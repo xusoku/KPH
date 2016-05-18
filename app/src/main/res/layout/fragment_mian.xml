@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="@color/colorAccent"
+        >
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+            android:text="wofsd我的见风使舵分1231"
+            android:onClick="doClick"
+            android:background="?android:attr/selectableItemBackground"
+
+            />
+    </android.support.v7.widget.CardView>
+
+
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:id="@+id/aaa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        app:customTypeface="number"
+        android:background="@color/colorPrimary"
+        android:backgroundTint="@color/colorAccent"
+        android:text="wofsd我的见风使舵分1231"/>
+
+    <TextView
+        android:id="@+id/aaaa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="wofsd我的见风使舵分1231"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:elevation="30dp"
+        android:transformPivotY="12dp"/>
+    <ImageView
+        android:id="@+id/aaaaa"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="30sp"
+        android:text="wofsd我的见风使舵分1231"
+        android:src="@drawable/ic_friends"
+        android:colorControlHighlight="@color/colorAccent"
+        android:background="?android:attr/selectableItemBackground"
+        />
+    <View
+        android:id="@+id/oval"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorAccent"/>
+    <View
+        android:id="@+id/rect"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimaryDark"/>
+
+</LinearLayout>
