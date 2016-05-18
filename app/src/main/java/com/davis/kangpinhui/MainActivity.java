@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
 
     int []  tabDrawables = {R.drawable.main_btn_home_selector, R.drawable.main_btn_home_selector, R.drawable.main_btn_home_selector, R.drawable.main_btn_film_review_selector, R.drawable.main_btn_price_selector, R.drawable.main_btn_share_ticket_selector};
-    String [] tabNames = {"性感", "韩日", "丝袜", "写真", "清纯", "车模"};
+    String [] tabNames = {"首页", "生鲜分类", "我的"};
 
 
     ViewPager viewPager;
@@ -42,8 +42,8 @@ public class MainActivity extends BaseActivity {
 
         setTitle("主页");
         getTitleView().setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        getLeftButton().setImageResource(R.drawable.ic_favorites);
-        getRightButton().setImageResource(R.drawable.ic_favorites);
+        getLeftButton().setImageResource(R.mipmap.ic_favorites);
+        getRightButton().setImageResource(R.mipmap.ic_favorites);
 
 
         viewPager=$(R.id.viewPager);

@@ -16,7 +16,7 @@
 
 
     <style name="AppLancherTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen">
-        <item name="android:windowBackground">@drawable/zhifubao_icon</item>
+        <item name="android:windowBackground">@mipmap/zhifubao_icon</item>
     </style>
 
 

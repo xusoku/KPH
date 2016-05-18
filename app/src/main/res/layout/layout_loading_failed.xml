@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_no_network" />
+            android:src="@mipmap/ic_no_network" />
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/tvFailed"

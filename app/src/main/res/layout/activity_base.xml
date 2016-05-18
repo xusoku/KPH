@@ -33,7 +33,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@null"
-            android:src="@drawable/ic_nearby"
+            android:src="@mipmap/ic_nearby"
             android:onClick="doClick"
             android:padding="15dp"
             android:scaleType="fitCenter" />

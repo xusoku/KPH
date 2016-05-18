@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         android:textSize="30sp"
         android:text="wofsd我的见风使舵分1231"
-        android:src="@drawable/ic_friends"
+        android:src="@mipmap/ic_friends"
         android:colorControlHighlight="@color/colorAccent"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
