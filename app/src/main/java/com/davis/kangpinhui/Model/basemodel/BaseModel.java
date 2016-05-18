@@ -1,11 +1,14 @@
 package com.davis.kangpinhui.Model.basemodel;
 
+import java.io.Serializable;
+
 /**
  * Created by davis on 16/5/17.
  */
-public class BaseModel {
+public class BaseModel<T> implements Serializable{
     public boolean breturn;
     public String errorinfo;
     public String ireturn;
+    public T object;
 
 }

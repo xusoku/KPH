@@ -1,0 +1,14 @@
+package com.davis.kangpinhui.Model;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+/**
+ * Created by davis on 16/5/18.
+ */
+public class Category implements Serializable{
+    public String id;
+    public String name;
+    public String picurl;
+    public ArrayList<Category> clist;
+}

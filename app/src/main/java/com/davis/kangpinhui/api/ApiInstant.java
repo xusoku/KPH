@@ -14,7 +14,7 @@ public class ApiInstant {
 
     private static   ApiService service=null;
 
-    private static String base_url="http://m2.kangpinhui.com:8089";
+
 
     public static final ApiService getInstant(){
 
@@ -25,7 +25,7 @@ public class ApiInstant {
                     .create();
 
             Retrofit retrofit=new Retrofit.Builder()
-                    .baseUrl(base_url)
+                    .baseUrl(ApiService.baseurl)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
 
