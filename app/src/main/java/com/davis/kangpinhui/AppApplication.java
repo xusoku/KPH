@@ -12,6 +12,8 @@ public class AppApplication extends Application {
      */
     private static AppApplication instance = null;
 
+    public static String apptype="android";
+    public static String token="ED82DDC119CDD9E1F056C46C85C7D7EB";
 
 
 

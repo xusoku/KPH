@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.davis.kangpinhui.adapter.CommonFragmentAdapter;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.fragment.IndexFragment;
 import com.davis.kangpinhui.fragment.SampleFragment;
 import com.davis.kangpinhui.views.viewpagerindicator.FixPageIndicator;
 import com.davis.kangpinhui.views.viewpagerindicator.PageIndicator;
@@ -30,20 +31,20 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initVariable() {
 
+
     }
 
 
     @Override
     protected void findViews() {
 
+        setTranslucentStatusBar(R.color.colormain);
 
-        showTopBar();
-
-
-        setTitle("主页");
-        getTitleView().setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        getLeftButton().setImageResource(R.mipmap.ic_favorites);
-        getRightButton().setImageResource(R.mipmap.ic_favorites);
+//        showTopBar();
+//        setTitle("主页");
+//        getTitleView().setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        getLeftButton().setImageResource(R.mipmap.ic_favorites);
+//        getRightButton().setImageResource(R.mipmap.ic_favorites);
 
 
         viewPager=$(R.id.viewPager);
@@ -57,7 +58,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
         ArrayList<Fragment> fragments = new ArrayList<Fragment>();
-        fragments.add(new SampleFragment());
+        fragments.add(new IndexFragment());
         fragments.add(new SampleFragment());
         fragments.add(new SampleFragment());
 
