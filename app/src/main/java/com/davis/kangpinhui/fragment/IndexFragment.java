@@ -1,7 +1,6 @@
 package com.davis.kangpinhui.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,8 +17,8 @@ import com.davis.kangpinhui.Model.Index;
 import com.davis.kangpinhui.Model.Product;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
-import com.davis.kangpinhui.adapter.CommonBaseAdapter;
-import com.davis.kangpinhui.adapter.ViewHolder;
+import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
+import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
@@ -27,15 +26,9 @@ import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
-import com.davis.kangpinhui.views.HorizontalListView;
-import com.davis.kangpinhui.views.LoadMoreListView;
-import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
-import com.davis.kangpinhui.views.StretchedListView;
 import com.davis.kangpinhui.views.loopbanner.LoopBanner;
 import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.davis.kangpinhui.adapter;
+package com.davis.kangpinhui.adapter.base;
 
 
 import android.support.v4.app.Fragment;

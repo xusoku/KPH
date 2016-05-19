@@ -7,5 +7,13 @@
         android:id="@+id/classic_rootid_list"
         android:layout_width="@dimen/common_measure_120dp"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         android:divider="@null"/>
+    <com.davis.kangpinhui.views.PinnedHeaderListView
+        android:id="@+id/classic_rootid_pinnlist"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/common_measure_10dp"
+        android:layout_width="0dp"
+        android:scrollbars="none"
+        android:layout_height="match_parent"></com.davis.kangpinhui.views.PinnedHeaderListView>
 </LinearLayout>

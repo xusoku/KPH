@@ -1,4 +1,4 @@
-package com.davis.kangpinhui.adapter;
+package com.davis.kangpinhui.adapter.base;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,16 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public abstract class CommonBaseAdapter<T> extends BaseAdapter
 {
     protected LayoutInflater mInflater;
     protected Context mContext;
-    protected List<T> mDatas;
+    protected ArrayList<T> mDatas;
     protected final int mItemLayoutId;
 
-    public CommonBaseAdapter(Context context, List<T> mDatas, int itemLayoutId)
+    public CommonBaseAdapter(Context context, ArrayList<T> mDatas, int itemLayoutId)
     {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);

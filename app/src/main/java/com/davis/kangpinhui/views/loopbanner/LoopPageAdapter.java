@@ -2,13 +2,12 @@ package com.davis.kangpinhui.views.loopbanner;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.davis.kangpinhui.adapter.ViewHolder;
+import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.adapter.recycleradapter.RecyclingPagerAdapter;
 
 import java.util.List;
