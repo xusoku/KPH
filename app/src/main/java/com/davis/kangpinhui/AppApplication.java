@@ -2,6 +2,8 @@ package com.davis.kangpinhui;
 
 import android.app.Application;
 
+import com.bumptech.glide.request.target.ViewTarget;
+
 /**
  * Created by davis on 16/5/18.
  */

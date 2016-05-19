@@ -1,6 +1,6 @@
 <LinearLayout
-    android:id="@+id/content"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -13,16 +13,10 @@
         android:layout_weight="1"
         android:persistentDrawingCache="animation"/>
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="12dp"
-        app:cardCornerRadius="0dp">
     <com.davis.kangpinhui.views.viewpagerindicator.FixPageIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_70dp"
         />
-    </android.support.v7.widget.CardView>
 
 </LinearLayout>

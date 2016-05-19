@@ -48,12 +48,15 @@ public abstract class BaseActivity extends AppCompatActivity
     private boolean isFirstLoading = false;
     private Toast toast;
 
+    public String TAG="";
+
     /* 子类使用的时候无需再次调用onCreate(),如需要加载其他方法可重写该方法 */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         // TODO Auto-generated method stub
         LogUtils.e("getSimpleName", this.getClass().getSimpleName().toString());
+        TAG=this.getClass().getSimpleName().toString();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 

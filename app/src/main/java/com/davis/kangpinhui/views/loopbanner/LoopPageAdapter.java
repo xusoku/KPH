@@ -94,7 +94,6 @@ public abstract class LoopPageAdapter<T> extends RecyclingPagerAdapter
 			viewPager = (ViewPager) container;
 		}
 		int position = viewPager.getCurrentItem();
-		Log.i("123", "finishUpdate_position-" + position);
 		if (position == 0 && !dataChange && canLoop) {
 			position = getFristItem();// 重置位置
 			viewPager.setCurrentItem(position, false);//

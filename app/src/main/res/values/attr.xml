@@ -46,4 +46,13 @@
         <!-- True the top view can be dragged -->
         <attr name="dtlCaptureTop" format="boolean"/>
     </declare-styleable>
+
+
+    <!-- HorizontalListView自定义的属性 -->
+    <declare-styleable name="HorizontalListView">
+        <attr name="dividerWidth" format="dimension"/>
+        <attr name="android:divider"/>
+        <attr name="android:requiresFadingEdge"/>
+        <attr name="android:fadingEdgeLength"/>
+    </declare-styleable>
 </resources>

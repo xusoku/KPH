@@ -16,8 +16,10 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.davis.kangpinhui.R;
+import com.davis.kangpinhui.util.LogUtils;
 
 
 /**
@@ -38,18 +40,24 @@ public abstract class BaseFragment extends Fragment
     private boolean isViewCreated = false;
     private boolean isInit = false;
 
+    public String TAG="";
+    private Toast toast;
+
     @Override
     public void onAttach(Activity activity)
     {
         // TODO Auto-generated method stub
         super.onAttach(activity);
         mContext = activity;
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        LogUtils.e("getSimpleName", this.getClass().getSimpleName().toString());
+        TAG=this.getClass().getSimpleName().toString();
         initVariable();
 
     }
@@ -226,5 +234,15 @@ public abstract class BaseFragment extends Fragment
     protected void onFragmentLoading()
     {
 
+    }
+
+
+    private void showTextToast(String msg) {
+        if (toast == null) {
+            toast = Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(msg);
+        }
+        toast.show();
     }
 }

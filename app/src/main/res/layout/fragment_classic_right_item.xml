@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/classic_rootid_right_title"
+        android:textSize="@dimen/text_size_17"
+        android:text="jia"
+        android:textColor="@color/black"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorgray"/>
+
+    <com.davis.kangpinhui.views.NoScrollGridView
+        android:id="@+id/classic_rootid_right_nogrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.davis.kangpinhui.views.NoScrollGridView>
+
+</LinearLayout>

@@ -21,12 +21,18 @@ import com.davis.kangpinhui.Model.basemodel.Page;
 
 import java.util.ArrayList;
 
-import retrofit.Call;
-import retrofit.http.Query;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
+
+//import retrofit.Call;
+//import retrofit.http.Query;
+//import retrofit.http.FormUrlEncoded;
+//import retrofit.http.GET;
+//import retrofit.http.POST;
+//import retrofit.http.Query;
 
 /**
  * Created by xusoku on 2016/4/5.

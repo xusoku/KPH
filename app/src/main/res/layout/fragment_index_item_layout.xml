@@ -5,12 +5,13 @@
     <ImageView
         android:id="@+id/fragment_index_item_image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_156dp"
+        android:layout_height="@dimen/common_measure_240dp"
+        android:scaleType="fitXY"
         />
 
-    <com.davis.kangpinhui.views.LoadMoreRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/fragment_index_item_recycler"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_156dp">
-    </com.davis.kangpinhui.views.LoadMoreRecyclerView>
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

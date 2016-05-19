@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 
+import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.views.viewpagerindicator.PageIndicator;
 
 import java.lang.reflect.Field;
@@ -128,7 +129,6 @@ public class LoopBanner extends RelativeLayout {
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, align == PageIndicatorAlign.ALIGN_PARENT_TOP ? RelativeLayout.TRUE : 0);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, align == PageIndicatorAlign.ALIGN_PARENT_LEFT ? RelativeLayout.TRUE : 0);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, align == PageIndicatorAlign.ALIGN_PARENT_RIGHT ? RelativeLayout.TRUE : 0);
-       
         pageIndicator.setLayoutParams(layoutParams);
         return this;
     }

@@ -5,152 +5,52 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="10dp">
+        android:layout_height="@dimen/common_measure_65dp"
+        android:background="@color/colormain">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/index_local_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_measure_16dp"
+            android:text="送至：光兰命运"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_17" />
+
+        <ImageView
+            android:id="@+id/index_cart"
+            android:layout_width="@dimen/common_measure_65dp"
             android:layout_height="@dimen/common_measure_65dp"
-            android:background="@color/colormain">
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_favorites" />
 
-            <com.davis.kangpinhui.views.CustomTypefaceTextView
-                android:id="@+id/index_local_select"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/common_measure_16dp"
-                android:text="送至：光兰命运"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_17" />
-
-            <ImageView
-                android:id="@+id/index_cart"
-                android:layout_width="@dimen/common_measure_35dp"
-                android:layout_height="@dimen/common_measure_35dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/common_measure_16dp"
-                android:src="@mipmap/ic_favorites" />
-
-            <ImageView
-                android:id="@+id/index_search"
-                android:layout_width="@dimen/common_measure_35dp"
-                android:layout_height="@dimen/common_measure_35dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/common_measure_16dp"
-                android:layout_toLeftOf="@+id/index_cart"
-                android:src="@mipmap/ic_favorites" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+        <ImageView
+            android:id="@+id/index_search"
+            android:layout_width="@dimen/common_measure_65dp"
+            android:layout_height="@dimen/common_measure_65dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/index_cart"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_favorites" />
+    </RelativeLayout>
 
     <com.davis.kangpinhui.views.MySwipeRefreshLayout
         android:id="@+id/index_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <ListView
+            android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
-                <com.davis.kangpinhui.views.loopbanner.LoopBanner
-                    android:id="@+id/index_loopbanner"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_measure_235dp"
-                    android:layout_marginTop="@dimen/common_measure_10dp"></com.davis.kangpinhui.views.loopbanner.LoopBanner>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_measure_140dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/index_classic"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:onClick="doClick"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="@dimen/common_measure_64dp"
-                            android:layout_height="@dimen/common_measure_64dp"
-                            android:src="@mipmap/ic_favorites" />
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/index_classic"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_17" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/index_tuan"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:onClick="doClick"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="@dimen/common_measure_64dp"
-                            android:layout_height="@dimen/common_measure_64dp"
-                            android:src="@mipmap/ic_favorites" />
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/index_tuan"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_17" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/index_rechange"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:onClick="doClick"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="@dimen/common_measure_64dp"
-                            android:layout_height="@dimen/common_measure_64dp"
-                            android:src="@mipmap/ic_favorites" />
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/index_rechanger"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_17" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/index_linear_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+            android:layout_height="wrap_content"></ListView>
     </com.davis.kangpinhui.views.MySwipeRefreshLayout>
 </LinearLayout>

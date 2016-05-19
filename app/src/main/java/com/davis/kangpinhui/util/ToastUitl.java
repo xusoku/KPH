@@ -2,6 +2,7 @@ package com.davis.kangpinhui.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.davis.kangpinhui.AppApplication;
@@ -11,9 +12,9 @@ import com.davis.kangpinhui.AppApplication;
  */
 public class ToastUitl {
 
-    private static Context mContext;
+    private static final Context mContext;
 
-    private static Toast mToast = null;
+    private static  Toast mToast = null;
 
     static {
         mContext = AppApplication.getApplication();
@@ -33,6 +34,14 @@ public class ToastUitl {
      * @param str
      */
     public static void showToast(String str) {
+        if (TextUtils.isEmpty(str) || "null".equals(str))
+        {
+            return;
+        }
+        if (mToast == null)
+        {
+            mToast = Toast.makeText(mContext, "", Toast.LENGTH_SHORT);
+        }
         mToast.setText(str);
         mToast.setDuration(Toast.LENGTH_SHORT);
         mToast.show();

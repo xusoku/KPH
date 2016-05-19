@@ -208,7 +208,7 @@ public class LoadMoreListView extends ListView implements OnScrollListener
                 mHintView.setText("没有更多了");
                 break;
             case UNAVAILABLE:
-            	mAutoLoadingLayout.setVisibility(View.INVISIBLE);
+            	mAutoLoadingLayout.setVisibility(View.GONE);
                 break;
             case FAILED:
                 mProgressBar.setVisibility(View.GONE);

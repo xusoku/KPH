@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.davis.kangpinhui.R;
 
 
 public class ViewHolder
@@ -26,7 +27,7 @@ public class ViewHolder
         this.mViews = new SparseArray<View>();
         mConvertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
         // setTag
-        mConvertView.setTag(this);
+        mConvertView.setTag(R.string.app_name,this);
     }
 
     /**
@@ -44,7 +45,7 @@ public class ViewHolder
         if (convertView == null) {
             return new ViewHolder(context, parent, layoutId, position);
         }
-        return (ViewHolder) convertView.getTag();
+        return (ViewHolder) convertView.getTag(R.string.app_name);
     }
 
     public View getConvertView()

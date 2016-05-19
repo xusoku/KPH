@@ -7,8 +7,10 @@ import android.widget.TextView;
 
 import com.davis.kangpinhui.adapter.CommonFragmentAdapter;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.fragment.ClassicFragment;
 import com.davis.kangpinhui.fragment.IndexFragment;
 import com.davis.kangpinhui.fragment.SampleFragment;
+import com.davis.kangpinhui.views.HackyViewPager;
 import com.davis.kangpinhui.views.viewpagerindicator.FixPageIndicator;
 import com.davis.kangpinhui.views.viewpagerindicator.PageIndicator;
 import com.davis.kangpinhui.views.viewpagerindicator.scrollbar.ColorBar;
@@ -21,7 +23,7 @@ public class MainActivity extends BaseActivity {
     String [] tabNames = {"首页", "生鲜分类", "我的"};
 
 
-    ViewPager viewPager;
+    HackyViewPager viewPager;
     FixPageIndicator indicator;
     @Override
     protected int setLayoutView() {
@@ -48,6 +50,7 @@ public class MainActivity extends BaseActivity {
 
 
         viewPager=$(R.id.viewPager);
+        viewPager.toggleLock();
         indicator=$(R.id.indicator);
         viewPager.setOffscreenPageLimit(6);
 
@@ -59,8 +62,8 @@ public class MainActivity extends BaseActivity {
     protected void initData() {
         ArrayList<Fragment> fragments = new ArrayList<Fragment>();
         fragments.add(new IndexFragment());
-        fragments.add(new SampleFragment());
-        fragments.add(new SampleFragment());
+        fragments.add(new ClassicFragment());
+        fragments.add(new ClassicFragment());
 
         viewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(), fragments));
         indicator.setViewPager(viewPager, 0);

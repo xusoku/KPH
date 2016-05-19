@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 
 
+import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.views.viewpagerindicator.PageIndicator;
 import com.davis.kangpinhui.views.viewpagerindicator.scrollbar.ScrollBar;
 
@@ -69,8 +70,8 @@ public class BannerPageIndicator extends View implements PageIndicator
 		mPaintStroke.setColor(0xFFffffff);//环形边缘颜色
 		mPaintStroke.setStrokeWidth(dip2px(context,1));//环形边缘宽度
 		mPaintFill.setStyle(Style.FILL);
-		mPaintFill.setColor(0xFFb10b0b);//选中的中间及移动的滑块颜色
-		mRadius =dip2px(context,4);//最外层圆半径，包括了边缘宽度
+		mPaintFill.setColor(getResources().getColor(R.color.colormain));//选中的中间及移动的滑块颜色
+		mRadius =dip2px(context,12);//最外层圆半径，包括了边缘宽度
 		mSnap = true;
 		spacing =mRadius;
 		final ViewConfiguration configuration = ViewConfiguration.get(context);
@@ -246,11 +247,13 @@ public class BannerPageIndicator extends View implements PageIndicator
 
 			// Only paint stroke if a stroke width was non-zero
 			if (pageFillRadius != mRadius) {
-				canvas.drawCircle(dX, dY, pageStokeRadius, mPaintStroke);
+//				canvas.drawCircle(dX, dY, pageStokeRadius, mPaintStroke);
+				canvas.drawRect(dX - 33, dY - 3, dX + 33, dY + 3, mPaintStroke);
 			}
 			// Only paint fill if not completely transparent
 			if (mPaintPageFill.getAlpha() > 0) {
-				canvas.drawCircle(dX, dY, pageFillRadius+1, mPaintPageFill);
+//				canvas.drawCircle(dX, dY, pageFillRadius+1, mPaintPageFill);
+				canvas.drawRect(dX - 33, dY - 3, dX + 33, dY + 3, mPaintPageFill);
 			}
 		}
 
@@ -266,7 +269,8 @@ public class BannerPageIndicator extends View implements PageIndicator
 			dX = shortOffset;
 			dY = longOffset + cx;
 		}
-		canvas.drawCircle(dX, dY, pageFillRadius+1, mPaintFill);
+		canvas.drawRect(dX - 33, dY - 4, dX + 35, dY + 4, mPaintFill);
+//		canvas.drawCircle(dX, dY, pageFillRadius+1, mPaintFill);
 	}
 
 	public boolean onTouchEvent(MotionEvent ev) {
@@ -508,7 +512,7 @@ public class BannerPageIndicator extends View implements PageIndicator
 			result = specSize;
 		} else {
 			// Measure the height
-			result = (int) (2 * mRadius + getPaddingTop() + getPaddingBottom() + 1);
+			result = (int) ( mRadius/2 + getPaddingTop() + getPaddingBottom() + 1);
 			// Respect AT_MOST value if that was what is called for by
 			// measureSpec
 			if (specMode == MeasureSpec.AT_MOST) {
