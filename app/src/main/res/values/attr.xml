@@ -55,4 +55,11 @@
         <attr name="android:requiresFadingEdge"/>
         <attr name="android:fadingEdgeLength"/>
     </declare-styleable>
+
+    <!-- MineCustomLayout自定义的属性 -->
+    <declare-styleable name="MineCustomLayout">
+        <attr name="src" format="reference"/>
+        <attr name="text" format="string"/>
+        <attr name="show" format="boolean"/>
+    </declare-styleable>
 </resources>

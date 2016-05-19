@@ -18,7 +18,8 @@
     <com.davis.kangpinhui.views.NoScrollGridView
         android:id="@+id/classic_rootid_right_nogrid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:numColumns="3">
     </com.davis.kangpinhui.views.NoScrollGridView>
 
 </LinearLayout>
