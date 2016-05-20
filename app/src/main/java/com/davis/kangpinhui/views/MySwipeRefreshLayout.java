@@ -5,6 +5,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.davis.kangpinhui.R;
+
 /**
  * Created by wbz360 on 2015/12/2.
  */
@@ -15,9 +17,20 @@ public class MySwipeRefreshLayout extends SwipeRefreshLayout
     private float yLast;
     private float xDistance;
     private float yDistance;
-    public MySwipeRefreshLayout(Context context, AttributeSet attrs)
-    {
+
+    public MySwipeRefreshLayout(Context context) {
+        this(context, null);
+    }
+
+    public MySwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        int [] colors={R.color.colormain,
+                R.color.material_green,
+                R.color.material_red,
+                R.color.material_blue};
+        this.setColorSchemeResources(colors);
+
     }
 
     @Override

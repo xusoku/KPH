@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.util.LogUtils;
+import com.davis.kangpinhui.views.ProgressWheel;
 
 
 /**
@@ -35,7 +36,7 @@ public abstract class BaseFragment extends Fragment
     private ViewStub stubLoadingFailed;
     private FrameLayout layLoadingFailed;
     private LinearLayout layClickReload;
-    private ProgressBar loadingProgress;
+    private ProgressWheel loadingProgress;
     private boolean isFirstLoading = false;
     private boolean isViewCreated = false;
     private boolean isInit = false;
@@ -201,7 +202,7 @@ public abstract class BaseFragment extends Fragment
         if (layLoadingFailed == null) {
             layLoadingFailed = (FrameLayout) stubLoadingFailed.inflate();
             layClickReload = (LinearLayout) layLoadingFailed.findViewById(R.id.layClickReload);
-            loadingProgress = (ProgressBar) layLoadingFailed.findViewById(R.id.loadingProgress);
+            loadingProgress = (ProgressWheel) layLoadingFailed.findViewById(R.id.loadingProgress);
             layClickReload.setOnClickListener(new View.OnClickListener()
             {
 

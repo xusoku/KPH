@@ -94,10 +94,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData() {
-
-        onActivityLoading();
-
-
+        startActivityLoading();
     }
 
     public void getBindView(ArrayList<Shop> list){

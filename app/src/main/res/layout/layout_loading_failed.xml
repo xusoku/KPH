@@ -30,10 +30,14 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <ProgressBar
+    <com.davis.kangpinhui.views.ProgressWheel
         android:id="@+id/loadingProgress"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center" />
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        app:matProg_circleRadius="45dp"
+        app:matProg_fillRadius="false"
+        app:matProg_progressIndeterminate="true"
+        app:matProg_barColor="@color/colormain"/>
 
 </FrameLayout>

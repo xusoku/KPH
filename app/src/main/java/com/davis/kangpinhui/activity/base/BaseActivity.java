@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.LogUtils;
+import com.davis.kangpinhui.views.ProgressWheel;
 
 
 public abstract class BaseActivity extends AppCompatActivity
@@ -44,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity
     private ViewStub stubLoadingFailed;
     private FrameLayout layLoadingFailed;
     private LinearLayout layClickReload;
-    private ProgressBar loadingProgress;
+    private ProgressWheel loadingProgress;
     private View contentView;
     private boolean isFirstLoading = false;
     private Toast toast;
@@ -224,7 +225,7 @@ public abstract class BaseActivity extends AppCompatActivity
         if (layLoadingFailed == null) {
             layLoadingFailed = (FrameLayout) stubLoadingFailed.inflate();
             layClickReload = (LinearLayout) layLoadingFailed.findViewById(R.id.layClickReload);
-            loadingProgress = (ProgressBar) layLoadingFailed.findViewById(R.id.loadingProgress);
+            loadingProgress = (ProgressWheel) layLoadingFailed.findViewById(R.id.loadingProgress);
             layClickReload.setOnClickListener(new OnClickListener()
             {
                 @Override

@@ -22,6 +22,7 @@
 
 
     <string name="mine_location">自动定位当前位置</string>
+    <string name="classic_search">搜索热门关键字</string>
 
 
 </resources>
