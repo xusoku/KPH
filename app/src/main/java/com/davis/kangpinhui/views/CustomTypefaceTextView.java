@@ -37,26 +37,29 @@ public class CustomTypefaceTextView extends TextView
     public CustomTypefaceTextView(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
+
+
+        this.isInEditMode();
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomTypefaceTextView, defStyleAttr, 0);
 
         String fontName = typedArray.getString(R.styleable.CustomTypefaceTextView_customTypeface);
 
         if (!TextUtils.isEmpty(fontName)) {
 
-            if (fontName.equals("number")) {
-                if (CommonManager.mNumberTypeface == null) {
-                    CommonManager.mNumberTypeface = Typeface.createFromAsset(context.getAssets(), CommonManager.FONT_NUMBER);
-                }
-                setTypeface(CommonManager.mNumberTypeface);
-            }
+//            if (fontName.equals("number")) {
+//                if (CommonManager.mNumberTypeface == null) {
+//                    CommonManager.mNumberTypeface = Typeface.createFromAsset(context.getAssets(), CommonManager.FONT_NUMBER);
+//                }
+//                setTypeface(CommonManager.mNumberTypeface);
+//            }
         }
         else {
-            if (CommonManager.mChineseTypeface == null) {
-                CommonManager.mChineseTypeface = Typeface.createFromAsset(context.getAssets(), CommonManager.FONT_CHINESE);
-            }
+//            if (CommonManager.mChineseTypeface == null) {
+//                CommonManager.mChineseTypeface = Typeface.createFromAsset(context.getAssets(), CommonManager.FONT_CHINESE);
+//            }
             setIncludeFontPadding(false);
 //            setLineSpacing(DimenUtils.dp2px(context, 3), (float) 1);//1倍间距
-            setTypeface(CommonManager.mChineseTypeface);
+//            setTypeface(CommonManager.mChineseTypeface);
 //            correctFont();
         }
 

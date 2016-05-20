@@ -1,5 +1,6 @@
 package com.davis.kangpinhui.fragment;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.davis.kangpinhui.Model.Index;
 import com.davis.kangpinhui.Model.Product;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
+import com.davis.kangpinhui.activity.ShopActivity;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
@@ -37,7 +39,7 @@ import retrofit2.Call;
 /**
  * Created by davis on 16/5/18.
  */
-public class IndexFragment extends BaseFragment {
+public class IndexFragment extends BaseFragment implements View.OnClickListener {
 
     private LinearLayout index_rechange;
     private LinearLayout index_tuan;
@@ -49,6 +51,7 @@ public class IndexFragment extends BaseFragment {
     private ImageView index_cart;
     private ImageView index_search;
     private TextView index_local_select;
+    private LinearLayout index_local_select_linear;
     private MySwipeRefreshLayout index_refresh;
 
     private boolean isRefreshOrLoad=false;
@@ -80,6 +83,7 @@ public class IndexFragment extends BaseFragment {
 
         index_refresh=$(view,R.id.index_refresh);
         index_local_select=$(view,R.id.index_local_select);
+        index_local_select_linear=$(view,R.id.index_local_select_linear);
         index_cart=$(view,R.id.index_cart);
         index_search=$(view,R.id.index_search);
 
@@ -219,27 +223,21 @@ public class IndexFragment extends BaseFragment {
 
             }
         });
-
-
-
-//        loadrecycler.setAdapter(new CommonBaseAdapter<Product>(getActivity(),list,R.layout.fragment_index_item_layout_item) {
-//            @Override
-//            public void convert(ViewHolder holder, Product itemData, int position) {
-//                ImageView iv=holder.getView(R.id.fragment_index_item_image_item);
-//                Glide.with(getActivity()).load(itemData.picurl).into(iv);
-//
-//                TextView tv_name=holder.getView(R.id.fragment_index_item_name);
-//                tv_name.setText(itemData.productname);
-//
-//                TextView tv_price=holder.getView(R.id.fragment_index_item_price);
-//                tv_price.setText(itemData.fprice);
-//            }
-//        });
     }
 
     @Override
     protected void setListener() {
 
+        index_local_select_linear.setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.index_local_select_linear:
+                Intent it=new Intent(getActivity(), ShopActivity.class);
+                startActivityForResult(it,0);
+                break;
+        }
     }
 }

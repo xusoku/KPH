@@ -39,6 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity
     private TextView tvTitle;
     private ImageButton btnLeft;
     private ImageButton btnRight;
+    private TextView btnRightTitle;
     private FrameLayout layBody;
     private ViewStub stubLoadingFailed;
     private FrameLayout layLoadingFailed;
@@ -75,13 +76,13 @@ public abstract class BaseActivity extends AppCompatActivity
     {
         mContext = getApplicationContext();
         mActivity=this;
-        setTranslucentStatusBar(R.color.colorPrimary);
         mInflater = getLayoutInflater();
         // topbar相关
         layTopBar = (RelativeLayout) findViewById(R.id.layTopBar);
         tvTitle = (TextView) findViewById(R.id.tvTopBarTitle);
         btnLeft = (ImageButton) findViewById(R.id.btnLeft);
         btnRight = (ImageButton) findViewById(R.id.btnRight);
+        btnRightTitle = (TextView) findViewById(R.id.btnRightTitle);
 
         // 内容区
         layBody = (FrameLayout) findViewById(R.id.layBody);
@@ -131,6 +132,14 @@ public abstract class BaseActivity extends AppCompatActivity
     {
         btnRight.setVisibility(View.VISIBLE);
         return btnRight;
+    }
+    /**
+     * 得到右边的文字按钮
+     */
+    public TextView getRightTextButton()
+    {
+        btnRightTitle.setVisibility(View.VISIBLE);
+        return btnRightTitle;
     }
 
     /**

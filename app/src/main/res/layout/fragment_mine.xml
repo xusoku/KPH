@@ -54,6 +54,7 @@
     </RelativeLayout>
 
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_allorder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"

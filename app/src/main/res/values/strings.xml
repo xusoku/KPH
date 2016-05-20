@@ -7,8 +7,6 @@
     <string name="index_rechanger">会员充值</string>
 
 
-
-
     <string name="mine_allorder">全部订单</string>
     <string name="mine_unpay">待付款</string>
     <string name="mine_senging">配送中</string>
@@ -21,6 +19,9 @@
     <string name="mine_set">设置</string>
     <string name="mine_order">充值订单</string>
     <string name="mine_histroy">历史账单</string>
+
+
+    <string name="mine_location">自动定位当前位置</string>
 
 
 </resources>

@@ -10,15 +10,25 @@
         android:layout_height="@dimen/common_measure_65dp"
         android:background="@color/colormain">
 
+        <LinearLayout
+            android:id="@+id/index_local_select_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackground">
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/index_local_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/common_measure_16dp"
+            android:paddingLeft="@dimen/common_measure_16dp"
+            android:paddingRight="@dimen/common_measure_16dp"
             android:text="送至：光兰命运"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_17" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/index_cart"

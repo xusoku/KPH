@@ -56,7 +56,7 @@ public interface ApiService {
             @Query("phone") String phone,
             @Query("password") String password);
 
-    //2、用户登陆
+    //2、用户 注册
     @POST("user/register.do")
     Call<BaseModel<UserInfo>> userRegister(
             @Query("apptype") String apptype,
@@ -271,7 +271,7 @@ public interface ApiService {
             @Query("token") String token
     );
 
-    //18.1 添加订单
+    //18.1 添加充值订单
     @GET("chongzhi/save.do")
     Call<BaseModel<Recharge>> saveRecharge(
             @Query("apptype") String apptype,
