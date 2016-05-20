@@ -13,11 +13,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.MainActivity;
 import com.davis.kangpinhui.Model.Banner;
 import com.davis.kangpinhui.Model.Index;
 import com.davis.kangpinhui.Model.Product;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
+import com.davis.kangpinhui.activity.SearchActivity;
 import com.davis.kangpinhui.activity.ShopActivity;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
@@ -48,8 +50,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private LinearLayout headerView;
 
     private ListView content;
-    private ImageView index_cart;
-    private ImageView index_search;
+    private LinearLayout index_cart;
+    private LinearLayout index_search;
     private TextView index_local_select;
     private LinearLayout index_local_select_linear;
     private MySwipeRefreshLayout index_refresh;
@@ -229,6 +231,11 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     protected void setListener() {
 
         index_local_select_linear.setOnClickListener(this);
+        index_classic.setOnClickListener(this);
+        index_rechange.setOnClickListener(this);
+        index_tuan.setOnClickListener(this);
+        index_cart.setOnClickListener(this);
+        index_search.setOnClickListener(this);
     }
 
     @Override
@@ -237,6 +244,21 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             case R.id.index_local_select_linear:
                 Intent it=new Intent(getActivity(), ShopActivity.class);
                 startActivityForResult(it,0);
+                break;
+            case R.id.index_classic:
+                MainActivity activity= (MainActivity) getActivity();
+                activity.change2();
+                break;
+            case R.id.index_rechange:
+                break;
+            case R.id.index_tuan:
+
+                break;
+            case R.id.index_cart:
+
+                break;
+            case R.id.index_search:
+                SearchActivity.jumpSearchActivity(getActivity(), "");
                 break;
         }
     }
