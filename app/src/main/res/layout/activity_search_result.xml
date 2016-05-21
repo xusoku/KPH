@@ -111,6 +111,7 @@
         android:layout_height="1dp"
         android:background="@color/colorgray"/>
     <com.davis.kangpinhui.views.LoadMoreRecyclerView
+        android:layout_margin="@dimen/common_measure_5dp"
         android:id="@+id/search_result_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -22,6 +22,7 @@ import com.davis.kangpinhui.Model.basemodel.Page;
 import java.util.ArrayList;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -89,12 +90,12 @@ public interface ApiService {
 
     //6、商品搜索
     @FormUrlEncoded
-    @GET("product/search.do")
+    @POST("product/search.do")
     Call<BaseModel<Page<ArrayList<Product>>>> getSearchProductlist(
             @Query("apptype") String apptype,
             @Query("iordertype") String iordertype,
             @Query("shopid") String shopid,
-            @Query("keyword") String keyword,
+            @Field("keyword") String keyword,
             @Query("ipage") String ipage,
             @Query("ipagesize") String ipagesize
             );

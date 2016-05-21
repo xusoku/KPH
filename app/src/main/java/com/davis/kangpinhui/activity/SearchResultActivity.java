@@ -2,21 +2,25 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.Model.Product;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.Model.basemodel.Page;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 
 import java.util.ArrayList;
@@ -33,6 +37,9 @@ public class SearchResultActivity extends BaseActivity {
 
     private int Page = 0;
     private int PageSize = 20;
+    private int TotalPage=0;
+    private CommonRecyclerAdapter<Product> adapter;
+    private ArrayList<Product> list;
 
     public static void jumpSearchResultActivity(Context con, String key) {
         Intent it = new Intent(con, SearchResultActivity.class);
@@ -49,7 +56,7 @@ public class SearchResultActivity extends BaseActivity {
     protected void initVariable() {
 
         key = getIntent().getStringExtra("key");
-
+        list=new ArrayList<>();
     }
 
     @Override
@@ -60,6 +67,40 @@ public class SearchResultActivity extends BaseActivity {
         search_result_recycler = $(R.id.search_result_recycler);
 
         search_et.setText(key);
+
+
+
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(this,2);
+        search_result_recycler.setLayoutManager(gridLayoutManager);
+
+        adapter= new CommonRecyclerAdapter<Product>(this,list,R.layout.activity_search_result_item){
+            @Override
+            public void convert(BaseViewHolder holder, Product itemData, int position) {
+
+                ImageView iv=holder.getView(R.id.search_result_item_iv);
+                Glide.with(mActivity).load(itemData.picurl).into(iv);
+
+                TextView tv_name=holder.getView(R.id.search_result_item_name);
+                tv_name.setText(itemData.productname);
+
+                TextView tv_price=holder.getView(R.id.search_result_item_price);
+                tv_price.setText(itemData.fprice);
+            }
+        };
+
+
+        search_result_recycler.setAdapter(adapter);
+        adapter.setOnItemClickLitener(new CommonRecyclerAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                ToastUitl.showToast("" + position);
+            }
+
+            @Override
+            public void onItemLongClick(View itemView, int position) {
+
+            }
+        });
     }
 
     @Override
@@ -72,6 +113,12 @@ public class SearchResultActivity extends BaseActivity {
             @Override
             public void onSucssce(BaseModel<Page<ArrayList<Product>>> pageBaseModel) {
 
+                Page<ArrayList<Product>> page=pageBaseModel.object;
+
+                TotalPage=page.iTotalPage;
+
+                list.addAll(page.list);
+                adapter.notifyDataSetChanged();
             }
 
             @Override

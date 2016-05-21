@@ -2,46 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/common_measure_300dp"
+    android:layout_margin="@dimen/common_measure_5dp"
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/search_result_item_iv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/common_measure_180dp"
+        android:scaleType="fitXY"
         android:src="@mipmap/zhifubao_icon" />
 
 
     <com.davis.kangpinhui.views.CustomTypefaceTextView
         android:id="@+id/search_result_item_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/common_measure_61dp"
         android:ellipsize="end"
-        android:hint="@string/classic_search"
+        android:text="aeo更加了解落落大方苦尽甘来咖啡馆里看到发个快乐的反光镜里的疯狂感觉"
         android:maxLines="2"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_size_17" />
+        android:textSize="@dimen/text_size_22" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_measure_10dp"
-        android:layout_marginBottom="@dimen/common_measure_10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/search_result_item_price"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:ellipsize="end"
-            android:hint="@string/classic_search"
-            android:maxLines="2"
+            android:text="1029"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_17" />
 
         <LinearLayout
             android:id="@+id/search_cart_iv"
             android:layout_width="@dimen/common_measure_60dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/common_measure_60dp"
             android:layout_alignParentRight="true"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"

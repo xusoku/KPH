@@ -5,10 +5,10 @@ package com.davis.kangpinhui.Model.basemodel;
  */
 public class Page<T> {
 
-    public String iTotalRecords;
-    public String iPageSize;
-    public String iCurrentPage;
-    public String iTotalPage;
+    public int iTotalRecords;
+    public int iPageSize;
+    public int iCurrentPage;
+    public int iTotalPage;
     public String className;
     public T list;
 
