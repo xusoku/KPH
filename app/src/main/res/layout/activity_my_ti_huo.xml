@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.davis.kangpinhui.views.CustomTypefaceEditText
+        android:id="@+id/ti_huo_et"
+        android:layout_width="match_parent"
+        android:gravity="top"
+        android:layout_height="@dimen/common_measure_70dp"
+        android:layout_margin="@dimen/common_measure_14dp"
+        android:background="@drawable/bg_flow_tag_unselect"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_60dp"
+        android:layout_margin="@dimen/common_measure_14dp"
+        app:cardCornerRadius="3dp">
+        <TextView
+            android:id="@+id/ti_huo_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/colormain"
+            android:textSize="@dimen/text_size_17"
+            android:textColor="@color/white"
+            android:text="提交订单号"/>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

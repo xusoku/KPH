@@ -37,6 +37,7 @@ public class MineCustomLayout extends LinearLayout {
         boolean show = typedArray.getBoolean(R.styleable.MineCustomLayout_show, true);
 
         int ids = typedArray.getResourceId(R.styleable.MineCustomLayout_src, 0);
+        boolean line = typedArray.getBoolean(R.styleable.MineCustomLayout_line, true);
 
         View view = LayoutInflater.from(context).inflate(R.layout.fragment_mine_item, this, true);
 
@@ -48,6 +49,7 @@ public class MineCustomLayout extends LinearLayout {
         ImageView iv = (ImageView) view.findViewById(R.id.mine_left_image);
         TextView tv = (TextView) view.findViewById(R.id.mine_center_name);
         ImageView miv = (ImageView) view.findViewById(R.id.mine_right_iv);
+        View viewline =  view.findViewById(R.id.mine_line_view);
 
         iv.setImageResource(ids);
         tv.setText(name);
@@ -56,6 +58,11 @@ public class MineCustomLayout extends LinearLayout {
             miv.setVisibility(View.VISIBLE);
         } else {
             miv.setVisibility(View.GONE);
+        }
+        if (line) {
+            viewline.setVisibility(View.VISIBLE);
+        } else {
+            viewline.setVisibility(View.GONE);
         }
         typedArray.recycle();
     }

@@ -64,6 +64,7 @@
         android:layout_height="@dimen/common_measure_66dp"
         android:orientation="horizontal">
         <com.davis.kangpinhui.views.MineCustomLayout
+            android:id="@+id/mine_allorder_unpay"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -76,6 +77,7 @@
             android:layout_gravity="center_vertical"
             android:background="@color/colorgray"/>
         <com.davis.kangpinhui.views.MineCustomLayout
+            android:id="@+id/mine_allorder_sending"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -89,6 +91,7 @@
         android:background="@color/colorgray"/>
 
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"
@@ -100,11 +103,13 @@
         android:background="@color/colorgray"/>
 
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_mycoup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"
         app:text="@string/mine_mycoup"/>
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_myaddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"
@@ -116,6 +121,7 @@
         android:background="@color/colorgray"/>
 
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_ti_huo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"
@@ -125,6 +131,7 @@
         android:layout_height="@dimen/common_measure_10dp"
         android:background="@color/colorgray"/>
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_kefu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"
@@ -136,6 +143,7 @@
         app:src="@mipmap/ic_nearby"
         app:text="@string/mine_feedback"/>
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"
@@ -145,11 +153,13 @@
         android:layout_height="@dimen/common_measure_10dp"
         android:background="@color/colorgray"/>
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_rechange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"
         app:text="@string/mine_order"/>
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_histroy_bill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"
