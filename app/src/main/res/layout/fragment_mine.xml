@@ -130,6 +130,7 @@
         app:src="@mipmap/ic_nearby"
         app:text="@string/mine_kefu"/>
     <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/mine_feedback_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"

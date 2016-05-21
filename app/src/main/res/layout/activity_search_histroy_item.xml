@@ -11,6 +11,12 @@
         android:layout_height="@dimen/common_measure_50dp"
         android:textColor="@color/black"
         android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/common_measure_15dp"
         android:text="历史搜索"/>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorgray"
+        android:layout_marginLeft="@dimen/common_measure_15dp"
+        android:layout_marginRight="@dimen/common_measure_15dp"/>
 </LinearLayout>
