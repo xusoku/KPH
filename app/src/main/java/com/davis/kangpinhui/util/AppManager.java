@@ -3,6 +3,8 @@ package com.davis.kangpinhui.util;
 import android.app.Activity;
 import android.content.Context;
 
+import com.davis.kangpinhui.AppApplication;
+
 import java.util.Stack;
 
 /**
@@ -115,6 +117,9 @@ public class AppManager {
 	 * 退出应用程序
 	 */
 	public void AppExit(Context context) {
+		AppApplication.classiclist.clear();
+		AppApplication.shopid="";
+		AppApplication.token="";
 			finishAllActivity();
 	}
 }

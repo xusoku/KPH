@@ -25,4 +25,13 @@
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 
+
+
+    <style name="popwin_recent_anim_style">
+        <!--<item name="android:windowEnterAnimation">@anim/poprecent</item>-->
+        <!--<item name="android:windowExitAnimation">@anim/poprecent_hidden</item>-->
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+    </style>
+
 </resources>

@@ -18,8 +18,7 @@
             android:id="@+id/search_result_item_iv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_measure_180dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/zhifubao_icon" />
+            android:scaleType="fitXY" />
 
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -28,7 +27,6 @@
             android:layout_height="@dimen/common_measure_61dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="aeo更加了解落落大方苦尽甘来咖啡馆里看到发个快乐的反光镜里的疯狂感觉"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_22" />
 
@@ -44,7 +42,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                android:text="1029"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17" />
 

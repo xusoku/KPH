@@ -11,5 +11,5 @@ public class Category implements Serializable{
     public String name;
     public String picurl;
     public boolean isOnclick=false;
-    public ArrayList<Category> clist;
+    public ArrayList<Category> clist=new ArrayList<>();
 }

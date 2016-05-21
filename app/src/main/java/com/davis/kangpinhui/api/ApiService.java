@@ -82,8 +82,9 @@ public interface ApiService {
     Call<BaseModel<Page<ArrayList<Product>>>> getProductlist(
             @Query("apptype") String apptype,
             @Query("iordertype") String iordertype,
-            @Query("shopid") String shopid,
+            @Query("rootid") String rootid,
             @Query("classid") String classid,
+            @Query("shopid") String shopid,
             @Query("ipage") String ipage,
             @Query("ipagesize") String ipagesize
             );

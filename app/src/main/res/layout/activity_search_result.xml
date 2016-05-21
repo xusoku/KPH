@@ -78,6 +78,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/search_all_classic"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -107,6 +108,7 @@
                     android:background="@color/colorgray" />
 
                 <LinearLayout
+                    android:id="@+id/search_all_sort"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

@@ -2,23 +2,32 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.Model.Category;
 import com.davis.kangpinhui.Model.Product;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.Model.basemodel.Page;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
+import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
@@ -26,6 +35,7 @@ import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
+import com.davis.kangpinhui.views.viewpagerindicator.scrollbar.ScrollBar;
 
 import java.util.ArrayList;
 
@@ -39,6 +49,8 @@ public class SearchResultActivity extends BaseActivity {
     private EditText search_et;
     private LoadMoreRecyclerView search_result_recycler;
     private MySwipeRefreshLayout search_result_myswipe;
+    private LinearLayout search_all_classic;
+    private LinearLayout search_all_sort;
 
     private int Page = 0;
     private int PageSize = 20;
@@ -47,6 +59,13 @@ public class SearchResultActivity extends BaseActivity {
     private ArrayList<Product> list;
 
     private boolean isLoadOrRefresh = false;
+    private String sortid="0";
+    private String rootid="0";
+    private String classid="0";
+
+
+    private PopupWindow classicpopupWindow;
+    private PopupWindow sortpopupWindow;
 
     public static void jumpSearchResultActivity(Context con, String key) {
         Intent it = new Intent(con, SearchResultActivity.class);
@@ -73,6 +92,8 @@ public class SearchResultActivity extends BaseActivity {
         search_et = $(R.id.search_et);
         search_result_recycler = $(R.id.search_result_recycler);
         search_result_myswipe = $(R.id.content);
+        search_all_classic = $(R.id.search_all_classic);
+        search_all_sort = $(R.id.search_all_sort);
 
         search_et.setText(key);
 
@@ -112,15 +133,16 @@ public class SearchResultActivity extends BaseActivity {
     @Override
     protected void onActivityLoading() {
         super.onActivityLoading();
+        Page = 0;
+        isLoadOrRefresh = true;
         getSearchProductList(0, PageSize);
     }
 
     @Override
     protected void initData() {
-        Page = 0;
-        isLoadOrRefresh = true;
         startActivityLoading();
-
+        initPopupClassicWindow();
+        initPopupSortWindow();
     }
 
     @Override
@@ -151,12 +173,60 @@ public class SearchResultActivity extends BaseActivity {
 
     /**
      * 搜索list
+     *
      * @param page
      * @param pagesize
      */
     private void getSearchProductList(int page, int pagesize) {
-        Call<BaseModel<Page<ArrayList<Product>>>> call = ApiInstant.getInstant().getSearchProductlist(AppApplication.apptype, "0",
+        Call<BaseModel<Page<ArrayList<Product>>>> call = ApiInstant.getInstant().getSearchProductlist(AppApplication.apptype, sortid,
                 AppApplication.shopid, key, page + "", pagesize + "");
+
+        call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.Model.basemodel.Page<ArrayList<Product>>>>() {
+            @Override
+            public void onSucssce(BaseModel<Page<ArrayList<Product>>> pageBaseModel) {
+
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingSuccess();
+                if (isLoadOrRefresh) {
+                    list.clear();
+                }
+                Page<ArrayList<Product>> page = pageBaseModel.object;
+
+                TotalPage = page.iTotalPage;
+
+                list.addAll(page.list);
+                adapter.notifyDataSetChanged();
+
+                if (list.size() == 0) {
+//                    layNoAttention.setVisibility(View.VISIBLE);
+                    search_result_recycler.onLoadUnavailable();
+                } else if (TotalPage == Page + 1) {
+                    search_result_recycler.onLoadSucess(false);
+                } else {
+                    search_result_recycler.onLoadSucess(true);
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingFailed();
+                if (!isLoadOrRefresh) {
+                    search_result_recycler.onLoadFailed();
+                }
+            }
+        });
+    }
+
+    /**
+     * 商品list
+     *
+     * @param page
+     * @param pagesize
+     */
+    private void getProductList(int page, int pagesize) {
+        Call<BaseModel<Page<ArrayList<Product>>>> call = ApiInstant.getInstant().getProductlist(AppApplication.apptype, sortid,
+                rootid,classid,AppApplication.shopid, page + "", pagesize + "");
 
         call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.Model.basemodel.Page<ArrayList<Product>>>>() {
             @Override
@@ -181,13 +251,11 @@ public class SearchResultActivity extends BaseActivity {
                     search_result_recycler.onLoadSucess(true);
                 } else {
                     search_result_recycler.onLoadSucess(false);
-
                 }
             }
 
             @Override
             public void onFailure() {
-
                 CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
                 onActivityLoadingFailed();
                 if (!isLoadOrRefresh) {
@@ -203,13 +271,217 @@ public class SearchResultActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.search_back:
                 break;
+            case R.id.search_all_sort:
+                sortpopupWindow.showAsDropDown(search_all_classic,0,5);
+                break;
+            case R.id.search_all_classic:
+                classicpopupWindow.showAsDropDown(search_all_classic,0,5);
+                break;
             case R.id.search_right_iv:
                 key = search_et.getText().toString().trim();
                 if (!TextUtils.isEmpty(key)) {
-                    CommonManager.dismissSoftInputMethod(this,view.getWindowToken());
-                    initData();
+                    CommonManager.dismissSoftInputMethod(this, view.getWindowToken());
+                    startActivityLoading();
                 }
                 break;
+        }
+    }
+
+
+    private ListView pop_list_classic_main;
+    private ListView pop_list_classic;
+
+    //初始化分类
+    private void initPopupClassicWindow() {
+        // TODO Auto-generated method stub
+        View view = getLayoutInflater().inflate(R.layout.activity_search_result_pop_classic, null);
+        pop_list_classic_main=$(view,R.id.pop_list_classic_main);
+        pop_list_classic=$(view,R.id.pop_list_classic);
+        classicpopupWindow = new PopupWindow(view,
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
+        classicpopupWindow.setFocusable(true);
+        classicpopupWindow.setOutsideTouchable(true);
+        classicpopupWindow.setAnimationStyle(R.style.popwin_recent_anim_style);
+        classicpopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        classicpopupWindow.setOnDismissListener(new popupWindowclickListener());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (classicpopupWindow != null && classicpopupWindow.isShowing()) {
+                    classicpopupWindow.dismiss();
+                }
+            }
+        });
+        getClassicData();
+    }
+
+    private ListView pop_list_classic_sort;
+    //初始化排序
+    private void initPopupSortWindow() {
+        // TODO Auto-generated method stub
+        View view = getLayoutInflater().inflate(R.layout.activity_search_result_pop_classic, null);
+        ListView pop_list_classic_main=$(view, R.id.pop_list_classic_main);
+        pop_list_classic_main.setVisibility(View.GONE);
+        LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        pop_list_classic_sort=$(view,R.id.pop_list_classic);
+        pop_list_classic_sort.setLayoutParams(params);
+        sortpopupWindow = new PopupWindow(view,
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
+        sortpopupWindow.setFocusable(true);
+        sortpopupWindow.setOutsideTouchable(true);
+        sortpopupWindow.setAnimationStyle(R.style.popwin_recent_anim_style);
+        sortpopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        sortpopupWindow.setOnDismissListener(new popupWindowclickListener());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sortpopupWindow != null && sortpopupWindow.isShowing()) {
+                    sortpopupWindow.dismiss();
+                }
+            }
+        });
+        getSortData();
+    }
+
+    private void getSortData() {
+        ArrayList<String> list=new ArrayList<>();
+        list.add("销量排序");
+        list.add("价格排序");
+        list.add("最新上线");
+        pop_list_classic_sort.setAdapter(new CommonBaseAdapter<String>(this, list, R.layout.fragment_classic_left_item) {
+            @Override
+            public void convert(ViewHolder holder, String itemData, int position) {
+                TextView textView = holder.getView(R.id.classic_rootid_list_item);
+                textView.setTextColor(getResources().getColor(R.color.black));
+                textView.setText(itemData);
+            }
+        });
+        pop_list_classic_sort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 0) {
+                    sortid = "0";
+                } else if (position == 1) {
+                    sortid = "2";
+                } else {
+                    sortid = "3";
+                }
+                closePopuw();
+                getProductList(Page,PageSize);
+            }
+        });
+    }
+
+
+    private void getClassicData(){
+        if(AppApplication.classiclist.size()>0){
+            if(!AppApplication.classiclist.get(0).name.equals("全部分类")) {
+                Category category = new Category();
+                category.name = "全部分类";
+                category.id = "";
+                Category category1 = new Category();
+                category1.name = "全部";
+                category1.id = "";
+                category.clist.add(category1);
+                AppApplication.classiclist.add(0, category);
+            }
+            AppApplication.classiclist.get(0).isOnclick=true;
+            bindClassicView();
+        }else {
+            Call<BaseModel<ArrayList<Category>>> call = ApiInstant.getInstant().categoryLevel2(AppApplication.apptype, "");
+            call.enqueue(new ApiCallback<BaseModel<ArrayList<Category>>>() {
+                @Override
+                public void onSucssce(BaseModel<ArrayList<Category>> arrayListBaseModel) {
+                    AppApplication.classiclist.addAll(arrayListBaseModel.object);
+                    getClassicData();
+                }
+                @Override
+                public void onFailure() {
+                }
+            });
+        }
+    }
+
+    private void bindClassicView(){
+        final  CommonBaseAdapter adapter=new CommonBaseAdapter<Category>(this,AppApplication.classiclist,R.layout.fragment_classic_left_item) {
+            @Override
+            public void convert(ViewHolder holder, Category itemData, int position) {
+                TextView textView=holder.getView(R.id.classic_rootid_list_item);
+                textView.setText(itemData.name);
+                if(itemData.isOnclick){
+
+                    textView.setTextColor(getResources().getColor(R.color.colormain));
+                }else {
+                    textView.setTextColor(getResources().getColor(R.color.black));
+                }
+            }
+        };
+        pop_list_classic_main.setAdapter(adapter);
+        pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this,AppApplication.classiclist.get(0).clist,R.layout.fragment_classic_left_item) {
+            @Override
+            public void convert(ViewHolder holder, Category itemData, int position) {
+                TextView textView=holder.getView(R.id.classic_rootid_list_item);
+                textView.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
+                textView.setTextColor(getResources().getColor(R.color.black));
+                textView.setText(itemData.name);
+            }
+        });
+        pop_list_classic_main.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                for (Category category : AppApplication.classiclist) {
+                    category.isOnclick = false;
+                }
+                AppApplication.classiclist.get(position).isOnclick = true;
+                rootid = AppApplication.classiclist.get(position).id;
+                adapter.notifyDataSetChanged();
+                pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, AppApplication.classiclist.get(position).clist, R.layout.fragment_classic_left_item) {
+                    @Override
+                    public void convert(ViewHolder holder, Category itemData, int position) {
+                        TextView textView = holder.getView(R.id.classic_rootid_list_item);
+                        textView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        textView.setTextColor(getResources().getColor(R.color.black));
+                        textView.setText(itemData.name);
+                    }
+                });
+            }
+        });
+
+        pop_list_classic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long ids) {
+                Category category=null;
+                for(Category category1 : AppApplication.classiclist){
+                    if(category1.id.equals(rootid)){
+                        category=category1;
+                    }
+                }
+                if(category!=null)
+               classid= category.clist.get(position).id;
+                Page=0;
+                getProductList(Page++,PageSize);
+                closePopuw();
+            }
+        });
+    }
+
+    private void closePopuw(){
+        if (sortpopupWindow != null && sortpopupWindow.isShowing()) {
+            sortpopupWindow.dismiss();
+        }
+        if (classicpopupWindow != null && classicpopupWindow.isShowing()) {
+            classicpopupWindow.dismiss();
+        }
+    }
+    class popupWindowclickListener implements PopupWindow.OnDismissListener {
+        @Override
+        public void onDismiss() {
+//            cinema_expandable_image_city.setImageResource(R.drawable.price_expandable_close);
+//            cinema_expandable_image_region.setImageResource(R.drawable.price_expandable_close);
         }
     }
 }
