@@ -35,7 +35,7 @@ public class SearchHistroyDao {
      */
     public void add(SearchHistroy key) {
         try {
-            keyDaoOpe.create(key);
+            keyDaoOpe.createIfNotExists(key);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,9 +80,22 @@ public class SearchHistroyDao {
     }
 
 
+    /**
+     * 删除某个用户
+     * @param key
+     */
+    public void removeall() {
+        try {
+            keyDaoOpe.deleteBuilder().delete();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public List<SearchHistroy> getKeyList() {
         try {
-            return keyDaoOpe.queryBuilder().orderBy("id", true).limit(6).query();
+            return keyDaoOpe.queryBuilder().orderBy("id", false).limit(6).query();
         } catch (Exception e) {
             e.printStackTrace();
         }

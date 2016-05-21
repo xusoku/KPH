@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <com.davis.kangpinhui.views.CustomTypefaceEditText
+            android:id="@+id/classic_rootid_et"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/common_measure_10dp"

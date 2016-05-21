@@ -121,7 +121,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private void getDate() {
-        Call<BaseModel<Index>> call= ApiInstant.getInstant().getIndex(AppApplication.apptype,"1","");
+        Call<BaseModel<Index>> call= ApiInstant.getInstant().getIndex(AppApplication.apptype,AppApplication.shopid,"");
         call.enqueue(new ApiCallback<BaseModel<Index>>() {
             @Override
             public void onSucssce(BaseModel<Index> indexBaseModel) {

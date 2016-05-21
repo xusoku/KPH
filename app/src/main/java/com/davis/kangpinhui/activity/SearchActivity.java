@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -100,7 +102,15 @@ public class SearchActivity extends BaseActivity {
 
     @Override
     protected void setListener() {
+        search_list_histroy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                String key=dao.getKeyList().get(position).getKey();
+                SearchResultActivity.jumpSearchResultActivity(SearchActivity.this,key);
+
+            }
+        });
     }
 
     @Override
@@ -111,17 +121,26 @@ public class SearchActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.search_right_iv:
+
                 getSearchKey();
+                break;
+            case R.id.search_clear_tv:
+                dao.removeall();
+                getRefuse();
                 break;
         }
     }
 
     private void getSearchKey() {
         String str = search_et.getText().toString().trim();
+        if(!TextUtils.isEmpty(str)){
         SearchHistroy histroy = new SearchHistroy();
         histroy.setKey(str);
         dao.add(histroy);
         getRefuse();
+            SearchResultActivity.jumpSearchResultActivity(SearchActivity.this, str);
+        }
+        search_et.setText("");
     }
 
     private void getRefuse() {
@@ -146,7 +165,7 @@ public class SearchActivity extends BaseActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUitl.showToast("tag" + tag);
+                SearchResultActivity.jumpSearchResultActivity(SearchActivity.this, tag);
             }
         });
         return textView;

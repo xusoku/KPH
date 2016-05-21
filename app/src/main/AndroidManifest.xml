@@ -37,10 +37,16 @@
         <activity
             android:name=".activity.ShopActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.FeedBackActivity" />
-        <activity android:name=".activity.MyTiHuoActivity" />
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.SearchActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.FeedBackActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MyTiHuoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.SearchResultActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

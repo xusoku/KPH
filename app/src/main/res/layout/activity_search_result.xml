@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_65dp"
         android:background="@color/colormain"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -33,11 +35,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:gravity="bottom"
             android:hint="@string/classic_search"
-            android:textColor="@color/white"
             android:singleLine="true"
-            android:ellipsize="end"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_17" />
 
         <LinearLayout
@@ -59,44 +61,59 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.davis.kangpinhui.views.FlowLayout
-        android:id="@+id/search_flowlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/common_measure_15dp" />
-
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="@dimen/common_measure_65dp">
 
-        <com.davis.kangpinhui.views.CustomTypefaceTextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/common_measure_50dp"
-            android:textColor="@color/colorgray"
-            android:layout_marginLeft="@dimen/common_measure_15dp"
-            android:gravity="center_vertical"
-            android:text="历史搜索"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorgray"
-            android:layout_marginLeft="@dimen/common_measure_15dp"/>
-        <ListView
-            android:id="@+id/search_list_histroy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:listSelector="?android:attr/selectableItemBackground"
-            />
-        <com.davis.kangpinhui.views.CustomTypefaceTextView
-            android:id="@+id/search_clear_tv"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/common_measure_50dp"
-            android:textColor="@color/colorgray"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:onClick="doClick"
-            android:text="清除历史记录"/>
+            android:layout_weight="1">
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_17"
+                android:text="全部分类"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_nearby"/>
+        </LinearLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/common_measure_45dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorgray"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_17"
+                android:text="销量排序"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_nearby"/>
+        </LinearLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorgray"/>
+    <com.davis.kangpinhui.views.LoadMoreRecyclerView
+        android:id="@+id/search_result_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    </com.davis.kangpinhui.views.LoadMoreRecyclerView>
 </LinearLayout>

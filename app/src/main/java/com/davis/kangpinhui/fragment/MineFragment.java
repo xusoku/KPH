@@ -5,6 +5,7 @@ import android.view.View;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.FeedBackActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
+import com.davis.kangpinhui.activity.SettingActivity;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.MineCustomLayout;
@@ -82,7 +83,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 FeedBackActivity.jumpFeedBackActivity(getActivity());
                 break;
             case R.id.mine_setting:
-                FeedBackActivity.jumpFeedBackActivity(getActivity());
+                SettingActivity.jumpSettingActivity(getActivity());
                 break;
             case R.id.mine_kefu:
                 FeedBackActivity.jumpFeedBackActivity(getActivity());
