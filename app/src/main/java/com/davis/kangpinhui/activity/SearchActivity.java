@@ -107,7 +107,7 @@ public class SearchActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String key=dao.getKeyList().get(position).getKey();
-                SearchResultActivity.jumpSearchResultActivity(SearchActivity.this,key);
+                SearchResultActivity.jumpSearchResultActivity(SearchActivity.this,key,true);
 
             }
         });
@@ -138,7 +138,7 @@ public class SearchActivity extends BaseActivity {
         histroy.setKey(str);
         dao.add(histroy);
         getRefuse();
-            SearchResultActivity.jumpSearchResultActivity(SearchActivity.this, str);
+            SearchResultActivity.jumpSearchResultActivity(SearchActivity.this, str,true);
         }
         search_et.setText("");
     }
@@ -165,7 +165,7 @@ public class SearchActivity extends BaseActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SearchResultActivity.jumpSearchResultActivity(SearchActivity.this, tag);
+                SearchResultActivity.jumpSearchResultActivity(SearchActivity.this, tag,true);
             }
         });
         return textView;

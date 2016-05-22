@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -44,6 +43,7 @@ import retrofit2.Call;
 public class SearchResultActivity extends BaseActivity {
 
     private String key = "";
+    private boolean isSearch=true;
     private LinearLayout search_back;
     private LinearLayout search_right_iv;
     private EditText search_et;
@@ -51,6 +51,8 @@ public class SearchResultActivity extends BaseActivity {
     private MySwipeRefreshLayout search_result_myswipe;
     private LinearLayout search_all_classic;
     private LinearLayout search_all_sort;
+    private TextView search_all_classic_text;
+    private TextView search_all_sort_text;
 
     private int Page = 0;
     private int PageSize = 20;
@@ -67,9 +69,18 @@ public class SearchResultActivity extends BaseActivity {
     private PopupWindow classicpopupWindow;
     private PopupWindow sortpopupWindow;
 
-    public static void jumpSearchResultActivity(Context con, String key) {
+    public static void jumpSearchResultActivity(Context con, String key,boolean isSearch) {
         Intent it = new Intent(con, SearchResultActivity.class);
         it.putExtra("key", key);
+        it.putExtra("issearch", isSearch);
+        con.startActivity(it);
+    }
+    public static void jumpSearchResultActivity(Context con, String key,boolean isSearch,String classid,String rootid) {
+        Intent it = new Intent(con, SearchResultActivity.class);
+        it.putExtra("key", key);
+        it.putExtra("issearch", isSearch);
+        it.putExtra("classid", classid);
+        it.putExtra("rootid", rootid);
         con.startActivity(it);
     }
 
@@ -82,6 +93,15 @@ public class SearchResultActivity extends BaseActivity {
     protected void initVariable() {
 
         key = getIntent().getStringExtra("key");
+        isSearch = getIntent().getBooleanExtra("issearch", false);
+        classid=getIntent().getStringExtra("classid");
+        rootid=getIntent().getStringExtra("rootid");
+        if(TextUtils.isEmpty(classid)){
+            classid="0";
+        }
+        if(TextUtils.isEmpty(rootid)){
+            rootid="0";
+        }
         list = new ArrayList<>();
     }
 
@@ -94,6 +114,8 @@ public class SearchResultActivity extends BaseActivity {
         search_result_myswipe = $(R.id.content);
         search_all_classic = $(R.id.search_all_classic);
         search_all_sort = $(R.id.search_all_sort);
+        search_all_classic_text = $(R.id.search_all_classic_text);
+        search_all_sort_text = $(R.id.search_all_sort_text);
 
         search_et.setText(key);
 
@@ -122,9 +144,14 @@ public class SearchResultActivity extends BaseActivity {
         search_result_myswipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getSearchProductList(0, PageSize);
-                Page = 0;
+                Page = 1;
                 isLoadOrRefresh = true;
+                if(!isSearch){
+                    getProductList(Page,PageSize);
+                }else {
+                    getSearchProductList(Page, PageSize);
+                }
+
             }
         });
 
@@ -133,9 +160,12 @@ public class SearchResultActivity extends BaseActivity {
     @Override
     protected void onActivityLoading() {
         super.onActivityLoading();
-        Page = 0;
+        Page = 1;
         isLoadOrRefresh = true;
-        getSearchProductList(0, PageSize);
+        if(isSearch){
+            getSearchProductList(Page, PageSize);
+        }else{
+        getProductList(Page, PageSize);}
     }
 
     @Override
@@ -163,7 +193,11 @@ public class SearchResultActivity extends BaseActivity {
             @Override
             public void onLoad(LoadMoreRecyclerView recyclerView) {
 
-                getSearchProductList(++Page, PageSize);
+                if(isSearch){
+                    getSearchProductList(++Page, PageSize);
+                }else{
+                   getProductList(++Page, PageSize);
+                }
                 isLoadOrRefresh = false;
             }
 
@@ -198,9 +232,9 @@ public class SearchResultActivity extends BaseActivity {
                 adapter.notifyDataSetChanged();
 
                 if (list.size() == 0) {
-//                    layNoAttention.setVisibility(View.VISIBLE);
+                    onActivityFirstLoadingNoData();
                     search_result_recycler.onLoadUnavailable();
-                } else if (TotalPage == Page + 1) {
+                } else if (TotalPage == Page ) {
                     search_result_recycler.onLoadSucess(false);
                 } else {
                     search_result_recycler.onLoadSucess(true);
@@ -245,9 +279,9 @@ public class SearchResultActivity extends BaseActivity {
                 adapter.notifyDataSetChanged();
 
                 if (list.size() == 0) {
-//                    layNoAttention.setVisibility(View.VISIBLE);
+                    onActivityFirstLoadingNoData();
                     search_result_recycler.onLoadUnavailable();
-                } else if (TotalPage != Page + 1) {
+                } else if (TotalPage != Page ) {
                     search_result_recycler.onLoadSucess(true);
                 } else {
                     search_result_recycler.onLoadSucess(false);
@@ -281,6 +315,7 @@ public class SearchResultActivity extends BaseActivity {
                 key = search_et.getText().toString().trim();
                 if (!TextUtils.isEmpty(key)) {
                     CommonManager.dismissSoftInputMethod(this, view.getWindowToken());
+                    isSearch=true;
                     startActivityLoading();
                 }
                 break;
@@ -346,7 +381,7 @@ public class SearchResultActivity extends BaseActivity {
     }
 
     private void getSortData() {
-        ArrayList<String> list=new ArrayList<>();
+        final ArrayList<String> list=new ArrayList<>();
         list.add("销量排序");
         list.add("价格排序");
         list.add("最新上线");
@@ -370,9 +405,14 @@ public class SearchResultActivity extends BaseActivity {
                     sortid = "3";
                 }
                 closePopuw();
-                Page = 0;
+                Page = 1;
                 isLoadOrRefresh = true;
-                getProductList(Page,PageSize);
+                if(isSearch){
+                    getSearchProductList(Page,PageSize);
+                }else{
+                    getProductList(Page,PageSize);
+                }
+                search_all_sort_text.setText(list.get(position));
             }
         });
     }
@@ -383,10 +423,10 @@ public class SearchResultActivity extends BaseActivity {
             if(!AppApplication.classiclist.get(0).name.equals("全部分类")) {
                 Category category = new Category();
                 category.name = "全部分类";
-                category.id = "";
+                category.id = "0";
                 Category category1 = new Category();
                 category1.name = "全部";
-                category1.id = "";
+                category1.id = "0";
                 category.clist.add(category1);
                 AppApplication.classiclist.add(0, category);
             }
@@ -463,11 +503,14 @@ public class SearchResultActivity extends BaseActivity {
                     }
                 }
                 if(category!=null)
-               classid= category.clist.get(position).id;
+                classid= category.clist.get(position).id;
                 Page = 0;
                 isLoadOrRefresh = true;
+                isSearch=false;
                 getProductList(Page++,PageSize);
                 closePopuw();
+                search_et.setText("");
+                search_all_classic_text.setText(category.clist.get(position).name);
             }
         });
     }

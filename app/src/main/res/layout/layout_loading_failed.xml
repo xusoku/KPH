@@ -13,12 +13,13 @@
         android:orientation="vertical" >
 
         <ImageView
+            android:id="@+id/base_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@mipmap/ic_no_network" />
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
-            android:id="@+id/tvFailed"
+            android:id="@+id/base_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"

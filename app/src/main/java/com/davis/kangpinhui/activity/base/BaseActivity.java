@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -219,6 +220,30 @@ public abstract class BaseActivity extends AppCompatActivity
         }
         isFirstLoading = false;
     }
+    /*如果首次加载先成功，就显示成功界面，
+       对于一个界面多个接口，之间不会有影响
+       isFirstLoading=false;
+       */
+    public void onActivityFirstLoadingNoData()
+    {
+
+        if (layLoadingFailed == null) {
+            return;
+        }
+        layLoadingFailed.setVisibility(View.VISIBLE);
+        ImageView base_image= (ImageView) layLoadingFailed.findViewById(R.id.base_image);
+        TextView base_text= (TextView) layLoadingFailed.findViewById(R.id.base_text);
+
+        base_image.setImageResource(R.mipmap.state_no_data);
+        base_text.setText("暂无数据");
+        layClickReload.setClickable(false);
+        layClickReload.setVisibility(View.VISIBLE);
+        loadingProgress.setVisibility(View.INVISIBLE);
+        isFirstLoading = true;
+        if (contentView != null) {
+            contentView.setVisibility(View.GONE);
+        }
+    }
 
     public void startActivityLoading()
     {
@@ -226,6 +251,12 @@ public abstract class BaseActivity extends AppCompatActivity
             layLoadingFailed = (FrameLayout) stubLoadingFailed.inflate();
             layClickReload = (LinearLayout) layLoadingFailed.findViewById(R.id.layClickReload);
             loadingProgress = (ProgressWheel) layLoadingFailed.findViewById(R.id.loadingProgress);
+            ImageView base_image= (ImageView) layLoadingFailed.findViewById(R.id.base_image);
+            TextView base_text= (TextView) layLoadingFailed.findViewById(R.id.base_text);
+
+            base_image.setImageResource(R.mipmap.ic_no_network);
+            base_text.setText("加载失败! 点击刷新");
+            layClickReload.setClickable(true);
             layClickReload.setOnClickListener(new OnClickListener()
             {
                 @Override

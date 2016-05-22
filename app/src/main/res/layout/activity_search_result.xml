@@ -89,6 +89,7 @@
                     android:orientation="horizontal">
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:id="@+id/search_all_classic_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="全部分类"
@@ -119,6 +120,7 @@
                     android:orientation="horizontal">
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:id="@+id/search_all_sort_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="销量排序"

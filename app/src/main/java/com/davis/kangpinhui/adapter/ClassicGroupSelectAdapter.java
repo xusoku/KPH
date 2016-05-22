@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.Model.Category;
 import com.davis.kangpinhui.R;
+import com.davis.kangpinhui.activity.SearchResultActivity;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.NoScrollGridView;
 import com.davis.kangpinhui.views.PinnedHeaderListView;
@@ -50,7 +51,7 @@ public class ClassicGroupSelectAdapter extends BaseAdapter
         }
         // 获取数据
         Category itemEntity = (Category) getItem(position);
-        GridViewAdapter gridViewAdapter = new GridViewAdapter(itemEntity.clist);
+        GridViewAdapter gridViewAdapter = new GridViewAdapter(itemEntity);
         viewHolder.noScrollGridView.setAdapter(gridViewAdapter);
 
 
@@ -190,10 +191,12 @@ public class ClassicGroupSelectAdapter extends BaseAdapter
 
     private class GridViewAdapter extends BaseAdapter {
 
+        private Category tcategory;
         private List<Category> categories;
 
-        public GridViewAdapter(List<Category> cityInfos) {
-            this.categories = cityInfos;
+        public GridViewAdapter(Category category) {
+            this.tcategory=category;
+            this.categories = category.clist;
         }
 
         @Override
@@ -233,7 +236,7 @@ public class ClassicGroupSelectAdapter extends BaseAdapter
            convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUitl.showToast(""+position);
+                    SearchResultActivity.jumpSearchResultActivity(mContext,"",false,category.id,tcategory.id);
                 }
             });
 
