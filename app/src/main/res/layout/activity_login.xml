@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colormain"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/common_measure_300dp"
+            android:layout_height="@dimen/common_measure_150dp"
+            android:src="@mipmap/logo_login"
+            android:layout_margin="@dimen/common_measure_30dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_measure_30dp"
+            android:layout_marginRight="@dimen/common_measure_30dp"
+            android:textColorHint="#bbffffff">
+
+            <AutoCompleteTextView
+                android:id="@+id/login_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="手机号"
+                android:textColor="@color/white"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@mipmap/ic_nearby"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_measure_30dp"
+            android:layout_marginRight="@dimen/common_measure_30dp">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textColorHint="#bbffffff"
+            >
+            <EditText
+                android:id="@+id/login_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="验证码"
+                android:textColor="@color/white"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="登录"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@mipmap/ic_nearby"/>
+
+        </android.support.design.widget.TextInputLayout>
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_17"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="发送验证码"/>
+        </RelativeLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_measure_30dp"
+            android:layout_marginRight="@dimen/common_measure_30dp"
+            android:textColorHint="#bbffffff"
+            >
+            <EditText
+                android:id="@+id/login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="密码"
+                android:textColor="@color/white"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="登录"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@mipmap/ic_nearby"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>
