@@ -370,6 +370,8 @@ public class SearchResultActivity extends BaseActivity {
                     sortid = "3";
                 }
                 closePopuw();
+                Page = 0;
+                isLoadOrRefresh = true;
                 getProductList(Page,PageSize);
             }
         });
@@ -462,7 +464,8 @@ public class SearchResultActivity extends BaseActivity {
                 }
                 if(category!=null)
                classid= category.clist.get(position).id;
-                Page=0;
+                Page = 0;
+                isLoadOrRefresh = true;
                 getProductList(Page++,PageSize);
                 closePopuw();
             }
