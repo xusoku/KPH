@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,7 +50,7 @@
 
             android:textColorHint="#bbffffff"
             >
-            <EditText
+            <com.davis.kangpinhui.views.CustomTypefaceEditText
                 android:id="@+id/login_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +83,7 @@
             android:layout_marginRight="@dimen/common_measure_30dp"
             android:textColorHint="#bbffffff"
             >
-            <EditText
+            <com.davis.kangpinhui.views.CustomTypefaceEditText
                 android:id="@+id/login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,6 +100,44 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_measure_64dp"
+            android:layout_marginLeft="@dimen/common_measure_30dp"
+            android:layout_marginRight="@dimen/common_measure_30dp"
+            android:layout_marginTop="@dimen/common_measure_15dp"
+            app:cardCornerRadius="3dp"
+            app:cardBackgroundColor="#90ffffff">
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_22"
+                android:gravity="center"
+                android:text="注册"/>
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_measure_30dp"
+            android:layout_marginRight="@dimen/common_measure_30dp"
+            android:layout_marginTop="@dimen/common_measure_15dp">
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_17"
+                android:layout_alignParentLeft="true"
+                android:text="忘记密码"/>
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_17"
+                android:layout_alignParentRight="true"
+                android:text="没有账号,去注册"/>
+        </RelativeLayout>
 
 
     </LinearLayout>
