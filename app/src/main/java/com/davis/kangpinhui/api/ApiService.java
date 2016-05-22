@@ -59,7 +59,7 @@ public interface ApiService {
 
     //2、用户 注册
     @POST("user/register.do")
-    Call<BaseModel<UserInfo>> userRegister(
+    Call<BaseModel> userRegister(
             @Query("apptype") String apptype,
             @Query("phone") String phone,
             @Query("password") String password,

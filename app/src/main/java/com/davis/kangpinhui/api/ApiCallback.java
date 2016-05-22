@@ -25,6 +25,7 @@ public abstract  class ApiCallback<T> implements Callback<T> {
             if(t.breturn){
                 onSucssce(response.body());
             }else{
+                onFailure();
                 ToastUitl.showToast(""+t.errorinfo);
             }
         }

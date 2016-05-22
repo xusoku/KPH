@@ -1,7 +1,9 @@
 package com.davis.kangpinhui.fragment;
 
 import android.view.View;
+import android.widget.TextView;
 
+import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.FeedBackActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
@@ -18,6 +20,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private MineCustomLayout mine_allorder;
     private MineCustomLayout mine_feedback_linear, mine_histroy_bill, mine_rechange, mine_setting, mine_kefu, mine_ti_huo, mine_myaddress, mine_mycoup, mine_cart, mine_allorder_sending,
             mine_allorder_unpay;
+    private TextView fragment_mine_name;
 
     @Override
     protected void initVariable() {
@@ -32,6 +35,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected void findViews(View view) {
 
+        fragment_mine_name = $(R.id.fragment_mine_name);
         mine_allorder = $(R.id.mine_allorder);
         mine_feedback_linear = $(R.id.mine_feedback_linear);
         mine_histroy_bill = $(R.id.mine_histroy_bill);
@@ -49,6 +53,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected void initData() {
 
+    }
+
+    public void setUi(UserInfo userInfo){
+
+        String name=userInfo.susername.substring(0,3)+"****"+userInfo.susername.substring(7,11);
+        fragment_mine_name.setText(name);
     }
 
     @Override

@@ -12,11 +12,11 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="@dimen/common_measure_300dp"
+            android:layout_width="@dimen/common_measure_250dp"
             android:layout_height="@dimen/common_measure_150dp"
             android:src="@mipmap/logo_login"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/common_measure_30dp"/>
+            android:layout_margin="@dimen/common_measure_20dp"/>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -34,20 +34,24 @@
                 android:inputType="phone"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:drawablePadding="10dp"
-                android:drawableLeft="@mipmap/ic_nearby"/>
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@mipmap/ic_nearby"
+                android:background="@null"
+                android:drawableBottom="@drawable/line"/>
 
         </android.support.design.widget.TextInputLayout>
 
         <RelativeLayout
+            android:id="@+id/login_code_relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_measure_30dp"
-            android:layout_marginRight="@dimen/common_measure_30dp">
+            android:layout_marginRight="@dimen/common_measure_30dp"
+            android:layout_marginTop="@dimen/common_measure_10dp">
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:textColorHint="#bbffffff"
             >
             <com.davis.kangpinhui.views.CustomTypefaceEditText
@@ -59,17 +63,22 @@
                 android:imeActionId="@+id/login"
                 android:imeActionLabel="登录"
                 android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
                 android:maxLines="1"
+                android:inputType="number"
                 android:singleLine="true"
-                android:drawablePadding="10dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:background="@null"
+                android:drawableBottom="@drawable/line"
                 android:drawableLeft="@mipmap/ic_nearby"/>
 
         </android.support.design.widget.TextInputLayout>
             <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/login_register_send_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:onClick="doClick"
                 android:textSize="@dimen/text_size_17"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
@@ -81,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_measure_30dp"
             android:layout_marginRight="@dimen/common_measure_30dp"
+            android:layout_marginTop="@dimen/common_measure_10dp"
             android:textColorHint="#bbffffff"
             >
             <com.davis.kangpinhui.views.CustomTypefaceEditText
@@ -95,7 +105,10 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:drawablePadding="10dp"
+                android:drawablePadding="5dp"
+                android:background="@null"
+                android:drawableBottom="@drawable/line"
+                android:gravity="center_vertical"
                 android:drawableLeft="@mipmap/ic_nearby"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -107,47 +120,56 @@
             android:layout_marginRight="@dimen/common_measure_30dp"
             android:layout_marginTop="@dimen/common_measure_30dp"
             app:cardCornerRadius="3dp"
-            app:cardElevation="1dp"
-            app:cardBackgroundColor="#90ffffff">
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#70ffffff">
             <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/login_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_22"
                 android:gravity="center"
+                android:onClick="doClick"
                 android:text="注册"/>
         </android.support.v7.widget.CardView>
 
         <RelativeLayout
+            android:id="@+id/login_forget_relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_measure_30dp"
             android:layout_marginRight="@dimen/common_measure_30dp"
-            android:layout_marginTop="@dimen/common_measure_25dp">
+            android:layout_marginTop="@dimen/common_measure_30dp">
             <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/login_forget_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:onClick="doClick"
                 android:textSize="@dimen/text_size_17"
                 android:layout_alignParentLeft="true"
                 android:text="忘记密码?"/>
             <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/login_register_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:onClick="doClick"
                 android:textSize="@dimen/text_size_17"
                 android:layout_alignParentRight="true"
                 android:text="没有账号,去注册"/>
         </RelativeLayout>
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/login_last_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_measure_30dp"
             android:layout_marginRight="@dimen/common_measure_30dp"
-            android:layout_marginTop="@dimen/common_measure_25dp"
+            android:layout_marginTop="@dimen/common_measure_35dp"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_17"
+            android:onClick="doClick"
             android:text="＜ 随便逛逛"/>
 
 

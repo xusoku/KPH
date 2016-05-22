@@ -256,6 +256,9 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 break;
             case R.id.index_cart:
 
+                if(AppApplication.isLogin(getActivity())){
+
+                }
                 break;
             case R.id.index_search:
                 SearchActivity.jumpSearchActivity(getActivity(), "");
