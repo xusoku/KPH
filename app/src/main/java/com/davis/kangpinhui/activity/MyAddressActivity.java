@@ -8,8 +8,17 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.Model.Address;
+import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.api.ApiCallback;
+import com.davis.kangpinhui.api.ApiInstant;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
 
 public class MyAddressActivity extends BaseActivity {
 
@@ -41,6 +50,19 @@ public class MyAddressActivity extends BaseActivity {
     @Override
     protected void initData() {
 
+        Call<BaseModel<ArrayList<Address>>> call = ApiInstant.getInstant().getAddresslist(AppApplication.apptype,AppApplication.token);
+
+        call.enqueue(new ApiCallback<BaseModel<ArrayList<Address>>>() {
+            @Override
+            public void onSucssce(BaseModel<ArrayList<Address>> arrayListBaseModel) {
+                
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
     }
 
     @Override
