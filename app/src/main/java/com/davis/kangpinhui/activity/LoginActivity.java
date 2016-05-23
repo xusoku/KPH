@@ -26,6 +26,7 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.RegexUtils;
+import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 
 import de.greenrobot.event.EventBus;
@@ -199,6 +200,8 @@ public class LoginActivity extends BaseActivity {
                                 finish();
                                 AppApplication.userInfo=userInfoBaseModel.object;
                                 AppApplication.token=userInfoBaseModel.object.token;
+                                SharePreferenceUtils.getSharedPreferences("kph").putString("token", AppApplication.token);
+                                SharePreferenceUtils.getSharedPreferences("kph").putString("username", AppApplication.userInfo.susername);
                                 EventBus.getDefault().post(AppApplication.userInfo);
                             }
 

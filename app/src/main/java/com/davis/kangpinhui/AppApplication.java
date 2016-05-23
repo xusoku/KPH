@@ -9,6 +9,7 @@ import com.davis.kangpinhui.Model.Category;
 import com.davis.kangpinhui.Model.Extendedinfo;
 import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.activity.LoginActivity;
+import com.davis.kangpinhui.util.SharePreferenceUtils;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ public class AppApplication extends Application {
         super.onCreate();
 //        instance
         instance = (AppApplication) getApplicationContext();
+
+        token=SharePreferenceUtils.getSharedPreferences("kph").getString("token","");
     }
 
     public static boolean isLogin(Context context) {

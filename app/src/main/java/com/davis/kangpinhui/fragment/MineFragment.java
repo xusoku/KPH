@@ -1,5 +1,6 @@
 package com.davis.kangpinhui.fragment;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.davis.kangpinhui.activity.FeedBackActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
 import com.davis.kangpinhui.activity.SettingActivity;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
+import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.MineCustomLayout;
@@ -54,6 +56,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initData() {
+
+        String name= SharePreferenceUtils.getSharedPreferences("kph").getString("username","");
+        if(!TextUtils.isEmpty(name)){
+            name=name.substring(0,3)+"****"+name.substring(7,11);
+            fragment_mine_name.setText(name);
+        }
 
     }
 

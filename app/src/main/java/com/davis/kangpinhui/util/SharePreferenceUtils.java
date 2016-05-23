@@ -9,14 +9,6 @@ import com.davis.kangpinhui.AppApplication;
 import java.util.Set;
 
 /**
- * ****************************************************************
- * 文件名称	: SharePreferenceUtils.java
- * 作    者	: hudongsheng
- * 创建时间	: 2014-6-25 下午5:48:24
- * 文件描述	: 保存数据到本地工具类
- * 版权声明	: Copyright 2011 © 江苏钱旺智能系统有限公司
- * 修改历史	: 2014-6-25 1.00 初始版本
- *****************************************************************
  */
 public class SharePreferenceUtils
 {
