@@ -1,6 +1,8 @@
 package com.davis.kangpinhui.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,8 +32,13 @@ public class AddAddressActivity extends BaseActivity {
     private EditText add_address_phone;
     private TextView add_address_text;
 
-    public static void jumpAddAddressActivity(Context cot) {
+    private String type = "";//1 添加  0 修改
+    private String addressid="";
+
+    public static void jumpAddAddressActivity(Context cot, String type,String id) {
         Intent it = new Intent(cot, AddAddressActivity.class);
+        it.putExtra("type", type);
+        it.putExtra("id", id);
         cot.startActivity(it);
     }
 
@@ -42,6 +49,9 @@ public class AddAddressActivity extends BaseActivity {
 
     @Override
     protected void initVariable() {
+
+        type = getIntent().getStringExtra("type");
+        addressid = getIntent().getStringExtra("id");
 
     }
 
@@ -58,18 +68,51 @@ public class AddAddressActivity extends BaseActivity {
         add_address_text = $(R.id.add_address_text);
 
 
+        if (type.equals("1")) {
+            delete_address.setVisibility(View.GONE);
+        } else {
+            delete_address.setVisibility(View.VISIBLE);
+        }
+
         getRightTextButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAddress();
+                if (type.equals("1"))
+                    addAddress();
+                else
+                    fixAddress();
             }
         });
+
 
     }
 
     @Override
     protected void initData() {
 
+        if (type.equals("0")) {
+            startActivityLoading();
+        }
+    }
+
+    @Override
+    protected void onActivityLoading() {
+        super.onActivityLoading();
+
+        Call<BaseModel<Address>> call = ApiInstant.getInstant().getAddressById(AppApplication.apptype, AppApplication.token, addressid);
+        call.enqueue(new ApiCallback<BaseModel<Address>>() {
+            @Override
+            public void onSucssce(BaseModel<Address> addressBaseModel) {
+                onActivityLoadingSuccess();
+                Address address = addressBaseModel.object;
+                bindView(address);
+            }
+
+            @Override
+            public void onFailure() {
+                onActivityLoadingFailed();
+            }
+        });
     }
 
     @Override
@@ -104,12 +147,13 @@ public class AddAddressActivity extends BaseActivity {
             return;
         }
 
-        Call<BaseModel<Address>> call= ApiInstant.getInstant().Addaddress(AppApplication.apptype,
-                AppApplication.token,"",pepole,address+addressdes,phone,AppApplication.shopid,"");
+        Call<BaseModel<Address>> call = ApiInstant.getInstant().Addaddress(AppApplication.apptype,
+                AppApplication.token, "", pepole, address + addressdes, phone, AppApplication.shopid, address);
         call.enqueue(new ApiCallback<BaseModel<Address>>() {
             @Override
             public void onSucssce(BaseModel<Address> addressBaseModel) {
                 ToastUitl.showToast("添加成功");
+                finish();
             }
 
             @Override
@@ -119,12 +163,85 @@ public class AddAddressActivity extends BaseActivity {
         });
     }
 
-    private void bindView() {
+    private void fixAddress() {
+        String address = add_address_text.getText().toString().trim();
+        String addressdes = add_des_address_text.getText().toString().trim();
+        String pepole = add_address_people.getText().toString().trim();
+        String phone = add_address_phone.getText().toString().trim();
+
+        if (TextUtils.isEmpty(address)) {
+            ToastUitl.showToast("地址不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(addressdes)) {
+            ToastUitl.showToast("详细地址不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(pepole)) {
+            ToastUitl.showToast("联系人不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(phone)) {
+            ToastUitl.showToast("联系方式不能为空");
+            return;
+        }
+        if (!RegexUtils.isMobilePhoneNumber(phone)) {
+            ToastUitl.showToast("联系方式不正确");
+            return;
+        }
+
+        Call<BaseModel<Address>> call = ApiInstant.getInstant().updateAddress(AppApplication.apptype,
+                AppApplication.token, addressid, pepole, address + addressdes, phone, AppApplication.shopid, address);
+        call.enqueue(new ApiCallback<BaseModel<Address>>() {
+            @Override
+            public void onSucssce(BaseModel<Address> addressBaseModel) {
+                ToastUitl.showToast("修改成功");
+                finish();;
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+    }
+
+    private void bindView(Address address) {
+
+        add_des_address_text.setText(address.saddress);
+        add_address_people.setText(address.saddressname);
+        add_address_phone.setText(address.smobile);
+        add_address_text.setText(address.saddressperfix);
+    }
+    private void deleteaddress() {
+        Call<BaseModel<Address>> call= ApiInstant.getInstant().deleteAddress(AppApplication.apptype,AppApplication.token,addressid);
+
+        call.enqueue(new ApiCallback<BaseModel<Address>>() {
+            @Override
+            public void onSucssce(BaseModel<Address> addressBaseModel) {
+                ToastUitl.showToast("删除成功");
+                finish();;
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
 
     }
 
     @Override
     public void doClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.delete_address:
+                new AlertDialog.Builder(this).setMessage("确定要删除?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteaddress();
+                    }
+                }).setNegativeButton("取消",null).show();
+                break;
+        }
     }
 }

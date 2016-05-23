@@ -34,8 +34,8 @@ import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.BadgeView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
-import com.davis.kangpinhui.views.loopbanner.LoopBanner;
 import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
+import com.davis.kangpinhui.views.viewlineloop.LoopBanner;
 
 import java.util.ArrayList;
 

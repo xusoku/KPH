@@ -6,7 +6,11 @@
     android:orientation="vertical"
     android:background="@color/colorlightgray"
     >
-
+<LinearLayout
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <View
         android:layout_width="fill_parent"
         android:layout_height="15dp"
@@ -32,9 +36,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="asdf"
             android:textColor="@color/black"
             android:singleLine="true"
+            android:text="asdf"
             android:ellipsize="end"
             android:textSize="@dimen/text_size_22" />
     </LinearLayout>
@@ -65,7 +69,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="我送我送我送我送我送"
             android:maxLines="3"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_22"
@@ -99,7 +102,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="asdf"
             android:textColor="@color/black"
             android:singleLine="true"
             android:ellipsize="end"
@@ -131,7 +133,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="asdf"
             android:textColor="@color/black"
             android:singleLine="true"
             android:ellipsize="end"
@@ -147,7 +148,10 @@
         android:layout_height="@dimen/common_measure_65dp"
         android:gravity="center"
         android:text="删除收获地址"
+        android:clickable="true"
+        android:onClick="doClick"
         android:textSize="@dimen/text_size_22"
         android:background="@color/white"
         android:textColor="@color/red"/>
+</LinearLayout>
 </LinearLayout>

@@ -190,6 +190,15 @@ public abstract class BaseActivity extends AppCompatActivity
             }
         }
     }
+    public void setTranslucentStatusBarGone()
+    {
+        View customStatusBarView = $(R.id.customStatusBarView);
+        if (customStatusBarView != null) {
+            if (isTranslucentStatusBar()) {
+                customStatusBarView.setVisibility(View.GONE);
+            }
+        }
+    }
 
     /*如果首次加载先失败，就显示失败界面，
     对于一个界面多个接口，之间不会有影响

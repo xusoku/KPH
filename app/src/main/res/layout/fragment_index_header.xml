@@ -3,12 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.davis.kangpinhui.views.loopbanner.LoopBanner
+    <com.davis.kangpinhui.views.viewlineloop.LoopBanner
         android:id="@+id/index_loopbanner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_235dp">
 
-    </com.davis.kangpinhui.views.loopbanner.LoopBanner>
+    </com.davis.kangpinhui.views.viewlineloop.LoopBanner>
 
     <LinearLayout
         android:layout_width="match_parent"

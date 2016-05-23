@@ -2,9 +2,11 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,7 +63,7 @@ public class ProductDetailActivity extends BaseActivity {
 
     @Override
     protected void findViews() {
-
+        setTranslucentStatusBarGone();
         product_detail_banner = $(R.id.product_detail_banner);
         product_detail_title = $(R.id.product_detail_title);
         product_detail_price = $(R.id.product_detail_price);

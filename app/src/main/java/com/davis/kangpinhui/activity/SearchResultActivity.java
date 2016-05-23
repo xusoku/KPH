@@ -155,6 +155,8 @@ public class SearchResultActivity extends BaseActivity {
             }
         });
 
+
+
     }
 
     @Override
@@ -181,7 +183,7 @@ public class SearchResultActivity extends BaseActivity {
         adapter.setOnItemClickLitener(new CommonRecyclerAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                ToastUitl.showToast("" + position);
+                ProductDetailActivity.jumpProductDetailActivity(SearchResultActivity.this,list.get(position).iproductid);
             }
 
             @Override

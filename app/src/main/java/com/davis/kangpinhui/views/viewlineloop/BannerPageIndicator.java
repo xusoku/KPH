@@ -1,4 +1,4 @@
-package com.davis.kangpinhui.views.loopbanner;
+package com.davis.kangpinhui.views.viewlineloop;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,9 +15,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.util.CommonManager;
+import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
 import com.davis.kangpinhui.views.viewpagerindicator.PageIndicator;
 import com.davis.kangpinhui.views.viewpagerindicator.scrollbar.ScrollBar;
 
@@ -76,7 +76,7 @@ public class BannerPageIndicator extends View implements PageIndicator {
         mPaintStroke.setStrokeWidth(dip2px(context, 1));//环形边缘宽度
         mPaintFill.setStyle(Style.FILL);
         mPaintFill.setColor(getResources().getColor(R.color.colormain));//选中的中间及移动的滑块颜色
-        mRadius = dip2px(context, 5);//最外层圆半径，包括了边缘宽度
+        mRadius = dip2px(context, 12);//最外层圆半径，包括了边缘宽度
         mSnap = true;
         spacing = mRadius;
         final ViewConfiguration configuration = ViewConfiguration.get(context);

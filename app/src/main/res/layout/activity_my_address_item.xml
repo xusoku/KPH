@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    >
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="@dimen/common_measure_0dp"
+        android:layout_height="@dimen/common_measure_100dp"
+        android:layout_margin="@dimen/common_measure_15dp"
+        android:gravity="center_vertical">
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/my_address_item_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colormain"
+            android:textSize="@dimen/text_size_22"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="收货人：xxx"/>
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/my_address_item_phone"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colormain"
+            android:textSize="@dimen/text_size_22"
+            android:text="123456756"/>
+
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:layout_marginTop="@dimen/common_measure_10dp"
+            android:id="@+id/my_address_item_text"
+            android:layout_below="@id/my_address_item_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colormain"
+            android:textSize="@dimen/text_size_22"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="添加新的收获地址"/>
+
+    </RelativeLayout>
+
+
+<ImageView
+    android:id="@+id/my_address_item_edit"
+    android:layout_width="@dimen/common_measure_65dp"
+    android:layout_height="match_parent"
+    android:paddingRight="@dimen/common_measure_15dp"
+    android:src="@mipmap/ic_favorites"/>
+</LinearLayout>
