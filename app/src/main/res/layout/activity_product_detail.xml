@@ -5,18 +5,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Dra
+    <com.davis.kangpinhui.views.DragTopLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@color/red">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="asdfsdfsjf alsdffasdfsdfsdfa"/>
+        </LinearLayout>
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/content"
@@ -181,17 +186,6 @@
                     </com.davis.kangpinhui.views.XWebView>
                 </LinearLayout>
             </ScrollView>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/red">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="asdfsdfsjf alsdffasdfsdfsdfa"/>
-        </LinearLayout>
-    </>
+    </com.davis.kangpinhui.views.DragTopLayout>
 </LinearLayout>
