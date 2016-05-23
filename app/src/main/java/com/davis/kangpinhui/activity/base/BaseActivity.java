@@ -63,6 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
+        setTranslucentStatusBar(R.color.colormain);
         AppManager.getAppManager().addActivity(this);
         initBase();
         addContentView();

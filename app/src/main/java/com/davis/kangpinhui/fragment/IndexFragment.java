@@ -20,6 +20,7 @@ import com.davis.kangpinhui.Model.Index;
 import com.davis.kangpinhui.Model.Product;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
+import com.davis.kangpinhui.activity.ProductDetailActivity;
 import com.davis.kangpinhui.activity.SearchActivity;
 import com.davis.kangpinhui.activity.ShopActivity;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
@@ -227,6 +228,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onItemClick(View itemView, int position) {
                 ToastUitl.showToast("" + position);
+                ProductDetailActivity.jumpProductDetailActivity(getActivity(),list.get(position).iproductid);
             }
 
             @Override

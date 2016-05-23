@@ -69,6 +69,10 @@ public class LoopBanner extends RelativeLayout {
         initViewPagerScroll();
     }
 
+    public void setPageIndicator(boolean pageIndicator) {
+        this.pageIndicator.setIsType(pageIndicator);
+    }
+
     public LoopBanner setPageAdapter(LoopPageAdapter pageAdapter){
        
         this.pageAdapter = pageAdapter;
