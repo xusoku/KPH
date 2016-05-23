@@ -104,6 +104,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             }
         });
 
+        index_loopbanner.setPageIndicator(true);
         backgroundDefaultBadge= new BadgeView(getActivity());
         backgroundDefaultBadge.setTargetView(index_cart);
     }
