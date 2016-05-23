@@ -34,10 +34,6 @@
 
     </LinearLayout>
 
-    <com.davis.kangpinhui.views.MySwipeRefreshLayout
-        android:id="@+id/classic_swipe"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/content"
@@ -51,6 +47,10 @@
                 android:layout_height="match_parent"
                 android:divider="@null"
                 android:scrollbars="none" />
+            <com.davis.kangpinhui.views.MySwipeRefreshLayout
+                android:id="@+id/classic_swipe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <com.davis.kangpinhui.views.PinnedHeaderListView
                 android:id="@+id/classic_rootid_pinnlist"
@@ -59,7 +59,8 @@
                 android:layout_marginLeft="@dimen/common_measure_10dp"
                 android:layout_weight="1"
                 android:scrollbars="none" />
+            </com.davis.kangpinhui.views.MySwipeRefreshLayout>
+
         </LinearLayout>
-    </com.davis.kangpinhui.views.MySwipeRefreshLayout>
 
 </LinearLayout>

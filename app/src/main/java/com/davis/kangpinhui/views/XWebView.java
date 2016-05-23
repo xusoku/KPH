@@ -53,6 +53,8 @@ public class XWebView extends WebView
 
         this.getSettings().setJavaScriptEnabled(false);
         this.getSettings().setDomStorageEnabled(true);
+        this.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        this.getSettings().setAppCacheEnabled(true);
         this.setHorizontalScrollBarEnabled(false);
         this.setVerticalScrollBarEnabled(false);
         this.setOnTouchListener(new OnTouchListener()

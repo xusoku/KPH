@@ -51,6 +51,7 @@
                     android:textSize="@dimen/text_size_22" />
 
                 <com.davis.kangpinhui.views.CustomTypefaceTextView
+                    android:id="@+id/product_detail_logo_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -78,6 +79,7 @@
                     android:textSize="@dimen/text_size_22" />
 
                 <com.davis.kangpinhui.views.CustomTypefaceTextView
+                    android:id="@+id/product_detail_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -105,6 +107,7 @@
                     android:textSize="@dimen/text_size_22" />
 
                 <com.davis.kangpinhui.views.CustomTypefaceTextView
+                    android:id="@+id/product_detail_save"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -132,6 +135,7 @@
                     android:textSize="@dimen/text_size_22" />
 
                 <com.davis.kangpinhui.views.CustomTypefaceTextView
+                    android:id="@+id/product_detail_producter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -158,6 +162,12 @@
                 android:gravity="center"
                 android:text="点击查看产品图片详情" />
             </LinearLayout>
+            <com.davis.kangpinhui.views.XWebView
+                android:id="@+id/product_detail_xweb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.davis.kangpinhui.views.XWebView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

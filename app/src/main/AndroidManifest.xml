@@ -55,8 +55,10 @@
         <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.ProductDetailActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.ProductDetailActivity" />
+        <activity android:name=".activity.MyAddressActivity" />
+        <activity android:name=".activity.AddAddressActivity"></activity>
     </application>
 
 </manifest>

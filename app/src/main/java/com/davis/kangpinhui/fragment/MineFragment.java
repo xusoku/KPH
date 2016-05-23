@@ -8,6 +8,7 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.FeedBackActivity;
+import com.davis.kangpinhui.activity.MyAddressActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
 import com.davis.kangpinhui.activity.SettingActivity;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
@@ -116,7 +117,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 MyTiHuoActivity.jumpMyTiHuoActivity(getActivity());
                 break;
             case R.id.mine_myaddress:
-                FeedBackActivity.jumpFeedBackActivity(getActivity());
+                MyAddressActivity.jumpMyAddressActivity(getActivity());
                 break;
             case R.id.mine_mycoup:
                 FeedBackActivity.jumpFeedBackActivity(getActivity());

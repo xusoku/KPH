@@ -82,6 +82,7 @@
                 android:textSize="@dimen/text_size_17"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:clickable="true"
                 android:text="发送验证码"/>
         </RelativeLayout>
 
@@ -130,6 +131,7 @@
                 android:textSize="@dimen/text_size_22"
                 android:gravity="center"
                 android:onClick="doClick"
+                android:clickable="true"
                 android:text="注册"/>
         </android.support.v7.widget.CardView>
 
@@ -147,6 +149,7 @@
                 android:textColor="@color/white"
                 android:onClick="doClick"
                 android:textSize="@dimen/text_size_17"
+                android:clickable="true"
                 android:layout_alignParentLeft="true"
                 android:text="忘记密码?"/>
             <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -157,6 +160,7 @@
                 android:onClick="doClick"
                 android:textSize="@dimen/text_size_17"
                 android:layout_alignParentRight="true"
+                android:clickable="true"
                 android:text="没有账号,去注册"/>
         </RelativeLayout>
 
@@ -170,8 +174,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_17"
             android:onClick="doClick"
+            android:clickable="true"
             android:text="＜ 随便逛逛"/>
-
-
     </LinearLayout>
 </LinearLayout>
