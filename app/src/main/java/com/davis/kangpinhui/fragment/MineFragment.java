@@ -3,6 +3,7 @@ package com.davis.kangpinhui.fragment;
 import android.view.View;
 import android.widget.TextView;
 
+import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.FeedBackActivity;
@@ -10,6 +11,7 @@ import com.davis.kangpinhui.activity.MyTiHuoActivity;
 import com.davis.kangpinhui.activity.SettingActivity;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.MineCustomLayout;
 
 /**
@@ -56,9 +58,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     public void setUi(UserInfo userInfo){
-
         String name=userInfo.susername.substring(0,3)+"****"+userInfo.susername.substring(7,11);
         fragment_mine_name.setText(name);
+    }
+    public void setNumber(){
+
+        mine_allorder_unpay.setText(UtilText.getminenumber("待付款  ("+ AppApplication.getOrderunpaid()+")"));
+        mine_allorder_sending.setText(UtilText.getminenumber("配送中 ("+ AppApplication.getOrdersending()+")"));
     }
 
     @Override

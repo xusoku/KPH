@@ -2,6 +2,7 @@ package com.davis.kangpinhui.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.SpannableString;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.davis.kangpinhui.util.ToastUitl;
  * Created by davis on 16/5/19.
  */
 public class MineCustomLayout extends LinearLayout {
+    TextView tv;
     public MineCustomLayout(Context context) {
         this(context, null);
     }
@@ -47,7 +49,7 @@ public class MineCustomLayout extends LinearLayout {
         this.setBackgroundResource(outValue.resourceId);
         LinearLayout linearLayout= (LinearLayout) view.findViewById(R.id.mine_linear);
         ImageView iv = (ImageView) view.findViewById(R.id.mine_left_image);
-        TextView tv = (TextView) view.findViewById(R.id.mine_center_name);
+         tv = (TextView) view.findViewById(R.id.mine_center_name);
         ImageView miv = (ImageView) view.findViewById(R.id.mine_right_iv);
         View viewline =  view.findViewById(R.id.mine_line_view);
 
@@ -67,5 +69,11 @@ public class MineCustomLayout extends LinearLayout {
         typedArray.recycle();
     }
 
+    public void setText(SpannableString str){
+        tv.setText(str);
+    }
+    public void setText(String str){
+        tv.setText(str);
+    }
 
 }

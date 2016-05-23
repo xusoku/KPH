@@ -7,10 +7,10 @@ import java.io.Serializable;
  */
 public class Extendedinfo implements Serializable {
 
-    public String couponcount;
-    public String orderunpaid;
-    public String ordersending;
-    public String orderwaitsend;
-    public String orderall;
-    public String cartcount;
+    public String couponcount="0";
+    public String orderunpaid="0";
+    public String ordersending="0";
+    public String orderwaitsend="0";
+    public String orderall="0";
+    public String cartcount="0.0";
 }

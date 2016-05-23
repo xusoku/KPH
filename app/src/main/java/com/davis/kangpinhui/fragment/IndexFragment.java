@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.views.BadgeView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
 import com.davis.kangpinhui.views.loopbanner.LoopBanner;
 import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
@@ -61,6 +63,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     ArrayList<Banner> bannerList=new ArrayList<>();
     ArrayList<Index.Productlist> recommandList=new ArrayList<Index.Productlist>();
 
+    BadgeView backgroundDefaultBadge;
 
     @Override
     protected void initVariable() {
@@ -94,14 +97,14 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         index_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                curPage = 0;
                 isRefreshOrLoad = true;
                 LogUtils.e(TAG, "isRefreshOrLoad");
                 getDate();
-//                getShowFilmBannerData();
-//                getShowFilmListData(curPage, limit);
             }
         });
+
+        backgroundDefaultBadge= new BadgeView(getActivity());
+        backgroundDefaultBadge.setTargetView(index_cart);
     }
 
     @Override
@@ -110,6 +113,12 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
     }
 
+    public void setcartNumber(){
+        String number=AppApplication.getCartcount();
+
+        if(!TextUtils.isEmpty(number)&&!number.equals("0")&&!number.equals("0.0"))
+        backgroundDefaultBadge.setText(number);
+    }
 
     @Override
     protected void onFragmentLoading() {

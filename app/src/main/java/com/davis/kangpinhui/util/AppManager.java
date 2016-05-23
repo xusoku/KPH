@@ -118,7 +118,7 @@ public class AppManager {
 	 */
 	public void AppExit(Context context) {
 		AppApplication.classiclist.clear();
-		AppApplication.shopid="";
+		AppApplication.shopid="1";
 		AppApplication.token="";
 			finishAllActivity();
 	}

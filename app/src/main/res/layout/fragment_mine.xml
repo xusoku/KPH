@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_17"
-            android:text="aaa"/>
+            android:text="注册／登录"/>
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/fragment_mine_price"

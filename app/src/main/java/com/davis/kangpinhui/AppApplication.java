@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.bumptech.glide.request.target.ViewTarget;
 import com.davis.kangpinhui.Model.Category;
+import com.davis.kangpinhui.Model.Extendedinfo;
 import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.activity.LoginActivity;
 
@@ -25,6 +26,7 @@ public class AppApplication extends Application {
     public static String shopid = "1";
     public static String token = "";
     public static UserInfo userInfo;
+    public static Extendedinfo extendedinfo;
 
     public static ArrayList<Category> classiclist = new ArrayList<>();
 
@@ -46,6 +48,49 @@ public class AppApplication extends Application {
             return false;
         } else {
             return  true;
+        }
+    }
+
+    public static String getCouponcount() {
+        if (extendedinfo!=null) {
+            return extendedinfo.couponcount;
+        } else {
+            return  "";
+        }
+    }
+    public static String getCartcount() {
+        if (extendedinfo!=null) {
+            return extendedinfo.cartcount;
+        } else {
+            return  "";
+        }
+    }
+    public static String getOrderall() {
+        if (extendedinfo!=null) {
+            return extendedinfo.orderall;
+        } else {
+            return  "";
+        }
+    }
+    public static String getOrdersending() {
+        if (extendedinfo!=null) {
+            return extendedinfo.ordersending;
+        } else {
+            return  "";
+        }
+    }
+    public static String getOrderunpaid() {
+        if (extendedinfo!=null) {
+            return extendedinfo.orderunpaid;
+        } else {
+            return  "";
+        }
+    }
+    public static String getOrderwaitsend() {
+        if (extendedinfo!=null) {
+            return extendedinfo.orderwaitsend;
+        } else {
+            return  "";
         }
     }
 
