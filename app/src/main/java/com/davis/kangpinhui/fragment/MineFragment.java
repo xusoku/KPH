@@ -72,8 +72,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
     public void setNumber(){
 
-        mine_allorder_unpay.setText(UtilText.getminenumber("待付款  ("+ AppApplication.getOrderunpaid()+")"));
-        mine_allorder_sending.setText(UtilText.getminenumber("配送中 ("+ AppApplication.getOrdersending()+")"));
+        if(mine_allorder_unpay!=null) {
+            mine_allorder_unpay.setText(UtilText.getminenumber("待付款  (" + AppApplication.getOrderunpaid() + ")"));
+            mine_allorder_sending.setText(UtilText.getminenumber("配送中 (" + AppApplication.getOrdersending() + ")"));
+        }
     }
 
     @Override

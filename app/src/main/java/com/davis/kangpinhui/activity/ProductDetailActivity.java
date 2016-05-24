@@ -2,20 +2,12 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Banner;
 import com.davis.kangpinhui.Model.ProductDetail;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
@@ -23,18 +15,13 @@ import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
-import com.davis.kangpinhui.util.LogUtils;
-import com.davis.kangpinhui.views.AttachUtil;
-import com.davis.kangpinhui.views.DragTopLayout;
-import com.davis.kangpinhui.views.XWebView;
+import com.davis.kangpinhui.views.dargview.DavisWebView;
+import com.davis.kangpinhui.views.dargview.DragLayout;
 import com.davis.kangpinhui.views.loopbanner.LoopBanner;
 import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 
 public class ProductDetailActivity extends BaseActivity {
@@ -50,9 +37,8 @@ public class ProductDetailActivity extends BaseActivity {
             product_detail_date,
             product_detail_save,
             product_detail_producter;
-    private XWebView product_detail_xweb;
-    private DragTopLayout product_detail_drag;
-    private ScrollView product_detail_content_sv,product_detail_header_sv;
+    private DavisWebView product_detail_xweb;
+    private DragLayout product_detail_drag;
 
     public static void jumpProductDetailActivity(Context conx, String id) {
         Intent it = new Intent(conx, ProductDetailActivity.class);
@@ -82,29 +68,6 @@ public class ProductDetailActivity extends BaseActivity {
         product_detail_save = $(R.id.product_detail_save);
         product_detail_producter = $(R.id.product_detail_producter);
         product_detail_xweb = $(R.id.product_detail_xweb);
-        product_detail_content_sv = $(R.id.product_detail_content_sv);
-        product_detail_header_sv = $(R.id.product_detail_header_sv);
-
-
-        //禁止下拉放大效果
-        product_detail_drag.setOverDrag(false);
-        //设置头部View可上拉显示ContentView
-        product_detail_drag.setCollapseOffset(1);
-
-        product_detail_drag.listener(new DragTopLayout.PanelListener() {
-            @Override
-            public void onPanelStateChanged(DragTopLayout.PanelState panelState) {
-            }
-
-            @Override
-            public void onSliding(float ratio) {
-                LogUtils.e(TAG,ratio+"");
-            }
-
-            @Override
-            public void onRefresh() {
-            }
-        });
 
     }
 
@@ -163,62 +126,7 @@ public class ProductDetailActivity extends BaseActivity {
     @Override
     protected void setListener() {
 
-        product_detail_content_sv.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
 
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        int scrollY=view.getScrollY();
-                        int height=view.getHeight();
-                        int scrollViewMeasuredHeight=product_detail_content_sv.getChildAt(0).getMeasuredHeight();
-                        if(scrollY==0){
-                            System.out.println("滑动到了顶端 content");
-                            product_detail_drag.setTouchMode(true);
-
-                        }
-                        if((scrollY+height)==scrollViewMeasuredHeight){
-//                            product_detail_drag.setTouchMode(false);
-                            System.out.println("滑动到了底部 content=");
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-                return false;
-            }
-        });
-        product_detail_header_sv.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        int scrollY=view.getScrollY();
-                        int height=view.getHeight();
-                        int scrollViewMeasuredHeight=product_detail_header_sv.getChildAt(0).getMeasuredHeight();
-                        if(scrollY==0){
-                            System.out.println("滑动到了顶端 header");
-//                            product_detail_drag.setTouchMode(false);
-
-                        }
-                        if((scrollY+height)==scrollViewMeasuredHeight){
-                            product_detail_drag.setTouchMode(true);
-                            System.out.println("滑动到了底部 header=");
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     @Override
