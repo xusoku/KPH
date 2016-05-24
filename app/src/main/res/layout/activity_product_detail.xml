@@ -258,9 +258,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/add_cart_addlinear"
                 android:layout_width="@dimen/common_measure_150dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
+                android:onClick="doClick"
                 android:background="?android:attr/selectableItemBackground">
 
                 <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -302,5 +304,6 @@
         android:layout_height="@dimen/common_measure_65dp"
         android:layout_marginTop="@dimen/common_measure_25dp"
         android:scaleType="centerInside"
+        android:onClick="doClick"
         android:src="@mipmap/ic_nearby" />
 </RelativeLayout>

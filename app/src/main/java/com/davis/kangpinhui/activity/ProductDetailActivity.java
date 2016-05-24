@@ -2,10 +2,14 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -47,6 +51,8 @@ public class ProductDetailActivity extends BaseActivity {
     private DivasScrollViewPageOne product_detail_header_sv;
     private TextView product_detail_title_text;
     private LinearLayout product_detail_title_text_linear;
+    
+    private PopupWindow addpopupWindow;
 
     public static void jumpProductDetailActivity(Context conx, String id) {
         Intent it = new Intent(conx, ProductDetailActivity.class);
@@ -136,22 +142,7 @@ public class ProductDetailActivity extends BaseActivity {
 
     @Override
     protected void setListener() {
-
-
-//        product_detail_drag.setOnDargListener(new DragLayout.onDargListener() {
-//            @Override
-//            public void dargListener(boolean flag) {
-//                if(flag){
-//                    product_detail_title_text.setVisibility(View.VISIBLE);
-//                }else{
-//                    product_detail_title_text.setVisibility(View.VISIBLE);
-//
-//                }
-//            }
-//        });
-
         product_detail_title_text_linear.setAlpha(0);
-
         product_detail_drag.setChange(new DragLayout.Change() {
             @Override
             public void onScrollChange(int t) {
@@ -161,11 +152,6 @@ public class ProductDetailActivity extends BaseActivity {
                 } else {
                     alpha = 0;
                 }
-
-                if (!product_detail_banner.isShown()) {
-                    alpha = 1;
-                }
-                LogUtils.e(TAG, "alpha=" + t);
                 product_detail_title_text_linear.setAlpha(alpha);
             }
         });
@@ -174,14 +160,37 @@ public class ProductDetailActivity extends BaseActivity {
 
     @Override
     public void doClick(View view) {
+        switch (view.getId()){
+            case R.id.product_detail_back:
+                finish();
+                break;
+            case R.id.add_cart_addlinear:
+                addpopupWindow.showAtLocation(product_detail_drag, Gravity.NO_GRAVITY,0,0);
+                break;
+        }
 
     }
 
 
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    //初始化分类
+    private void initPopupWindow() {
+        // TODO Auto-generated method stub
+        View view = getLayoutInflater().inflate(R.layout.activity_product_detail_add_cart, null);
+        addpopupWindow = new PopupWindow(view,
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
+        addpopupWindow.setFocusable(true);
+        addpopupWindow.setOutsideTouchable(true);
+        addpopupWindow.setAnimationStyle(R.style.popwin_recent_anim_style);
+        addpopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (addpopupWindow != null && addpopupWindow.isShowing()) {
+                    addpopupWindow.dismiss();
+                }
+            }
+        });
     }
+
 }
