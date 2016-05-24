@@ -8,6 +8,9 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.davis.kangpinhui.util.CommonManager;
+import com.davis.kangpinhui.util.LogUtils;
+
 /**
  *
  *
@@ -18,10 +21,21 @@ public class DragLayout extends ScrollView {
 //      private int mMenuPadding=220;
 
 
+    private Change change;
+    private  onDargListener onDargListener;
     private DivasScrollViewPageOne wrapperMenu;
     private DavisWebView wrapperContent;
     private boolean isSetted = false;
     private boolean ispageOne = true;
+
+
+    public void setChange(Change change) {
+        this.change = change;
+    }
+
+    public void setOnDargListener(DragLayout.onDargListener onDargListener) {
+        this.onDargListener = onDargListener;
+    }
 
     public DragLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -46,10 +60,10 @@ public class DragLayout extends ScrollView {
             //得到里面的控件
             final LinearLayout wrapper = (LinearLayout) getChildAt(0);
             wrapperMenu = (DivasScrollViewPageOne) wrapper.getChildAt(0);
-//            wrapperContent = (DavisWebView) wrapper.getChildAt(1);
+            wrapperContent = (DavisWebView) wrapper.getChildAt(1);
             //设置两个子View的高度为手机的高度
             wrapperMenu.getLayoutParams().height = mScreenHeight;
-//            wrapperContent.getLayoutParams().height = mScreenHeight;
+            wrapperContent.getLayoutParams().height = mScreenHeight-CommonManager.dpToPx(300);
             isSetted = true;
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -79,7 +93,7 @@ public class DragLayout extends ScrollView {
                         this.smoothScrollTo(0, 0);
                     } else {
                         //隐藏菜单
-                        this.smoothScrollTo(0, mScreenHeight);
+                        this.smoothScrollTo(0, mScreenHeight- CommonManager.dpToPx(240));
                         this.setFocusable(false);
                         ispageOne = false;
                     }
@@ -89,10 +103,12 @@ public class DragLayout extends ScrollView {
                         this.smoothScrollTo(0, 0);
                         ispageOne = true;
                     } else {
-                        this.smoothScrollTo(0, mScreenHeight);
+                        this.smoothScrollTo(0, mScreenHeight- CommonManager.dpToPx(240));
                     }
                 }
 
+                if(onDargListener!=null)
+                onDargListener.dargListener(ispageOne);
                 return true;
         }
         return super.onTouchEvent(ev);
@@ -122,5 +138,20 @@ public class DragLayout extends ScrollView {
         }
     }
 
+    public interface onDargListener{
+        public void dargListener(boolean flag);
+    }
+
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        //t表示本scrollview向上滑动的距离
+        change.onScrollChange(t);
+        super.onScrollChanged(l, t, oldl, oldt);
+    }
+
+    public interface Change{
+        public void onScrollChange(int t);
+    }
 
 }

@@ -17,6 +17,8 @@ import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.util.DisplayMetricsUtils;
+import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.views.dargview.DavisWebView;
 import com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne;
 import com.davis.kangpinhui.views.dargview.DragLayout;
@@ -40,7 +42,7 @@ public class ProductDetailActivity extends BaseActivity {
             product_detail_date,
             product_detail_save,
             product_detail_producter;
-    private WebView product_detail_xweb;
+    private DavisWebView product_detail_xweb;
     private DragLayout product_detail_drag;
     private DivasScrollViewPageOne product_detail_header_sv;
     private TextView product_detail_title_text;
@@ -135,11 +137,25 @@ public class ProductDetailActivity extends BaseActivity {
     @Override
     protected void setListener() {
 
+
+//        product_detail_drag.setOnDargListener(new DragLayout.onDargListener() {
+//            @Override
+//            public void dargListener(boolean flag) {
+//                if(flag){
+//                    product_detail_title_text.setVisibility(View.VISIBLE);
+//                }else{
+//                    product_detail_title_text.setVisibility(View.VISIBLE);
+//
+//                }
+//            }
+//        });
+
         product_detail_title_text_linear.setAlpha(0);
-        product_detail_header_sv.setChange(new DivasScrollViewPageOne.Change() {
+
+        product_detail_drag.setChange(new DragLayout.Change() {
             @Override
             public void onScrollChange(int t) {
-                float alpha = 0;
+                float alpha = 0.0f;
                 if (t > 0) {
                     alpha = (float) ((t - 100) / 100.00);
                 } else {
@@ -149,10 +165,11 @@ public class ProductDetailActivity extends BaseActivity {
                 if (!product_detail_banner.isShown()) {
                     alpha = 1;
                 }
+                LogUtils.e(TAG, "alpha=" + t);
                 product_detail_title_text_linear.setAlpha(alpha);
-
             }
         });
+
     }
 
     @Override

@@ -78,6 +78,7 @@ public class DivasScrollViewPageOne extends ScrollView {
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         //t表示本scrollview向上滑动的距离
             this.t=t;
+        if(change!=null)
         change.onScrollChange(t);
         super.onScrollChanged(l, t, oldl, oldt);
     }
