@@ -15,6 +15,7 @@ public class DivasScrollViewPageOne extends ScrollView {
     public float oldY;
     private int t;
 
+    private Change change;
     public DivasScrollViewPageOne(Context context) {
         this(context, null);
     }
@@ -69,12 +70,20 @@ public class DivasScrollViewPageOne extends ScrollView {
         return super.onTouchEvent(ev);
     }
 
+    public void setChange(Change change) {
+        this.change = change;
+    }
+
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         //t表示本scrollview向上滑动的距离
             this.t=t;
+        change.onScrollChange(t);
         super.onScrollChanged(l, t, oldl, oldt);
     }
 
+    public interface Change{
+        public void onScrollChange(int t);
+    }
 
 }

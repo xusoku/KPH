@@ -3,7 +3,9 @@ package com.davis.kangpinhui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +18,7 @@ import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.views.dargview.DavisWebView;
+import com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne;
 import com.davis.kangpinhui.views.dargview.DragLayout;
 import com.davis.kangpinhui.views.loopbanner.LoopBanner;
 import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
@@ -37,8 +40,11 @@ public class ProductDetailActivity extends BaseActivity {
             product_detail_date,
             product_detail_save,
             product_detail_producter;
-    private DavisWebView product_detail_xweb;
+    private WebView product_detail_xweb;
     private DragLayout product_detail_drag;
+    private DivasScrollViewPageOne product_detail_header_sv;
+    private TextView product_detail_title_text;
+    private LinearLayout product_detail_title_text_linear;
 
     public static void jumpProductDetailActivity(Context conx, String id) {
         Intent it = new Intent(conx, ProductDetailActivity.class);
@@ -68,6 +74,9 @@ public class ProductDetailActivity extends BaseActivity {
         product_detail_save = $(R.id.product_detail_save);
         product_detail_producter = $(R.id.product_detail_producter);
         product_detail_xweb = $(R.id.product_detail_xweb);
+        product_detail_header_sv = $(R.id.product_detail_header_sv);
+        product_detail_title_text = $(R.id.product_detail_title_text);
+        product_detail_title_text_linear = $(R.id.product_detail_title_text_linear);
 
     }
 
@@ -126,7 +135,24 @@ public class ProductDetailActivity extends BaseActivity {
     @Override
     protected void setListener() {
 
+        product_detail_title_text_linear.setAlpha(0);
+        product_detail_header_sv.setChange(new DivasScrollViewPageOne.Change() {
+            @Override
+            public void onScrollChange(int t) {
+                float alpha = 0;
+                if (t > 0) {
+                    alpha = (float) ((t - 100) / 100.00);
+                } else {
+                    alpha = 0;
+                }
 
+                if (!product_detail_banner.isShown()) {
+                    alpha = 1;
+                }
+                product_detail_title_text_linear.setAlpha(alpha);
+
+            }
+        });
     }
 
     @Override

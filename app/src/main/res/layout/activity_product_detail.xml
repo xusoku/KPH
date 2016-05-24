@@ -1,225 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.davis.kangpinhui.views.dargview.DragLayout
-        android:id="@+id/product_detail_drag"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+
+        <com.davis.kangpinhui.views.dargview.DragLayout
+            android:id="@+id/product_detail_drag"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne
-                android:id="@+id/product_detail_header_sv"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/content"
+                <com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne
+                    android:id="@+id/product_detail_header_sv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-
-                    <com.davis.kangpinhui.views.loopbanner.LoopBanner
-                        android:id="@+id/product_detail_banner"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/common_measure_400dp" />
-
-                    <com.davis.kangpinhui.views.CustomTypefaceTextView
-                        android:id="@+id/product_detail_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="火龙果"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_22" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="500dp"/>
-                    <com.davis.kangpinhui.views.CustomTypefaceTextView
-                        android:id="@+id/product_detail_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="¥14.9"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_22" />
+                    android:layout_height="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/content"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/common_measure_65dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:layout_width="@dimen/common_measure_130dp"
-                            android:layout_height="wrap_content"
-                            android:text="品牌"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_22" />
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:id="@+id/product_detail_logo_text"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="asdf"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_22" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorlightgray" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/common_measure_65dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:layout_width="@dimen/common_measure_130dp"
-                            android:layout_height="wrap_content"
-                            android:text="保质期天数"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_22" />
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:id="@+id/product_detail_date"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="asdf"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_22" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorlightgray" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/common_measure_65dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:layout_width="@dimen/common_measure_130dp"
-                            android:layout_height="wrap_content"
-                            android:text="存储条件"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_22" />
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:id="@+id/product_detail_save"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="asdf"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_22" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorlightgray" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/common_measure_65dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:layout_width="@dimen/common_measure_130dp"
-                            android:layout_height="wrap_content"
-                            android:text="生产厂商"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_22" />
-
-                        <com.davis.kangpinhui.views.CustomTypefaceTextView
-                            android:id="@+id/product_detail_producter"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="asdf"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_22" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorlightgray" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/common_measure_70dp"
-                        android:gravity="center"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
                         android:orientation="vertical">
 
+
+                        <com.davis.kangpinhui.views.loopbanner.LoopBanner
+                            android:id="@+id/product_detail_banner"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_400dp" />
+
                         <com.davis.kangpinhui.views.CustomTypefaceTextView
+                            android:id="@+id/product_detail_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorgray"
-                            android:drawableRight="@mipmap/ic_favorites"
-                            android:gravity="center"
-                            android:text="点击查看产品图片详情" />
+                            android:layout_marginLeft="@dimen/common_measure_10dp"
+                            android:layout_marginRight="@dimen/common_measure_10dp"
+                            android:layout_marginTop="@dimen/common_measure_10dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_22" />
+
+                        <com.davis.kangpinhui.views.CustomTypefaceTextView
+                            android:id="@+id/product_detail_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/common_measure_10dp"
+                            android:layout_marginRight="@dimen/common_measure_10dp"
+                            android:layout_marginTop="@dimen/common_measure_20dp"
+                            android:text="¥14.9"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_22" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="@dimen/common_measure_10dp"
+                            android:layout_marginRight="@dimen/common_measure_10dp"
+                            android:layout_marginTop="@dimen/common_measure_5dp"
+                            android:background="@color/colorlightgray" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_30dp"
+                            android:background="@color/white" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_30dp"
+                            android:background="@color/colorlightgray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_65dp"
+                            android:layout_marginLeft="@dimen/common_measure_10dp"
+                            android:layout_marginRight="@dimen/common_measure_10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                                android:layout_width="@dimen/common_measure_130dp"
+                                android:layout_height="wrap_content"
+                                android:text="品牌"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_17" />
+
+                            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                                android:id="@+id/product_detail_logo_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="asdf"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_17" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorlightgray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_65dp"
+                            android:layout_marginLeft="@dimen/common_measure_10dp"
+                            android:layout_marginRight="@dimen/common_measure_10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                                android:layout_width="@dimen/common_measure_130dp"
+                                android:layout_height="wrap_content"
+                                android:text="保质期天数"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_17" />
+
+                            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                                android:id="@+id/product_detail_date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="asdf"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_17" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorlightgray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_65dp"
+                            android:layout_marginLeft="@dimen/common_measure_10dp"
+                            android:layout_marginRight="@dimen/common_measure_10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                                android:layout_width="@dimen/common_measure_130dp"
+                                android:layout_height="wrap_content"
+                                android:text="存储条件"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_17" />
+
+                            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                                android:id="@+id/product_detail_save"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="asdf"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_17" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorlightgray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_65dp"
+                            android:layout_marginLeft="@dimen/common_measure_10dp"
+                            android:layout_marginRight="@dimen/common_measure_10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                                android:layout_width="@dimen/common_measure_130dp"
+                                android:layout_height="wrap_content"
+                                android:text="生产厂商"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_17" />
+
+                            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                                android:id="@+id/product_detail_producter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="asdf"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_17" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorlightgray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_70dp"
+                            android:background="@color/colorlightgray"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0.6dp"
+                                android:layout_margin="@dimen/common_measure_10dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorgray" />
+
+                            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableRight="@mipmap/ic_favorites"
+                                android:gravity="center"
+                                android:text="继续拖动,查看图片详情"
+                                android:textSize="@dimen/text_size_11" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0.6dp"
+                                android:layout_margin="@dimen/common_measure_10dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorgray" />
+                        </LinearLayout>
+
                     </LinearLayout>
+                </com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne>
 
-                </LinearLayout>
-            </com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne>
+                <com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <com.davis.kangpinhui.views.dargview.DavisWebView
-                android:id="@+id/product_detail_xweb"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-    </com.davis.kangpinhui.views.dargview.DragLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_65dp"
+                            android:background="@color/white"/>
+                        <WebView
+                            android:id="@+id/product_detail_xweb"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none" />
+                    </LinearLayout>
+                </com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_70dp"
-        android:background="@color/colorgray">
+            </LinearLayout>
+        </com.davis.kangpinhui.views.dargview.DragLayout>
 
-        <LinearLayout
-            android:layout_width="@dimen/common_measure_70dp"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground"
-            android:gravity="center">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_measure_70dp"
+            android:background="@color/colorgray">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_recents" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="@dimen/common_measure_150dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:background="?android:attr/selectableItemBackground">
-
-            <com.davis.kangpinhui.views.CustomTypefaceTextView
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="@dimen/common_measure_70dp"
                 android:layout_height="match_parent"
-                android:background="@color/colormain"
-                android:gravity="center"
-                android:text="加入购物车"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_22" />
-        </LinearLayout>
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center">
 
-    </RelativeLayout>
-</LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_recents" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/common_measure_150dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="?android:attr/selectableItemBackground">
+
+                <com.davis.kangpinhui.views.CustomTypefaceTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colormain"
+                    android:gravity="center"
+                    android:text="加入购物车"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_22" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_detail_title_text_linear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_80dp"
+        android:background="@color/colormain">
+
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/product_detail_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_measure_65dp"
+            android:layout_marginTop="@dimen/common_measure_25dp"
+            android:gravity="center"
+            android:text="产品详情"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_measure_22dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/product_detail_back"
+        android:layout_width="@dimen/common_measure_65dp"
+        android:layout_height="@dimen/common_measure_65dp"
+        android:layout_marginTop="@dimen/common_measure_25dp"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_nearby" />
+</RelativeLayout>

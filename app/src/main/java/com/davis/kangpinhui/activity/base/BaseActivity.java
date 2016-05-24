@@ -113,6 +113,10 @@ public abstract class BaseActivity extends AppCompatActivity
     {
         layTopBar.setVisibility(View.GONE);
     }
+    public RelativeLayout getTopBar()
+    {
+        return layTopBar;
+    }
 
     public void showTopBar()
     {
