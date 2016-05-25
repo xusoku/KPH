@@ -86,6 +86,7 @@ public class ProductDetailActivity extends BaseActivity {
         product_detail_title_text = $(R.id.product_detail_title_text);
         product_detail_title_text_linear = $(R.id.product_detail_title_text_linear);
 
+        initPopupWindow();
     }
 
     @Override
@@ -113,6 +114,7 @@ public class ProductDetailActivity extends BaseActivity {
                 onActivityLoadingFailed();
             }
         });
+
     }
 
     public void getBannerData(ArrayList<String> bannerList) {
@@ -172,6 +174,9 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
 
+
+    private ImageView
+
     //初始化分类
     private void initPopupWindow() {
         // TODO Auto-generated method stub
@@ -181,7 +186,7 @@ public class ProductDetailActivity extends BaseActivity {
                 RelativeLayout.LayoutParams.MATCH_PARENT);
         addpopupWindow.setFocusable(true);
         addpopupWindow.setOutsideTouchable(true);
-        addpopupWindow.setAnimationStyle(R.style.popwin_recent_anim_style);
+        addpopupWindow.setAnimationStyle(R.style.popwin_add_cart_anim_style);
         addpopupWindow.setBackgroundDrawable(new BitmapDrawable());
         view.setOnClickListener(new View.OnClickListener() {
             @Override
