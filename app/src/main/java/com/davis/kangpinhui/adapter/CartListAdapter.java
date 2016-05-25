@@ -1,6 +1,7 @@
 package com.davis.kangpinhui.adapter;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -19,6 +20,12 @@ import java.util.ArrayList;
  */
 public class CartListAdapter extends CommonBaseAdapter<Cart> {
 
+    private OnPriceChange onPriceChange;
+
+
+    public void setOnPriceChange(OnPriceChange onPriceChange) {
+        this.onPriceChange = onPriceChange;
+    }
 
     public CartListAdapter(Context context, ArrayList<Cart> mDatas, int itemLayoutId) {
         super(context, mDatas, itemLayoutId);
@@ -32,12 +39,12 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
         holder.setText(R.id.add_cart_item_title, itemData.productName);
         holder.setText(R.id.add_cart_item_sstandent,"规格:"+itemData.sstandard);
         holder.setText(R.id.add_cart_item_price,itemData.iprice+"/"+itemData.sstandard);
-        holder.setText(R.id.add_cart_item_add_center,itemData.inumber);
+        holder.setText(R.id.add_cart_item_add_center, (int) Float.parseFloat(itemData.inumber)+"");
 
         CheckBox checkBox=holder.getView(R.id.add_cart_item_checkbox);
         ImageView ivDelete=holder.getView(R.id.add_cart_add_del);
         TextView addText=holder.getView(R.id.add_cart_item_add);
-        TextView text=holder.getView(R.id.add_cart_item_add_center);
+        final TextView text=holder.getView(R.id.add_cart_item_add_center);
         TextView minsText=holder.getView(R.id.add_cart_item_add_mins);
 
         checkBox.setChecked(itemData.flag);
@@ -46,12 +53,49 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                itemData.flag=isChecked;
+                itemData.flag = isChecked;
+                notifyDataSetChanged();
+                onPriceChange.priceChange();
+            }
+        });
+
+
+        addText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String number = text.getText().toString().trim();
+
+                int n = (int) Float.parseFloat(number);
+                n++;
+                itemData.inumber=n + "";
+                notifyDataSetChanged();
+                onPriceChange.priceChange();
+            }
+        });
+
+        minsText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = text.getText().toString().trim();
+                int n = (int) Float.parseFloat(number);
+
+                if (n <= 1) {
+                    n = 1;
+                } else {
+                    n--;
+                }
+                itemData.inumber=n + "";
+                notifyDataSetChanged();
+                onPriceChange.priceChange();
             }
         });
 
 
 
+    }
 
+    public interface OnPriceChange{
+        public void priceChange();
     }
 }

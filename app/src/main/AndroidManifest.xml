@@ -61,14 +61,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MyAddressActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AddAddressActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.CartListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CartTheme"/>
+            android:theme="@style/CartTheme" />
+        <activity android:name=".activity.OrderActivity"></activity>
     </application>
 
 </manifest>
