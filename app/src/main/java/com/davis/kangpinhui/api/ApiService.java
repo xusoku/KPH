@@ -5,6 +5,7 @@ import com.davis.kangpinhui.Model.Address;
 import com.davis.kangpinhui.Model.Cart;
 import com.davis.kangpinhui.Model.Category;
 import com.davis.kangpinhui.Model.Consume;
+import com.davis.kangpinhui.Model.Coupon;
 import com.davis.kangpinhui.Model.Extendedinfo;
 import com.davis.kangpinhui.Model.Index;
 import com.davis.kangpinhui.Model.Order;
@@ -358,14 +359,14 @@ public interface ApiService {
 
     //27 提交订单时获取用户的优惠券信息
     @GET("coupon/getbyuid.do")
-    Call<BaseModel<Topic>> getCouponByUid(
+    Call<BaseModel<ArrayList<Coupon>>> getCouponByUid(
             @Query("apptype") String apptype,
             @Query("token") String token
     );
 
     //28 获取优惠券列表信息
     @GET("coupon/list.do")
-    Call<BaseModel<Page<ArrayList<Topic>>>> getCouponlist(
+    Call<BaseModel<Page<ArrayList<Coupon>>>> getCouponlist(
             @Query("apptype") String apptype,
             @Query("token") String token
     );

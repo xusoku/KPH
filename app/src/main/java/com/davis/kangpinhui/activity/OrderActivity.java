@@ -1,17 +1,20 @@
 package com.davis.kangpinhui.activity;
 
 import android.app.AlertDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.Model.Cart;
+import com.davis.kangpinhui.Model.Coupon;
 import com.davis.kangpinhui.Model.TakeGoodsdate;
 import com.davis.kangpinhui.Model.Topic;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
@@ -47,6 +50,8 @@ public class OrderActivity extends BaseActivity {
     private String ids="";
 
     private  ArrayList<Cart> list;
+    private  ArrayList<TakeGoodsdate> takeGoodsdateArrayList;
+    private  ArrayList<Coupon> couponArrayList;
 
     public static void jumpOrderActivity(Context cot,String ids) {
         Intent it = new Intent(cot, OrderActivity.class);
@@ -76,6 +81,8 @@ public class OrderActivity extends BaseActivity {
     protected void initVariable() {
         ids=getIntent().getStringExtra("ids");
         list=new ArrayList<>();
+        takeGoodsdateArrayList=new ArrayList<>();
+        couponArrayList=new ArrayList<>();
     }
 
     @Override
@@ -131,12 +138,11 @@ public class OrderActivity extends BaseActivity {
 
 
         Call<BaseModel<ArrayList<TakeGoodsdate>>> calltime=ApiInstant.getInstant().getTakegoodtimelist(AppApplication.apptype,
-                AppApplication.shopid,ids,AppApplication.token);
+                AppApplication.shopid, ids, AppApplication.token);
         calltime.enqueue(new ApiCallback<BaseModel<ArrayList<TakeGoodsdate>>>() {
             @Override
             public void onSucssce(BaseModel<ArrayList<TakeGoodsdate>> arrayListBaseModel) {
-
-
+                takeGoodsdateArrayList.addAll(arrayListBaseModel.object);
             }
 
             @Override
@@ -146,18 +152,18 @@ public class OrderActivity extends BaseActivity {
         });
 
 
-        Call<BaseModel<Page<ArrayList<Topic>>>> callCoup=ApiInstant.getInstant().getCouponlist(AppApplication.apptype,AppApplication.token);
-        callCoup.enqueue(new ApiCallback<BaseModel<Page<ArrayList<Topic>>>>() {
+        Call<BaseModel<ArrayList<Coupon>>> callCoup=ApiInstant.getInstant().getCouponByUid(AppApplication.apptype,AppApplication.token);
+        callCoup.enqueue(new ApiCallback<BaseModel<ArrayList<Coupon>>>() {
             @Override
-            public void onSucssce(BaseModel<Page<ArrayList<Topic>>> pageBaseModel) {
-
+            public void onSucssce(BaseModel<ArrayList<Coupon>> arrayListBaseModel) {
+                couponArrayList.addAll(arrayListBaseModel.object);
             }
 
             @Override
             public void onFailure() {
+
             }
         });
-
     }
 
     @Override
@@ -184,20 +190,39 @@ public class OrderActivity extends BaseActivity {
         return total;
     }
 
-
+    private String payTape="3";
+    private String couponId="";
     @Override
     public void doClick(View view) {
 
         switch (view.getId()){
             case R.id.order_coup_relatie:
-
+                couponId="";
+                final CharSequence[] charSequencess = new CharSequence[couponArrayList.size()];
+                for (int i = 0; i < couponArrayList.size(); i++) {
+                    charSequencess[i]=couponArrayList.get(i).context;
+                }
+                AlertDialog.Builder builde= new AlertDialog.Builder(this);
+                builde.setTitle("优惠券列表")
+                        .setItems(charSequencess, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                order_paytypecoup_text.setText(charSequencess[which].toString());
+                                couponId=couponArrayList.get(which).usercouponid;
+                            }
+                        }).show();
                 break;
             case R.id.order_paytime_relative:
 
+                TimePickerDialog timePickerDialog=new TimePickerDialog(this,null,4,12,true);
+                timePickerDialog.show();
+
                 break;
             case R.id.order_paytype_relative:
+                //付款方式  3:余额支付  2：货到付款 0：支付宝  1：财付通  4微信支付
 
                 final CharSequence[] charSequences = {"余额支付","货到付款","支付宝支付","微信支付"};
+                final String[] type = {"3","2","0","4"};
                 AlertDialog.Builder builder= new AlertDialog.Builder(this);
 
                 builder.setTitle("付款方式")
@@ -206,6 +231,9 @@ public class OrderActivity extends BaseActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ToastUitl.showToast(charSequences[which].toString());
+                                payTape=type[which];
+                                order_paytype_text.setText(charSequences[which].toString());
+
                             }
                         }).show();
                 break;
@@ -214,6 +242,29 @@ public class OrderActivity extends BaseActivity {
                 break;
             case R.id.order_list_addlinear:
 
+                if(AppApplication.address==null|| TextUtils.isEmpty(AppApplication.address.iuseraddressid)){
+                    ToastUitl.showToast("请选择收货地址");
+                    return;
+                }
+                String time=order_paytype_time.getText().toString().trim();
+                String beizhu=order_beizhu_text.getText().toString().trim();
+
+
+                Call<BaseModel> call=ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
+                        ids, AppApplication.address.iuseraddressid, payTape, time, beizhu, couponId, AppApplication.token);
+
+                call.enqueue(new ApiCallback<BaseModel>() {
+                    @Override
+                    public void onSucssce(BaseModel baseModel) {
+
+                        ToastUitl.showToast("xia");
+
+                    }
+                    @Override
+                    public void onFailure() {
+
+                    }
+                });
                 break;
         }
     }
