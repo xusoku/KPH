@@ -29,7 +29,7 @@
             android:layout_marginLeft="@dimen/common_measure_10dp"
             android:textSize="@dimen/common_measure_30dp"
             android:textStyle="bold"
-            android:text="asdf"
+            android:text="¥0"
             android:textColor="@color/white"
             android:gravity="center">
         </com.davis.kangpinhui.views.CustomTypefaceTextView>

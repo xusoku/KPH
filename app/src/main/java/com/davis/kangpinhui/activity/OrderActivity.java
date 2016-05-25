@@ -14,8 +14,11 @@ import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.CartListAdapter;
+import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
+import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.views.StretchedListView;
 
 import java.text.DecimalFormat;
@@ -80,27 +83,23 @@ public class OrderActivity extends BaseActivity {
             public void onSucssce(BaseModel<ArrayList<Cart>> arrayListBaseModel) {
                 onActivityLoadingSuccess();
 
-//                list.addAll(arrayListBaseModel.object);
-//
-//                adapter = new CartListAdapter(CartListActivity.this, list, R.layout.activity_cart_list_item);
-//
-//                cart_listvew.setAdapter(adapter);
-//
-//                DecimalFormat fnum = new DecimalFormat("##0.0");
-//                String str = fnum.format(getTotalPrice(list));
-//                str = str.endsWith(".0") ? str.substring(0, str.length() - 2) : str;
-//                add_cart_number_text.setText("¥" + str);
-//
-//                adapter.setOnPriceChange(new CartListAdapter.OnPriceChange() {
-//                    @Override
-//                    public void priceChange() {
-//
-//                        DecimalFormat fnum = new DecimalFormat("##0.0");
-//                        String str = fnum.format(getTotalPrice(list));
-//                        str = str.endsWith(".0") ? str.substring(0, str.length() - 2) : str;
-//                        add_cart_number_text.setText("¥" + str);
-//                    }
-//                });
+                list.addAll(arrayListBaseModel.object);
+
+                DecimalFormat fnum = new DecimalFormat("##0.0");
+                String str = fnum.format(getTotalPrice(list));
+                str = str.endsWith(".0") ? str.substring(0, str.length() - 2) : str;
+                order_number_text.setText("¥" + str);
+
+                order_address_lst.setAdapter(new CommonBaseAdapter<Cart>(OrderActivity.this, list, R.layout.activity_order_item) {
+                    @Override
+                    public void convert(ViewHolder holder, Cart itemData, int position) {
+                      holder.setImageByUrl(R.id.order_comfi_item_iv, ApiService.picurl+itemData.picurl);
+                        holder.setText(R.id.order_comfi_item_title, itemData.productName);
+                        holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
+                        holder.setText(R.id.order_comfi_item_price,"¥"+itemData.iprice);
+                        holder.setText(R.id.order_comfi_item_number,"数量:"+(int)Float.parseFloat(itemData.inumber));
+                    }
+                });
             }
 
             @Override
@@ -108,6 +107,8 @@ public class OrderActivity extends BaseActivity {
                 onActivityLoadingFailed();
             }
         });
+
+
     }
 
     @Override
@@ -120,6 +121,20 @@ public class OrderActivity extends BaseActivity {
     protected void setListener() {
 
     }
+    private Float getTotalPrice(ArrayList<Cart> list) {
+        Float total = 0.0f;
+
+        for (Cart cart : list) {
+            if (cart.flag) {
+                int n = (int) Float.parseFloat(cart.inumber);
+                Float f = Float.parseFloat(cart.iprice);
+                total += n * f;
+            }
+        }
+
+        return total;
+    }
+
 
     @Override
     public void doClick(View view) {
@@ -135,9 +150,6 @@ public class OrderActivity extends BaseActivity {
 
                 break;
             case R.id.order_address_relative:
-
-                break;
-            case R.id.order_list_addlinear:
 
                 break;
             case R.id.order_list_addlinear:
