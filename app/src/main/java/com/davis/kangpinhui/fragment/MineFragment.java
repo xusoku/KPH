@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.R;
+import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.FeedBackActivity;
 import com.davis.kangpinhui.activity.MyAddressActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
@@ -125,7 +126,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 FeedBackActivity.jumpFeedBackActivity(getActivity());
                 break;
             case R.id.mine_cart:
-                FeedBackActivity.jumpFeedBackActivity(getActivity());
+                CartListActivity.jumpCartListActivity(getActivity());
                 break;
             case R.id.mine_allorder_sending:
                 FeedBackActivity.jumpFeedBackActivity(getActivity());

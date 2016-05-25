@@ -26,4 +26,6 @@ public class Cart implements Serializable {
     public String itgclassid;
     public String sproductcode;
     public String sstandard;
+
+    public boolean flag=true;
 }

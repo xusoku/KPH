@@ -41,6 +41,7 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     public static String baseurl="http://m2.kangpinhui.com:8089";
+    public static String picurl="http://img.kangpinhui.com/physic";
 
         //http://www.tngou.net/tnfs/api/list?page=1&rows=10
 //        @GET("tnfs/api/list")

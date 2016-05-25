@@ -1,5 +1,7 @@
 package com.davis.kangpinhui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +26,15 @@ public class CartListActivity extends BaseActivity {
     private CartListAdapter adapter;
 
 
+    public static void jumpCartListActivity(Context context){
+        if(AppApplication.isLogin(context)){
+
+            Intent it=new Intent(context,CartListActivity.class);
+            context.startActivity(it);
+        }
+
+
+    }
     @Override
     protected int setLayoutView() {
         return R.layout.activity_cart_list;
@@ -55,6 +66,7 @@ public class CartListActivity extends BaseActivity {
                         ArrayList<Cart> list=arrayListBaseModel.object;
 
                         adapter=new CartListAdapter(CartListActivity.this,list,R.layout.activity_cart_list_item);
+
                         cart_listvew.setAdapter(adapter);
                     }
 
@@ -69,7 +81,6 @@ public class CartListActivity extends BaseActivity {
     @Override
     protected void initData() {
         startActivityLoading();
-
     }
 
     @Override

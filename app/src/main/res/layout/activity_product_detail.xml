@@ -249,6 +249,7 @@
                 android:id="@+id/add_cart_number_linear"
                 android:layout_width="@dimen/common_measure_70dp"
                 android:layout_height="match_parent"
+                android:onClick="doClick"
                 android:background="?android:attr/selectableItemBackground"
                 android:gravity="center">
 

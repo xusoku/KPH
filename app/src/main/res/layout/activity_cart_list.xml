@@ -11,9 +11,40 @@
     <ListView
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:scrollbars="none"
         android:divider="@color/colorlightgray"
         android:dividerHeight="@dimen/common_measure_10dp"></ListView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_70dp"
+        android:background="@color/colorgray">
+
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/add_cart_number_text"
+            android:layout_width="@dimen/common_measure_70dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+        </com.davis.kangpinhui.views.CustomTypefaceTextView>
+
+        <LinearLayout
+            android:id="@+id/add_cart_addlinear"
+            android:layout_width="@dimen/common_measure_150dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:onClick="doClick"
+            android:background="?android:attr/selectableItemBackground">
+
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colormain"
+                android:gravity="center"
+                android:text="去结算"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_22" />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

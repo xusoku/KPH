@@ -24,6 +24,7 @@ import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
@@ -159,7 +160,7 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
     private void setBindPopData(final ProductDetail productDetail) {
-        Glide.with(this).load(productDetail.spicurl).into(add_cart_image);
+        Glide.with(this).load(ApiService.picurl+productDetail.spicurl).into(add_cart_image);
 
         add_cart_text_vip_price.setText("会员价" + productDetail.fvipprice + "/" + productDetail.sstandard);
         add_cart_text_price.setText("康品价" + productDetail.fprice + "/" + productDetail.sstandard);
@@ -267,6 +268,9 @@ public class ProductDetailActivity extends BaseActivity {
                 break;
             case R.id.add_cart_addlinear:
                 addpopupWindow.showAtLocation(product_detail_drag, Gravity.NO_GRAVITY, 0, 0);
+                break;
+            case R.id.add_cart_number_linear:
+                CartListActivity.jumpCartListActivity((this));
                 break;
         }
 

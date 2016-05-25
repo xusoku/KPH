@@ -56,10 +56,19 @@
             android:name=".activity.LoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.ProductDetailActivity" />
-        <activity android:name=".activity.MyAddressActivity" />
-        <activity android:name=".activity.AddAddressActivity" />
-        <activity android:name=".activity.CartListActivity"></activity>
+        <activity
+            android:name=".activity.ProductDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyAddressActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.AddAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CartListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CartTheme"/>
     </application>
 
 </manifest>

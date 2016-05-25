@@ -20,6 +20,7 @@ import com.davis.kangpinhui.Model.Index;
 import com.davis.kangpinhui.Model.Product;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
+import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.ProductDetailActivity;
 import com.davis.kangpinhui.activity.SearchActivity;
 import com.davis.kangpinhui.activity.ShopActivity;
@@ -267,10 +268,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
                 break;
             case R.id.index_cart:
-
-                if(AppApplication.isLogin(getActivity())){
-
-                }
+                CartListActivity.jumpCartListActivity(getActivity());
                 break;
             case R.id.index_search:
                 SearchActivity.jumpSearchActivity(getActivity(), "");

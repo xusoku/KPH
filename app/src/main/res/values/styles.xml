@@ -20,9 +20,9 @@
     </style>
 
 
-    <style name="MainAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="CartTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorAccent">@color/colormain</item>
     </style>
 
 
