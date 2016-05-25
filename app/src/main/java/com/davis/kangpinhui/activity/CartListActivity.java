@@ -127,7 +127,7 @@ public class CartListActivity extends BaseActivity {
 
         return total;
     }
-
+    String ids = "";
     @Override
     public void doClick(View view) {
 
@@ -138,7 +138,6 @@ public class CartListActivity extends BaseActivity {
                     ToastUitl.showToast("暂无数据");
                     return;
                 }
-                String ids = "";
                 boolean isCheck = false;
                 for (Cart cart : list) {
                     if (cart.flag) {
@@ -156,7 +155,7 @@ public class CartListActivity extends BaseActivity {
                 call.enqueue(new ApiCallback<BaseModel>() {
                     @Override
                     public void onSucssce(BaseModel baseModel) {
-                        OrderActivity.jumpOrderActivity(CartListActivity.this, "", "");
+                        OrderActivity.jumpOrderActivity(CartListActivity.this,  ids);
                     }
 
                     @Override
