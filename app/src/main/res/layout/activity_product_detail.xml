@@ -246,12 +246,14 @@
             android:background="@color/colorgray">
 
             <LinearLayout
+                android:id="@+id/add_cart_number_linear"
                 android:layout_width="@dimen/common_measure_70dp"
                 android:layout_height="match_parent"
                 android:background="?android:attr/selectableItemBackground"
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/add_cart_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_recents" />

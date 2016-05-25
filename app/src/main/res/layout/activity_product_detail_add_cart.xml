@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#90000000"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/add_cart_pop_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:clickable="true"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -93,6 +99,7 @@
                 android:layout_margin="@dimen/common_measure_10dp"
                 android:background="@color/lightblue"
                 android:text="2个（约12-14）"
+                android:padding="5dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
 
@@ -151,6 +158,11 @@
                 android:layout_height="1dp"
                 android:background="@color/colorlightgray" />
 
+            <LinearLayout
+                android:id="@+id/add_cart_add_linear_sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
             <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -169,7 +181,10 @@
                 android:background="@drawable/bg_flow_tag_unselect"
                 android:textSize="@dimen/text_size_17"
                 android:padding="@dimen/common_measure_5dp"/>
-
+            </LinearLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/common_measure_50dp"/>
         </LinearLayout>
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -184,4 +199,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

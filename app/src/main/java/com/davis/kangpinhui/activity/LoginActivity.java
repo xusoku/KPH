@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.MainActivity;
+import com.davis.kangpinhui.Model.Extendedinfo;
 import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
@@ -203,6 +204,7 @@ public class LoginActivity extends BaseActivity {
                                 SharePreferenceUtils.getSharedPreferences("kph").putString("token", AppApplication.token);
                                 SharePreferenceUtils.getSharedPreferences("kph").putString("username", AppApplication.userInfo.susername);
                                 EventBus.getDefault().post(AppApplication.userInfo);
+                                EventBus.getDefault().post(new Extendedinfo());
                             }
 
                             @Override

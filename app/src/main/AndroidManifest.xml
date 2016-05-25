@@ -58,7 +58,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.ProductDetailActivity" />
         <activity android:name=".activity.MyAddressActivity" />
-        <activity android:name=".activity.AddAddressActivity"></activity>
+        <activity android:name=".activity.AddAddressActivity" />
+        <activity android:name=".activity.CartListActivity"></activity>
     </application>
 
 </manifest>
