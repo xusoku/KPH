@@ -36,6 +36,8 @@ public class CartListActivity extends BaseActivity {
 
     @Override
     protected void findViews() {
+        showTopBar();
+        setTitle("购物车");
         cart_listvew = $(R.id.content);
 
     }
@@ -52,7 +54,8 @@ public class CartListActivity extends BaseActivity {
 
                         ArrayList<Cart> list=arrayListBaseModel.object;
 
-                        adapter=new CartListAdapter(CartListActivity.this,list,)
+                        adapter=new CartListAdapter(CartListActivity.this,list,R.layout.activity_cart_list_item);
+                        cart_listvew.setAdapter(adapter);
                     }
 
                     @Override
