@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.bumptech.glide.request.target.ViewTarget;
+import com.davis.kangpinhui.Model.Address;
 import com.davis.kangpinhui.Model.Category;
 import com.davis.kangpinhui.Model.Extendedinfo;
 import com.davis.kangpinhui.Model.UserInfo;
@@ -28,6 +29,7 @@ public class AppApplication extends Application {
     public static String token = "";
     public static UserInfo userInfo;
     public static Extendedinfo extendedinfo;
+    public static Address address;
 
     public static ArrayList<Category> classiclist = new ArrayList<>();
 

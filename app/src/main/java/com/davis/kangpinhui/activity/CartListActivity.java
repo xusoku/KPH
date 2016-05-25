@@ -134,6 +134,7 @@ public class CartListActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.add_cart_list_addlinear:
 
+                ids="";
                 if (list == null || list.size() == 0) {
                     ToastUitl.showToast("暂无数据");
                     return;

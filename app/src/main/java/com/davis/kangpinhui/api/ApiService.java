@@ -365,7 +365,7 @@ public interface ApiService {
 
     //28 获取优惠券列表信息
     @GET("coupon/list.do")
-    Call<BaseModel<Page<Topic>>> getCouponlist(
+    Call<BaseModel<Page<ArrayList<Topic>>>> getCouponlist(
             @Query("apptype") String apptype,
             @Query("token") String token
     );

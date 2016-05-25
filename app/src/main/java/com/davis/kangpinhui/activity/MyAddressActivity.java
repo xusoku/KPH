@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,8 +29,15 @@ public class MyAddressActivity extends BaseActivity {
 
     private ListView listView;
 
+    private boolean isOrder=false;
+
     public static void jumpMyAddressActivity(Context cot) {
         Intent it = new Intent(cot, MyAddressActivity.class);
+        cot.startActivity(it);
+    }
+    public static void jumpMyAddressActivity(Context cot,boolean flag) {
+        Intent it = new Intent(cot, MyAddressActivity.class);
+        it.putExtra("isOrder",flag);
         cot.startActivity(it);
     }
 
@@ -41,6 +49,7 @@ public class MyAddressActivity extends BaseActivity {
     @Override
     protected void initVariable() {
 
+        isOrder=getIntent().getBooleanExtra("isOrder",false);
     }
 
     @Override
@@ -88,7 +97,7 @@ public class MyAddressActivity extends BaseActivity {
 
     }
 
-    private void bindView(ArrayList<Address> list) {
+    private void bindView(final ArrayList<Address> list) {
 
         listView.setAdapter(new CommonBaseAdapter<Address>(this, list, R.layout.activity_my_address_item) {
             @Override
@@ -104,6 +113,16 @@ public class MyAddressActivity extends BaseActivity {
                         AddAddressActivity.jumpAddAddressActivity(MyAddressActivity.this,"0",itemData.iuseraddressid);
                     }
                 });
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(isOrder){
+                    AppApplication.address=list.get(position);
+                    finish();
+                }
             }
         });
     }
