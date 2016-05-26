@@ -64,7 +64,7 @@ public class ProductDetailActivity extends BaseActivity {
     private PopupWindow addpopupWindow;
     private ImageView add_cart_icon;
 
-    private  ProductDetail productDetail;
+    private ProductDetail productDetail;
 
     public static void jumpProductDetailActivity(Context conx, String id) {
         Intent it = new Intent(conx, ProductDetailActivity.class);
@@ -121,7 +121,7 @@ public class ProductDetailActivity extends BaseActivity {
             @Override
             public void onSucssce(BaseModel<ProductDetail> productDetailBaseModel) {
                 onActivityLoadingSuccess();
-                 productDetail = productDetailBaseModel.object;
+                productDetail = productDetailBaseModel.object;
                 ArrayList<String> bannerList = productDetail.piclist;
                 getBannerData(bannerList);
                 setBindData(productDetail);
@@ -164,7 +164,7 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
     private void setBindPopData(final ProductDetail productDetail) {
-        Glide.with(this).load(ApiService.picurl+productDetail.spicurl).into(add_cart_image);
+        Glide.with(this).load(ApiService.picurl + productDetail.spicurl).into(add_cart_image);
 
         add_cart_text_vip_price.setText("会员价" + productDetail.fvipprice + "/" + productDetail.sstandard);
         add_cart_text_price.setText("康品价" + productDetail.fprice + "/" + productDetail.sstandard);
@@ -179,7 +179,7 @@ public class ProductDetailActivity extends BaseActivity {
                 if (AppApplication.isLogin(ProductDetailActivity.this)) {
 
                     String num = add_cart_add_center.getText().toString().trim();
-                    Call<BaseModel> call = ApiInstant.getInstant().addCart(AppApplication.apptype, AppApplication.shopid, num, productDetail.iproductid, productDetail.srequire, AppApplication.token);
+                    Call<BaseModel> call = ApiInstant.getInstant().addCart(AppApplication.apptype, AppApplication.shopid, num, productDetail.iproductid, srequire, AppApplication.token);
 
                     call.enqueue(new ApiCallback<BaseModel>() {
                         @Override
@@ -238,16 +238,25 @@ public class ProductDetailActivity extends BaseActivity {
 
 
         if (!TextUtils.isEmpty(productDetail.srequire)) {
-            add_cart_sp.setText(productDetail.srequire);
             add_cart_add_linear_sp.setVisibility(View.VISIBLE);
 
-            String req=productDetail.srequire;
+            String req = productDetail.srequire;
             String[] list = req.split(" ");
-            for (String tag : list) {
-                add_cart_flow.addView(newFlowTagView(tag));
-            }
+            getRequre(list);
         } else {
             add_cart_add_linear_sp.setVisibility(View.GONE);
+        }
+
+
+    }
+
+    private String[] list;
+
+    private void getRequre(String[] list) {
+
+        this.list = list;
+        for (int i = 0; i < list.length; i++) {
+            add_cart_flow.addView(newFlowTagView(list[i], i));
         }
 
 
@@ -278,9 +287,9 @@ public class ProductDetailActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.add_cart_addlinear:
-                if(productDetail!=null) {
+                if (productDetail != null) {
                     addpopupWindow.showAtLocation(product_detail_drag, Gravity.NO_GRAVITY, 0, 0);
-                }else{
+                } else {
                     ToastUitl.showToast("暂无数据");
                 }
                 break;
@@ -294,7 +303,7 @@ public class ProductDetailActivity extends BaseActivity {
 
     private ImageView add_cart_image, add_cart_image_close;
 
-    private TextView add_cart_text_vip_price, add_cart_text_price, add_cart_guige, add_cart_sp,
+    private TextView add_cart_text_vip_price, add_cart_text_price, add_cart_guige,
             add_cart_add_mins, add_cart_add, add_cart_add_center, add_cart_add_btn;
 
     private LinearLayout add_cart_add_linear_sp;
@@ -316,7 +325,6 @@ public class ProductDetailActivity extends BaseActivity {
         add_cart_image_close = $(view, R.id.add_cart_image_close);
         add_cart_text_vip_price = $(view, R.id.add_cart_text_vip_price);
         add_cart_text_price = $(view, R.id.add_cart_text_price);
-        add_cart_sp = $(view, R.id.add_cart_sp);
         add_cart_add_mins = $(view, R.id.add_cart_add_mins);
         add_cart_add_center = $(view, R.id.add_cart_add_center);
         add_cart_add_btn = $(view, R.id.add_cart_add_btn);
@@ -375,7 +383,7 @@ public class ProductDetailActivity extends BaseActivity {
             backgroundDefaultBadge.setText(number);
     }
 
-    public View newFlowTagView(final String tag) {
+    public View newFlowTagView(final String tag, final int i) {
         final TextView textView = (TextView) View.inflate(mActivity, R.layout.layout_flow_tag, null);
         FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
         int dp = CommonManager.dpToPx(25);
@@ -387,8 +395,45 @@ public class ProductDetailActivity extends BaseActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getRequre(i);
+                srequire=tag;
             }
         });
         return textView;
     }
+
+    public View newFlowTag(final String tag, final int i) {
+        final TextView textView = (TextView) View.inflate(mActivity, R.layout.layout_flow_tag, null);
+        FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
+        int dp = CommonManager.dpToPx(25);
+        params.setMargins(dp, dp, dp, dp);
+        textView.setLayoutParams(params);
+        textView.setText(tag);
+        textView.setTextColor(getResources().getColor(R.color.black));
+        textView.setBackgroundColor(getResources().getColor(R.color.lightblue));
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getRequre(-1);
+                srequire="";
+            }
+        });
+        return textView;
+    }
+
+    private String srequire = "";
+
+    private void getRequre(int j) {
+        add_cart_flow.removeAllViews();
+        for (int i = 0; i < list.length; i++) {
+            if (i == j) {
+                add_cart_flow.addView(newFlowTag(list[i], i));
+            } else {
+                add_cart_flow.addView(newFlowTagView(list[i], i));
+            }
+        }
+
+
+    }
+
 }

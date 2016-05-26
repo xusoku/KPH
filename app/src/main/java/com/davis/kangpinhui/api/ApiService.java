@@ -257,7 +257,7 @@ public interface ApiService {
 
     //17.1 去结算、形成订单
     @GET("order/save.do")
-    Call<BaseModel> orderSave(
+    Call<BaseModel<Order>> orderSave(
             @Query("apptype") String apptype,
             @Query("shopid") String shopid,
             @Query("ids") String ids,

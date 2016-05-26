@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.Model.Cart;
 import com.davis.kangpinhui.Model.Coupon;
+import com.davis.kangpinhui.Model.Order;
 import com.davis.kangpinhui.Model.TakeGoodsdate;
 import com.davis.kangpinhui.Model.Topic;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
@@ -282,16 +283,17 @@ public class OrderActivity extends BaseActivity {
                 }
                 String beizhu=order_beizhu_text.getText().toString().trim();
 
-                Call<BaseModel> call=ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
+                Call<BaseModel<Order>> call=ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
                         ids, AppApplication.address.iuseraddressid, payTape, timeTape, beizhu, couponId, AppApplication.token);
 
-                call.enqueue(new ApiCallback<BaseModel>() {
+                call.enqueue(new ApiCallback<BaseModel<Order>>() {
                     @Override
-                    public void onSucssce(BaseModel baseModel) {
+                    public void onSucssce(BaseModel<Order> baseModel) {
                         ToastUitl.showToast("订单提交成功");
                     }
                     @Override
                     public void onFailure() {
+
                     }
                 });
                 break;
