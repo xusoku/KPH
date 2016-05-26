@@ -48,7 +48,7 @@
                 android:layout_marginLeft="@dimen/common_measure_10dp"
                 android:layout_marginTop="@dimen/common_measure_10dp"
                 android:layout_toRightOf="@id/add_cart_image"
-                android:text="家分类考试的见风使舵了房间"
+                android:text=""
                 android:textSize="@dimen/text_size_17" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -59,7 +59,7 @@
                 android:layout_marginLeft="@dimen/common_measure_10dp"
                 android:layout_marginTop="@dimen/common_measure_10dp"
                 android:layout_toRightOf="@id/add_cart_image"
-                android:text="发生接受的快乐飞机上看了大的"
+                android:text=""
                 android:textSize="@dimen/text_size_17" />
 
             <ImageView
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/common_measure_10dp"
                 android:background="@color/lightblue"
-                android:text="2个（约12-14）"
+                android:text=""
                 android:padding="5dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
@@ -181,6 +181,12 @@
                 android:background="@drawable/bg_flow_tag_unselect"
                 android:textSize="@dimen/text_size_17"
                 android:padding="@dimen/common_measure_5dp"/>
+                <com.davis.kangpinhui.views.FlowLayout
+                    android:id="@+id/add_cart_flow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/red"
+                    android:minHeight="@dimen/common_measure_100dp"/>
             </LinearLayout>
             <View
                 android:layout_width="wrap_content"

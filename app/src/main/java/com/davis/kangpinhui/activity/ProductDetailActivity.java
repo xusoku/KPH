@@ -25,10 +25,12 @@ import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.api.ApiService;
+import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.BadgeView;
+import com.davis.kangpinhui.views.FlowLayout;
 import com.davis.kangpinhui.views.dargview.DavisWebView;
 import com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne;
 import com.davis.kangpinhui.views.dargview.DragLayout;
@@ -176,7 +178,7 @@ public class ProductDetailActivity extends BaseActivity {
 
                 if (AppApplication.isLogin(ProductDetailActivity.this)) {
 
-                    String num=add_cart_add_center.getText().toString().trim();
+                    String num = add_cart_add_center.getText().toString().trim();
                     Call<BaseModel> call = ApiInstant.getInstant().addCart(AppApplication.apptype, AppApplication.shopid, num, productDetail.iproductid, productDetail.srequire, AppApplication.token);
 
                     call.enqueue(new ApiCallback<BaseModel>() {
@@ -186,12 +188,12 @@ public class ProductDetailActivity extends BaseActivity {
                             EventBus.getDefault().post(new Extendedinfo());
 
                             String number = AppApplication.getCartcount();
-                            if (TextUtils.isEmpty(number)||number.equals("0.0")){
-                                number="0";
+                            if (TextUtils.isEmpty(number) || number.equals("0.0")) {
+                                number = "0";
                             }
                             int n = Integer.valueOf(number);
                             n++;
-                            backgroundDefaultBadge.setText(n+"");
+                            backgroundDefaultBadge.setText(n + "");
 
                             addpopupWindow.dismiss();
                         }
@@ -238,9 +240,16 @@ public class ProductDetailActivity extends BaseActivity {
         if (!TextUtils.isEmpty(productDetail.srequire)) {
             add_cart_sp.setText(productDetail.srequire);
             add_cart_add_linear_sp.setVisibility(View.VISIBLE);
+
+            String req=productDetail.srequire;
+            String[] list = req.split(" ");
+            for (String tag : list) {
+                add_cart_flow.addView(newFlowTagView(tag));
+            }
         } else {
             add_cart_add_linear_sp.setVisibility(View.GONE);
         }
+
 
     }
 
@@ -291,6 +300,7 @@ public class ProductDetailActivity extends BaseActivity {
     private LinearLayout add_cart_add_linear_sp;
 
     private View add_cart_pop_view;
+    private FlowLayout add_cart_flow;
 
     private BadgeView backgroundDefaultBadge;
 
@@ -299,6 +309,7 @@ public class ProductDetailActivity extends BaseActivity {
         // TODO Auto-generated method stub
         View view = getLayoutInflater().inflate(R.layout.activity_product_detail_add_cart, null);
 
+        add_cart_flow = $(view, R.id.add_cart_flow);
         add_cart_pop_view = $(view, R.id.add_cart_pop_view);
         add_cart_add_linear_sp = $(view, R.id.add_cart_add_linear_sp);
         add_cart_image = $(view, R.id.add_cart_image);
@@ -362,5 +373,22 @@ public class ProductDetailActivity extends BaseActivity {
         String number = AppApplication.getCartcount();
         if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0"))
             backgroundDefaultBadge.setText(number);
+    }
+
+    public View newFlowTagView(final String tag) {
+        final TextView textView = (TextView) View.inflate(mActivity, R.layout.layout_flow_tag, null);
+        FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
+        int dp = CommonManager.dpToPx(25);
+        params.setMargins(dp, dp, dp, dp);
+        textView.setLayoutParams(params);
+        textView.setText(tag);
+        textView.setTextColor(getResources().getColor(R.color.black));
+        textView.setBackgroundResource(R.drawable.bg_flow_tag_unselect);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+        return textView;
     }
 }
