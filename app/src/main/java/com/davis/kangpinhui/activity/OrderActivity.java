@@ -35,6 +35,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
+import view.TwoPickerView;
 
 public class OrderActivity extends BaseActivity {
 
@@ -52,6 +53,8 @@ public class OrderActivity extends BaseActivity {
     private  ArrayList<Cart> list;
     private  ArrayList<TakeGoodsdate> takeGoodsdateArrayList;
     private  ArrayList<Coupon> couponArrayList;
+
+    private TwoPickerView twoPickerView;
 
     public static void jumpOrderActivity(Context cot,String ids) {
         Intent it = new Intent(cot, OrderActivity.class);
@@ -89,6 +92,7 @@ public class OrderActivity extends BaseActivity {
     protected void findViews() {
         showTopBar();
         setTitle("订单结算");
+        twoPickerView=new TwoPickerView(this);
         order_number_text=$(R.id.order_number_text);
         order_paytype_text=$(R.id.order_paytype_text);
         order_paytype_time=$(R.id.order_paytype_time);
@@ -136,20 +140,8 @@ public class OrderActivity extends BaseActivity {
             }
         });
 
+        getTimeList();
 
-        Call<BaseModel<ArrayList<TakeGoodsdate>>> calltime=ApiInstant.getInstant().getTakegoodtimelist(AppApplication.apptype,
-                AppApplication.shopid, ids, AppApplication.token);
-        calltime.enqueue(new ApiCallback<BaseModel<ArrayList<TakeGoodsdate>>>() {
-            @Override
-            public void onSucssce(BaseModel<ArrayList<TakeGoodsdate>> arrayListBaseModel) {
-                takeGoodsdateArrayList.addAll(arrayListBaseModel.object);
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        });
 
 
         Call<BaseModel<ArrayList<Coupon>>> callCoup=ApiInstant.getInstant().getCouponByUid(AppApplication.apptype,AppApplication.token);
@@ -166,6 +158,21 @@ public class OrderActivity extends BaseActivity {
         });
     }
 
+   private void getTimeList(){
+        Call<BaseModel<ArrayList<TakeGoodsdate>>> calltime=ApiInstant.getInstant().getTakegoodtimelist(AppApplication.apptype,
+                AppApplication.shopid, ids, AppApplication.token);
+        calltime.enqueue(new ApiCallback<BaseModel<ArrayList<TakeGoodsdate>>>() {
+            @Override
+            public void onSucssce(BaseModel<ArrayList<TakeGoodsdate>> arrayListBaseModel) {
+                takeGoodsdateArrayList.addAll(arrayListBaseModel.object);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+    }
     @Override
     protected void initData() {
 
@@ -192,6 +199,7 @@ public class OrderActivity extends BaseActivity {
 
     private String payTape="3";
     private String couponId="";
+    private String timeTape="";
     @Override
     public void doClick(View view) {
 
@@ -213,9 +221,30 @@ public class OrderActivity extends BaseActivity {
                         }).show();
                 break;
             case R.id.order_paytime_relative:
+                timeTape="";
+                if(takeGoodsdateArrayList.size()==0){
+                    ToastUitl.showToast("请等待");
+                    getTimeList();
+                    return;
+                }
+                 final ArrayList<String> list=new ArrayList<String>();
+                 final ArrayList<ArrayList<String>> arrayLists=new ArrayList<ArrayList<String>>();
+                for (TakeGoodsdate takeGoodsdate : takeGoodsdateArrayList){
+                    list.add(takeGoodsdate.date);
+                    arrayLists.add(takeGoodsdate.time);
+                }
 
-                TimePickerDialog timePickerDialog=new TimePickerDialog(this,null,4,12,true);
-                timePickerDialog.show();
+                twoPickerView.setPicker(list, arrayLists, false);
+                twoPickerView.setCyclic(false);
+                twoPickerView.setSelectOptions(0, 0);
+                twoPickerView.show();
+                twoPickerView.setOnoptionsSelectListener(new TwoPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2) {
+
+                        timeTape=(list.get(options1) + " " + arrayLists.get(options1).get(option2));
+                    }
+                });
 
                 break;
             case R.id.order_paytype_relative:
@@ -246,12 +275,11 @@ public class OrderActivity extends BaseActivity {
                     ToastUitl.showToast("请选择收货地址");
                     return;
                 }
-                String time=order_paytype_time.getText().toString().trim();
                 String beizhu=order_beizhu_text.getText().toString().trim();
 
 
                 Call<BaseModel> call=ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
-                        ids, AppApplication.address.iuseraddressid, payTape, time, beizhu, couponId, AppApplication.token);
+                        ids, AppApplication.address.iuseraddressid, payTape, timeTape, beizhu, couponId, AppApplication.token);
 
                 call.enqueue(new ApiCallback<BaseModel>() {
                     @Override
