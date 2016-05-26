@@ -62,6 +62,8 @@ public class ProductDetailActivity extends BaseActivity {
     private PopupWindow addpopupWindow;
     private ImageView add_cart_icon;
 
+    private  ProductDetail productDetail;
+
     public static void jumpProductDetailActivity(Context conx, String id) {
         Intent it = new Intent(conx, ProductDetailActivity.class);
         it.putExtra("id", id);
@@ -117,7 +119,7 @@ public class ProductDetailActivity extends BaseActivity {
             @Override
             public void onSucssce(BaseModel<ProductDetail> productDetailBaseModel) {
                 onActivityLoadingSuccess();
-                ProductDetail productDetail = productDetailBaseModel.object;
+                 productDetail = productDetailBaseModel.object;
                 ArrayList<String> bannerList = productDetail.piclist;
                 getBannerData(bannerList);
                 setBindData(productDetail);
@@ -184,7 +186,7 @@ public class ProductDetailActivity extends BaseActivity {
                             EventBus.getDefault().post(new Extendedinfo());
 
                             String number = AppApplication.getCartcount();
-                            if (!TextUtils.isEmpty(number) &&number.equals("0.0")){
+                            if (TextUtils.isEmpty(number)||number.equals("0.0")){
                                 number="0";
                             }
                             int n = Integer.valueOf(number);
@@ -267,7 +269,11 @@ public class ProductDetailActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.add_cart_addlinear:
-                addpopupWindow.showAtLocation(product_detail_drag, Gravity.NO_GRAVITY, 0, 0);
+                if(productDetail!=null) {
+                    addpopupWindow.showAtLocation(product_detail_drag, Gravity.NO_GRAVITY, 0, 0);
+                }else{
+                    ToastUitl.showToast("暂无数据");
+                }
                 break;
             case R.id.add_cart_number_linear:
                 CartListActivity.jumpCartListActivity((this));

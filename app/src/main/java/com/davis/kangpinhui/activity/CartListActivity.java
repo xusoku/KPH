@@ -93,6 +93,12 @@ public class CartListActivity extends BaseActivity {
                         str = str.endsWith(".0") ? str.substring(0, str.length() - 2) : str;
                         add_cart_number_text.setText("¥" + str);
                     }
+
+                    @Override
+                    public void listChange() {
+                        list.clear();
+                        startActivityLoading();
+                    }
                 });
             }
 

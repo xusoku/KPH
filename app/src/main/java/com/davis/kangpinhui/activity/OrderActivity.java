@@ -243,6 +243,7 @@ public class OrderActivity extends BaseActivity {
                     public void onOptionsSelect(int options1, int option2) {
 
                         timeTape=(list.get(options1) + " " + arrayLists.get(options1).get(option2));
+                        order_paytype_time.setText(timeTape);
                     }
                 });
 
@@ -275,8 +276,11 @@ public class OrderActivity extends BaseActivity {
                     ToastUitl.showToast("请选择收货地址");
                     return;
                 }
+                if(TextUtils.isEmpty(timeTape)){
+                    ToastUitl.showToast("请选择配送时间");
+                    return;
+                }
                 String beizhu=order_beizhu_text.getText().toString().trim();
-
 
                 Call<BaseModel> call=ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
                         ids, AppApplication.address.iuseraddressid, payTape, timeTape, beizhu, couponId, AppApplication.token);
@@ -284,13 +288,10 @@ public class OrderActivity extends BaseActivity {
                 call.enqueue(new ApiCallback<BaseModel>() {
                     @Override
                     public void onSucssce(BaseModel baseModel) {
-
-                        ToastUitl.showToast("xia");
-
+                        ToastUitl.showToast("订单提交成功");
                     }
                     @Override
                     public void onFailure() {
-
                     }
                 });
                 break;
