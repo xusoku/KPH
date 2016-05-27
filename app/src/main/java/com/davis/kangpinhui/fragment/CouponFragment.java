@@ -61,10 +61,17 @@ public class CouponFragment extends BaseFragment {
         mine_allorder_list = $(view, R.id.mine_allorder_list);
 
         list = new ArrayList<>();
-        adapter = new CommonBaseAdapter<Coupon>(getActivity(), list, R.layout.fragment_allorder_item) {
+        adapter = new CommonBaseAdapter<Coupon>(getActivity(), list, R.layout.fragment_coupon_item) {
             @Override
             public void convert(ViewHolder holder, Coupon itemData, int position) {
 
+                holder.setText(R.id.coupon_item_price,"¥"+itemData.fmoney);
+
+                holder.setText(R.id.coupon_item_price_item,itemData.starttime);
+
+                holder.setText(R.id.coupon_item_title,itemData.title);
+                holder.setText(R.id.coupon_item_content,itemData.context);
+                holder.setText(R.id.coupon_item_time,"有效期至:"+itemData.endtime);
 
 
             }

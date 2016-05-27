@@ -16,6 +16,11 @@ public class Coupon implements Serializable {
     public String endtime;
     public String ctype;
     public String fmoney;
+    public String endtime2;
+    public String daystr;
     public String ftotal;
     public String usercouponid;
+
+
+
 }
