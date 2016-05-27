@@ -69,7 +69,8 @@
             android:name=".activity.CartListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CartTheme" />
-        <activity android:name=".activity.OrderActivity"></activity>
+        <activity android:name=".activity.OrderActivity" />
+        <activity android:name=".activity.AllOrderActivity"></activity>
     </application>
 
 </manifest>

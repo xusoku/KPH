@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.R;
+import com.davis.kangpinhui.activity.AllOrderActivity;
 import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.FeedBackActivity;
 import com.davis.kangpinhui.activity.MyAddressActivity;
@@ -99,7 +100,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mine_allorder:
-                ToastUitl.showToast("aaa");
+                AllOrderActivity.jumpAllOrderActivity(getActivity(),0);
                 break;
             case R.id.mine_feedback_linear:
                 FeedBackActivity.jumpFeedBackActivity(getActivity());

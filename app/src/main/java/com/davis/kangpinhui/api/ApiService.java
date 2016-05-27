@@ -175,7 +175,7 @@ public interface ApiService {
 
     //12 我的订单
     @GET("order/list.do")
-    Call<BaseModel<Page<Order<OrderDetail>>>> myOrderlist(
+    Call<BaseModel<Page<ArrayList<Order<ArrayList<OrderDetail>>>>>> myOrderlist(
             @Query("apptype") String apptype,
             @Query("ipage") String ipage,
             @Query("ipagesize") String ipagesize,
