@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.Model.Cart;
 import com.davis.kangpinhui.Model.Order;
 import com.davis.kangpinhui.Model.OrderDetail;
 import com.davis.kangpinhui.Model.Product;
@@ -16,9 +17,11 @@ import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.views.LoadMoreListView;
 import com.davis.kangpinhui.views.LoadMoreRecyclerView;
+import com.davis.kangpinhui.views.StretchedListView;
 
 
 import java.util.ArrayList;
@@ -66,11 +69,41 @@ public class AllorderFragment extends BaseFragment {
         adapter = new CommonBaseAdapter<Order<ArrayList<OrderDetail>>>(getActivity(), list, R.layout.fragment_allorder_item) {
             @Override
             public void convert(ViewHolder holder, Order<ArrayList<OrderDetail>> itemData, int position) {
-
+//                Stype：  0：待配送  3：已付款成功  6：已关闭
                 ArrayList<OrderDetail> orderDetails = itemData.list;
+                holder.setText(R.id.allorder_item_number, itemData.sordernumber + "[详情]");
+                if (itemData.stype.equals("0")) {
+                    holder.setText(R.id.allorder_item_type, "待配送");
+
+                } else if (itemData.stype.equals("3")) {
+                    holder.setText(R.id.allorder_item_type, "配送中");
+
+                } else if (itemData.stype.equals("6")) {
+                    holder.setText(R.id.allorder_item_type, "已关闭");
+
+                } else {
+                    holder.setText(R.id.allorder_item_type,"未知");
+                }
+
+
+                bindItemView(holder.<StretchedListView>getView(R.id.allorder_lst_item),orderDetails);
+
             }
         };
         mine_allorder_list.setAdapter(adapter);
+    }
+
+    private void bindItemView(StretchedListView listView,ArrayList<OrderDetail> orderDetails) {
+        listView.setAdapter(new CommonBaseAdapter<OrderDetail>(getActivity(), orderDetails, R.layout.activity_order_item) {
+            @Override
+            public void convert(ViewHolder holder, OrderDetail itemData, int position) {
+                holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
+                holder.setText(R.id.order_comfi_item_title, itemData.sproductname);
+                holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
+                holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fmoney);
+                holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.icount));
+            }
+        });
     }
 
     @Override
@@ -81,7 +114,7 @@ public class AllorderFragment extends BaseFragment {
     @Override
     protected void onFragmentLoading() {
         super.onFragmentLoading();
-        getOrderList(iPage,iPageSize);
+        getOrderList(iPage, iPageSize);
     }
 
     @Override
@@ -120,10 +153,12 @@ public class AllorderFragment extends BaseFragment {
                     mine_allorder_list.onLoadSucess(true);
                 }
             }
+
             @Override
             public void onFailure() {
                 onFragmentLoadingFailed();
             }
         });
     }
+
 }
