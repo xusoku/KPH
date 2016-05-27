@@ -16,6 +16,7 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.base.CommonFragmentAdapter;
+import com.davis.kangpinhui.fragment.AllorderFragment;
 import com.davis.kangpinhui.fragment.ClassicFragment;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.views.CustomTypefaceEditText;
@@ -36,6 +37,7 @@ public class AllOrderActivity extends BaseActivity {
     HackyViewPager viewPager;
     FixPageIndicator indicator;
 
+//    0:全部订单 、 1：代付款 2、代配送 3、配送中
     private int id=0;
 
     public static void jumpAllOrderActivity(Context cot, int id) {
@@ -71,11 +73,9 @@ public class AllOrderActivity extends BaseActivity {
     @Override
     protected void initData() {
         ArrayList<Fragment> fragments = new ArrayList<Fragment>();
-        fragments.add(new ClassicFragment());
-        fragments.add(new ClassicFragment());
-        fragments.add(new ClassicFragment());
-        fragments.add(new ClassicFragment());
-
+        for (int i = 0; i <4 ; i++) {
+            fragments.add(AllorderFragment.newInstance(i));
+        }
         viewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(), fragments));
         indicator.setViewPager(viewPager, id);
 

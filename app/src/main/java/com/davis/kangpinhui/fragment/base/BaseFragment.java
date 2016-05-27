@@ -14,8 +14,10 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.davis.kangpinhui.R;
@@ -157,6 +159,27 @@ public abstract class BaseFragment extends Fragment
         onFragmentLoadingFailed();
     }
 
+
+    public void onFragmentFirstLoadingNoData()
+    {
+
+        if (layLoadingFailed == null) {
+            return;
+        }
+        layLoadingFailed.setVisibility(View.VISIBLE);
+        ImageView base_image= (ImageView) layLoadingFailed.findViewById(R.id.base_image);
+        TextView base_text= (TextView) layLoadingFailed.findViewById(R.id.base_text);
+
+        base_image.setImageResource(R.mipmap.state_no_data);
+        base_text.setText("暂无数据");
+        layClickReload.setClickable(false);
+        layClickReload.setVisibility(View.VISIBLE);
+        loadingProgress.setVisibility(View.INVISIBLE);
+        isFirstLoading = true;
+        if (contentView != null) {
+            contentView.setVisibility(View.GONE);
+        }
+    }
     /*如果首次加载先失败，就显示失败界面，
     好处是：当首次成功显示内容区后，当再次下拉刷新失败时，就不会显示失败界面，保留原来的界面
    同时，对于一个界面多个接口，之间也不会有影响

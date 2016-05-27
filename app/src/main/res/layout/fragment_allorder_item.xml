@@ -4,11 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.davis.kangpinhui.views.LoadMoreListView
-        android:id="@+id/mine_allorder_list"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:divider="@null"
-        android:dividerHeight="@dimen/common_measure_10dp"/>
+        android:layout_height="@dimen/common_measure_200dp"
+        android:background="@color/red" />
 </LinearLayout>
