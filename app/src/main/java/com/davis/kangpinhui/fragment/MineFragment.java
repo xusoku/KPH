@@ -125,16 +125,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 MyAddressActivity.jumpMyAddressActivity(getActivity());
                 break;
             case R.id.mine_mycoup:
-                CouponActivity.jumpCouponActivity(getActivity(),0);
+                CouponActivity.jumpCouponActivity(getActivity(), 0);
                 break;
             case R.id.mine_cart:
                 CartListActivity.jumpCartListActivity(getActivity());
                 break;
             case R.id.mine_allorder_sending:
-                FeedBackActivity.jumpFeedBackActivity(getActivity());
+                AllOrderActivity.jumpAllOrderActivity(getActivity(), 3);
                 break;
             case R.id.mine_allorder_unpay:
-                FeedBackActivity.jumpFeedBackActivity(getActivity());
+                AllOrderActivity.jumpAllOrderActivity(getActivity(), 1);
                 break;
         }
     }

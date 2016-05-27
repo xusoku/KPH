@@ -190,6 +190,13 @@ public interface ApiService {
             @Query("ordernum") String ordernum,
             @Query("token") String token
     );
+    //12.2 取消订单
+    @GET("order/cancel.do")
+    Call<BaseModel> cancelOrder(
+            @Query("apptype") String apptype,
+            @Query("ordernum") String ordernum,
+            @Query("token") String token
+    );
 
     //13 用户消费信息接口
     @GET("moneyinfo/list.do")
@@ -368,6 +375,9 @@ public interface ApiService {
     @GET("coupon/list.do")
     Call<BaseModel<Page<ArrayList<Coupon>>>> getCouponlist(
             @Query("apptype") String apptype,
+            @Query("type") String type,
+            @Query("ipage") String ipage,
+            @Query("pagesize") String pagesize,
             @Query("token") String token
     );
 

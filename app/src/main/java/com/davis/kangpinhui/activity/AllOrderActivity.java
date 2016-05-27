@@ -2,6 +2,7 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -58,6 +59,11 @@ public class AllOrderActivity extends BaseActivity {
     protected void initVariable() {
 
         id=getIntent().getIntExtra("id",0);
+
+        tabNames[0]="全部("+AppApplication.getOrderall()+")";
+        tabNames[1]="待付款("+AppApplication.getOrderunpaid()+")";
+        tabNames[2]="待配送("+AppApplication.getOrderwaitsend()+")";
+        tabNames[3]="配送中("+AppApplication.getOrdersending()+")";
     }
 
     @Override
@@ -104,6 +110,29 @@ public class AllOrderActivity extends BaseActivity {
     @Override
     protected void setListener() {
 
+    }
+
+    public void chageTitle(final String [] str,final int i){
+
+//        tabNames = {"全部", "待付款", "待配送","配送中"};
+
+        indicator.setIndicatorAdapter(new PageIndicator.IndicatorAdapter() {
+            @Override
+            public View getIndicatorView(int position) {
+                TextView textView = (TextView) getLayoutInflater().inflate(R.layout.layout_allorder_tab_item, null);
+                textView.setTextSize(CommonManager.dpToPx(20));
+                textView.setText(str[position]);
+                if(position==i){
+                    textView.setTextColor(getResources().getColor(R.color.colormain));
+                }
+                return textView;
+            }
+
+            @Override
+            public void onPageScrolled(View view, int position, float selectPercent) {
+
+            }
+        });
     }
 
     @Override

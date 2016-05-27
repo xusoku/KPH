@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.Model.Cart;
 import com.davis.kangpinhui.Model.Coupon;
+import com.davis.kangpinhui.Model.Extendedinfo;
 import com.davis.kangpinhui.Model.Order;
 import com.davis.kangpinhui.Model.TakeGoodsdate;
 import com.davis.kangpinhui.Model.Topic;
@@ -35,6 +36,7 @@ import com.davis.kangpinhui.views.StretchedListView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 import view.TwoPickerView;
 
@@ -290,6 +292,7 @@ public class OrderActivity extends BaseActivity {
                     @Override
                     public void onSucssce(BaseModel<Order> baseModel) {
                         ToastUitl.showToast("订单提交成功");
+                        EventBus.getDefault().post(new Extendedinfo());
                     }
                     @Override
                     public void onFailure() {

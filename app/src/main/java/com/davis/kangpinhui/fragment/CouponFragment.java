@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.Model.Coupon;
 import com.davis.kangpinhui.Model.Order;
 import com.davis.kangpinhui.Model.OrderDetail;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
@@ -33,8 +34,8 @@ public class CouponFragment extends BaseFragment {
     private int iPage = 1;
     private int iPageSize = 10;
     private int TotalPage = 0;
-    private CommonBaseAdapter<Order<ArrayList<OrderDetail>>> adapter;
-    private ArrayList<Order<ArrayList<OrderDetail>>> list;
+    private CommonBaseAdapter<Coupon> adapter;
+    private ArrayList<Coupon> list;
 
     public static CouponFragment newInstance(int id) {
         Bundle args = new Bundle();
@@ -60,45 +61,15 @@ public class CouponFragment extends BaseFragment {
         mine_allorder_list = $(view, R.id.mine_allorder_list);
 
         list = new ArrayList<>();
-        adapter = new CommonBaseAdapter<Order<ArrayList<OrderDetail>>>(getActivity(), list, R.layout.fragment_allorder_item) {
+        adapter = new CommonBaseAdapter<Coupon>(getActivity(), list, R.layout.fragment_allorder_item) {
             @Override
-            public void convert(ViewHolder holder, Order<ArrayList<OrderDetail>> itemData, int position) {
-//                Stype：  0：待配送  3：已付款成功  6：已关闭
-                ArrayList<OrderDetail> orderDetails = itemData.list;
-                holder.setText(R.id.allorder_item_number, itemData.sordernumber + "[详情]");
-                if (itemData.stype.equals("0")) {
-                    holder.setText(R.id.allorder_item_type, "待配送");
+            public void convert(ViewHolder holder, Coupon itemData, int position) {
 
-                } else if (itemData.stype.equals("3")) {
-                    holder.setText(R.id.allorder_item_type, "配送中");
 
-                } else if (itemData.stype.equals("6")) {
-                    holder.setText(R.id.allorder_item_type, "已关闭");
-
-                } else {
-                    holder.setText(R.id.allorder_item_type,"未知");
-                }
-
-                LinearLayout linearLayout=holder.getView(R.id.allorder_item_linear);
-
-                bindItemView(holder.<StretchedListView>getView(R.id.allorder_lst_item),orderDetails);
 
             }
         };
         mine_allorder_list.setAdapter(adapter);
-    }
-
-    private void bindItemView(StretchedListView listView,ArrayList<OrderDetail> orderDetails) {
-        listView.setAdapter(new CommonBaseAdapter<OrderDetail>(getActivity(), orderDetails, R.layout.activity_order_item) {
-            @Override
-            public void convert(ViewHolder holder, OrderDetail itemData, int position) {
-                holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
-                holder.setText(R.id.order_comfi_item_title, itemData.sproductname);
-                holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
-                holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fmoney);
-                holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.icount));
-            }
-        });
     }
 
     @Override
@@ -109,7 +80,7 @@ public class CouponFragment extends BaseFragment {
     @Override
     protected void onFragmentLoading() {
         super.onFragmentLoading();
-        getOrderList(iPage, iPageSize);
+        getCouponList(iPage, iPageSize);
     }
 
     @Override
@@ -118,21 +89,21 @@ public class CouponFragment extends BaseFragment {
         mine_allorder_list.setOnLoadListener(new LoadMoreListView.OnLoadListener() {
             @Override
             public void onLoad(LoadMoreListView listView) {
-                getOrderList(++iPage, iPageSize);
+                getCouponList(++iPage, iPageSize);
             }
         });
     }
 
-    private void getOrderList(int ipage, int iPageSize) {
+    private void getCouponList(int ipage, int iPageSize) {
 
-        Call<BaseModel<Page<ArrayList<Order<ArrayList<OrderDetail>>>>>> call = ApiInstant.getInstant().myOrderlist(AppApplication.apptype, ipage + "", iPageSize + "", AppApplication.token, id + "");
-        call.enqueue(new ApiCallback<BaseModel<Page<ArrayList<Order<ArrayList<OrderDetail>>>>>>() {
+        Call<BaseModel<Page<ArrayList<Coupon>>>> call = ApiInstant.getInstant().getCouponlist(AppApplication.apptype, id + "", ipage + "", iPageSize + "", AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel<Page<ArrayList<Coupon>>>>() {
             @Override
-            public void onSucssce(BaseModel<Page<ArrayList<Order<ArrayList<OrderDetail>>>>> pageBaseModel) {
+            public void onSucssce(BaseModel<Page<ArrayList<Coupon>>> pageBaseModel) {
 
                 onFragmentLoadingSuccess();
 
-                Page<ArrayList<Order<ArrayList<OrderDetail>>>> page = pageBaseModel.object;
+                Page<ArrayList<Coupon>> page = pageBaseModel.object;
 
                 TotalPage = page.iTotalPage;
 
@@ -148,12 +119,10 @@ public class CouponFragment extends BaseFragment {
                     mine_allorder_list.onLoadSucess(true);
                 }
             }
-
             @Override
             public void onFailure() {
-                onFragmentLoadingFailed();
+
             }
         });
     }
-
 }
