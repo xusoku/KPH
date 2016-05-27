@@ -9,6 +9,7 @@ import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.AllOrderActivity;
 import com.davis.kangpinhui.activity.CartListActivity;
+import com.davis.kangpinhui.activity.CouponActivity;
 import com.davis.kangpinhui.activity.FeedBackActivity;
 import com.davis.kangpinhui.activity.MyAddressActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
@@ -124,7 +125,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 MyAddressActivity.jumpMyAddressActivity(getActivity());
                 break;
             case R.id.mine_mycoup:
-                FeedBackActivity.jumpFeedBackActivity(getActivity());
+                CouponActivity.jumpCouponActivity(getActivity(),0);
                 break;
             case R.id.mine_cart:
                 CartListActivity.jumpCartListActivity(getActivity());

@@ -57,6 +57,7 @@
                 android:background="@color/colorlightgray" />
 
             <LinearLayout
+                android:id="@+id/allorder_item_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_measure_65dp"
                 android:gravity="center_vertical"

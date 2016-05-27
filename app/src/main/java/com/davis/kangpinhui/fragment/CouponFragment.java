@@ -2,28 +2,21 @@ package com.davis.kangpinhui.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Cart;
 import com.davis.kangpinhui.Model.Order;
 import com.davis.kangpinhui.Model.OrderDetail;
-import com.davis.kangpinhui.Model.Product;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.Model.basemodel.Page;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
-import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
-import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.views.LoadMoreListView;
-import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 import com.davis.kangpinhui.views.StretchedListView;
-
 
 import java.util.ArrayList;
 
@@ -32,7 +25,7 @@ import retrofit2.Call;
 /**
  * Created by davis on 16/5/27.
  */
-public class AllorderFragment extends BaseFragment {
+public class CouponFragment extends BaseFragment {
 
     private LoadMoreListView mine_allorder_list;
     private int id = 0;
@@ -43,10 +36,10 @@ public class AllorderFragment extends BaseFragment {
     private CommonBaseAdapter<Order<ArrayList<OrderDetail>>> adapter;
     private ArrayList<Order<ArrayList<OrderDetail>>> list;
 
-    public static AllorderFragment newInstance(int id) {
+    public static CouponFragment newInstance(int id) {
         Bundle args = new Bundle();
         args.putInt("id", id);
-        AllorderFragment sampleFragment = new AllorderFragment();
+        CouponFragment sampleFragment = new CouponFragment();
         sampleFragment.setArguments(args);
         return sampleFragment;
     }
