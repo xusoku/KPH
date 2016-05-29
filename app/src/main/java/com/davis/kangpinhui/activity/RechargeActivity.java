@@ -4,13 +4,20 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.Model.Address;
+import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
+
+import retrofit2.Call;
 
 public class RechargeActivity extends BaseActivity {
 
@@ -59,13 +66,22 @@ public class RechargeActivity extends BaseActivity {
     protected void initData() {
 
 
-
-
     }
 
     @Override
     protected void setListener() {
 
+    }
+
+    private Address address;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==resultCode){
+            address= (Address) data.getSerializableExtra("lerrter");
+            LogUtils.e("address",address.slock);
+        }
     }
 
     @Override
@@ -78,21 +94,21 @@ public class RechargeActivity extends BaseActivity {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
 
                 builder1.setTitle("充值金额")
-                        .setSingleChoiceItems(pricetext,0, new DialogInterface.OnClickListener() {
+                        .setItems(pricetext, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                price = pricetext[which]+"";
-                                recharge_price.setText(pricetext[which]+"");
+                                price = pricetext[which] + "";
+                                recharge_price.setText(pricetext[which] + "");
 
                             }
                         }).show();
                 break;
             case R.id.recharge_pay:
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
                 builder.setTitle("支付方式")
-                        .setSingleChoiceItems(typepaytext, 0,new DialogInterface.OnClickListener() {
+                        .setItems(typepaytext,new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ToastUitl.showToast(typepaytext[which].toString());
@@ -103,6 +119,9 @@ public class RechargeActivity extends BaseActivity {
                         }).show();
                 break;
             case R.id.recharge_commit:
+
+//                Call<BaseModel> call= ApiInstant.getInstant().saveRecharge(AppApplication.apptype,
+//                        )
                 break;
         }
 

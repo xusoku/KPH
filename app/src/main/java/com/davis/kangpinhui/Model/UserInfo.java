@@ -37,5 +37,7 @@ public class UserInfo  implements Serializable {
         public String utype;
         public String scoretotal;
         public String token;
+        public Address useraddress;
+
 //    }
 }

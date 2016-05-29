@@ -8,6 +8,7 @@ import com.bumptech.glide.request.target.ViewTarget;
 import com.davis.kangpinhui.Model.Address;
 import com.davis.kangpinhui.Model.Category;
 import com.davis.kangpinhui.Model.Extendedinfo;
+import com.davis.kangpinhui.Model.Recharge;
 import com.davis.kangpinhui.Model.UserInfo;
 import com.davis.kangpinhui.activity.LoginActivity;
 import com.davis.kangpinhui.util.SharePreferenceUtils;

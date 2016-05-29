@@ -21,7 +21,7 @@
     <com.davis.kangpinhui.views.CustomTypefaceTextView
         android:id="@+id/recharge_letterhead"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_65dp"
+        android:layout_height="@dimen/common_measure_60dp"
         android:layout_marginRight="@dimen/common_measure_10dp"
         android:clickable="true"
         android:onClick="doClick"
@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:clickable="true"
         android:onClick="doClick"
-        android:layout_height="@dimen/common_measure_65dp"
+        android:layout_height="@dimen/common_measure_60dp"
         android:layout_marginRight="@dimen/common_measure_10dp"
         android:layout_marginLeft="@dimen/common_measure_10dp"
         android:textColor="@color/black"
@@ -75,7 +75,7 @@
     <com.davis.kangpinhui.views.CustomTypefaceTextView
         android:id="@+id/recharge_pay"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_65dp"
+        android:layout_height="@dimen/common_measure_60dp"
         android:layout_marginRight="@dimen/common_measure_10dp"
         android:layout_marginLeft="@dimen/common_measure_10dp"
         android:textColor="@color/black"
@@ -90,7 +90,7 @@
     <com.davis.kangpinhui.views.CustomTypefaceEditText
         android:id="@+id/recharge_content"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_65dp"
+        android:layout_height="@dimen/common_measure_60dp"
         android:layout_marginTop="@dimen/common_measure_20dp"
         android:layout_marginRight="@dimen/common_measure_10dp"
         android:layout_marginLeft="@dimen/common_measure_10dp"
@@ -139,6 +139,6 @@
             android:onClick="doClick"
             android:gravity="center"
             android:layout_alignParentRight="true"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/common_measure_50dp" />
     </RelativeLayout>
 </LinearLayout>
