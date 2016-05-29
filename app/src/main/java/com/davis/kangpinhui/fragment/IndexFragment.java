@@ -120,7 +120,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     public void setcartNumber(){
         String number=AppApplication.getCartcount();
 
-        if(!TextUtils.isEmpty(number)&&!number.equals("0")&&!number.equals("0.0"))
+        if(!TextUtils.isEmpty(number)&&!number.equals("0")&&!number.equals("0.0")&&backgroundDefaultBadge!=null)
         backgroundDefaultBadge.setText((int)Float.parseFloat(number)+"");
     }
 

@@ -18,6 +18,7 @@ import com.davis.kangpinhui.Model.Cart;
 import com.davis.kangpinhui.Model.Coupon;
 import com.davis.kangpinhui.Model.Extendedinfo;
 import com.davis.kangpinhui.Model.Order;
+import com.davis.kangpinhui.Model.Product;
 import com.davis.kangpinhui.Model.TakeGoodsdate;
 import com.davis.kangpinhui.Model.Topic;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
@@ -50,13 +51,14 @@ public class OrderActivity extends BaseActivity {
 
     private EditText order_beizhu_text;
 
-    private LinearLayout add_cart_add_passwrod_linear;
+    private LinearLayout add_cart_add_passwrod_linear,order_coup_linear,order_paytype_linear;
 
     private StretchedListView order_address_lst;
 
     private String ids = "";
 
     private ArrayList<Cart> list;
+    private ArrayList<Product> listproduct;
     private ArrayList<TakeGoodsdate> takeGoodsdateArrayList;
     private ArrayList<Coupon> couponArrayList;
 
@@ -65,6 +67,14 @@ public class OrderActivity extends BaseActivity {
     public static void jumpOrderActivity(Context cot, String ids) {
         Intent it = new Intent(cot, OrderActivity.class);
         it.putExtra("ids", ids);
+        cot.startActivity(it);
+    }
+
+    private String code="";
+    public static void jumpOrderActivity(Context cot, String ids,String code) {
+        Intent it = new Intent(cot, OrderActivity.class);
+        it.putExtra("ids", ids);
+        it.putExtra("code", code);
         cot.startActivity(it);
     }
 
@@ -90,7 +100,11 @@ public class OrderActivity extends BaseActivity {
     @Override
     protected void initVariable() {
         ids = getIntent().getStringExtra("ids");
+        if(ids.equals("-1")){
+            code=getIntent().getStringExtra("code");
+        }
         list = new ArrayList<>();
+        listproduct = new ArrayList<>();
         takeGoodsdateArrayList = new ArrayList<>();
         couponArrayList = new ArrayList<>();
     }
@@ -111,6 +125,13 @@ public class OrderActivity extends BaseActivity {
         order_address_lst = $(R.id.order_address_lst);
         add_cart_add_passwrod = $(R.id.add_cart_add_passwrod);
         add_cart_add_passwrod_linear = $(R.id.add_cart_add_passwrod_linear);
+        order_coup_linear = $(R.id.order_coup_linear);
+        order_paytype_linear = $(R.id.order_paytype_linear);
+        if(ids.equals("-1")){
+            order_paytype_linear.setVisibility(View.GONE);
+            order_coup_linear.setVisibility(View.GONE);
+            add_cart_add_passwrod_linear.setVisibility(View.GONE);
+        }
 
     }
 
@@ -118,6 +139,57 @@ public class OrderActivity extends BaseActivity {
     protected void onActivityLoading() {
         super.onActivityLoading();
 
+
+
+        getTimeList();
+
+        if(ids.equals("-1")) {
+            getBycodeList();
+        }else{
+            getorderlist();
+            getCouplist();
+        }
+
+    }
+
+    private void getBycodeList() {
+        Call<BaseModel<ArrayList<Product>>> call = ApiInstant.getInstant().getProductByCode(AppApplication.apptype, AppApplication.shopid, code, AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel<ArrayList<Product>>>() {
+            @Override
+            public void onSucssce(BaseModel<ArrayList<Product>> arrayListBaseModel) {
+                onActivityLoadingSuccess();
+
+                listproduct.addAll(arrayListBaseModel.object);
+
+                DecimalFormat fnum = new DecimalFormat("##0.0");
+                String str = fnum.format(getTotalPPrice(listproduct));
+                str = str.endsWith(".0") ? str.substring(0, str.length() - 2) : str;
+                order_number_text.setText("¥" + str);
+
+                order_address_lst.setAdapter(new CommonBaseAdapter<Product>(OrderActivity.this, listproduct, R.layout.activity_order_item) {
+                    @Override
+                    public void convert(ViewHolder holder, Product itemData, int position) {
+                        holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
+                        holder.setText(R.id.order_comfi_item_title, itemData.productname);
+                        holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
+                        holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fprice);
+                        String number = itemData.count;
+                        if (TextUtils.isEmpty(number)) {
+                            number = "0";
+                        }
+                        holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(number));
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure() {
+                onActivityLoadingFailed();
+            }
+        });
+    }
+
+    private void getorderlist() {
         Call<BaseModel<ArrayList<Cart>>> call = ApiInstant.getInstant().getCartlist(AppApplication.apptype, AppApplication.shopid, "", AppApplication.token);
         call.enqueue(new ApiCallback<BaseModel<ArrayList<Cart>>>() {
             @Override
@@ -148,11 +220,11 @@ public class OrderActivity extends BaseActivity {
                 onActivityLoadingFailed();
             }
         });
+    }
 
-        getTimeList();
+    private void getCouplist() {
 
-
-        final Call<BaseModel<ArrayList<Coupon>>> callCoup = ApiInstant.getInstant().getCouponByUid(AppApplication.apptype, AppApplication.token);
+        Call<BaseModel<ArrayList<Coupon>>> callCoup = ApiInstant.getInstant().getCouponByUid(AppApplication.apptype, AppApplication.token);
         callCoup.enqueue(new ApiCallback<BaseModel<ArrayList<Coupon>>>() {
             @Override
             public void onSucssce(BaseModel<ArrayList<Coupon>> arrayListBaseModel) {
@@ -188,7 +260,6 @@ public class OrderActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
         startActivityLoading();
     }
 
@@ -202,12 +273,37 @@ public class OrderActivity extends BaseActivity {
 
         for (Cart cart : list) {
             if (cart.flag) {
-                int n = (int) Float.parseFloat(cart.inumber);
-                Float f = Float.parseFloat(cart.iprice);
+                String s=cart.inumber;
+                if(TextUtils.isEmpty(s)){
+                    s="0.0";
+                }
+                String ss=cart.iprice;
+                if(TextUtils.isEmpty(ss)){
+                    ss="0.0";
+                }
+                int n = (int) Float.parseFloat(s);
+                Float f = Float.parseFloat(ss);
                 total += n * f;
             }
         }
+        return total;
+    }
+    private Float getTotalPPrice(ArrayList<Product> list) {
+        Float total = 0.0f;
 
+        for (Product product : list) {
+                String s=product.count;
+                if(TextUtils.isEmpty(s)){
+                    s="0.0";
+                }
+                String ss=product.fprice;
+                if(TextUtils.isEmpty(ss)){
+                    ss="0.0";
+                }
+                int n = (int) Float.parseFloat(s);
+                Float f = Float.parseFloat(ss);
+                total += n * f;
+        }
         return total;
     }
 
@@ -306,34 +402,64 @@ public class OrderActivity extends BaseActivity {
                     return;
                 }
 
-                String pass = add_cart_add_passwrod.getText().toString().trim();
-                if (payTape.equals("3")) {
-                    if (TextUtils.isEmpty(pass)) {
-                        ToastUitl.showToast("请输入交易密码");
-                        return;
-                    }
-                } else {
-                    pass = "";
-                }
 
                 String beizhu = order_beizhu_text.getText().toString().trim();
 
-                Call<BaseModel<Order>> call = ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
-                        ids, AppApplication.address.iuseraddressid, payTape, timeTape, beizhu, couponId, pass, AppApplication.token);
+                if(TextUtils.isEmpty(beizhu)){
+                    beizhu="";
+                }
 
-                call.enqueue(new ApiCallback<BaseModel<Order>>() {
-                    @Override
-                    public void onSucssce(BaseModel<Order> baseModel) {
-                        ToastUitl.showToast("订单提交成功");
-                        EventBus.getDefault().post(new Extendedinfo());
-                    }
-
-                    @Override
-                    public void onFailure() {
-
-                    }
-                });
+                if(ids.equals("-1")){
+                    saveByCode(beizhu);
+                }else {
+                    saveOrder(beizhu);
+                }
                 break;
         }
+    }
+
+    private void saveByCode(String beizhu) {
+        Call<BaseModel> call=ApiInstant.getInstant().saveProductCode(AppApplication.apptype,AppApplication.shopid,AppApplication.address.iuseraddressid,timeTape,beizhu,code,AppApplication.token);
+            call.enqueue(new ApiCallback<BaseModel>() {
+                @Override
+                public void onSucssce(BaseModel baseModel) {
+                    ToastUitl.showToast("订单提交成功");
+                    EventBus.getDefault().post(new Extendedinfo());
+                }
+
+                @Override
+                public void onFailure() {
+
+                }
+            });
+    }
+
+    private void saveOrder(String beizhu) {
+
+        String pass = add_cart_add_passwrod.getText().toString().trim();
+        if (payTape.equals("3")) {
+            if (TextUtils.isEmpty(pass)) {
+                ToastUitl.showToast("请输入交易密码");
+                return;
+            }
+        } else {
+            pass = "";
+        }
+
+        Call<BaseModel<Order>> call = ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
+                ids, AppApplication.address.iuseraddressid, payTape, timeTape, beizhu, couponId, pass, AppApplication.token);
+
+        call.enqueue(new ApiCallback<BaseModel<Order>>() {
+            @Override
+            public void onSucssce(BaseModel<Order> baseModel) {
+                ToastUitl.showToast("订单提交成功");
+                EventBus.getDefault().post(new Extendedinfo());
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
     }
 }

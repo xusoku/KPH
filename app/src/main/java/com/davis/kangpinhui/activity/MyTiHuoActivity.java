@@ -4,12 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.api.ApiCallback;
+import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.util.ToastUitl;
+
+import org.w3c.dom.Text;
+
+import retrofit2.Call;
 
 public class MyTiHuoActivity extends BaseActivity {
 
@@ -56,5 +66,33 @@ public class MyTiHuoActivity extends BaseActivity {
     @Override
     public void doClick(View view) {
 
+        switch (view.getId()){
+            case R.id.ti_huo_tv:
+                final String string=ti_huo_et.getText().toString().trim();
+                if(TextUtils.isEmpty(string)){
+                    ToastUitl.showToast("请输入提货码");
+                    return;
+                }
+
+                Call<BaseModel> call= ApiInstant.getInstant().checkquancode(AppApplication.apptype,
+                        AppApplication.shopid,string,AppApplication.token);
+
+                call.enqueue(new ApiCallback<BaseModel>() {
+                    @Override
+                    public void onSucssce(BaseModel baseModel) {
+
+                        OrderActivity.jumpOrderActivity(MyTiHuoActivity.this,"-1",string);
+                    }
+                    @Override
+                    public void onFailure() {
+
+                    }
+                });
+
+                break;
+        }
+
     }
+
+
 }

@@ -349,7 +349,7 @@ public interface ApiService {
 
     //23根据提货券，获取商品数据
     @GET("product/getbyquancode.do")
-    Call<BaseModel> getProductByCode(
+    Call<BaseModel<ArrayList<Product>>> getProductByCode(
             @Query("apptype") String apptype,
             @Query("shopid") String shopid,
             @Query("code") String code,
