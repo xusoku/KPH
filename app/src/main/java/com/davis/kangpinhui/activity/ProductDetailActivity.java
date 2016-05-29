@@ -380,7 +380,7 @@ public class ProductDetailActivity extends BaseActivity {
     public void setcartNumber() {
         String number = AppApplication.getCartcount();
         if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0"))
-            backgroundDefaultBadge.setText(number);
+            backgroundDefaultBadge.setText((int)Float.parseFloat(number)+"");
     }
 
     public View newFlowTagView(final String tag, final int i) {

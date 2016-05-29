@@ -12,13 +12,18 @@
         android:layout_marginTop="@dimen/common_measure_20dp"
         android:layout_marginLeft="@dimen/common_measure_10dp"
         android:layout_marginBottom="@dimen/common_measure_10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:textSize="@dimen/text_size_17"
         android:textStyle="bold"
         android:textColor="@color/black"/>
     <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:id="@+id/recharge_letterhead"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_65dp"
         android:layout_marginRight="@dimen/common_measure_10dp"
+        android:clickable="true"
+        android:onClick="doClick"
         android:layout_marginLeft="@dimen/common_measure_10dp"
         android:drawableRight="@mipmap/ic_nearby"
         android:textColor="@color/black"
@@ -41,7 +46,10 @@
         android:textStyle="bold"
         android:textColor="@color/black"/>
     <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:id="@+id/recharge_price"
         android:layout_width="match_parent"
+        android:clickable="true"
+        android:onClick="doClick"
         android:layout_height="@dimen/common_measure_65dp"
         android:layout_marginRight="@dimen/common_measure_10dp"
         android:layout_marginLeft="@dimen/common_measure_10dp"
@@ -64,18 +72,22 @@
         android:textStyle="bold"
         android:textColor="@color/black"/>
     <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:id="@+id/recharge_pay"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_65dp"
         android:layout_marginRight="@dimen/common_measure_10dp"
         android:layout_marginLeft="@dimen/common_measure_10dp"
         android:textColor="@color/black"
+        android:clickable="true"
+        android:onClick="doClick"
         android:textSize="@dimen/text_size_17"
         android:background="@drawable/bg_flow_tag_unselect"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/common_measure_10dp"
-        android:text="在线支付"/>
+        android:text="在线支付 微信支付"/>
 
-    <com.davis.kangpinhui.views.CustomTypefaceTextView
+    <com.davis.kangpinhui.views.CustomTypefaceEditText
+        android:id="@+id/recharge_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_65dp"
         android:layout_marginTop="@dimen/common_measure_20dp"
@@ -102,6 +114,7 @@
         android:layout_height="@dimen/common_measure_65dp">
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/recharge_price_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_measure_65dp"
             android:layout_marginLeft="@dimen/common_measure_10dp"
@@ -111,8 +124,9 @@
             android:text="总金额：¥500"/>
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/recharge_commit"
             android:layout_width="wrap_content"
-            android:background="@color/colormain"
+            android:background="@drawable/bg_miancolor_unselect"
             android:text="提交订单"
             android:textStyle="bold"
             android:padding="@dimen/common_measure_10dp"
@@ -120,6 +134,8 @@
             android:textSize="@dimen/text_size_17"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/common_measure_10dp"
+            android:clickable="true"
+            android:onClick="doClick"
             android:gravity="center"
             android:layout_alignParentRight="true"
             android:layout_height="wrap_content" />
