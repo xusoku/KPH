@@ -273,6 +273,7 @@ public interface ApiService {
             @Query("sendtime") String sendtime,
             @Query("sremark") String sremark,
             @Query("couponid") String couponid,
+            @Query("password") String password,
             @Query("token") String token
     );
 

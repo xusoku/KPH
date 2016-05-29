@@ -51,7 +51,7 @@ public class TwoWheelOptions<T> {
 		if (mOptions2Items != null)
 			wv_option2.setAdapter(new ArrayWheelAdapter(mOptions2Items.get(0)));// 设置显示数据
 		wv_option2.setCurrentItem(wv_option1.getCurrentItem());// 初始化时显示的数据
-		int textSize = 25;
+		int textSize = 18;
 
 		wv_option1.setTextSize(textSize);
 		wv_option2.setTextSize(textSize);

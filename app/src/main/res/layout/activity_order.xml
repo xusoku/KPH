@@ -120,6 +120,33 @@
                         android:textSize="@dimen/text_size_11" />
                 </RelativeLayout>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/add_cart_add_passwrod_linear"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_measure_80dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_measure_15dp"
+                    android:background="@color/colorlightgray" />
+
+                <RelativeLayout
+                    android:onClick="doClick"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:id="@+id/add_cart_add_passwrod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/common_measure_15dp"
+                        android:hint="请输入卡号密码"
+                        android:textSize="@dimen/text_size_17" />
+
+                </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

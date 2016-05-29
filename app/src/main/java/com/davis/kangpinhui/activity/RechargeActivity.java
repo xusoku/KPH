@@ -81,7 +81,7 @@ public class RechargeActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==resultCode){
+        if(data!=null&&requestCode==resultCode){
             address= (Address) data.getSerializableExtra("lerrter");
             recharge_letterhead.setText(address.slock);
         }

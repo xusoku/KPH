@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
@@ -43,27 +44,30 @@ import view.TwoPickerView;
 public class OrderActivity extends BaseActivity {
 
 
-    private TextView order_number_text,order_paytype_text,order_paytype_time,order_paytypecoup_text;
+    private TextView order_number_text, order_paytype_text, order_paytype_time, order_paytypecoup_text;
 
-    private TextView order_address_text,order_address_phone,order_address_pepole;
+    private TextView order_address_text, order_address_phone, order_address_pepole, add_cart_add_passwrod;
 
     private EditText order_beizhu_text;
 
+    private LinearLayout add_cart_add_passwrod_linear;
+
     private StretchedListView order_address_lst;
 
-    private String ids="";
+    private String ids = "";
 
-    private  ArrayList<Cart> list;
-    private  ArrayList<TakeGoodsdate> takeGoodsdateArrayList;
-    private  ArrayList<Coupon> couponArrayList;
+    private ArrayList<Cart> list;
+    private ArrayList<TakeGoodsdate> takeGoodsdateArrayList;
+    private ArrayList<Coupon> couponArrayList;
 
     private TwoPickerView twoPickerView;
 
-    public static void jumpOrderActivity(Context cot,String ids) {
+    public static void jumpOrderActivity(Context cot, String ids) {
         Intent it = new Intent(cot, OrderActivity.class);
         it.putExtra("ids", ids);
         cot.startActivity(it);
     }
+
     @Override
     protected int setLayoutView() {
         return R.layout.activity_order;
@@ -72,11 +76,11 @@ public class OrderActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(AppApplication.address!=null){
+        if (AppApplication.address != null) {
             order_address_text.setText(AppApplication.address.saddress);
             order_address_phone.setText(AppApplication.address.smobile);
             order_address_pepole.setText(AppApplication.address.saddressname);
-        }else{
+        } else {
             order_address_text.setText("暂无地址");
             order_address_phone.setText("");
             order_address_pepole.setText("");
@@ -85,26 +89,28 @@ public class OrderActivity extends BaseActivity {
 
     @Override
     protected void initVariable() {
-        ids=getIntent().getStringExtra("ids");
-        list=new ArrayList<>();
-        takeGoodsdateArrayList=new ArrayList<>();
-        couponArrayList=new ArrayList<>();
+        ids = getIntent().getStringExtra("ids");
+        list = new ArrayList<>();
+        takeGoodsdateArrayList = new ArrayList<>();
+        couponArrayList = new ArrayList<>();
     }
 
     @Override
     protected void findViews() {
         showTopBar();
         setTitle("订单结算");
-        twoPickerView=new TwoPickerView(this);
-        order_number_text=$(R.id.order_number_text);
-        order_paytype_text=$(R.id.order_paytype_text);
-        order_paytype_time=$(R.id.order_paytype_time);
-        order_paytypecoup_text=$(R.id.order_paytypecoup_text);
-        order_address_text=$(R.id.order_address_text);
-        order_address_phone=$(R.id.order_address_phone);
-        order_address_pepole=$(R.id.order_address_pepole);
-        order_beizhu_text=$(R.id.order_beizhu_text);
-        order_address_lst=$(R.id.order_address_lst);
+        twoPickerView = new TwoPickerView(this);
+        order_number_text = $(R.id.order_number_text);
+        order_paytype_text = $(R.id.order_paytype_text);
+        order_paytype_time = $(R.id.order_paytype_time);
+        order_paytypecoup_text = $(R.id.order_paytypecoup_text);
+        order_address_text = $(R.id.order_address_text);
+        order_address_phone = $(R.id.order_address_phone);
+        order_address_pepole = $(R.id.order_address_pepole);
+        order_beizhu_text = $(R.id.order_beizhu_text);
+        order_address_lst = $(R.id.order_address_lst);
+        add_cart_add_passwrod = $(R.id.add_cart_add_passwrod);
+        add_cart_add_passwrod_linear = $(R.id.add_cart_add_passwrod_linear);
 
     }
 
@@ -146,16 +152,15 @@ public class OrderActivity extends BaseActivity {
         getTimeList();
 
 
-
-        final Call<BaseModel<ArrayList<Coupon>>> callCoup=ApiInstant.getInstant().getCouponByUid(AppApplication.apptype,AppApplication.token);
+        final Call<BaseModel<ArrayList<Coupon>>> callCoup = ApiInstant.getInstant().getCouponByUid(AppApplication.apptype, AppApplication.token);
         callCoup.enqueue(new ApiCallback<BaseModel<ArrayList<Coupon>>>() {
             @Override
             public void onSucssce(BaseModel<ArrayList<Coupon>> arrayListBaseModel) {
                 couponArrayList.addAll(arrayListBaseModel.object);
-                Coupon coupon=new Coupon();
-                coupon.usercouponid="";
-                coupon.context="不使用优惠券";
-                couponArrayList.add(0,coupon);
+                Coupon coupon = new Coupon();
+                coupon.usercouponid = "";
+                coupon.context = "不使用优惠券";
+                couponArrayList.add(0, coupon);
             }
 
             @Override
@@ -165,8 +170,8 @@ public class OrderActivity extends BaseActivity {
         });
     }
 
-   private void getTimeList(){
-        Call<BaseModel<ArrayList<TakeGoodsdate>>> calltime=ApiInstant.getInstant().getTakegoodtimelist(AppApplication.apptype,
+    private void getTimeList() {
+        Call<BaseModel<ArrayList<TakeGoodsdate>>> calltime = ApiInstant.getInstant().getTakegoodtimelist(AppApplication.apptype,
                 AppApplication.shopid, ids, AppApplication.token);
         calltime.enqueue(new ApiCallback<BaseModel<ArrayList<TakeGoodsdate>>>() {
             @Override
@@ -180,6 +185,7 @@ public class OrderActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void initData() {
 
@@ -190,6 +196,7 @@ public class OrderActivity extends BaseActivity {
     protected void setListener() {
 
     }
+
     private Float getTotalPrice(ArrayList<Cart> list) {
         Float total = 0.0f;
 
@@ -204,44 +211,45 @@ public class OrderActivity extends BaseActivity {
         return total;
     }
 
-    private String payTape="3";
-    private String couponId="";
-    private String timeTape="";
+    private String payTape = "3";
+    private String couponId = "";
+    private String timeTape = "";
+
     @Override
     public void doClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.order_coup_relatie:
-                couponId="";
+                couponId = "";
 
-                if(couponArrayList.size()==0){
+                if (couponArrayList.size() == 0) {
                     ToastUitl.showToast("暂无优惠券");
                     return;
                 }
                 final CharSequence[] charSequencess = new CharSequence[couponArrayList.size()];
                 for (int i = 0; i < couponArrayList.size(); i++) {
-                    charSequencess[i]=couponArrayList.get(i).context;
+                    charSequencess[i] = couponArrayList.get(i).context;
                 }
-                AlertDialog.Builder builde= new AlertDialog.Builder(this);
+                AlertDialog.Builder builde = new AlertDialog.Builder(this);
                 builde.setTitle("优惠券列表")
                         .setItems(charSequencess, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 order_paytypecoup_text.setText(charSequencess[which].toString());
-                                couponId=couponArrayList.get(which).usercouponid;
+                                couponId = couponArrayList.get(which).usercouponid;
                             }
                         }).show();
                 break;
             case R.id.order_paytime_relative:
-                timeTape="";
-                if(takeGoodsdateArrayList.size()==0){
+                timeTape = "";
+                if (takeGoodsdateArrayList.size() == 0) {
                     ToastUitl.showToast("请等待");
                     getTimeList();
                     return;
                 }
-                 final ArrayList<String> list=new ArrayList<String>();
-                 final ArrayList<ArrayList<String>> arrayLists=new ArrayList<ArrayList<String>>();
-                for (TakeGoodsdate takeGoodsdate : takeGoodsdateArrayList){
+                final ArrayList<String> list = new ArrayList<String>();
+                final ArrayList<ArrayList<String>> arrayLists = new ArrayList<ArrayList<String>>();
+                for (TakeGoodsdate takeGoodsdate : takeGoodsdateArrayList) {
                     list.add(takeGoodsdate.date);
                     arrayLists.add(takeGoodsdate.time);
                 }
@@ -254,7 +262,7 @@ public class OrderActivity extends BaseActivity {
                     @Override
                     public void onOptionsSelect(int options1, int option2) {
 
-                        timeTape=(list.get(options1) + " " + arrayLists.get(options1).get(option2));
+                        timeTape = (list.get(options1) + " " + arrayLists.get(options1).get(option2));
                         order_paytype_time.setText(timeTape);
                     }
                 });
@@ -263,39 +271,55 @@ public class OrderActivity extends BaseActivity {
             case R.id.order_paytype_relative:
                 //付款方式  3:余额支付  2：货到付款 0：支付宝  1：财付通  4微信支付
 
-                final CharSequence[] charSequences = {"余额支付","货到付款","支付宝支付","微信支付"};
-                final String[] type = {"3","2","0","4"};
-                AlertDialog.Builder builder= new AlertDialog.Builder(this);
+                final CharSequence[] charSequences = {"余额支付", "货到付款", "支付宝支付", "微信支付"};
+                final String[] type = {"3", "2", "0", "4"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
                 builder.setTitle("付款方式")
-                        .setItems(charSequences,new DialogInterface.OnClickListener() {
+                        .setItems(charSequences, new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ToastUitl.showToast(charSequences[which].toString());
-                                payTape=type[which];
+                                payTape = type[which];
                                 order_paytype_text.setText(charSequences[which].toString());
 
+                                if (payTape.equals("3")) {
+                                    add_cart_add_passwrod_linear.setVisibility(View.VISIBLE);
+                                } else {
+                                    add_cart_add_passwrod_linear.setVisibility(View.GONE);
+                                }
                             }
                         }).show();
                 break;
             case R.id.order_address_relative:
-                MyAddressActivity.jumpMyAddressActivity(this,true);
+                MyAddressActivity.jumpMyAddressActivity(this, true);
                 break;
             case R.id.order_list_addlinear:
 
-                if(AppApplication.address==null|| TextUtils.isEmpty(AppApplication.address.iuseraddressid)){
+                if (AppApplication.address == null || TextUtils.isEmpty(AppApplication.address.iuseraddressid)) {
                     ToastUitl.showToast("请选择收货地址");
                     return;
                 }
-                if(TextUtils.isEmpty(timeTape)){
+                if (TextUtils.isEmpty(timeTape)) {
                     ToastUitl.showToast("请选择配送时间");
                     return;
                 }
-                String beizhu=order_beizhu_text.getText().toString().trim();
 
-                Call<BaseModel<Order>> call=ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
-                        ids, AppApplication.address.iuseraddressid, payTape, timeTape, beizhu, couponId, AppApplication.token);
+                String pass = add_cart_add_passwrod.getText().toString().trim();
+                if (payTape.equals("3")) {
+                    if (TextUtils.isEmpty(pass)) {
+                        ToastUitl.showToast("请输入交易密码");
+                        return;
+                    }
+                } else {
+                    pass = "";
+                }
+
+                String beizhu = order_beizhu_text.getText().toString().trim();
+
+                Call<BaseModel<Order>> call = ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
+                        ids, AppApplication.address.iuseraddressid, payTape, timeTape, beizhu, couponId, pass, AppApplication.token);
 
                 call.enqueue(new ApiCallback<BaseModel<Order>>() {
                     @Override
@@ -303,6 +327,7 @@ public class OrderActivity extends BaseActivity {
                         ToastUitl.showToast("订单提交成功");
                         EventBus.getDefault().post(new Extendedinfo());
                     }
+
                     @Override
                     public void onFailure() {
 

@@ -1,5 +1,9 @@
 package com.davis.kangpinhui.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -130,7 +134,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 SettingActivity.jumpSettingActivity(getActivity());
                 break;
             case R.id.mine_kefu:
-                FeedBackActivity.jumpFeedBackActivity(getActivity());
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("联系客服")
+                        .setMessage("客服电话：18516548570")
+                        .setPositiveButton("呼叫", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "18516548570"));
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("取消",null)
+                        .show();
                 break;
             case R.id.mine_ti_huo:
                 MyTiHuoActivity.jumpMyTiHuoActivity(getActivity());
