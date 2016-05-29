@@ -90,7 +90,7 @@ public class AllOrderActivity extends BaseActivity {
             @Override
             public View getIndicatorView(int position) {
                 TextView textView = (TextView) getLayoutInflater().inflate(R.layout.layout_allorder_tab_item, null);
-                textView.setTextSize(CommonManager.dpToPx(20));
+//                textView.setTextSize(CommonManager.dpToPx(20));
                 textView.setText(tabNames[position]);
                 return textView;
             }
@@ -120,7 +120,7 @@ public class AllOrderActivity extends BaseActivity {
             @Override
             public View getIndicatorView(int position) {
                 TextView textView = (TextView) getLayoutInflater().inflate(R.layout.layout_allorder_tab_item, null);
-                textView.setTextSize(CommonManager.dpToPx(20));
+//                textView.setTextSize(CommonManager.dpToPx(20));
                 textView.setText(str[position]);
                 if(position==i){
                     textView.setTextColor(getResources().getColor(R.color.colormain));

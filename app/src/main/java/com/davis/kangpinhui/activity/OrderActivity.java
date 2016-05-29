@@ -215,7 +215,7 @@ public class OrderActivity extends BaseActivity {
                 }
                 AlertDialog.Builder builde= new AlertDialog.Builder(this);
                 builde.setTitle("优惠券列表")
-                        .setItems(charSequencess, new DialogInterface.OnClickListener() {
+                        .setSingleChoiceItems(charSequencess, 0,new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 order_paytypecoup_text.setText(charSequencess[which].toString());
@@ -259,7 +259,7 @@ public class OrderActivity extends BaseActivity {
                 AlertDialog.Builder builder= new AlertDialog.Builder(this);
 
                 builder.setTitle("付款方式")
-                        .setItems(charSequences, new DialogInterface.OnClickListener() {
+                        .setSingleChoiceItems(charSequences, 0,new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

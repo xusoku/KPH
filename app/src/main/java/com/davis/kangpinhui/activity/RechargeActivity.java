@@ -15,11 +15,11 @@ import com.davis.kangpinhui.util.ToastUitl;
 public class RechargeActivity extends BaseActivity {
 
     private String price = "500";
-    private String payTape = "2"; //付款方式  4: '微信'   2:'支付宝'
+    private String payTape = "4"; //付款方式  4: '微信'   2:'支付宝'
 
     final CharSequence[] pricetext = {"500", "1000", "2000"};
-    final CharSequence[] typepaytext = {"在线支付 支付宝支付", "在线支付 微信支付"};
-    final String[] typepay = {"2", "4"};
+    final CharSequence[] typepaytext = { "在线支付 微信支付","在线支付 支付宝支付"};
+    final String[] typepay = {"4","2" };
 
 
     private TextView recharge_letterhead, recharge_price, recharge_pay, recharge_content, recharge_price_text, recharge_commit;
@@ -78,7 +78,7 @@ public class RechargeActivity extends BaseActivity {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
 
                 builder1.setTitle("充值金额")
-                        .setItems(pricetext, new DialogInterface.OnClickListener() {
+                        .setSingleChoiceItems(pricetext,0, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 price = pricetext[which]+"";
@@ -92,7 +92,7 @@ public class RechargeActivity extends BaseActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
                 builder.setTitle("支付方式")
-                        .setItems(typepaytext, new DialogInterface.OnClickListener() {
+                        .setSingleChoiceItems(typepaytext, 0,new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ToastUitl.showToast(typepaytext[which].toString());
