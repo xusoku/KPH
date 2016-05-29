@@ -74,7 +74,8 @@
         <activity android:name=".activity.CouponActivity" />
         <activity android:name=".activity.RechargeActivity" />
         <activity android:name=".activity.LetterheadActivity" />
-        <activity android:name=".activity.RechargeListActivity"></activity>
+        <activity android:name=".activity.RechargeListActivity" />
+        <activity android:name=".activity.RechargeDetailActivity"></activity>
     </application>
 
 </manifest>

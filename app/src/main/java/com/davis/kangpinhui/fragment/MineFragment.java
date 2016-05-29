@@ -14,6 +14,7 @@ import com.davis.kangpinhui.activity.FeedBackActivity;
 import com.davis.kangpinhui.activity.MyAddressActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
 import com.davis.kangpinhui.activity.RechargeActivity;
+import com.davis.kangpinhui.activity.RechargeListActivity;
 import com.davis.kangpinhui.activity.SettingActivity;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
@@ -115,7 +116,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 FeedBackActivity.jumpFeedBackActivity(getActivity());
                 break;
             case R.id.mine_rechange:
-                FeedBackActivity.jumpFeedBackActivity(getActivity());
+                RechargeListActivity.jumpRechargeListActivity(getActivity());
                 break;
             case R.id.mine_setting:
                 SettingActivity.jumpSettingActivity(getActivity());

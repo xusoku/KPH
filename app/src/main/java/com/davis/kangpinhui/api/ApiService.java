@@ -278,7 +278,7 @@ public interface ApiService {
 
     //18 充值列表
     @GET("chongzhi/list.do")
-    Call<BaseModel<Page<Recharge>>> getRechargelist(
+    Call<BaseModel<Page<ArrayList<Recharge>>>> getRechargelist(
             @Query("apptype") String apptype,
             @Query("ipage") String ipage,
             @Query("pagesize") String pagesize,
