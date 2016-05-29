@@ -22,6 +22,7 @@ import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.ProductDetailActivity;
+import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.activity.SearchActivity;
 import com.davis.kangpinhui.activity.ShopActivity;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
@@ -120,7 +121,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         String number=AppApplication.getCartcount();
 
         if(!TextUtils.isEmpty(number)&&!number.equals("0")&&!number.equals("0.0"))
-        backgroundDefaultBadge.setText(number);
+        backgroundDefaultBadge.setText((int)Float.parseFloat(number)+"");
     }
 
     @Override
@@ -263,6 +264,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 activity.change2();
                 break;
             case R.id.index_rechange:
+                RechargeActivity.jumpRechangeActivity(getActivity());
                 break;
             case R.id.index_tuan:
 

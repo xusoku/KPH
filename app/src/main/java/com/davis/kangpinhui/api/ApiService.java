@@ -280,6 +280,8 @@ public interface ApiService {
     @GET("chongzhi/list.do")
     Call<BaseModel<Page<Recharge>>> getRechargelist(
             @Query("apptype") String apptype,
+            @Query("ipage") String ipage,
+            @Query("pagesize") String pagesize,
             @Query("token") String token
     );
 
@@ -301,6 +303,7 @@ public interface ApiService {
     @GET("chongzhi/get.do")
     Call<BaseModel<Recharge>> getRecharge(
             @Query("apptype") String apptype,
+            @Query("shopid") String shopid,
             @Query("ordernum") String ordernum,
             @Query("token") String token
     );

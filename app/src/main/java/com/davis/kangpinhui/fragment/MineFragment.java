@@ -13,6 +13,7 @@ import com.davis.kangpinhui.activity.CouponActivity;
 import com.davis.kangpinhui.activity.FeedBackActivity;
 import com.davis.kangpinhui.activity.MyAddressActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
+import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.activity.SettingActivity;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
@@ -28,7 +29,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private MineCustomLayout mine_allorder;
     private MineCustomLayout mine_feedback_linear, mine_histroy_bill, mine_rechange, mine_setting, mine_kefu, mine_ti_huo, mine_myaddress, mine_mycoup, mine_cart, mine_allorder_sending,
             mine_allorder_unpay;
-    private TextView fragment_mine_name;
+    private TextView fragment_mine_name,fragment_mine_price,fragment_mine_price_info;
 
     @Override
     protected void initVariable() {
@@ -56,6 +57,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mine_cart = $(R.id.mine_cart);
         mine_allorder_sending = $(R.id.mine_allorder_sending);
         mine_allorder_unpay = $(R.id.mine_allorder_unpay);
+        fragment_mine_price = $(R.id.fragment_mine_price);
+        fragment_mine_price_info = $(R.id.fragment_mine_price_info);
     }
 
     @Override
@@ -95,6 +98,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mine_cart.setOnClickListener(this);
         mine_allorder_sending.setOnClickListener(this);
         mine_allorder_unpay.setOnClickListener(this);
+        fragment_mine_price_info.setOnClickListener(this);
+        fragment_mine_price.setOnClickListener(this);
     }
 
     @Override
@@ -135,6 +140,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.mine_allorder_unpay:
                 AllOrderActivity.jumpAllOrderActivity(getActivity(), 1);
+                break;
+            case R.id.fragment_mine_price:
+                RechargeActivity.jumpRechangeActivity(getActivity());
+                break;
+            case R.id.fragment_mine_price_info:
+                RechargeActivity.jumpRechangeActivity(getActivity());
                 break;
         }
     }

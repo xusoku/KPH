@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发票抬头"
+        android:layout_marginTop="@dimen/common_measure_20dp"
+        android:layout_marginLeft="@dimen/common_measure_10dp"
+        android:layout_marginBottom="@dimen/common_measure_10dp"
+        android:textSize="@dimen/text_size_17"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_65dp"
+        android:layout_marginRight="@dimen/common_measure_10dp"
+        android:layout_marginLeft="@dimen/common_measure_10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_17"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_measure_10dp"
+        android:background="@drawable/bg_flow_tag_unselect"
+        android:text="不开具发票"/>
+
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发票寄邮地址"
+        android:layout_marginTop="@dimen/common_measure_20dp"
+        android:layout_marginLeft="@dimen/common_measure_10dp"
+        android:layout_marginBottom="@dimen/common_measure_10dp"
+
+        android:textSize="@dimen/text_size_17"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_65dp"
+        android:layout_marginRight="@dimen/common_measure_10dp"
+        android:layout_marginLeft="@dimen/common_measure_10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_17"
+        android:background="@drawable/bg_flow_tag_unselect"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_measure_10dp"
+        android:text="500"/>
+
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发票收件人"
+        android:layout_marginTop="@dimen/common_measure_20dp"
+        android:layout_marginLeft="@dimen/common_measure_10dp"
+        android:layout_marginBottom="@dimen/common_measure_10dp"
+
+        android:textSize="@dimen/text_size_17"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_65dp"
+        android:layout_marginRight="@dimen/common_measure_10dp"
+        android:layout_marginLeft="@dimen/common_measure_10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_17"
+        android:background="@drawable/bg_flow_tag_unselect"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_measure_10dp"
+        android:text="联系方式"/>
+
+
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="联系方式"
+        android:layout_marginTop="@dimen/common_measure_20dp"
+        android:layout_marginLeft="@dimen/common_measure_10dp"
+        android:layout_marginBottom="@dimen/common_measure_10dp"
+
+        android:textSize="@dimen/text_size_17"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_65dp"
+        android:layout_marginRight="@dimen/common_measure_10dp"
+        android:layout_marginLeft="@dimen/common_measure_10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_17"
+        android:background="@drawable/bg_flow_tag_unselect"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_measure_10dp"
+        android:hint="请填写订单备注（选填）"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:background="@color/colormain"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_17"
+        android:gravity="center"
+        android:layout_height="@dimen/common_measure_65dp" />
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:text="暂不需开具发票"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_17"
+        android:gravity="center"
+        android:layout_height="@dimen/common_measure_65dp" />
+
+</LinearLayout>

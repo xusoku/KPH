@@ -71,7 +71,10 @@
             android:theme="@style/CartTheme" />
         <activity android:name=".activity.OrderActivity" />
         <activity android:name=".activity.AllOrderActivity" />
-        <activity android:name=".activity.CouponActivity"></activity>
+        <activity android:name=".activity.CouponActivity" />
+        <activity android:name=".activity.RechargeActivity" />
+        <activity android:name=".activity.LetterheadActivity" />
+        <activity android:name=".activity.RechargeListActivity"></activity>
     </application>
 
 </manifest>
