@@ -308,6 +308,14 @@ public interface ApiService {
             @Query("token") String token
     );
 
+    //18.3 取消充值订单
+    @GET("chongzhi/cancel.do")
+    Call<BaseModel> cancelRecharge(
+            @Query("apptype") String apptype,
+            @Query("ordernum") String ordernum,
+            @Query("token") String token
+    );
+
     //19 首页
     @GET("common/index.do")
     Call<BaseModel<Index>> getIndex(

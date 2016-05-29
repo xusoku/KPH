@@ -21,6 +21,7 @@ import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.CommonManager;
+import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreListView;
 import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 
@@ -67,7 +68,7 @@ public class RechargeListActivity extends BaseActivity {
 
         adapter = new CommonBaseAdapter<Recharge>(this, list, R.layout.activity_recharge_list_item) {
             @Override
-            public void convert(ViewHolder holder, Recharge itemData, int position) {
+            public void convert(ViewHolder holder, final Recharge itemData, int position) {
 
 //                srechargetype ：//付款方式  0:'现金' 4: '微信'   2:'支付宝'
 //
@@ -99,6 +100,28 @@ public class RechargeListActivity extends BaseActivity {
                 holder.setText(R.id.recharge_item_code_text, itemData.schargenumber);
                 holder.setText(R.id.recharge_item_price_text, "¥"+itemData.fmoney);
                 holder.setText(R.id.recharge_item_type_text, stype);
+
+
+                holder.getView(R.id.recharge_item_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Call<BaseModel> call=ApiInstant.getInstant().cancelRecharge(AppApplication.apptype,itemData.schargenumber,AppApplication.token);
+
+                        call.enqueue(new ApiCallback<BaseModel>() {
+                            @Override
+                            public void onSucssce(BaseModel baseModel) {
+                                ToastUitl.showToast("取消成功");
+                                initData();
+                                list.clear();
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        });
+                    }
+                });
 
             }
         };

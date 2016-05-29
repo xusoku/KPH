@@ -4,15 +4,18 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.Model.Address;
+import com.davis.kangpinhui.Model.Recharge;
 import com.davis.kangpinhui.Model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
@@ -80,7 +83,7 @@ public class RechargeActivity extends BaseActivity {
 
         if(requestCode==resultCode){
             address= (Address) data.getSerializableExtra("lerrter");
-            LogUtils.e("address",address.slock);
+            recharge_letterhead.setText(address.slock);
         }
     }
 
@@ -112,7 +115,7 @@ public class RechargeActivity extends BaseActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ToastUitl.showToast(typepaytext[which].toString());
-                                payTape = typepaytext[which].toString();
+                                payTape = typepay[which].toString();
                                 recharge_pay.setText(typepaytext[which].toString());
 
                             }
@@ -120,8 +123,27 @@ public class RechargeActivity extends BaseActivity {
                 break;
             case R.id.recharge_commit:
 
-//                Call<BaseModel> call= ApiInstant.getInstant().saveRecharge(AppApplication.apptype,
-//                        )
+                String remark=recharge_content.getText().toString().trim();
+                if(TextUtils.isEmpty(remark)){
+                    remark="";
+                }
+                if(address==null){
+                    address=new Address();
+                }
+                Call<BaseModel<Recharge>> call= ApiInstant.getInstant().saveRecharge(AppApplication.apptype,
+                        address.slock,payTape,price,remark,address.saddressname,address.smobile,address.saddress,AppApplication.token);
+
+                call.enqueue(new ApiCallback<BaseModel<Recharge>>() {
+                    @Override
+                    public void onSucssce(BaseModel<Recharge> rechargeBaseModel) {
+
+                        ToastUitl.showToast("充值成功");
+                    }
+                    @Override
+                    public void onFailure() {
+
+                    }
+                });
                 break;
         }
 

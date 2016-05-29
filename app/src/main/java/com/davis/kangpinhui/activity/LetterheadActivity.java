@@ -102,6 +102,7 @@ public class LetterheadActivity extends BaseActivity {
                 Intent it=new Intent(this,RechargeActivity.class);
                 it.putExtra("lerrter", address);
                 setResult(0,it);
+                finish();
                 break;
             case R.id.lerrerhead_cancel:
                 finish();

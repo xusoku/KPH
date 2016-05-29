@@ -100,6 +100,11 @@ public class CartListActivity extends BaseActivity {
                         startActivityLoading();
                     }
                 });
+
+
+                if (list.size() == 0) {
+                    onActivityFirstLoadingNoData();
+                }
             }
 
             @Override

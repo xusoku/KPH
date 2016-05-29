@@ -155,10 +155,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/common_measure_10dp"
-                android:background="@drawable/bg_flow_tag_unselect"
                 android:padding="@dimen/common_measure_10dp"
                 android:text="取消订单"
-                android:textColor="@color/colorgray"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:background="@color/colorlightgray"
                 android:textSize="@dimen/text_size_17" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView

@@ -191,7 +191,7 @@ public class ProductDetailActivity extends BaseActivity {
                             if (TextUtils.isEmpty(number) || number.equals("0.0")) {
                                 number = "0";
                             }
-                            int n = Integer.valueOf(number);
+                            int n = (int)Float.parseFloat(number);
                             n++;
                             backgroundDefaultBadge.setText(n + "");
 
