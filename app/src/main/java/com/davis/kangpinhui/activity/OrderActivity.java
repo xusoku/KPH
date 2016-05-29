@@ -147,11 +147,15 @@ public class OrderActivity extends BaseActivity {
 
 
 
-        Call<BaseModel<ArrayList<Coupon>>> callCoup=ApiInstant.getInstant().getCouponByUid(AppApplication.apptype,AppApplication.token);
+        final Call<BaseModel<ArrayList<Coupon>>> callCoup=ApiInstant.getInstant().getCouponByUid(AppApplication.apptype,AppApplication.token);
         callCoup.enqueue(new ApiCallback<BaseModel<ArrayList<Coupon>>>() {
             @Override
             public void onSucssce(BaseModel<ArrayList<Coupon>> arrayListBaseModel) {
                 couponArrayList.addAll(arrayListBaseModel.object);
+                Coupon coupon=new Coupon();
+                coupon.usercouponid="";
+                coupon.context="不使用优惠券";
+                couponArrayList.add(0,coupon);
             }
 
             @Override
@@ -209,6 +213,11 @@ public class OrderActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.order_coup_relatie:
                 couponId="";
+
+                if(couponArrayList.size()==0){
+                    ToastUitl.showToast("暂无优惠券");
+                    return;
+                }
                 final CharSequence[] charSequencess = new CharSequence[couponArrayList.size()];
                 for (int i = 0; i < couponArrayList.size(); i++) {
                     charSequencess[i]=couponArrayList.get(i).context;

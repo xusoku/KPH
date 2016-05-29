@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
@@ -30,6 +31,7 @@ public class CartListActivity extends BaseActivity {
     private TextView add_cart_number_text;
     private LinearLayout add_cart_list_addlinear;
     private CartListAdapter adapter;
+    private RelativeLayout add_cart_relative;
 
     ArrayList<Cart> list;
 
@@ -58,6 +60,7 @@ public class CartListActivity extends BaseActivity {
         showTopBar();
         setTitle("购物车");
         cart_listvew = $(R.id.content);
+        add_cart_relative = $(R.id.add_cart_relative);
         add_cart_number_text = $(R.id.add_cart_number_text);
         add_cart_list_addlinear = $(R.id.add_cart_list_addlinear);
         list = new ArrayList<>();
@@ -104,6 +107,7 @@ public class CartListActivity extends BaseActivity {
 
                 if (list.size() == 0) {
                     onActivityFirstLoadingNoData();
+                    add_cart_relative.setVisibility(View.GONE);
                 }
             }
 

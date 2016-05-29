@@ -18,6 +18,7 @@
         android:dividerHeight="@dimen/common_measure_10dp"></ListView>
 
     <RelativeLayout
+        android:id="@+id/add_cart_relative"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_70dp"
         android:background="@color/colorgray">

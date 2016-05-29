@@ -2,6 +2,7 @@ package com.davis.kangpinhui.fragment;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
@@ -32,6 +33,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             mine_allorder_unpay;
     private TextView fragment_mine_name,fragment_mine_price,fragment_mine_price_info;
 
+    private ImageView fragment_mine_photo;
+
     @Override
     protected void initVariable() {
 
@@ -46,6 +49,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     protected void findViews(View view) {
 
         fragment_mine_name = $(R.id.fragment_mine_name);
+        fragment_mine_photo = $(R.id.fragment_mine_photo);
         mine_allorder = $(R.id.mine_allorder);
         mine_feedback_linear = $(R.id.mine_feedback_linear);
         mine_histroy_bill = $(R.id.mine_histroy_bill);
@@ -82,6 +86,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         if(mine_allorder_unpay!=null) {
             mine_allorder_unpay.setText(UtilText.getminenumber("待付款  (" + AppApplication.getOrderunpaid() + ")"));
             mine_allorder_sending.setText(UtilText.getminenumber("配送中 (" + AppApplication.getOrdersending() + ")"));
+            mine_cart.setText(UtilText.getminenumber("购物车 (" + (int)Float.parseFloat(AppApplication.getCartcount()) + ")"));
+            mine_mycoup.setText(("我的优惠券 (" + AppApplication.getCouponcount() + "张)"));
         }
     }
 
@@ -101,6 +107,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mine_allorder_unpay.setOnClickListener(this);
         fragment_mine_price_info.setOnClickListener(this);
         fragment_mine_price.setOnClickListener(this);
+        fragment_mine_photo.setOnClickListener(this);
+        fragment_mine_name.setOnClickListener(this);
     }
 
     @Override
@@ -147,6 +155,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.fragment_mine_price_info:
                 RechargeActivity.jumpRechangeActivity(getActivity());
+                break;
+            case R.id.fragment_mine_photo:
+                AppApplication.isLogin(getActivity());
+                break;
+            case R.id.fragment_mine_name:
+                AppApplication.isLogin(getActivity());
                 break;
         }
     }

@@ -10,12 +10,12 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_180dp"
+        android:layout_height="@dimen/common_measure_150dp"
         android:background="@color/colormain">
         <ImageView
             android:id="@+id/fragment_mine_photo"
-            android:layout_width="@dimen/common_measure_100dp"
-            android:layout_height="@dimen/common_measure_100dp"
+            android:layout_width="@dimen/common_measure_80dp"
+            android:layout_height="@dimen/common_measure_80dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/common_measure_20dp"
             android:src="@mipmap/zhifubao_icon"/>
