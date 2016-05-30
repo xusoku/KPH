@@ -102,4 +102,6 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-core:4.48'
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile project(':pickview')
+    compile files('libs/AMap_Location_V2.5.0_20160526.jar')
+    compile files('libs/AMap_2DMap_V2.9.0_20160525.jar')
 }
