@@ -70,13 +70,20 @@
             android:name=".activity.CartListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CartTheme" />
-        <activity android:name=".activity.OrderActivity" />
-        <activity android:name=".activity.AllOrderActivity" />
-        <activity android:name=".activity.CouponActivity" />
-        <activity android:name=".activity.RechargeActivity" />
-        <activity android:name=".activity.LetterheadActivity" />
-        <activity android:name=".activity.RechargeListActivity" />
-        <activity android:name=".activity.RechargeDetailActivity"></activity>
+        <activity android:name=".activity.OrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AllOrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.CouponActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RechargeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LetterheadActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RechargeListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RechargeDetailActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
