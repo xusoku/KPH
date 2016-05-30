@@ -95,6 +95,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.PolygonActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.PoiKeywordSearchActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

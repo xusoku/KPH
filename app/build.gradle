@@ -104,4 +104,5 @@ dependencies {
     compile project(':pickview')
     compile files('libs/AMap_Location_V2.5.0_20160526.jar')
     compile files('libs/AMap_2DMap_V2.9.0_20160525.jar')
+    compile files('libs/AMap_Search_V3.2.1_20160308.jar')
 }

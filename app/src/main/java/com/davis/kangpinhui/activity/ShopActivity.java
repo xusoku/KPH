@@ -133,7 +133,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener, 
         startActivityLoading();
     }
 
-    public void getBindView(ArrayList<Shop> list){
+    public void getBindView(final ArrayList<Shop> list){
          adapter= new CommonBaseAdapter<Shop>(this, list, R.layout.activity_shop_item) {
             @Override
             public void convert(ViewHolder holder, Shop itemData, int position) {
@@ -145,7 +145,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener, 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this,list.get(position));
             }
         });
     }
