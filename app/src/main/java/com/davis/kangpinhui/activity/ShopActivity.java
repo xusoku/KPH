@@ -72,6 +72,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onRefresh() {
                 CommonManager.setRefreshingState(shop_swiperefresh,true);
+                list.clear();
                 getData();
             }
         });
