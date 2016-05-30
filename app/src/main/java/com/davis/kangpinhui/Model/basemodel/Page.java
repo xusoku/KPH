@@ -1,4 +1,4 @@
-package com.davis.kangpinhui.Model.basemodel;
+package com.davis.kangpinhui.model.basemodel;
 
 /**
  * Created by davis on 16/5/18.

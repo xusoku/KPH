@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/ti_huo_tv"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/common_measure_60dp"
+            android:layout_height="@dimen/common_measure_55dp"
             android:layout_margin="@dimen/common_measure_20dp"
             android:gravity="center"
             android:background="@drawable/bg_miancolor_unselect"

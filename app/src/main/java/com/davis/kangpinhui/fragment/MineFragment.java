@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.UserInfo;
+import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.AllOrderActivity;
 import com.davis.kangpinhui.activity.CartListActivity;
@@ -23,7 +23,6 @@ import com.davis.kangpinhui.activity.RechargeListActivity;
 import com.davis.kangpinhui.activity.SettingActivity;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
-import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.MineCustomLayout;
 

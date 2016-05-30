@@ -1,24 +1,24 @@
 package com.davis.kangpinhui.api;
 
 
-import com.davis.kangpinhui.Model.Address;
-import com.davis.kangpinhui.Model.Cart;
-import com.davis.kangpinhui.Model.Category;
-import com.davis.kangpinhui.Model.Consume;
-import com.davis.kangpinhui.Model.Coupon;
-import com.davis.kangpinhui.Model.Extendedinfo;
-import com.davis.kangpinhui.Model.Index;
-import com.davis.kangpinhui.Model.Order;
-import com.davis.kangpinhui.Model.OrderDetail;
-import com.davis.kangpinhui.Model.Product;
-import com.davis.kangpinhui.Model.ProductDetail;
-import com.davis.kangpinhui.Model.Recharge;
-import com.davis.kangpinhui.Model.Shop;
-import com.davis.kangpinhui.Model.TakeGoodsdate;
-import com.davis.kangpinhui.Model.Topic;
-import com.davis.kangpinhui.Model.UserInfo;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
-import com.davis.kangpinhui.Model.basemodel.Page;
+import com.davis.kangpinhui.model.Address;
+import com.davis.kangpinhui.model.Cart;
+import com.davis.kangpinhui.model.Category;
+import com.davis.kangpinhui.model.Consume;
+import com.davis.kangpinhui.model.Coupon;
+import com.davis.kangpinhui.model.Extendedinfo;
+import com.davis.kangpinhui.model.Index;
+import com.davis.kangpinhui.model.Order;
+import com.davis.kangpinhui.model.OrderDetail;
+import com.davis.kangpinhui.model.Product;
+import com.davis.kangpinhui.model.ProductDetail;
+import com.davis.kangpinhui.model.Recharge;
+import com.davis.kangpinhui.model.Shop;
+import com.davis.kangpinhui.model.TakeGoodsdate;
+import com.davis.kangpinhui.model.Topic;
+import com.davis.kangpinhui.model.UserInfo;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.basemodel.Page;
 
 import java.util.ArrayList;
 

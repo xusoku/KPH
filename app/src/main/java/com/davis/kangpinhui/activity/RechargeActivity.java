@@ -5,19 +5,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Address;
-import com.davis.kangpinhui.Model.Recharge;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.Address;
+import com.davis.kangpinhui.model.Recharge;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
-import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 
 import retrofit2.Call;

@@ -2,14 +2,11 @@ package com.davis.kangpinhui.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Coupon;
-import com.davis.kangpinhui.Model.Order;
-import com.davis.kangpinhui.Model.OrderDetail;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
-import com.davis.kangpinhui.Model.basemodel.Page;
+import com.davis.kangpinhui.model.Coupon;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.basemodel.Page;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
@@ -17,7 +14,6 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.views.LoadMoreListView;
-import com.davis.kangpinhui.views.StretchedListView;
 
 import java.util.ArrayList;
 

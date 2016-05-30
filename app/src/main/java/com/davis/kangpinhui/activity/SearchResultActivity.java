@@ -19,10 +19,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Category;
-import com.davis.kangpinhui.Model.Product;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
-import com.davis.kangpinhui.Model.basemodel.Page;
+import com.davis.kangpinhui.model.Category;
+import com.davis.kangpinhui.model.Product;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.basemodel.Page;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
@@ -31,10 +31,8 @@ import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.CommonManager;
-import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
-import com.davis.kangpinhui.views.viewpagerindicator.scrollbar.ScrollBar;
 
 import java.util.ArrayList;
 
@@ -217,7 +215,7 @@ public class SearchResultActivity extends BaseActivity {
         Call<BaseModel<Page<ArrayList<Product>>>> call = ApiInstant.getInstant().getSearchProductlist(AppApplication.apptype, sortid,
                 AppApplication.shopid, key, page + "", pagesize + "");
 
-        call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.Model.basemodel.Page<ArrayList<Product>>>>() {
+        call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.model.basemodel.Page<ArrayList<Product>>>>() {
             @Override
             public void onSucssce(BaseModel<Page<ArrayList<Product>>> pageBaseModel) {
 
@@ -264,7 +262,7 @@ public class SearchResultActivity extends BaseActivity {
         Call<BaseModel<Page<ArrayList<Product>>>> call = ApiInstant.getInstant().getProductlist(AppApplication.apptype, sortid,
                 rootid,classid,AppApplication.shopid, page + "", pagesize + "");
 
-        call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.Model.basemodel.Page<ArrayList<Product>>>>() {
+        call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.model.basemodel.Page<ArrayList<Product>>>>() {
             @Override
             public void onSucssce(BaseModel<Page<ArrayList<Product>>> pageBaseModel) {
 

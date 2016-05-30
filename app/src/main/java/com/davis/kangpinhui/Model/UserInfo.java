@@ -1,6 +1,4 @@
-package com.davis.kangpinhui.Model;
-
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
+package com.davis.kangpinhui.model;
 
 import java.io.Serializable;
 

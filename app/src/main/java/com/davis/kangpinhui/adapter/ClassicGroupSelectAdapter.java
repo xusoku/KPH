@@ -12,10 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.davis.kangpinhui.Model.Category;
+import com.davis.kangpinhui.model.Category;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.SearchResultActivity;
-import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.NoScrollGridView;
 import com.davis.kangpinhui.views.PinnedHeaderListView;
 

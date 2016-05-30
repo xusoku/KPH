@@ -1,4 +1,4 @@
-package com.davis.kangpinhui.Model;
+package com.davis.kangpinhui.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

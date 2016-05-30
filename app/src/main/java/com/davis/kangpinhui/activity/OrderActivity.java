@@ -1,12 +1,9 @@
 package com.davis.kangpinhui.activity;
 
 import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -14,24 +11,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Cart;
-import com.davis.kangpinhui.Model.Coupon;
-import com.davis.kangpinhui.Model.Extendedinfo;
-import com.davis.kangpinhui.Model.Order;
-import com.davis.kangpinhui.Model.Product;
-import com.davis.kangpinhui.Model.TakeGoodsdate;
-import com.davis.kangpinhui.Model.Topic;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
-import com.davis.kangpinhui.Model.basemodel.Page;
+import com.davis.kangpinhui.model.Cart;
+import com.davis.kangpinhui.model.Coupon;
+import com.davis.kangpinhui.model.Extendedinfo;
+import com.davis.kangpinhui.model.Order;
+import com.davis.kangpinhui.model.Product;
+import com.davis.kangpinhui.model.TakeGoodsdate;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
-import com.davis.kangpinhui.adapter.CartListAdapter;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.api.ApiService;
-import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.StretchedListView;
 

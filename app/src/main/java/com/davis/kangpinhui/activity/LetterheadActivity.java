@@ -1,16 +1,13 @@
 package com.davis.kangpinhui.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Address;
+import com.davis.kangpinhui.model.Address;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.util.ToastUitl;

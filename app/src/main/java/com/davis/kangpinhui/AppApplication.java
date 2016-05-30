@@ -4,12 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.bumptech.glide.request.target.ViewTarget;
-import com.davis.kangpinhui.Model.Address;
-import com.davis.kangpinhui.Model.Category;
-import com.davis.kangpinhui.Model.Extendedinfo;
-import com.davis.kangpinhui.Model.Recharge;
-import com.davis.kangpinhui.Model.UserInfo;
+import com.davis.kangpinhui.model.Address;
+import com.davis.kangpinhui.model.Category;
+import com.davis.kangpinhui.model.Extendedinfo;
+import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.activity.LoginActivity;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 

@@ -2,28 +2,21 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Product;
-import com.davis.kangpinhui.Model.Recharge;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
-import com.davis.kangpinhui.Model.basemodel.Page;
+import com.davis.kangpinhui.model.Recharge;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.basemodel.Page;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
-import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
-import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreListView;
-import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 
 import java.util.ArrayList;
 
@@ -138,7 +131,7 @@ public class RechargeListActivity extends BaseActivity {
 
         Call<BaseModel<Page<ArrayList<Recharge>>>> call = ApiInstant.getInstant().getRechargelist(AppApplication.apptype,
                 page + "", pagesize + "", AppApplication.token);
-        call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.Model.basemodel.Page<ArrayList<Recharge>>>>() {
+        call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.model.basemodel.Page<ArrayList<Recharge>>>>() {
             @Override
             public void onSucssce(BaseModel<Page<ArrayList<Recharge>>> pageBaseModel) {
 

@@ -2,17 +2,14 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Address;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.Address;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;

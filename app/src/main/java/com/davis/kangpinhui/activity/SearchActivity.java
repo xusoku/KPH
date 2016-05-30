@@ -2,8 +2,6 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
@@ -23,13 +21,9 @@ import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.db.SearchHistroy;
 import com.davis.kangpinhui.db.SearchHistroyDao;
 import com.davis.kangpinhui.util.CommonManager;
-import com.davis.kangpinhui.util.LogUtils;
-import com.davis.kangpinhui.util.ToastUitl;
-import com.davis.kangpinhui.views.CustomTypefaceTextView;
 import com.davis.kangpinhui.views.FlowLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 

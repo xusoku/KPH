@@ -1,13 +1,12 @@
 package com.davis.kangpinhui.api;
 
 
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.util.ToastUitl;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 /**

@@ -2,8 +2,6 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -11,8 +9,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Cart;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.Cart;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.CartListAdapter;

@@ -4,30 +4,24 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.Model.Cart;
-import com.davis.kangpinhui.Model.Extendedinfo;
-import com.davis.kangpinhui.Model.Order;
-import com.davis.kangpinhui.Model.OrderDetail;
-import com.davis.kangpinhui.Model.Product;
-import com.davis.kangpinhui.Model.basemodel.BaseModel;
-import com.davis.kangpinhui.Model.basemodel.Page;
+import com.davis.kangpinhui.model.Extendedinfo;
+import com.davis.kangpinhui.model.Order;
+import com.davis.kangpinhui.model.OrderDetail;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.model.basemodel.Page;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.AllOrderActivity;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
-import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
-import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreListView;
-import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 import com.davis.kangpinhui.views.StretchedListView;
 
 
