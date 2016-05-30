@@ -29,13 +29,17 @@ public class MyAddressActivity extends BaseActivity {
     private boolean isOrder=false;
 
     public static void jumpMyAddressActivity(Context cot) {
-        Intent it = new Intent(cot, MyAddressActivity.class);
-        cot.startActivity(it);
+        if(AppApplication.isLogin(cot)) {
+            Intent it = new Intent(cot, MyAddressActivity.class);
+            cot.startActivity(it);
+        }
     }
     public static void jumpMyAddressActivity(Context cot,boolean flag) {
-        Intent it = new Intent(cot, MyAddressActivity.class);
-        it.putExtra("isOrder",flag);
-        cot.startActivity(it);
+        if(AppApplication.isLogin(cot)) {
+            Intent it = new Intent(cot, MyAddressActivity.class);
+            it.putExtra("isOrder", flag);
+            cot.startActivity(it);
+        }
     }
 
     @Override

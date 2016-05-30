@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_weight="1"
         android:layout_width="@dimen/common_measure_0dp"
-        android:layout_height="@dimen/common_measure_100dp"
+        android:layout_height="@dimen/common_measure_90dp"
         android:layout_margin="@dimen/common_measure_15dp"
         android:gravity="center_vertical">
         <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colormain"
-            android:textSize="@dimen/text_size_22"
+            android:textSize="@dimen/text_size_17"
             android:singleLine="true"
             android:ellipsize="end"
             android:text="收货人：xxx"/>
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colormain"
-            android:textSize="@dimen/text_size_22"
+            android:textSize="@dimen/text_size_17"
             android:text="123456756"/>
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colormain"
-            android:textSize="@dimen/text_size_22"
+            android:textSize="@dimen/text_size_17"
             android:singleLine="true"
             android:ellipsize="end"
             android:text="添加新的收获地址"/>

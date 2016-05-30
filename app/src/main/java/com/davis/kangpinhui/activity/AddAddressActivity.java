@@ -34,10 +34,12 @@ public class AddAddressActivity extends BaseActivity {
     private String addressid="";
 
     public static void jumpAddAddressActivity(Context cot, String type,String id) {
-        Intent it = new Intent(cot, AddAddressActivity.class);
-        it.putExtra("type", type);
-        it.putExtra("id", id);
-        cot.startActivity(it);
+        if(AppApplication.isLogin(cot)) {
+            Intent it = new Intent(cot, AddAddressActivity.class);
+            it.putExtra("type", type);
+            it.putExtra("id", id);
+            cot.startActivity(it);
+        }
     }
 
     @Override
