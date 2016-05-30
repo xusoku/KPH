@@ -15,3 +15,62 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-dontshrink
+-ignorewarnings
+
+-verbose
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class com.android.vending.licensing.ILicensingService
+-keepclassmembers class * {public *;}
+
+-keepattributes Signature
+-keepattributes *Annotation*
+
+
+
+-keep public class com.dym.film.R$*{
+public static final int *;
+}
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+#记录生成的日志数据,gradle build时在本项目根目录输出
+#apk 包内所有 class 的内部结构
+-dump class_files.txt
+#未混淆的类和成员
+-printseeds seeds.txt
+#列出从 apk 中删除的代码
+-printusage unused.txt
+#混淆前后的映射
+-printmapping mapping.txt
