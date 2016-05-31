@@ -29,6 +29,10 @@ public class SharePreferenceUtils
 	{
 		return new SharePreferenceUtils(fileName);
 	};
+	public static SharePreferenceUtils getSharedPreferences()
+	{
+		return new SharePreferenceUtils("kph");
+	};
 
 	public void putString(String key, String value)
 	{

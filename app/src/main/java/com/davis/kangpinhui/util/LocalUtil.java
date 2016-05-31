@@ -87,19 +87,21 @@ public class LocalUtil {
     }
 
     // 功能：判断点是否在多边形内 取shopid
-    public static void getShopid(LatLng point, List<Shop> list) {
+    public static boolean  getShopid(LatLng point, List<Shop> list) {
 
         for (Shop shop:list){
-//            if()
-
+            if(PtInPolygon(point,createDDRectangle(shop.polygon))){
+                SharePreferenceUtils.getSharedPreferences("kph").putString("shopid",shop.id);
+                return  true;
+            }
         }
-
+        return false;
     }
 
     /**
      * 生成一个多边形
      */
-    private List<LatLng> createDDRectangle(String pot) {
+    private static  List<LatLng> createDDRectangle(String pot) {
         List<LatLng> list = new ArrayList<>();
         String[] strs = pot.split(";");
         for (String str : strs) {

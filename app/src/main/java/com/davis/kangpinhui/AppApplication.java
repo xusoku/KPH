@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.davis.kangpinhui.model.Address;
 import com.davis.kangpinhui.model.Category;
 import com.davis.kangpinhui.model.Extendedinfo;
+import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.activity.LoginActivity;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
@@ -24,11 +25,13 @@ public class AppApplication extends Application {
     private static AppApplication instance = null;
 
     public static String apptype = "android";
-    public static String shopid = "1";
+    public static String shopid = "";
     public static String token = "";
     public static UserInfo userInfo;
     public static Extendedinfo extendedinfo;
     public static Address address;
+
+    public static ArrayList<Shop> shoplist=new ArrayList<>();
 
     public static ArrayList<Category> classiclist = new ArrayList<>();
 
@@ -43,7 +46,8 @@ public class AppApplication extends Application {
 //        instance
         instance = (AppApplication) getApplicationContext();
 
-        token=SharePreferenceUtils.getSharedPreferences("kph").getString("token","");
+        token=SharePreferenceUtils.getSharedPreferences().getString("token","");
+        shopid=SharePreferenceUtils.getSharedPreferences().getString("shopid","");
     }
 
     public static boolean isLogin(Context context) {

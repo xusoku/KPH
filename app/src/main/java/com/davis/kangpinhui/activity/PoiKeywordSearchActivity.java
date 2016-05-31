@@ -32,13 +32,16 @@ import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
+import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
+import com.davis.kangpinhui.util.LocalUtil;
 import com.davis.kangpinhui.util.LogUtils;
+import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreListView;
 
@@ -315,8 +318,6 @@ public class PoiKeywordSearchActivity extends Activity implements
 
             }
         };
-//        View footerView = LayoutInflater.from(this).inflate(R.layout.layout_load_more_footer, null);
-//        listView.addFooterView(footerView);
         listView.setAdapter(adapter);
         LogUtils.e("aaa", "footview");
 
@@ -331,7 +332,11 @@ public class PoiKeywordSearchActivity extends Activity implements
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AppManager.getAppManager().finishActivity();
+                SharePreferenceUtils.getSharedPreferences().putString("address",list.get(position).getSnippet());
+                LatLonPoint s = list.get(position).getLatLonPoint();
+                LatLng latLng = new LatLng(s.getLatitude(), s.getLongitude());
+                LocalUtil.getShopid(latLng, AppApplication.shoplist);
+                finish();
                 AppManager.getAppManager().finishActivity(ShopActivity.class);
 
             }
