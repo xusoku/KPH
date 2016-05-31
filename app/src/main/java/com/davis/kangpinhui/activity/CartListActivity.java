@@ -180,4 +180,5 @@ public class CartListActivity extends BaseActivity {
                 break;
         }
     }
+
 }

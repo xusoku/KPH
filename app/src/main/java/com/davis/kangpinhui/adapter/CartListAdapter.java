@@ -82,6 +82,7 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
                 n++;
                 itemData.inumber = n + "";
                 notifyDataSetChanged();
+                addAndMins(itemData.iproductid,"1");
                 onPriceChange.priceChange();
             }
         });
@@ -96,6 +97,7 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
                     n = 1;
                 } else {
                     n--;
+                    addAndMins(itemData.iproductid,"-1");
                 }
                 itemData.inumber = n + "";
                 notifyDataSetChanged();
@@ -136,5 +138,17 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
     public interface OnPriceChange {
         public void priceChange();
         public void listChange();
+    }
+
+    private void addAndMins(String iproductid,String num){
+        Call<BaseModel> call = ApiInstant.getInstant().addCart(AppApplication.apptype, AppApplication.shopid, num, iproductid, "", AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel>() {
+            @Override
+            public void onSucssce(BaseModel baseModel) {
+            }
+            @Override
+            public void onFailure() {
+            }
+        });
     }
 }
