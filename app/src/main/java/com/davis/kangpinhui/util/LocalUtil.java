@@ -1,5 +1,7 @@
 package com.davis.kangpinhui.util;
 
+import android.text.TextUtils;
+
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -112,6 +114,7 @@ public class LocalUtil implements AMapLocationListener {
                 EventBus.getDefault().post(new Address());
 
             }else{
+
                 ToastUitl.showToast("您所在的范围不再配送区,请选择配送区域");
                 if(!flag) {
                     AppManager.getAppManager().finishActivity(ShopActivity.class);
@@ -126,10 +129,7 @@ public class LocalUtil implements AMapLocationListener {
             sb.append("错误码:" + location.getErrorCode() + "\n");
             sb.append("错误信息:" + location.getErrorInfo() + "\n");
             sb.append("错误描述:" + location.getLocationDetail() + "\n");
-
-            ToastUitl.showToast("开始失败");
-            AppManager.getAppManager().finishActivity(ShopActivity.class);
-            EventBus.getDefault().post(new Address());
+            ToastUitl.showToast("定位失败");
         }
 
         return sb.toString();
