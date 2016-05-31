@@ -1,5 +1,7 @@
 package com.davis.kangpinhui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -43,7 +45,10 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
     private ArrayList<Shop> list;
 
 
-
+    public static void jumpShopActivity(Context cot) {
+            Intent it = new Intent(cot, ShopActivity.class);
+            cot.startActivity(it);
+    }
 
     @Override
     protected int setLayoutView() {

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.MainActivity;
+import com.davis.kangpinhui.activity.PolygonActivity;
 import com.davis.kangpinhui.model.Banner;
 import com.davis.kangpinhui.model.Index;
 import com.davis.kangpinhui.model.Product;
@@ -61,6 +62,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private TextView index_local_select;
     private LinearLayout index_local_select_linear;
     private LinearLayout no_linear_shopid;
+    private TextView no_shopid_add_address;
+    private TextView no_shopid_see_sending;
     private MySwipeRefreshLayout index_refresh;
 
     private boolean isRefreshOrLoad=false;
@@ -92,6 +95,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
 
         no_linear_shopid=$(view,R.id.no_linear_shopid);
+        no_shopid_add_address=$(view,R.id.no_shopid_add_address);
+        no_shopid_see_sending=$(view,R.id.no_shopid_see_sending);
         index_refresh=$(view,R.id.index_refresh);
         index_local_select=$(view,R.id.index_local_select);
         index_local_select_linear=$(view,R.id.index_local_select_linear);
@@ -264,6 +269,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         index_tuan.setOnClickListener(this);
         index_cart.setOnClickListener(this);
         index_search.setOnClickListener(this);
+        no_shopid_add_address.setOnClickListener(this);
+        no_shopid_see_sending.setOnClickListener(this);
     }
 
     @Override
@@ -288,6 +295,15 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 break;
             case R.id.index_search:
                 SearchActivity.jumpSearchActivity(getActivity(), "");
+                break;
+            case R.id.no_shopid_see_sending:
+                if(AppApplication.shoplist.size()>0)
+                    PolygonActivity.jumpPolygonActivity(getActivity(), AppApplication.shoplist);
+                else
+                    ToastUitl.showToast("暂无数据");
+                break;
+            case R.id.no_shopid_add_address:
+                ShopActivity.jumpShopActivity(getActivity());
                 break;
         }
     }
