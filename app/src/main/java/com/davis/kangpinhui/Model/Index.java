@@ -12,6 +12,7 @@ public class Index implements Serializable {
 
     public static class Productlist extends  Banner{
 
+        public String id;
         public ArrayList<Product> list=new ArrayList<>();
     }
 }

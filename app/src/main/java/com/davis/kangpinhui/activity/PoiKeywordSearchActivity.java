@@ -9,10 +9,15 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
@@ -31,12 +36,14 @@ import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.model.Shop;
+import com.davis.kangpinhui.util.AppManager;
+import com.davis.kangpinhui.util.DisplayMetricsUtils;
+import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreListView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * AMapV1地图中简单介绍poisearch搜索
@@ -55,6 +62,8 @@ public class PoiKeywordSearchActivity extends Activity implements
     private PoiSearch.Query query;// Poi查询条件类
     private PoiSearch poiSearch;// POI搜索
 
+    private ImageView searchText_back;
+
 
     private Shop shop;
 
@@ -69,6 +78,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poikeywordsearch);
 
+        searchText_back = (ImageView) findViewById(R.id.searchText_back);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         shop = getIntent().getParcelableExtra("id");
@@ -78,6 +88,14 @@ public class PoiKeywordSearchActivity extends Activity implements
         }
         init();
         initPopupSortWindow();
+
+
+        searchText_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     /**
@@ -127,9 +145,24 @@ public class PoiKeywordSearchActivity extends Activity implements
      * 开始进行poi搜索
      */
     protected void doSearchQuery() {
+        list.clear();
         currentPage = 0;
         query = new PoiSearch.Query(keyWord, "");
-        query.setPageSize(30);// 设置每页最多返回多少条poiitem
+        query.setPageSize(20);// 设置每页最多返回多少条poiitem
+        query.setPageNum(currentPage);// 设置查第一页
+
+        poiSearch = new PoiSearch(this, query);
+        poiSearch.setBound(new PoiSearch.SearchBound(createDRectangle(shop.polygon)));//
+        poiSearch.setOnPoiSearchListener(this);
+        poiSearch.searchPOIAsyn();
+    }
+    /**
+     * 开始进行poi搜索
+     */
+    protected void donextSearchQuery() {
+        currentPage++;
+        query = new PoiSearch.Query(keyWord, "");
+        query.setPageSize(20);// 设置每页最多返回多少条poiitem
         query.setPageNum(currentPage);// 设置查第一页
 
         poiSearch = new PoiSearch(this, query);
@@ -224,19 +257,24 @@ public class PoiKeywordSearchActivity extends Activity implements
                         aMap.addPolygon(new PolygonOptions().addAll(createDDRectangle(shop.polygon)).fillColor(Color.parseColor("#550000ff"))
                                 .strokeColor(Color.RED).strokeWidth(1));
 
-
-                        popupWindow.showAsDropDown(searchText, 0, 0);
+                        popupWindow.showAsDropDown(searchText_back, 0, 0);
                         list.addAll(poiItems);
                         adapter.notifyDataSetChanged();
+                        if(list.size()>=20)
+                        listView.onLoadSucess(true);
+                        else listView.onLoadSucess(false);
                     } else {
                         ToastUitl.showToast("没有搜索到结果");
+                        listView.onLoadSucess(false);
                     }
                 }
             } else {
                 ToastUitl.showToast("没有搜索到结果");
+                listView.onLoadSucess(false);
             }
         } else {
-            ToastUitl.showToast(rCode);
+            ToastUitl.showToast("没有搜索到结果");
+            listView.onLoadSucess(false);
         }
 
     }
@@ -257,10 +295,9 @@ public class PoiKeywordSearchActivity extends Activity implements
         View view = getLayoutInflater().inflate(R.layout.activity_poikeywordsearch_pop, null);
         listView = (LoadMoreListView) view.findViewById(R.id.poi_search_lst);
         popupWindow = new PopupWindow(view,
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT);
+                LinearLayout.LayoutParams.MATCH_PARENT, (int)DisplayMetricsUtils.getHeight()/10*9);
         popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
+        popupWindow.setOutsideTouchable(false);
         popupWindow.setAnimationStyle(R.style.popwin_recent_anim_style);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         list = new ArrayList<>();
@@ -268,12 +305,37 @@ public class PoiKeywordSearchActivity extends Activity implements
             @Override
             public void convert(ViewHolder holder, PoiItem itemData, int position) {
                 holder.setText(R.id.poi_item_title, itemData.getTitle());
-                holder.setText(R.id.poi_item_address, itemData.getProvinceName());
-                holder.setText(R.id.poi_item_phone, itemData.getTel());
+                holder.setText(R.id.poi_item_address, "地址:"+itemData.getSnippet());
+                if(!TextUtils.isEmpty(itemData.getTel())){
+                    holder.getView(R.id.poi_item_phone).setVisibility(View.VISIBLE);
+                    holder.setText(R.id.poi_item_phone, "电话:"+itemData.getTel());}
+                else{
+                    holder.getView(R.id.poi_item_phone).setVisibility(View.GONE);
+                }
 
             }
         };
+//        View footerView = LayoutInflater.from(this).inflate(R.layout.layout_load_more_footer, null);
+//        listView.addFooterView(footerView);
         listView.setAdapter(adapter);
+        LogUtils.e("aaa", "footview");
+
+        listView.setOnLoadListener(new LoadMoreListView.OnLoadListener() {
+            @Override
+            public void onLoad(LoadMoreListView listView) {
+                if (list.size() >= 20)
+                    donextSearchQuery();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AppManager.getAppManager().finishActivity();
+                AppManager.getAppManager().finishActivity(ShopActivity.class);
+
+            }
+        });
     }
 
     public static String checkEditText(EditText editText) {

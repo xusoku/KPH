@@ -2,7 +2,9 @@ package com.davis.kangpinhui.util;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps2d.model.LatLng;
+import com.davis.kangpinhui.model.Shop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -82,5 +84,29 @@ public class LocalUtil {
         }
         // 单边交点为偶数，点在多边形之外 ---
         return (nCross % 2 == 1);
+    }
+
+    // 功能：判断点是否在多边形内 取shopid
+    public static void getShopid(LatLng point, List<Shop> list) {
+
+        for (Shop shop:list){
+//            if()
+
+        }
+
+    }
+
+    /**
+     * 生成一个多边形
+     */
+    private List<LatLng> createDDRectangle(String pot) {
+        List<LatLng> list = new ArrayList<>();
+        String[] strs = pot.split(";");
+        for (String str : strs) {
+            String[] s = str.split(",");
+            LatLng latLng = new LatLng(Double.parseDouble(s[1]), Double.parseDouble(s[0]));
+            list.add(latLng);
+        }
+        return list;
     }
 }
