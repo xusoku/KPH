@@ -85,6 +85,7 @@
         </com.davis.kangpinhui.views.MySwipeRefreshLayout>
         <LinearLayout
             android:id="@+id/no_linear_shopid"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <include layout="@layout/fragment_noshopid_layout"/>

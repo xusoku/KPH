@@ -60,6 +60,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private LinearLayout index_search;
     private TextView index_local_select;
     private LinearLayout index_local_select_linear;
+    private LinearLayout no_linear_shopid;
     private MySwipeRefreshLayout index_refresh;
 
     private boolean isRefreshOrLoad=false;
@@ -90,6 +91,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         index_rechange=$(headerView,R.id.index_rechange);
 
 
+        no_linear_shopid=$(view,R.id.no_linear_shopid);
         index_refresh=$(view,R.id.index_refresh);
         index_local_select=$(view,R.id.index_local_select);
         index_local_select_linear=$(view,R.id.index_local_select_linear);
@@ -117,7 +119,13 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     protected void initData() {
-        startFragmentLoading();
+
+        if(!TextUtils.isEmpty(AppApplication.shopid)){
+            no_linear_shopid.setVisibility(View.GONE);
+            startFragmentLoading();
+        }else{
+            no_linear_shopid.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -127,9 +135,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         backgroundDefaultBadge.setText((int)Float.parseFloat(number)+"");
     }
     public void setindex_local_select(String str){
-        index_local_select.setText("送至:"+str);
-
-        startFragmentLoading();
+        index_local_select.setText("送至:" + str);
+        initData();
     }
 
     @Override
@@ -137,12 +144,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         super.onFragmentLoading();
         LogUtils.e(TAG, "onFragmentLoading");
         isRefreshOrLoad=true;
-        if(!TextUtils.isEmpty(AppApplication.shopid)){
-            getDate();
-        }else{
-            onFragmentFirstLoadingNoData();
-        }
-//        CommonManager.setRefreshingState(index_refresh, true);
+        getDate();
     }
 
     private void getDate() {
