@@ -36,6 +36,7 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
+import com.davis.kangpinhui.model.Address;
 import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
@@ -47,6 +48,8 @@ import com.davis.kangpinhui.views.LoadMoreListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * AMapV1地图中简单介绍poisearch搜索
@@ -332,12 +335,13 @@ public class PoiKeywordSearchActivity extends Activity implements
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SharePreferenceUtils.getSharedPreferences().putString("address",list.get(position).getSnippet());
+                SharePreferenceUtils.getSharedPreferences().putString("address",list.get(position).getTitle());
                 LatLonPoint s = list.get(position).getLatLonPoint();
                 LatLng latLng = new LatLng(s.getLatitude(), s.getLongitude());
                 LocalUtil.getShopid(latLng, AppApplication.shoplist);
                 finish();
                 AppManager.getAppManager().finishActivity(ShopActivity.class);
+                EventBus.getDefault().post(new Address());
 
             }
         });

@@ -33,6 +33,7 @@ import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.LogUtils;
+import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.BadgeView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
@@ -109,6 +110,9 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         index_loopbanner.setPageIndicator(true);
         backgroundDefaultBadge= new BadgeView(getActivity());
         backgroundDefaultBadge.setTargetView(index_cart);
+
+        String add= SharePreferenceUtils.getSharedPreferences().getString("address","选择配送地址");
+        index_local_select.setText("送至:"+add);
     }
 
     @Override
@@ -119,9 +123,13 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
     public void setcartNumber(){
         String number=AppApplication.getCartcount();
-
         if(!TextUtils.isEmpty(number)&&!number.equals("0")&&!number.equals("0.0")&&backgroundDefaultBadge!=null)
         backgroundDefaultBadge.setText((int)Float.parseFloat(number)+"");
+    }
+    public void setindex_local_select(String str){
+        index_local_select.setText("送至:"+str);
+
+        startFragmentLoading();
     }
 
     @Override
@@ -129,7 +137,11 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         super.onFragmentLoading();
         LogUtils.e(TAG, "onFragmentLoading");
         isRefreshOrLoad=true;
-        getDate();
+        if(!TextUtils.isEmpty(AppApplication.shopid)){
+            getDate();
+        }else{
+            onFragmentFirstLoadingNoData();
+        }
 //        CommonManager.setRefreshingState(index_refresh, true);
     }
 

@@ -162,7 +162,6 @@ public abstract class BaseFragment extends Fragment
 
     public void onFragmentFirstLoadingNoData()
     {
-
         if (layLoadingFailed == null) {
             return;
         }
@@ -259,7 +258,9 @@ public abstract class BaseFragment extends Fragment
     {
 
     }
-
+    public boolean getisInit(){
+        return isInit;
+    }
 
     private void showTextToast(String msg) {
         if (toast == null) {

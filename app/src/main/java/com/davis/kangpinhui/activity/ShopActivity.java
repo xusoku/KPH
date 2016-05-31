@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -32,9 +33,9 @@ import retrofit2.Call;
 
 
 
-public class ShopActivity extends BaseActivity implements View.OnClickListener, AMapLocationListener {
+public class ShopActivity extends BaseActivity implements View.OnClickListener {
 
-    private LoadMoreListView listView;
+    private ListView listView;
     private  CommonBaseAdapter adapter;
     private MySwipeRefreshLayout shop_swiperefresh;
     private LinearLayout shop_location_headerid;
@@ -42,8 +43,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener, 
     private ArrayList<Shop> list;
 
 
-    private AMapLocationClient locationClient = null;
-    private AMapLocationClientOption locationOption = null;
+
 
     @Override
     protected int setLayoutView() {
@@ -71,7 +71,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener, 
         shop_swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                CommonManager.setRefreshingState(shop_swiperefresh,true);
+                CommonManager.setRefreshingState(shop_swiperefresh, true);
                 list.clear();
                 getData();
             }
@@ -79,26 +79,14 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener, 
         getRightTextButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(list.size()==0){
+                if (list.size() == 0) {
                     ToastUitl.showToast("暂无数据");
-                }else{
-                    PolygonActivity.jumpPolygonActivity(ShopActivity.this,list);
+                } else {
+                    PolygonActivity.jumpPolygonActivity(ShopActivity.this, list);
                 }
             }
         });
 
-        locationClient = new AMapLocationClient(this.getApplicationContext());
-        locationOption = new AMapLocationClientOption();
-        // 设置定位模式为低功耗模式
-        locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
-        // 设置定位监听
-        locationClient.setLocationListener(this);
-        //设置为单次定位
-        locationOption.setOnceLocation(true);
-        // 设置是否需要显示地址信息
-        locationOption.setNeedAddress(true);
-        // 设置是否开启缓存
-        locationOption.setLocationCacheEnable(true);
 
     }
 
@@ -116,7 +104,8 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener, 
             public void onSucssce(BaseModel<ArrayList<Shop>> arrayListBaseModel) {
                 CommonManager.setRefreshingState(shop_swiperefresh, false);
                 onActivityLoadingSuccess();
-                list.addAll( arrayListBaseModel.object);
+                list.addAll(arrayListBaseModel.object);
+                AppApplication.shoplist.addAll(arrayListBaseModel.object);
                 getBindView(list);
             }
 
@@ -145,7 +134,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener, 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this,list.get(position));
+                PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this, list.get(position));
             }
         });
     }
@@ -160,58 +149,15 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
+    LocalUtil util;
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.shop_location_headerid:
-                locationClient.setLocationOption(locationOption);
-                // 启动定位
-                locationClient.startLocation();
-                mHandler.sendEmptyMessage(0x101);
+               util =new LocalUtil(true);
+                util.startLocation();
                 break;
         }
     }
 
-
-    Handler mHandler = new Handler(){
-        public void dispatchMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case 0x101:
-                    ToastUitl.showToast("正在定位...");
-                    break;
-                //定位完成
-                case 0x100:
-                    AMapLocation loc = (AMapLocation)msg.obj;
-                    String result = LocalUtil.getLocationStr(loc);
-                    ToastUitl.showToast(result);
-                    break;
-                default:
-                    break;
-            }
-        };
-    };
-    @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-        if (null != aMapLocation) {
-            Message msg = mHandler.obtainMessage();
-            msg.obj = aMapLocation;
-            msg.what = 0x100;
-            mHandler.sendMessage(msg);
-        }
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (null != locationClient) {
-            /**
-             * 如果AMapLocationClient是在当前Activity实例化的，
-             * 在Activity的onDestroy中一定要执行AMapLocationClient的onDestroy
-             */
-            locationClient.onDestroy();
-            locationClient = null;
-            locationOption = null;
-        }
-    }
 }

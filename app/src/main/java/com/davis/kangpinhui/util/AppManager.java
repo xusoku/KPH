@@ -118,6 +118,8 @@ public class AppManager {
 	 */
 	public void AppExit(Context context) {
 		AppApplication.classiclist.clear();
-			finishAllActivity();
+		AppApplication.shoplist.clear();
+		AppApplication.shopid="";
+		finishAllActivity();
 	}
 }
