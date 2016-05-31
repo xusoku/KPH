@@ -69,16 +69,25 @@
     </LinearLayout>
     </LinearLayout>
 
-    <com.davis.kangpinhui.views.MySwipeRefreshLayout
-        android:id="@+id/index_refresh"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/content"
+        <com.davis.kangpinhui.views.MySwipeRefreshLayout
+            android:id="@+id/index_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:scrollbars="none"></ListView>
-    </com.davis.kangpinhui.views.MySwipeRefreshLayout>
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                android:scrollbars="none"/>
+        </com.davis.kangpinhui.views.MySwipeRefreshLayout>
+        <LinearLayout
+            android:id="@+id/no_linear_shopid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include layout="@layout/fragment_noshopid_layout"/>
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

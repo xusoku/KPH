@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorlightgray"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_no_network" />
+
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/no_shopid_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_measure_20dp"
+            android:text="很抱歉,我们目前只支持配送上海浦东新\n              区,欢迎有时间到店体验"
+            android:textColor="@color/colorgray"
+            android:lineSpacingExtra="1dp"
+            android:textSize="@dimen/text_size_17" />
+
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/no_shopid_add_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/common_measure_20dp"
+            android:background="@drawable/bg_miancolor_unselect"
+            android:padding="@dimen/common_measure_13dp"
+            android:text="添加收获地址"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_17" />
+
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/no_shopid_see_sending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/common_measure_10dp"
+            android:background="@drawable/bg_flow_tag_unselect"
+            android:padding="@dimen/common_measure_13dp"
+            android:text="查看配送范围"
+            android:textColor="@color/colorgray"
+            android:textSize="@dimen/text_size_17" />
+    </LinearLayout>
+</RelativeLayout>
