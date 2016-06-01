@@ -8,14 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-        <View
-            android:layout_width="@dimen/common_measure_10dp"
-            android:layout_height="match_parent"
-            />
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/classic_rootid_list_item"
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:paddingLeft="@dimen/common_measure_10dp"
             android:layout_height="@dimen/common_measure_65dp"
             android:textColor="@color/colorgray"
             android:text="家禽"
