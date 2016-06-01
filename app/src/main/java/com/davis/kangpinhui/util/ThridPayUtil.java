@@ -1,10 +1,8 @@
 package com.davis.kangpinhui.util;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.util.alipay.PayResult;
@@ -13,15 +11,13 @@ import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
-import java.lang.ref.WeakReference;
-
 /**
  * Created by davis on 16/6/1.
  */
 public class ThridPayUtil {
 
-    private Context context;
-    public ThridPayUtil(Context context){
+    private Activity context;
+    public ThridPayUtil(Activity context){
         this.context=context;
     }
     /**
@@ -53,11 +49,15 @@ public class ThridPayUtil {
     }
 
 
+    public void alipay(String totalPrice,String code){
+        ZhifubaoPayUtil payUtil=new ZhifubaoPayUtil(context,mHandler);
+        payUtil.pay("电影票兑换券","可用于兑换指定电影票", totalPrice+"",code);
+    }
 
     /**
      * Handler处理
      */
-    private Handler mHandler = new Handler() {
+    private static Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case ZhifubaoPayUtil.SDK_PAY_FLAG: {
@@ -88,8 +88,6 @@ public class ThridPayUtil {
                     break;
             }
         }
-
-        ;
     };
 
 }
