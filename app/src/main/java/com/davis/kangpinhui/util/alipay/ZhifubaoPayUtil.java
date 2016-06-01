@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.davis.kangpinhui.api.ApiService;
-import com.dym.film.manager.NetworkManager;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
