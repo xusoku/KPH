@@ -25,6 +25,7 @@ import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.api.ApiService;
+import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.StretchedListView;
 
@@ -56,6 +57,8 @@ public class OrderActivity extends BaseActivity {
     private ArrayList<Coupon> couponArrayList;
 
     private TwoPickerView twoPickerView;
+
+    private ThridPayUtil thridPayUtil;
 
     public static void jumpOrderActivity(Context cot, String ids) {
         Intent it = new Intent(cot, OrderActivity.class);
@@ -106,6 +109,7 @@ public class OrderActivity extends BaseActivity {
     protected void findViews() {
         showTopBar();
         setTitle("订单结算");
+        thridPayUtil=new ThridPayUtil(this);
         twoPickerView = new TwoPickerView(this);
         order_number_text = $(R.id.order_number_text);
         order_paytype_text = $(R.id.order_paytype_text);
@@ -448,7 +452,8 @@ public class OrderActivity extends BaseActivity {
                 ToastUitl.showToast("订单提交成功");
                 EventBus.getDefault().post(new Extendedinfo());
 
-            }
+                thridPayUtil.alipay("0.01",baseModel.object.sordernumber);
+      }
 
             @Override
             public void onFailure() {

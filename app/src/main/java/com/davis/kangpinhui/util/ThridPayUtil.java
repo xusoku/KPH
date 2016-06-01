@@ -68,7 +68,7 @@ public class ThridPayUtil {
      */
     public void alipay(String totalPrice,String code){
         ZhifubaoPayUtil payUtil=new ZhifubaoPayUtil(context,mHandler);
-        payUtil.pay("电影票兑换券","可用于兑换指定电影票", totalPrice+"",code);
+        payUtil.pay("康品汇生鲜","康品汇生鲜", totalPrice+"",code);
     }
 
     /**
