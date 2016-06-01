@@ -46,8 +46,8 @@ public class MineCustomLayout extends LinearLayout {
         this.setClickable(true);
         TypedValue outValue = new TypedValue();
         getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
-        this.setBackgroundResource(outValue.resourceId);
         LinearLayout linearLayout= (LinearLayout) view.findViewById(R.id.mine_linear);
+        linearLayout.setBackgroundResource(outValue.resourceId);
         ImageView iv = (ImageView) view.findViewById(R.id.mine_left_image);
          tv = (TextView) view.findViewById(R.id.mine_center_name);
         ImageView miv = (ImageView) view.findViewById(R.id.mine_right_iv);

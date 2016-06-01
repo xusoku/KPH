@@ -74,7 +74,7 @@
             android:layout_width="1dp"
             android:layout_height="@dimen/common_measure_60dp"
             android:layout_gravity="center_vertical"
-            android:background="@color/colorgray"/>
+            android:background="@color/colorlightgray"/>
         <com.davis.kangpinhui.views.MineCustomLayout
             android:id="@+id/mine_allorder_sending"
             android:layout_weight="1"
@@ -87,7 +87,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_10dp"
-        android:background="@color/colorgray"/>
+        android:background="@color/colorlightgray"/>
 
     <com.davis.kangpinhui.views.MineCustomLayout
         android:id="@+id/mine_cart"
@@ -99,7 +99,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_10dp"
-        android:background="@color/colorgray"/>
+        android:background="@color/colorlightgray"/>
 
     <com.davis.kangpinhui.views.MineCustomLayout
         android:id="@+id/mine_mycoup"
@@ -117,7 +117,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_10dp"
-        android:background="@color/colorgray"/>
+        android:background="@color/colorlightgray"/>
 
     <com.davis.kangpinhui.views.MineCustomLayout
         android:id="@+id/mine_ti_huo"
@@ -128,7 +128,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_10dp"
-        android:background="@color/colorgray"/>
+        android:background="@color/colorlightgray"/>
     <com.davis.kangpinhui.views.MineCustomLayout
         android:id="@+id/mine_kefu"
         android:layout_width="match_parent"
@@ -150,7 +150,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_10dp"
-        android:background="@color/colorgray"/>
+        android:background="@color/colorlightgray"/>
     <com.davis.kangpinhui.views.MineCustomLayout
         android:id="@+id/mine_rechange"
         android:layout_width="match_parent"
@@ -166,6 +166,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_10dp"
-        android:background="@color/colorgray"/>
+        android:background="@color/colorlightgray"/>
 </LinearLayout>
 </ScrollView>
