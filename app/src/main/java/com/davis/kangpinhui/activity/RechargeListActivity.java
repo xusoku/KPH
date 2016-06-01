@@ -1,9 +1,13 @@
 package com.davis.kangpinhui.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.Recharge;
@@ -16,6 +20,7 @@ import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.LoadMoreListView;
 
 import java.util.ArrayList;
@@ -91,28 +96,37 @@ public class RechargeListActivity extends BaseActivity {
                 holder.setText(R.id.recharge_item_date_text, itemData.daddtime);
                 holder.setText(R.id.recharge_item_paytype_text, srechargetype);
                 holder.setText(R.id.recharge_item_code_text, itemData.schargenumber);
-                holder.setText(R.id.recharge_item_price_text, "¥"+itemData.fmoney);
+                TextView tv=holder.getView(R.id.recharge_item_price_text);
+                tv.setText(UtilText.getRechargePrice("¥"+itemData.fmoney));
                 holder.setText(R.id.recharge_item_type_text, stype);
 
 
                 holder.getView(R.id.recharge_item_cancel).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Call<BaseModel> call=ApiInstant.getInstant().cancelRecharge(AppApplication.apptype,itemData.schargenumber,AppApplication.token);
+                        new AlertDialog.Builder(RechargeListActivity.this)
+                                .setTitle("是否取消订单？")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Call<BaseModel> call=ApiInstant.getInstant().cancelRecharge(AppApplication.apptype,itemData.schargenumber,AppApplication.token);
+                                        call.enqueue(new ApiCallback<BaseModel>() {
+                                            @Override
+                                            public void onSucssce(BaseModel baseModel) {
+                                                ToastUitl.showToast("取消成功");
+                                                initData();
+                                                list.clear();
+                                            }
 
-                        call.enqueue(new ApiCallback<BaseModel>() {
-                            @Override
-                            public void onSucssce(BaseModel baseModel) {
-                                ToastUitl.showToast("取消成功");
-                                initData();
-                                list.clear();
-                            }
+                                            @Override
+                                            public void onFailure() {
 
-                            @Override
-                            public void onFailure() {
+                                            }
+                                        });
+                                    }
+                                }).setNegativeButton("取消",null)
+                                .show();
 
-                            }
-                        });
                     }
                 });
 

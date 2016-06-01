@@ -18,7 +18,7 @@
             android:id="@+id/my_address_item_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colormain"
+            android:textColor="@color/black"
             android:textSize="@dimen/text_size_17"
             android:singleLine="true"
             android:ellipsize="end"
@@ -28,7 +28,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colormain"
+            android:textColor="@color/black"
             android:textSize="@dimen/text_size_17"
             android:text="123456756"/>
 
@@ -38,7 +38,7 @@
             android:layout_below="@id/my_address_item_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colormain"
+            android:textColor="@color/colorgray"
             android:textSize="@dimen/text_size_17"
             android:singleLine="true"
             android:ellipsize="end"

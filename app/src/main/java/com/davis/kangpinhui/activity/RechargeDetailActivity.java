@@ -12,6 +12,7 @@ import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.util.UtilText;
 
 import retrofit2.Call;
 
@@ -116,7 +117,7 @@ public class RechargeDetailActivity extends BaseActivity {
         }
         recharge_detail_orderType.setText(stype);
         recharge_detail_ordertime.setText(recharge.daddtime);
-        recharge_detail_orderprice.setText("¥"+recharge.fmoney);
+        recharge_detail_orderprice.setText("¥"+ UtilText.getRechargePrice(recharge.fmoney));
         recharge_detail_orderPayType.setText(srechargetype);
         recharge_detail_orderCode.setText(recharge.schargenumber);
         recharge_detail_letterhead.setText(recharge.sinvoice);

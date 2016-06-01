@@ -29,7 +29,17 @@ public class UtilText {
         }
         SpannableString spanString = new SpannableString(str);
         ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor("#ff0000"));
-        spanString.setSpan(span, 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanString.setSpan(span, 0, spanString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spanString;
+    }
+
+    public static SpannableString getRechargePrice(String str){
+        if(str.contains(".0")){
+            str=str.substring(0,str.length()-2);
+        }
+        SpannableString spanString = new SpannableString(str);
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor("#ff0000"));
+        spanString.setSpan(span, 1, spanString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spanString;
     }
 

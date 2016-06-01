@@ -9,6 +9,7 @@
         android:id="@+id/feedback_et"
         android:layout_width="match_parent"
         android:gravity="top"
+        android:hint="有什么不爽的在这里吐槽吧"
         android:layout_height="@dimen/common_measure_178dp"
         android:layout_margin="@dimen/common_measure_14dp"
         android:background="@drawable/bg_flow_tag_unselect"/>

@@ -109,7 +109,7 @@
                 android:layout_toRightOf="@id/recharge_item_price"
                 android:layout_marginLeft="@dimen/common_measure_10dp"
                 android:text="2016-12-12"
-                android:textColor="@color/black"
+                android:textColor="@color/colorgray"
                 android:textSize="@dimen/text_size_17" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView

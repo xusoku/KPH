@@ -38,7 +38,7 @@
             android:layout_weight="1"
             android:textColor="@color/black"
             android:singleLine="true"
-            android:text="asdf"
+            android:hint="请选择收获地址"
             android:ellipsize="end"
             android:textSize="@dimen/text_size_17" />
     </LinearLayout>
@@ -73,6 +73,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_17"
             android:ellipsize="end"
+            android:hint="具体信息（如楼号/层号）"
             android:drawableRight="@mipmap/ic_nearby"
             android:paddingRight="10dp"/>
     </LinearLayout>
@@ -104,6 +105,7 @@
             android:layout_weight="1"
             android:textColor="@color/black"
             android:singleLine="true"
+            android:hint="联系人姓名"
             android:ellipsize="end"
             android:textSize="@dimen/text_size_17" />
     </LinearLayout>
@@ -136,6 +138,7 @@
             android:textColor="@color/black"
             android:singleLine="true"
             android:ellipsize="end"
+            android:hint="联系人手机"
             android:textSize="@dimen/text_size_17" />
     </LinearLayout>
     <View
