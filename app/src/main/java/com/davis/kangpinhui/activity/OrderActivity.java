@@ -447,6 +447,7 @@ public class OrderActivity extends BaseActivity {
             public void onSucssce(BaseModel<Order> baseModel) {
                 ToastUitl.showToast("订单提交成功");
                 EventBus.getDefault().post(new Extendedinfo());
+
             }
 
             @Override

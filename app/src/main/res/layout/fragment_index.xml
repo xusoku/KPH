@@ -6,16 +6,16 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_65dp"
-        android:background="@color/colormain">
+        android:background="@color/colormain"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/index_local_select_linear"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:gravity="center_vertical"
@@ -26,11 +26,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:ellipsize="end"
                 android:paddingLeft="@dimen/common_measure_16dp"
                 android:paddingRight="@dimen/common_measure_16dp"
-                android:text="送至：光兰命运"
                 android:singleLine="true"
-                android:ellipsize="end"
+                android:text="送至：光兰命运"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
         </LinearLayout>
@@ -39,56 +39,64 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-        <LinearLayout
-            android:id="@+id/index_cart"
-            android:layout_width="@dimen/common_measure_70dp"
-            android:layout_height="@dimen/common_measure_65dp"
-            android:layout_alignParentRight="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_favorites" />
+
+            <LinearLayout
+                android:id="@+id/index_search"
+                android:layout_width="@dimen/common_measure_70dp"
+                android:layout_height="@dimen/common_measure_65dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_favorites" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/index_cart"
+                android:layout_width="@dimen/common_measure_70dp"
+                android:layout_height="@dimen/common_measure_65dp"
+                android:layout_alignParentRight="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_favorites" />
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/index_search"
-            android:layout_width="@dimen/common_measure_70dp"
-            android:layout_height="@dimen/common_measure_65dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_favorites" />
-        </LinearLayout>
-    </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <com.davis.kangpinhui.views.MySwipeRefreshLayout
             android:id="@+id/index_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ListView
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@null"
-                android:scrollbars="none"/>
+                android:scrollbars="none" />
         </com.davis.kangpinhui.views.MySwipeRefreshLayout>
+
         <LinearLayout
             android:id="@+id/no_linear_shopid"
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <include layout="@layout/fragment_noshopid_layout"/>
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <include layout="@layout/fragment_noshopid_layout" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

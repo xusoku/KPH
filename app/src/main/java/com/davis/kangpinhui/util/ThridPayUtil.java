@@ -21,6 +21,18 @@ public class ThridPayUtil {
     public ThridPayUtil(Activity context){
         this.context=context;
     }
+
+
+//    支付宝去支付跳转：
+//            /alipay/product.do?token=5C271EB237F869484D9EFF7FF23D2895&orderNum=201604272228087903
+//
+//
+//    微信支付：
+//    用ajax调用下面URL地址。
+//            /weixin/product.do?token=5C271EB237F869484D9EFF7FF23D2895&orderNum=201604272228087903&openid=oZCBsuD21rTGrBifWiomwIL350Xk
+
+
+
     /**
      * 微信支付
      */
@@ -49,7 +61,11 @@ public class ThridPayUtil {
         }
     }
 
-
+    /**
+     * 支付宝
+     * @param totalPrice 金额
+     * @param code 订单
+     */
     public void alipay(String totalPrice,String code){
         ZhifubaoPayUtil payUtil=new ZhifubaoPayUtil(context,mHandler);
         payUtil.pay("电影票兑换券","可用于兑换指定电影票", totalPrice+"",code);
