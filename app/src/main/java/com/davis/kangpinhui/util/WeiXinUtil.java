@@ -28,6 +28,7 @@ public class WeiXinUtil {
 	private static String TAG = WeiXinUtil.class.getSimpleName();
 	private static IWXAPI api;
 	private static String APP_ID = "wx3425f79b9118ff62";
+//	AppID：wx962774b475625f93
 	private static Context context;
 
 	public static IWXAPI WXInit(Context context) {
