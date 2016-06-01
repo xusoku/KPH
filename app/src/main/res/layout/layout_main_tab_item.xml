@@ -8,5 +8,5 @@
     android:textSize="@dimen/text_size_17"
                                            android:gravity="center"
                                            android:textColor="@color/main_btn_tab_text_color"
-    android:background="?android:attr/selectableItemBackground"
+    android:background="@color/white"
     android:clickable="true"/>
