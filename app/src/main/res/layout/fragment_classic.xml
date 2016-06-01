@@ -20,6 +20,7 @@
             android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:layout_weight="1"
+            android:textSize="@dimen/text_size_17"
             android:layout_gravity="center_vertical"
             android:background="@color/colormain"
             android:drawablePadding="10dp"
