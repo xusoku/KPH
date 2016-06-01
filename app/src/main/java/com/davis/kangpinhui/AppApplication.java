@@ -11,6 +11,8 @@ import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.activity.LoginActivity;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
+import com.davis.kangpinhui.util.WeiXinUtil;
+import com.tencent.mm.sdk.openapi.IWXAPI;
 
 import java.util.ArrayList;
 
@@ -35,6 +37,7 @@ public class AppApplication extends Application {
 
     public static ArrayList<Category> classiclist = new ArrayList<>();
 
+    public static IWXAPI wxApi;
 
     public static AppApplication getApplication() {
         return instance;
@@ -48,6 +51,9 @@ public class AppApplication extends Application {
 
         token=SharePreferenceUtils.getSharedPreferences().getString("token","");
         shopid=SharePreferenceUtils.getSharedPreferences().getString("shopid","");
+
+
+        wxApi = WeiXinUtil.WXInit(getApplicationContext());
     }
 
     public static boolean isLogin(Context context) {
