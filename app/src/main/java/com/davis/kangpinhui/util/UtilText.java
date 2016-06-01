@@ -23,6 +23,18 @@ import com.davis.kangpinhui.R;
  */
 public class UtilText {
 
+    public static SpannableString getIndexPrice(String str){
+        if(str.contains(".0")){
+            str=str.substring(0,str.length()-2);
+        }
+        SpannableString spanString = new SpannableString(str);
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor("#ff0000"));
+        spanString.setSpan(span, 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spanString;
+    }
+
+
+
     public static SpannableString gettest(String str, int size1,
                                                    int size2) {
         SpannableString spanString = new SpannableString(str);
@@ -39,6 +51,8 @@ public class UtilText {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spanString;
     }
+
+
     public static SpannableString getminenumber(String str) {
         SpannableString spanString = new SpannableString(str);
         ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor("#f19a00"));

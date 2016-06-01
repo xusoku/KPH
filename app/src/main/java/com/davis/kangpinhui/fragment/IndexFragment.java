@@ -36,6 +36,7 @@ import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.BadgeView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
 import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
@@ -237,7 +238,9 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 tv_name.setText(itemData.productname);
 
                 TextView tv_price=holder.getView(R.id.fragment_index_item_price);
-                tv_price.setText(itemData.fprice);
+                tv_price.append("¥ ");
+                tv_price.append((UtilText.getIndexPrice(itemData.fprice)));
+                tv_price.append("/" + itemData.sstandard);
             }
         };
 
