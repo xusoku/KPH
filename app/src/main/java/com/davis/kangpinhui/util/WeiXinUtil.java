@@ -27,7 +27,7 @@ import java.io.RandomAccessFile;
 public class WeiXinUtil {
 	private static String TAG = WeiXinUtil.class.getSimpleName();
 	private static IWXAPI api;
-	private static String APP_ID = "wx5a9e0008073841f8";
+	private static String APP_ID = "wx3425f79b9118ff62";
 	private static Context context;
 
 	public static IWXAPI WXInit(Context context) {
@@ -36,50 +36,6 @@ public class WeiXinUtil {
 		api.registerApp(APP_ID);
 		return api;
 	}
-
-//	// http://open.weixin.qq.com/document/sdk/android/com/tencent/mm/sdk/openapi/WXWebpageObject.html
-//	public static void WXShare(final BaseFragment fragment,String description,String filePath ,String targetUrl) {
-//		LogX.getInstance().d(TAG, "targetUrl=" + targetUrl);
-//		if (!api.isWXAppInstalled()) {
-//			Toast.makeText(context, "亲,你还未安装微信~~", Toast.LENGTH_SHORT).show();
-//			return;
-//		}
-//		WXWebpageObject webpageObject = new WXWebpageObject(targetUrl);
-//
-//		final WXMediaMessage msg = new WXMediaMessage();
-//		
-//		if (filePath == null || filePath.trim().equals(""))
-//			return;
-//		File file = new File(filePath);
-//		if (!file.exists())
-//			return;
-//		Bitmap decodeFile = null;
-//		try {
-//			final BitmapFactory.Options options = BitmapUtil.createOptions(filePath, 100, 100);
-//			decodeFile = BitmapFactory.decodeFile(filePath, options);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		// msg.setThumbImage(extractThumbNail(filePath, 150, 150, true));
-//		msg.setThumbImage(decodeFile);
-//		msg.title = "钱宝";
-//		msg.description = description;
-//		msg.mediaObject = webpageObject;
-//
-//		SendMessageToWX.Req req = new SendMessageToWX.Req();
-//		req.transaction = buildTransaction("appdata");
-//		req.message = msg;
-//		req.scene = SendMessageToWX.Req.WXSceneSession;
-//		api.sendReq(req);
-//		fragment.setOnDialogKeyBackListener(new OnDialogKeyBackListener() {
-//
-//			@Override
-//			public void onKeyBackListener() {
-//				fragment.hideWaitingDialog();
-//			}
-//		});
-//		fragment.showWaitingDialog();
-//	}
 
 	public static void WXShare(final Context activity, String title,String description,Bitmap decodeResource,
 			String targetUrl) {

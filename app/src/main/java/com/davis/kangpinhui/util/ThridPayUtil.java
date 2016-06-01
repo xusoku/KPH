@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.text.TextUtils;
 
+import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.util.alipay.PayResult;
 import com.davis.kangpinhui.util.alipay.ZhifubaoPayUtil;
@@ -24,8 +25,8 @@ public class ThridPayUtil {
      * 微信支付
      */
     public void wxpay(WeixinInfo payData){
-        IWXAPI wxApi= WXAPIFactory.createWXAPI(context, "wx805154ce4d985929");
-//        IWXAPI wxApi=QBaoApplication.getApplication().wxApi;
+//        IWXAPI wxApi= WXAPIFactory.createWXAPI(context, "wx805154ce4d985929");
+        IWXAPI wxApi= AppApplication.getApplication().wxApi;
         if(wxApi!=null){
             if(null != payData  ){
                 PayReq req = new PayReq();
