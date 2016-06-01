@@ -14,11 +14,16 @@
         <com.davis.kangpinhui.views.CustomTypefaceEditText
             android:id="@+id/classic_rootid_et"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_measure_10dp"
             android:hint="@string/classic_search"
-            android:gravity="bottom"
-            android:layout_weight="1" />
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colormain"
+            android:drawablePadding="10dp"
+            android:drawableBottom="@drawable/line"/>
 
         <LinearLayout
             android:id="@+id/classic_rootid_search_linear"
@@ -43,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
+            android:background="@color/white"
             android:orientation="horizontal">
             <ListView
                 android:id="@+id/classic_rootid_list"
@@ -60,7 +66,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/common_measure_10dp"
+                android:layout_marginRight="@dimen/common_measure_10dp"
                 android:layout_weight="1"
+                android:divider="@null"
                 android:scrollbars="none" />
             </com.davis.kangpinhui.views.MySwipeRefreshLayout>
         </LinearLayout>
