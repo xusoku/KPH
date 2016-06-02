@@ -148,11 +148,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.mine_kefu:
                 new AlertDialog.Builder(getActivity())
                         .setTitle("联系客服")
-                        .setMessage("客服电话：18516548570")
+                        .setMessage("客服电话："+AppApplication.kefu)
                         .setPositiveButton("呼叫", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "18516548570"));
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + AppApplication.kefu));
                                 startActivity(intent);
                             }
                         }).setNegativeButton("取消",null)

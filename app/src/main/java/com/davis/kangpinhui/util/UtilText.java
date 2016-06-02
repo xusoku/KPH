@@ -23,6 +23,21 @@ import com.davis.kangpinhui.R;
  */
 public class UtilText {
 
+    public static SpannableString getOrderDetail(String str){
+        if(str.contains(".0")){
+            str=str.substring(0,str.length()-2);
+        }
+        SpannableString spanString = new SpannableString(str);
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor("#F19a00"));
+        spanString.setSpan(span, 0, spanString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spanString;
+    }
+    public static String getDivideZero(String str){
+        if(str.contains(".0")){
+            str=str.substring(0,str.length()-2);
+        }
+        return str;
+    }
     public static SpannableString getIndexPrice(String str){
         if(str.contains(".0")){
             str=str.substring(0,str.length()-2);

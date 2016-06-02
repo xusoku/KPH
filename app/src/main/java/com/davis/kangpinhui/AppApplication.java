@@ -33,6 +33,8 @@ public class AppApplication extends Application {
     public static Extendedinfo extendedinfo;
     public static Address address;
 
+    public static String kefu="4001106648";
+
     public static ArrayList<Shop> shoplist=new ArrayList<>();
 
     public static ArrayList<Category> classiclist = new ArrayList<>();

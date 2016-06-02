@@ -1,7 +1,13 @@
 package com.davis.kangpinhui.activity;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -124,22 +130,30 @@ public class OrderDetailActivity extends BaseActivity {
         if ((payType.equals("0") || payType.equals("4") || payType.equals("1")) && orderDetailOrder.stype.equals("0")) {
             //还未付款，需要继续支付。
             order_detail_state.append("待付款    ");
-            order_detail_state.append(UtilText.getRechargePrice("继续付款"));
+            order_detail_state.append(UtilText.getOrderDetail("继续付款"));
+            order_detail_state.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                }
+            });
+
+        } else if (orderDetailOrder.stype.equals("0")) {
+            order_detail_state.setText("待配送");
         } else if (orderDetailOrder.stype.equals("3")) {
             order_detail_state.setText("配送中");
 
         } else if (orderDetailOrder.stype.equals("6")) {
-            order_detail_state.setText( "已关闭");
+            order_detail_state.setText("已关闭");
         } else {
             order_detail_state.setText("未知");
         }
 
-         CharSequence[] charSequences = {"余额支付", "货到付款", "支付宝支付", "微信支付"};
-         String[] type = {"3", "2", "0", "4"};
+        CharSequence[] charSequences = {"余额支付", "货到付款", "支付宝支付", "微信支付"};
+        String[] type = {"3", "2", "0", "4"};
 
         for (int i = 0; i < type.length; i++) {
-            if(type[i].equals(orderDetailOrder.spaytype)){
+            if (type[i].equals(orderDetailOrder.spaytype)) {
                 order_detail_paytype.setText(charSequences[i]);
             }
         }
@@ -147,11 +161,10 @@ public class OrderDetailActivity extends BaseActivity {
         order_detail_people.setText(orderDetailOrder.snickName);
         order_detail_phone.setText(orderDetailOrder.smobile);
         order_detail_address.setText(orderDetailOrder.saddress);
-        order_detail_heji.setText(orderDetailOrder.fmoney);
-        order_detail_m_oney.setText(orderDetailOrder.fmoney);
+        order_detail_heji.setText("¥" + UtilText.getDivideZero(orderDetailOrder.fmoney));
+        order_detail_m_oney.setText("¥" + UtilText.getDivideZero(orderDetailOrder.fmoney));
         order_detail_time.setText(orderDetailOrder.daddtime);
         order_detail_code.setText(orderDetailOrder.sordernumber);
-
 
     }
 
@@ -164,5 +177,20 @@ public class OrderDetailActivity extends BaseActivity {
     @Override
     public void doClick(View view) {
 
+        switch (view.getId()) {
+            case R.id.order_detail_kefu:
+                new AlertDialog.Builder(this)
+                        .setTitle("联系客服")
+                        .setMessage("客服电话："+AppApplication.kefu)
+                        .setPositiveButton("呼叫", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + AppApplication.kefu));
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("取消",null)
+                        .show();
+                break;
+        }
     }
 }
