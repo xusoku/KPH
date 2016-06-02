@@ -40,6 +40,8 @@
             android:singleLine="true"
             android:hint="请选择收获地址"
             android:ellipsize="end"
+            android:clickable="true"
+            android:onClick="doClick"
             android:textSize="@dimen/text_size_17" />
     </LinearLayout>
 

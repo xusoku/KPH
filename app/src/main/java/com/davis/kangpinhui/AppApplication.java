@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.amap.api.services.core.PoiItem;
 import com.davis.kangpinhui.model.Address;
 import com.davis.kangpinhui.model.Category;
 import com.davis.kangpinhui.model.Extendedinfo;
@@ -34,6 +35,8 @@ public class AppApplication extends Application {
     public static Address address;
 
     public static String kefu="4001106648";
+
+    public static PoiItem poiItem;
 
     public static ArrayList<Shop> shoplist=new ArrayList<>();
 

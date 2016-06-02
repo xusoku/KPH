@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.amap.api.services.core.PoiItem;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.Address;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
@@ -85,6 +86,16 @@ public class AddAddressActivity extends BaseActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PoiItem poiItem=AppApplication.poiItem;
+        if(poiItem!=null){
+            add_address_text.setText(poiItem.getProvinceName()+poiItem.getBusinessArea()+"");
+            add_des_address_text.setText(poiItem.getSnippet()+"");
+        }
     }
 
     @Override
@@ -234,6 +245,9 @@ public class AddAddressActivity extends BaseActivity {
     @Override
     public void doClick(View view) {
         switch (view.getId()) {
+            case R.id.add_address_text:
+               ShopActivity.jumpShopActivity(this,"my_address");
+                break;
             case R.id.delete_address:
                 new AlertDialog.Builder(this).setMessage("确定要删除?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override

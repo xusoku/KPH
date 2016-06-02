@@ -73,10 +73,12 @@ public class PoiKeywordSearchActivity extends Activity implements
 
 
     private Shop shop;
+    private String type="";
 
-    public static void jumpPoiKeywordSearchActivity(Context cot, Shop id) {
+    public static void jumpPoiKeywordSearchActivity(Context cot, Shop id,String str) {
         Intent it = new Intent(cot, PoiKeywordSearchActivity.class);
         it.putExtra("id", id);
+        it.putExtra("type", str);
         cot.startActivity(it);
     }
 
@@ -90,6 +92,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         shop = getIntent().getParcelableExtra("id");
 
+        type=getIntent().getStringExtra("type");
         if (shop == null) {
             return;
         }
@@ -336,6 +339,14 @@ public class PoiKeywordSearchActivity extends Activity implements
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if(!TextUtils.isEmpty(type)&&type.equals("my_address")){
+                    AppApplication.poiItem=list.get(position);
+                    finish();
+                    AppManager.getAppManager().finishActivity(ShopActivity.class);
+                    CommonManager.dismissSoftInputMethod(PoiKeywordSearchActivity.this, listView.getWindowToken());
+                    return;
+                }
                 SharePreferenceUtils.getSharedPreferences().putString("address",list.get(position).getTitle());
                 LatLonPoint s = list.get(position).getLatLonPoint();
                 LatLng latLng = new LatLng(s.getLatitude(), s.getLongitude());

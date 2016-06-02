@@ -44,9 +44,21 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
     private View view;
     private ArrayList<Shop> list;
 
+    private String type="";
 
     public static void jumpShopActivity(Context cot) {
             Intent it = new Intent(cot, ShopActivity.class);
+            cot.startActivity(it);
+    }
+
+    /**
+     * 从我的地址进来的
+     * @param cot
+     * @param str
+     */
+    public static void jumpShopActivity(Context cot,String str) {
+            Intent it = new Intent(cot, ShopActivity.class);
+            it.putExtra("type",str);
             cot.startActivity(it);
     }
 
@@ -58,6 +70,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initVariable() {
         list=new ArrayList<>();
+        type=getIntent().getStringExtra("type");
     }
 
     @Override
@@ -139,7 +152,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this, list.get(position));
+                PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this, list.get(position),type);
             }
         });
     }
