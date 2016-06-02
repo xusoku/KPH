@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -21,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.Category;
 import com.davis.kangpinhui.model.Product;
+import com.davis.kangpinhui.model.Topic;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.model.basemodel.Page;
 import com.davis.kangpinhui.R;
@@ -41,7 +43,7 @@ import retrofit2.Call;
 public class SearchResultActivity extends BaseActivity {
 
     private String key = "";
-    private boolean isSearch=true;
+    private boolean isSearch = true;
     private LinearLayout search_back;
     private LinearLayout search_right_iv;
     private EditText search_et;
@@ -59,38 +61,45 @@ public class SearchResultActivity extends BaseActivity {
     private ArrayList<Product> list;
 
     private boolean isLoadOrRefresh = false;
-    private String sortid="0";
-    private String rootid="0";
-    private String classid="0";
+    private String sortid = "0";
+    private String rootid = "0";
+    private String classid = "0";
 
-    private boolean type=false;
+    //专题数据判断
+    private boolean type = false;
+    private String activid = "";
 
     private PopupWindow classicpopupWindow;
     private PopupWindow sortpopupWindow;
 
+    private CardView search_result_card;
+    private LinearLayout search_result_title_linear;
+
     /**
      * 搜索
      */
-    public static void jumpSearchResultActivity(Context con, String key,boolean isSearch) {
+    public static void jumpSearchResultActivity(Context con, String key, boolean isSearch) {
         Intent it = new Intent(con, SearchResultActivity.class);
         it.putExtra("key", key);
         it.putExtra("issearch", isSearch);
         con.startActivity(it);
     }
+
     /**
-     *专题进入
+     * 专题进入
      */
-    public static void jumpSearchResultActivity(Context con, String title, boolean type,String  activid) {
+    public static void jumpSearchResultActivity(Context con, String title, boolean type, String activid) {
         Intent it = new Intent(con, SearchResultActivity.class);
         it.putExtra("key", title);
         it.putExtra("type", type);
         it.putExtra("activid", activid);
         con.startActivity(it);
     }
+
     /**
      * 分类
      */
-    public static void jumpSearchResultActivity(Context con, String key,boolean isSearch,String classid,String rootid) {
+    public static void jumpSearchResultActivity(Context con, String key, boolean isSearch, String classid, String rootid) {
         Intent it = new Intent(con, SearchResultActivity.class);
         it.putExtra("key", key);
         it.putExtra("issearch", isSearch);
@@ -108,8 +117,9 @@ public class SearchResultActivity extends BaseActivity {
     protected void initVariable() {
 
         key = getIntent().getStringExtra("key");
-        type = getIntent().getBooleanExtra("type",false);
-        if(!type){
+        type = getIntent().getBooleanExtra("type", false);
+        activid = getIntent().getStringExtra("activid");
+        if (!type) {
             isSearch = getIntent().getBooleanExtra("issearch", false);
             classid = getIntent().getStringExtra("classid");
             rootid = getIntent().getStringExtra("rootid");
@@ -127,11 +137,18 @@ public class SearchResultActivity extends BaseActivity {
     @Override
     protected void findViews() {
 
-        if(type){
+        if (type) {
             showTopBar();
             setTitle(key);
         }
 
+        search_result_title_linear = $(R.id.search_result_title_linear);
+        search_result_card = $(R.id.search_result_card);
+
+        if(type){
+            search_result_title_linear.setVisibility(View.GONE);
+            search_result_card.setVisibility(View.GONE);
+        }
         search_back = $(R.id.search_back);
         search_right_iv = $(R.id.search_right_iv);
         search_et = $(R.id.search_et);
@@ -162,8 +179,10 @@ public class SearchResultActivity extends BaseActivity {
                 tv_price.setText(itemData.fprice);
             }
         };
-        View footerView = mInflater.inflate(R.layout.layout_load_more_footer, null);
-        adapter.addFooterView(footerView);
+        if (!type) {
+            View footerView = mInflater.inflate(R.layout.layout_load_more_footer, null);
+            adapter.addFooterView(footerView);
+        }
         search_result_recycler.setAdapter(adapter);
         search_result_myswipe.setDistanceToTriggerSync(CommonManager.dpToPx(200));
         search_result_myswipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -171,15 +190,19 @@ public class SearchResultActivity extends BaseActivity {
             public void onRefresh() {
                 Page = 1;
                 isLoadOrRefresh = true;
-                if(!isSearch){
-                    getProductList(Page,PageSize);
-                }else {
-                    getSearchProductList(Page, PageSize);
+
+                if (type) {
+                    getActivedlist();
+                } else {
+                    if (!isSearch) {
+                        getProductList(Page, PageSize);
+                    } else {
+                        getSearchProductList(Page, PageSize);
+                    }
                 }
 
             }
         });
-
 
 
     }
@@ -189,10 +212,16 @@ public class SearchResultActivity extends BaseActivity {
         super.onActivityLoading();
         Page = 1;
         isLoadOrRefresh = true;
-        if(isSearch){
-            getSearchProductList(Page, PageSize);
-        }else{
-        getProductList(Page, PageSize);}
+
+        if (type) {
+            getActivedlist();
+        } else {
+            if (!isSearch) {
+                getProductList(Page, PageSize);
+            } else {
+                getSearchProductList(Page, PageSize);
+            }
+        } getProductList(Page, PageSize);
     }
 
     @Override
@@ -208,7 +237,7 @@ public class SearchResultActivity extends BaseActivity {
         adapter.setOnItemClickLitener(new CommonRecyclerAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                ProductDetailActivity.jumpProductDetailActivity(SearchResultActivity.this,list.get(position).iproductid);
+                ProductDetailActivity.jumpProductDetailActivity(SearchResultActivity.this, list.get(position).iproductid);
             }
 
             @Override
@@ -216,19 +245,45 @@ public class SearchResultActivity extends BaseActivity {
 
             }
         });
-        search_result_recycler.setOnLoadListener(new LoadMoreRecyclerView.OnLoadListener() {
-            @Override
-            public void onLoad(LoadMoreRecyclerView recyclerView) {
+        if(!type) {
+            search_result_recycler.setOnLoadListener(new LoadMoreRecyclerView.OnLoadListener() {
+                @Override
+                public void onLoad(LoadMoreRecyclerView recyclerView) {
 
-                if(isSearch){
-                    getSearchProductList(++Page, PageSize);
-                }else{
-                   getProductList(++Page, PageSize);
+                    if (isSearch) {
+                        getSearchProductList(++Page, PageSize);
+                    } else {
+                        getProductList(++Page, PageSize);
+                    }
+                    isLoadOrRefresh = false;
                 }
-                isLoadOrRefresh = false;
+            });
+        }
+    }
+
+    /**
+     * 专题数据
+     */
+    private void getActivedlist() {
+        Call<BaseModel<Topic<ArrayList<Product>>>> call = ApiInstant.getInstant().getActivelist(AppApplication.apptype, AppApplication.shopid, activid);
+
+        call.enqueue(new ApiCallback<BaseModel<Topic<ArrayList<Product>>>>() {
+            @Override
+            public void onSucssce(BaseModel<Topic<ArrayList<Product>>> topicBaseModel) {
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingSuccess();
+                if (isLoadOrRefresh) {
+                    list.clear();
+                }
+                list.addAll(topicBaseModel.object.list);
+                adapter.notifyDataSetChanged();
             }
 
-
+            @Override
+            public void onFailure() {
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingFailed();
+            }
         });
     }
 
@@ -261,7 +316,7 @@ public class SearchResultActivity extends BaseActivity {
                 if (list.size() == 0) {
                     onActivityFirstLoadingNoData();
                     search_result_recycler.onLoadUnavailable();
-                } else if (TotalPage == Page ) {
+                } else if (TotalPage == Page) {
                     search_result_recycler.onLoadSucess(false);
                 } else {
                     search_result_recycler.onLoadSucess(true);
@@ -287,7 +342,7 @@ public class SearchResultActivity extends BaseActivity {
      */
     private void getProductList(int page, int pagesize) {
         Call<BaseModel<Page<ArrayList<Product>>>> call = ApiInstant.getInstant().getProductlist(AppApplication.apptype, sortid,
-                rootid,classid,AppApplication.shopid, page + "", pagesize + "");
+                rootid, classid, AppApplication.shopid, page + "", pagesize + "");
 
         call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.model.basemodel.Page<ArrayList<Product>>>>() {
             @Override
@@ -308,7 +363,7 @@ public class SearchResultActivity extends BaseActivity {
                 if (list.size() == 0) {
                     onActivityFirstLoadingNoData();
                     search_result_recycler.onLoadUnavailable();
-                } else if (TotalPage != Page ) {
+                } else if (TotalPage != Page) {
                     search_result_recycler.onLoadSucess(true);
                 } else {
                     search_result_recycler.onLoadSucess(false);
@@ -333,16 +388,16 @@ public class SearchResultActivity extends BaseActivity {
             case R.id.search_back:
                 break;
             case R.id.search_all_sort:
-                sortpopupWindow.showAsDropDown(search_all_classic,0,5);
+                sortpopupWindow.showAsDropDown(search_all_classic, 0, 5);
                 break;
             case R.id.search_all_classic:
-                classicpopupWindow.showAsDropDown(search_all_classic,0,5);
+                classicpopupWindow.showAsDropDown(search_all_classic, 0, 5);
                 break;
             case R.id.search_right_iv:
                 key = search_et.getText().toString().trim();
                 if (!TextUtils.isEmpty(key)) {
                     CommonManager.dismissSoftInputMethod(this, view.getWindowToken());
-                    isSearch=true;
+                    isSearch = true;
                     startActivityLoading();
                 }
                 break;
@@ -357,8 +412,8 @@ public class SearchResultActivity extends BaseActivity {
     private void initPopupClassicWindow() {
         // TODO Auto-generated method stub
         View view = getLayoutInflater().inflate(R.layout.activity_search_result_pop_classic, null);
-        pop_list_classic_main=$(view,R.id.pop_list_classic_main);
-        pop_list_classic=$(view,R.id.pop_list_classic);
+        pop_list_classic_main = $(view, R.id.pop_list_classic_main);
+        pop_list_classic = $(view, R.id.pop_list_classic);
         classicpopupWindow = new PopupWindow(view,
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -379,14 +434,15 @@ public class SearchResultActivity extends BaseActivity {
     }
 
     private ListView pop_list_classic_sort;
+
     //初始化排序
     private void initPopupSortWindow() {
         // TODO Auto-generated method stub
         View view = getLayoutInflater().inflate(R.layout.activity_search_result_pop_classic, null);
-        ListView pop_list_classic_main=$(view, R.id.pop_list_classic_main);
+        ListView pop_list_classic_main = $(view, R.id.pop_list_classic_main);
         pop_list_classic_main.setVisibility(View.GONE);
-        LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-        pop_list_classic_sort=$(view,R.id.pop_list_classic);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        pop_list_classic_sort = $(view, R.id.pop_list_classic);
         pop_list_classic_sort.setLayoutParams(params);
         sortpopupWindow = new PopupWindow(view,
                 RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -408,7 +464,7 @@ public class SearchResultActivity extends BaseActivity {
     }
 
     private void getSortData() {
-        final ArrayList<String> list=new ArrayList<>();
+        final ArrayList<String> list = new ArrayList<>();
         list.add("销量排序");
         list.add("价格排序");
         list.add("最新上线");
@@ -434,10 +490,10 @@ public class SearchResultActivity extends BaseActivity {
                 closePopuw();
                 Page = 1;
                 isLoadOrRefresh = true;
-                if(isSearch){
-                    getSearchProductList(Page,PageSize);
-                }else{
-                    getProductList(Page,PageSize);
+                if (isSearch) {
+                    getSearchProductList(Page, PageSize);
+                } else {
+                    getProductList(Page, PageSize);
                 }
                 search_all_sort_text.setText(list.get(position));
             }
@@ -445,9 +501,9 @@ public class SearchResultActivity extends BaseActivity {
     }
 
 
-    private void getClassicData(){
-        if(AppApplication.classiclist.size()>0){
-            if(!AppApplication.classiclist.get(0).name.equals("全部分类")) {
+    private void getClassicData() {
+        if (AppApplication.classiclist.size() > 0) {
+            if (!AppApplication.classiclist.get(0).name.equals("全部分类")) {
                 Category category = new Category();
                 category.name = "全部分类";
                 category.id = "0";
@@ -457,9 +513,9 @@ public class SearchResultActivity extends BaseActivity {
                 category.clist.add(category1);
                 AppApplication.classiclist.add(0, category);
             }
-            AppApplication.classiclist.get(0).isOnclick=true;
+            AppApplication.classiclist.get(0).isOnclick = true;
             bindClassicView();
-        }else {
+        } else {
             Call<BaseModel<ArrayList<Category>>> call = ApiInstant.getInstant().categoryLevel2(AppApplication.apptype, "");
             call.enqueue(new ApiCallback<BaseModel<ArrayList<Category>>>() {
                 @Override
@@ -467,6 +523,7 @@ public class SearchResultActivity extends BaseActivity {
                     AppApplication.classiclist.addAll(arrayListBaseModel.object);
                     getClassicData();
                 }
+
                 @Override
                 public void onFailure() {
                 }
@@ -474,26 +531,26 @@ public class SearchResultActivity extends BaseActivity {
         }
     }
 
-    private void bindClassicView(){
-        final  CommonBaseAdapter adapter=new CommonBaseAdapter<Category>(this,AppApplication.classiclist,R.layout.fragment_classic_left_item) {
+    private void bindClassicView() {
+        final CommonBaseAdapter adapter = new CommonBaseAdapter<Category>(this, AppApplication.classiclist, R.layout.fragment_classic_left_item) {
             @Override
             public void convert(ViewHolder holder, Category itemData, int position) {
-                TextView textView=holder.getView(R.id.classic_rootid_list_item);
+                TextView textView = holder.getView(R.id.classic_rootid_list_item);
                 textView.setText(itemData.name);
-                if(itemData.isOnclick){
+                if (itemData.isOnclick) {
 
                     textView.setTextColor(getResources().getColor(R.color.colormain));
-                }else {
+                } else {
                     textView.setTextColor(getResources().getColor(R.color.black));
                 }
             }
         };
         pop_list_classic_main.setAdapter(adapter);
-        pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this,AppApplication.classiclist.get(0).clist,R.layout.fragment_classic_left_item) {
+        pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, AppApplication.classiclist.get(0).clist, R.layout.fragment_classic_left_item) {
             @Override
             public void convert(ViewHolder holder, Category itemData, int position) {
-                TextView textView=holder.getView(R.id.classic_rootid_list_item);
-                textView.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
+                TextView textView = holder.getView(R.id.classic_rootid_list_item);
+                textView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
                 textView.setTextColor(getResources().getColor(R.color.black));
                 textView.setText(itemData.name);
             }
@@ -523,18 +580,18 @@ public class SearchResultActivity extends BaseActivity {
         pop_list_classic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long ids) {
-                Category category=null;
-                for(Category category1 : AppApplication.classiclist){
-                    if(category1.id.equals(rootid)){
-                        category=category1;
+                Category category = null;
+                for (Category category1 : AppApplication.classiclist) {
+                    if (category1.id.equals(rootid)) {
+                        category = category1;
                     }
                 }
-                if(category!=null)
-                classid= category.clist.get(position).id;
+                if (category != null)
+                    classid = category.clist.get(position).id;
                 Page = 0;
                 isLoadOrRefresh = true;
-                isSearch=false;
-                getProductList(Page++,PageSize);
+                isSearch = false;
+                getProductList(Page++, PageSize);
                 closePopuw();
                 search_et.setText("");
                 search_all_classic_text.setText(category.clist.get(position).name);
@@ -542,7 +599,7 @@ public class SearchResultActivity extends BaseActivity {
         });
     }
 
-    private void closePopuw(){
+    private void closePopuw() {
         if (sortpopupWindow != null && sortpopupWindow.isShowing()) {
             sortpopupWindow.dismiss();
         }
@@ -550,6 +607,7 @@ public class SearchResultActivity extends BaseActivity {
             classicpopupWindow.dismiss();
         }
     }
+
     class popupWindowclickListener implements PopupWindow.OnDismissListener {
         @Override
         public void onDismiss() {

@@ -371,7 +371,7 @@ public interface ApiService {
 
     //25 专题数据获取
     @GET("product/active.do")
-    Call<BaseModel<Topic>> getActivelist(
+    Call<BaseModel<Topic<ArrayList<Product>>>> getActivelist(
             @Query("apptype") String apptype,
             @Query("shopid") String shopid,
             @Query("activeid") String activeid

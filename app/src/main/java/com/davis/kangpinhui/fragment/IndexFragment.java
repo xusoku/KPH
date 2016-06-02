@@ -212,7 +212,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     public void getContentData() {
         content.setAdapter(new CommonBaseAdapter<Index.Productlist>(getActivity(), recommandList, R.layout.fragment_index_item_layout) {
             @Override
-            public void convert(ViewHolder holder, Index.Productlist itemData, int position) {
+            public void convert(ViewHolder holder, final Index.Productlist itemData, int position) {
 
                 String image = itemData.picurl;
                 ArrayList<Product> list = itemData.list;
@@ -223,7 +223,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 holder.getView(R.id.fragment_index_item_image).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        SearchResultActivity.jumpSearchResultActivity();
+                        SearchResultActivity.jumpSearchResultActivity(getActivity(),itemData.title,true,itemData.id);
                     }
                 });
                 getContentitemData((RecyclerView) holder.getView(R.id.fragment_index_item_recycler), list);
