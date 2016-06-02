@@ -17,6 +17,7 @@ import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.model.TakeGoodsdate;
 import com.davis.kangpinhui.model.Topic;
 import com.davis.kangpinhui.model.UserInfo;
+import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.model.basemodel.Page;
 
@@ -398,6 +399,20 @@ public interface ApiService {
     Call<BaseModel<Extendedinfo>> getExtendedInfo(
             @Query("apptype") String apptype,
             @Query("shopid") String shopid,
+            @Query("token") String token
+    );
+    //30 商品微信支付
+    @GET("weixin/pay/product.do")
+    Call<BaseModel<WeixinInfo>> getWeixinProductInfo(
+            @Query("apptype") String apptype,
+            @Query("orderNum") String shopid,
+            @Query("token") String token
+    );
+    //31 商品充值支付
+    @GET("weixin/pay/chongzhi.do")
+    Call<BaseModel<WeixinInfo>> getWeixinChongzhiInfo(
+            @Query("apptype") String apptype,
+            @Query("orderNum") String shopid,
             @Query("token") String token
     );
 

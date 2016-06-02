@@ -17,6 +17,7 @@ import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.Product;
 import com.davis.kangpinhui.model.TakeGoodsdate;
+import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
@@ -416,7 +417,7 @@ public class OrderActivity extends BaseActivity {
     }
 
     private void saveByCode(String beizhu) {
-        Call<BaseModel> call=ApiInstant.getInstant().saveProductCode(AppApplication.apptype,AppApplication.shopid,AppApplication.address.iuseraddressid,timeTape,beizhu,code,AppApplication.token);
+        Call<BaseModel> call=ApiInstant.getInstant().saveProductCode(AppApplication.apptype, AppApplication.shopid, AppApplication.address.iuseraddressid, timeTape, beizhu, code, AppApplication.token);
             call.enqueue(new ApiCallback<BaseModel>() {
                 @Override
                 public void onSucssce(BaseModel baseModel) {
@@ -451,8 +452,11 @@ public class OrderActivity extends BaseActivity {
             public void onSucssce(BaseModel<Order> baseModel) {
                 ToastUitl.showToast("订单提交成功");
                 EventBus.getDefault().post(new Extendedinfo());
-
-                thridPayUtil.alipay("0.01",baseModel.object.sordernumber);
+                if(payTape.equals("0")) {
+                    thridPayUtil.alipay("0.01", baseModel.object.sordernumber);
+                }else if(payTape.equals("4")){
+                    getWeixinPay(baseModel.object.sordernumber);
+                }
       }
 
             @Override
@@ -460,5 +464,21 @@ public class OrderActivity extends BaseActivity {
 
             }
         });
+    }
+
+    public void getWeixinPay(String orderId){
+
+        Call<BaseModel<WeixinInfo>> call=ApiInstant.getInstant().getWeixinProductInfo(AppApplication.apptype,orderId,AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel<WeixinInfo>>() {
+            @Override
+            public void onSucssce(BaseModel<WeixinInfo> weixinInfoBaseModel) {
+                thridPayUtil.wxpay(weixinInfoBaseModel.object);
+            }
+            @Override
+            public void onFailure() {
+
+            }
+        });
+
     }
 }
