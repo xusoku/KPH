@@ -238,6 +238,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 tv_name.setText(itemData.productname);
 
                 TextView tv_price=holder.getView(R.id.fragment_index_item_price);
+                tv_price.setText("");
                 tv_price.append("¥ ");
                 tv_price.append((UtilText.getIndexPrice(itemData.fprice)));
                 tv_price.append("/" + itemData.sstandard);

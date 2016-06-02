@@ -32,7 +32,7 @@
             android:name="com.amap.api.v2.apikey"
             android:value="fb143d27d0d652393ccb54f86fb4afd6" />
         <!-- 定位需要的服务 -->
-        <service android:name="com.amap.api.location.APSService"></service>
+        <service android:name="com.amap.api.location.APSService" />
 
         <activity
             android:name=".MainActivity"
@@ -113,8 +113,10 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.OrderDetailActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.OrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.PayResultActivity"></activity>
     </application>
 
 </manifest>
