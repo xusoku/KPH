@@ -10,5 +10,6 @@
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:divider="@null"
+        android:listSelector="@null"
         android:dividerHeight="@dimen/common_measure_10dp"/>
 </LinearLayout>

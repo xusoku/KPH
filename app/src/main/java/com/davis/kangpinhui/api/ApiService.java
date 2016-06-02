@@ -185,7 +185,7 @@ public interface ApiService {
 
     //12.1 我的订单详情
     @GET("order/get.do")
-    Call<BaseModel<Order<OrderDetail>>> myOrderDetail(
+    Call<BaseModel<Order<ArrayList<OrderDetail>>>> myOrderDetail(
             @Query("apptype") String apptype,
             @Query("ordernum") String ordernum,
             @Query("token") String token

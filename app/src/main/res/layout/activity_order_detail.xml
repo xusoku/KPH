@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <ScrollView
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -15,6 +16,7 @@
             android:orientation="vertical">
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/order_detail_state"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_measure_120dp"
                 android:gravity="center"
@@ -66,7 +68,10 @@
                 android:layout_height="@dimen/common_measure_10dp"
                 android:background="@color/colorlightgray" />
 
-            <include layout="@layout/activity_order_item" />
+            <com.davis.kangpinhui.views.StretchedListView
+                android:id="@+id/order_detail_lst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <View
                 android:layout_width="match_parent"
@@ -260,10 +265,12 @@
 
 
             <TextView
+                android:id="@+id/order_detail_kefu"
                 android:layout_width="match_parent"
                 android:textColor="@color/white"
                 android:text="联系客服"
                 android:layout_margin="@dimen/common_measure_20dp"
+                android:background="@drawable/bg_miancolor_unselect"
                 android:textSize="@dimen/text_size_17"
                 android:layout_height="@dimen/common_measure_60dp" />
         </LinearLayout>

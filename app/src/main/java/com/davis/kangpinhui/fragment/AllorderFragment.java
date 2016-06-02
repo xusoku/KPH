@@ -80,7 +80,7 @@ public class AllorderFragment extends BaseFragment {
                 holder.getView(R.id.allorder_item_number).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        OrderDetailActivity.jumpOrderDetailActivity(mContext);
+                        OrderDetailActivity.jumpOrderDetailActivity(mContext,itemData.sordernumber);
                     }
                 });
 

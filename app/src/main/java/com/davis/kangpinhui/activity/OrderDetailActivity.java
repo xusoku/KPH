@@ -5,19 +5,42 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
+import com.davis.kangpinhui.adapter.base.ViewHolder;
+import com.davis.kangpinhui.api.ApiCallback;
+import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.model.Order;
+import com.davis.kangpinhui.model.OrderDetail;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.util.UtilText;
+import com.davis.kangpinhui.views.StretchedListView;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
 
 public class OrderDetailActivity extends BaseActivity {
 
-    public static void jumpOrderDetailActivity(Context cot) {
-        if(AppApplication.isLogin(cot)) {
+    public static void jumpOrderDetailActivity(Context cot, String code) {
+        if (AppApplication.isLogin(cot)) {
             Intent it = new Intent(cot, OrderDetailActivity.class);
+            it.putExtra("code", code);
             cot.startActivity(it);
         }
     }
+
+    private String code = "";
+
+    private TextView order_detail_state, order_detail_people, order_detail_phone,
+            order_detail_address, order_detail_paytype, order_detail_heji, order_detail_m_oney, order_detail_time,
+            order_detail_code, order_detail_kefu;
+
+    private StretchedListView order_detail_lst;
 
     @Override
     protected int setLayoutView() {
@@ -27,18 +50,111 @@ public class OrderDetailActivity extends BaseActivity {
     @Override
     protected void initVariable() {
 
+        code = getIntent().getStringExtra("code");
+
     }
 
     @Override
     protected void findViews() {
         showTopBar();
         setTitle("订单详情");
+        order_detail_state = $(R.id.order_detail_state);
+        order_detail_people = $(R.id.order_detail_people);
+        order_detail_phone = $(R.id.order_detail_phone);
+        order_detail_address = $(R.id.order_detail_address);
+        order_detail_paytype = $(R.id.order_detail_paytype);
+        order_detail_heji = $(R.id.order_detail_heji);
+        order_detail_m_oney = $(R.id.order_detail_m_oney);
+        order_detail_time = $(R.id.order_detail_time);
+        order_detail_code = $(R.id.order_detail_code);
+        order_detail_kefu = $(R.id.order_detail_kefu);
+        order_detail_lst = $(R.id.order_detail_lst);
     }
 
     @Override
     protected void initData() {
 
+        startActivityLoading();
     }
+
+    @Override
+    public void startActivityLoading() {
+        super.startActivityLoading();
+
+        Call<BaseModel<Order<ArrayList<OrderDetail>>>> call = ApiInstant.getInstant().myOrderDetail(AppApplication.apptype, code, AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel<Order<ArrayList<OrderDetail>>>>() {
+            @Override
+            public void onSucssce(BaseModel<Order<ArrayList<OrderDetail>>> orderBaseModel) {
+                onActivityLoadingSuccess();
+
+                Order<ArrayList<OrderDetail>> orderDetailOrder = orderBaseModel.object;
+
+                bindView(orderDetailOrder);
+
+
+                ArrayList<OrderDetail> list = orderDetailOrder.list;
+                bindList(list);
+            }
+
+            @Override
+            public void onFailure() {
+                onActivityLoadingFailed();
+            }
+        });
+
+    }
+
+    private void bindList(ArrayList<OrderDetail> list) {
+        order_detail_lst.setAdapter(new CommonBaseAdapter<OrderDetail>(this, list, R.layout.activity_order_item) {
+            @Override
+            public void convert(ViewHolder holder, OrderDetail itemData, int position) {
+                holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
+                holder.setText(R.id.order_comfi_item_title, itemData.sproductname);
+                holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
+                holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fmoney);
+                holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.icount));
+            }
+        });
+    }
+
+    private void bindView(Order<ArrayList<OrderDetail>> orderDetailOrder) {
+
+
+        String payType = orderDetailOrder.spaytype;
+        if ((payType.equals("0") || payType.equals("4") || payType.equals("1")) && orderDetailOrder.stype.equals("0")) {
+            //还未付款，需要继续支付。
+            order_detail_state.append("待付款    ");
+            order_detail_state.append(UtilText.getRechargePrice("继续付款"));
+
+        } else if (orderDetailOrder.stype.equals("3")) {
+            order_detail_state.setText("配送中");
+
+        } else if (orderDetailOrder.stype.equals("6")) {
+            order_detail_state.setText( "已关闭");
+        } else {
+            order_detail_state.setText("未知");
+        }
+
+         CharSequence[] charSequences = {"余额支付", "货到付款", "支付宝支付", "微信支付"};
+         String[] type = {"3", "2", "0", "4"};
+
+        for (int i = 0; i < type.length; i++) {
+            if(type[i].equals(orderDetailOrder.spaytype)){
+                order_detail_paytype.setText(charSequences[i]);
+            }
+        }
+
+        order_detail_people.setText(orderDetailOrder.snickName);
+        order_detail_phone.setText(orderDetailOrder.smobile);
+        order_detail_address.setText(orderDetailOrder.saddress);
+        order_detail_heji.setText(orderDetailOrder.fmoney);
+        order_detail_m_oney.setText(orderDetailOrder.fmoney);
+        order_detail_time.setText(orderDetailOrder.daddtime);
+        order_detail_code.setText(orderDetailOrder.sordernumber);
+
+
+    }
+
 
     @Override
     protected void setListener() {
