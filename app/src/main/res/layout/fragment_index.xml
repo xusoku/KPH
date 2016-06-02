@@ -42,7 +42,7 @@
 
             <LinearLayout
                 android:id="@+id/index_search"
-                android:layout_width="@dimen/common_measure_70dp"
+                android:layout_width="@dimen/common_measure_60dp"
                 android:layout_height="@dimen/common_measure_65dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
@@ -53,12 +53,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_favorites" />
+                    android:src="@mipmap/index_search" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/index_cart"
-                android:layout_width="@dimen/common_measure_70dp"
+                android:layout_width="@dimen/common_measure_60dp"
                 android:layout_height="@dimen/common_measure_65dp"
                 android:layout_alignParentRight="true"
                 android:background="?android:attr/selectableItemBackground"
@@ -68,7 +68,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_favorites" />
+                    android:src="@mipmap/index_cart" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

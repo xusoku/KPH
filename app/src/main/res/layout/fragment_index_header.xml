@@ -29,7 +29,7 @@
             <ImageView
                 android:layout_width="@dimen/common_measure_64dp"
                 android:layout_height="@dimen/common_measure_64dp"
-                android:src="@mipmap/ic_favorites" />
+                android:src="@mipmap/index_classic" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
             <ImageView
                 android:layout_width="@dimen/common_measure_64dp"
                 android:layout_height="@dimen/common_measure_64dp"
-                android:src="@mipmap/ic_favorites" />
+                android:src="@mipmap/index_tuangou" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
             <ImageView
                 android:layout_width="@dimen/common_measure_64dp"
                 android:layout_height="@dimen/common_measure_64dp"
-                android:src="@mipmap/ic_favorites" />
+                android:src="@mipmap/index_vip_rechange" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:layout_width="wrap_content"
