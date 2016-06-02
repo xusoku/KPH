@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_120dp"
         android:textColor="@color/black"
@@ -15,8 +15,35 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_10dp"
-
-
-
+        android:background="@color/colorlightgray"
         />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_100dp">
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Android"
+            android:textSize="@dimen/text_size_17"
+            android:layout_margin="@dimen/common_measure_10dp"
+            android:textColor="@color/black"/>
+
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/text_size_17"
+            android:layout_margin="@dimen/common_measure_10dp"
+            android:text="Android"
+            android:textColor="@color/black"/>
+
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_17"
+            android:text="asdfasdf"
+
+            android:textColor="@color/colorgray"/>
+
+    </RelativeLayout>
 </LinearLayout>
