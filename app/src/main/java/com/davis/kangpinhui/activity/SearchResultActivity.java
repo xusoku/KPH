@@ -221,7 +221,7 @@ public class SearchResultActivity extends BaseActivity {
             } else {
                 getSearchProductList(Page, PageSize);
             }
-        } getProductList(Page, PageSize);
+        }
     }
 
     @Override
@@ -277,6 +277,10 @@ public class SearchResultActivity extends BaseActivity {
                 }
                 list.addAll(topicBaseModel.object.list);
                 adapter.notifyDataSetChanged();
+                if (list.size() == 0) {
+                    onActivityFirstLoadingNoData();
+                }
+                search_result_recycler.onLoadUnavailable();
             }
 
             @Override
