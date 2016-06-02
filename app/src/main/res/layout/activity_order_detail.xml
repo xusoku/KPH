@@ -5,4 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_120dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_22"
+        android:gravity="center"
+        android:text="带支付"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_10dp"
+
+
+
+        />
 </LinearLayout>
