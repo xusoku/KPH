@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.MainActivity;
 import com.davis.kangpinhui.activity.PolygonActivity;
+import com.davis.kangpinhui.activity.SearchResultActivity;
 import com.davis.kangpinhui.model.Banner;
 import com.davis.kangpinhui.model.Index;
 import com.davis.kangpinhui.model.Product;
@@ -67,10 +68,10 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private TextView no_shopid_see_sending;
     private MySwipeRefreshLayout index_refresh;
 
-    private boolean isRefreshOrLoad=false;
+    private boolean isRefreshOrLoad = false;
 
-    ArrayList<Banner> bannerList=new ArrayList<>();
-    ArrayList<Index.Productlist> recommandList=new ArrayList<Index.Productlist>();
+    ArrayList<Banner> bannerList = new ArrayList<>();
+    ArrayList<Index.Productlist> recommandList = new ArrayList<Index.Productlist>();
 
     BadgeView backgroundDefaultBadge;
 
@@ -87,24 +88,24 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     @Override
     protected void findViews(View view) {
 
-        headerView= (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_index_header,null);
+        headerView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_index_header, null);
 
-        index_loopbanner=$(headerView,R.id.index_loopbanner);
-        index_classic=$(headerView,R.id.index_classic);
-        index_tuan=$(headerView,R.id.index_tuan);
-        index_rechange=$(headerView,R.id.index_rechange);
+        index_loopbanner = $(headerView, R.id.index_loopbanner);
+        index_classic = $(headerView, R.id.index_classic);
+        index_tuan = $(headerView, R.id.index_tuan);
+        index_rechange = $(headerView, R.id.index_rechange);
 
 
-        no_linear_shopid=$(view,R.id.no_linear_shopid);
-        no_shopid_add_address=$(view,R.id.no_shopid_add_address);
-        no_shopid_see_sending=$(view,R.id.no_shopid_see_sending);
-        index_refresh=$(view,R.id.index_refresh);
-        index_local_select=$(view,R.id.index_local_select);
-        index_local_select_linear=$(view,R.id.index_local_select_linear);
-        index_cart=$(view,R.id.index_cart);
-        index_search=$(view,R.id.index_search);
+        no_linear_shopid = $(view, R.id.no_linear_shopid);
+        no_shopid_add_address = $(view, R.id.no_shopid_add_address);
+        no_shopid_see_sending = $(view, R.id.no_shopid_see_sending);
+        index_refresh = $(view, R.id.index_refresh);
+        index_local_select = $(view, R.id.index_local_select);
+        index_local_select_linear = $(view, R.id.index_local_select_linear);
+        index_cart = $(view, R.id.index_cart);
+        index_search = $(view, R.id.index_search);
 
-        content=$(view,R.id.content);
+        content = $(view, R.id.content);
         content.addHeaderView(headerView);
         index_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -116,31 +117,32 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         });
 
         index_loopbanner.setPageIndicator(true);
-        backgroundDefaultBadge= new BadgeView(getActivity());
+        backgroundDefaultBadge = new BadgeView(getActivity());
         backgroundDefaultBadge.setTargetView(index_cart);
 
-        String add= SharePreferenceUtils.getSharedPreferences().getString("address","选择配送地址");
-        index_local_select.setText("送至:"+add);
+        String add = SharePreferenceUtils.getSharedPreferences().getString("address", "选择配送地址");
+        index_local_select.setText("送至:" + add);
     }
 
     @Override
     protected void initData() {
 
-        if(!TextUtils.isEmpty(AppApplication.shopid)){
+        if (!TextUtils.isEmpty(AppApplication.shopid)) {
             no_linear_shopid.setVisibility(View.GONE);
             startFragmentLoading();
-        }else{
+        } else {
             no_linear_shopid.setVisibility(View.VISIBLE);
         }
 
     }
 
-    public void setcartNumber(){
-        String number=AppApplication.getCartcount();
-        if(!TextUtils.isEmpty(number)&&!number.equals("0")&&!number.equals("0.0")&&backgroundDefaultBadge!=null)
-        backgroundDefaultBadge.setText((int)Float.parseFloat(number)+"");
+    public void setcartNumber() {
+        String number = AppApplication.getCartcount();
+        if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0") && backgroundDefaultBadge != null)
+            backgroundDefaultBadge.setText((int) Float.parseFloat(number) + "");
     }
-    public void setindex_local_select(String str){
+
+    public void setindex_local_select(String str) {
         index_local_select.setText("送至:" + str);
         initData();
     }
@@ -149,12 +151,12 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     protected void onFragmentLoading() {
         super.onFragmentLoading();
         LogUtils.e(TAG, "onFragmentLoading");
-        isRefreshOrLoad=true;
+        isRefreshOrLoad = true;
         getDate();
     }
 
     private void getDate() {
-        Call<BaseModel<Index>> call= ApiInstant.getInstant().getIndex(AppApplication.apptype,AppApplication.shopid,"");
+        Call<BaseModel<Index>> call = ApiInstant.getInstant().getIndex(AppApplication.apptype, AppApplication.shopid, "");
         call.enqueue(new ApiCallback<BaseModel<Index>>() {
             @Override
             public void onSucssce(BaseModel<Index> indexBaseModel) {
@@ -183,7 +185,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         });
     }
 
-    public void getBannerData(){
+    public void getBannerData() {
         index_loopbanner.setPageAdapter(new LoopPageAdapter<Banner>(mContext, bannerList, R.layout.layout_main_banner_item) {
 
             @Override
@@ -207,7 +209,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     }
 
 
-    public void getContentData(){
+    public void getContentData() {
         content.setAdapter(new CommonBaseAdapter<Index.Productlist>(getActivity(), recommandList, R.layout.fragment_index_item_layout) {
             @Override
             public void convert(ViewHolder holder, Index.Productlist itemData, int position) {
@@ -218,26 +220,33 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
                 holder.setImageByUrl(R.id.fragment_index_item_image, image);
 
-                    getContentitemData((RecyclerView) holder.getView(R.id.fragment_index_item_recycler), list);
+                holder.getView(R.id.fragment_index_item_image).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        SearchResultActivity.jumpSearchResultActivity();
+                    }
+                });
+                getContentitemData((RecyclerView) holder.getView(R.id.fragment_index_item_recycler), list);
             }
         });
     }
 
     private CommonRecyclerAdapter<Product> adapter;
-    public void getContentitemData(RecyclerView loadrecycler,final ArrayList<Product> list){
+
+    public void getContentitemData(RecyclerView loadrecycler, final ArrayList<Product> list) {
 
 
-        adapter= new CommonRecyclerAdapter<Product>(getActivity(),list,R.layout.fragment_index_item_layout_item){
+        adapter = new CommonRecyclerAdapter<Product>(getActivity(), list, R.layout.fragment_index_item_layout_item) {
             @Override
             public void convert(BaseViewHolder holder, Product itemData, int position) {
 
-                ImageView iv=holder.getView(R.id.fragment_index_item_image_item);
+                ImageView iv = holder.getView(R.id.fragment_index_item_image_item);
                 Glide.with(getActivity()).load(itemData.picurl).into(iv);
 
-                TextView tv_name=holder.getView(R.id.fragment_index_item_name);
+                TextView tv_name = holder.getView(R.id.fragment_index_item_name);
                 tv_name.setText(itemData.productname);
 
-                TextView tv_price=holder.getView(R.id.fragment_index_item_price);
+                TextView tv_price = holder.getView(R.id.fragment_index_item_price);
                 tv_price.setText("");
                 tv_price.append("¥ ");
                 tv_price.append((UtilText.getIndexPrice(itemData.fprice)));
@@ -245,7 +254,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             }
         };
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         loadrecycler.setLayoutManager(linearLayoutManager);
 
@@ -254,7 +263,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onItemClick(View itemView, int position) {
                 ToastUitl.showToast("" + position);
-                ProductDetailActivity.jumpProductDetailActivity(getActivity(),list.get(position).iproductid);
+                ProductDetailActivity.jumpProductDetailActivity(getActivity(), list.get(position).iproductid);
             }
 
             @Override
@@ -279,13 +288,13 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.index_local_select_linear:
-                Intent it=new Intent(getActivity(), ShopActivity.class);
-                startActivityForResult(it,0);
+                Intent it = new Intent(getActivity(), ShopActivity.class);
+                startActivityForResult(it, 0);
                 break;
             case R.id.index_classic:
-                MainActivity activity= (MainActivity) getActivity();
+                MainActivity activity = (MainActivity) getActivity();
                 activity.change2();
                 break;
             case R.id.index_rechange:
@@ -301,7 +310,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 SearchActivity.jumpSearchActivity(getActivity(), "");
                 break;
             case R.id.no_shopid_see_sending:
-                if(AppApplication.shoplist.size()>0)
+                if (AppApplication.shoplist.size() > 0)
                     PolygonActivity.jumpPolygonActivity(getActivity(), AppApplication.shoplist);
                 else
                     ToastUitl.showToast("暂无数据");

@@ -63,16 +63,33 @@ public class SearchResultActivity extends BaseActivity {
     private String rootid="0";
     private String classid="0";
 
+    private boolean type=false;
 
     private PopupWindow classicpopupWindow;
     private PopupWindow sortpopupWindow;
 
+    /**
+     * 搜索
+     */
     public static void jumpSearchResultActivity(Context con, String key,boolean isSearch) {
         Intent it = new Intent(con, SearchResultActivity.class);
         it.putExtra("key", key);
         it.putExtra("issearch", isSearch);
         con.startActivity(it);
     }
+    /**
+     *专题进入
+     */
+    public static void jumpSearchResultActivity(Context con, String title, boolean type,String  activid) {
+        Intent it = new Intent(con, SearchResultActivity.class);
+        it.putExtra("key", title);
+        it.putExtra("type", type);
+        it.putExtra("activid", activid);
+        con.startActivity(it);
+    }
+    /**
+     * 分类
+     */
     public static void jumpSearchResultActivity(Context con, String key,boolean isSearch,String classid,String rootid) {
         Intent it = new Intent(con, SearchResultActivity.class);
         it.putExtra("key", key);
@@ -91,20 +108,30 @@ public class SearchResultActivity extends BaseActivity {
     protected void initVariable() {
 
         key = getIntent().getStringExtra("key");
-        isSearch = getIntent().getBooleanExtra("issearch", false);
-        classid=getIntent().getStringExtra("classid");
-        rootid=getIntent().getStringExtra("rootid");
-        if(TextUtils.isEmpty(classid)){
-            classid="0";
+        type = getIntent().getBooleanExtra("type",false);
+        if(!type){
+            isSearch = getIntent().getBooleanExtra("issearch", false);
+            classid = getIntent().getStringExtra("classid");
+            rootid = getIntent().getStringExtra("rootid");
+            if (TextUtils.isEmpty(classid)) {
+                classid = "0";
+            }
+            if (TextUtils.isEmpty(rootid)) {
+                rootid = "0";
+            }
         }
-        if(TextUtils.isEmpty(rootid)){
-            rootid="0";
-        }
+
         list = new ArrayList<>();
     }
 
     @Override
     protected void findViews() {
+
+        if(type){
+            showTopBar();
+            setTitle(key);
+        }
+
         search_back = $(R.id.search_back);
         search_right_iv = $(R.id.search_right_iv);
         search_et = $(R.id.search_et);

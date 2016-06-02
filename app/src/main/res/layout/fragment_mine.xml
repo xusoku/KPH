@@ -32,12 +32,12 @@
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/fragment_mine_price"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/common_measure_20dp"
+            android:layout_marginRight="@dimen/common_measure_35dp"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_17"
+            android:textSize="@dimen/common_measure_40dp"
             android:text="¥"/>
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/fragment_mine_price_info"
