@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.activity.OrderDetailActivity;
 import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.OrderDetail;
@@ -76,6 +77,13 @@ public class AllorderFragment extends BaseFragment {
                 bindItemView(holder.<StretchedListView>getView(R.id.allorder_lst_item), orderDetails);
 
                 holder.setText(R.id.allorder_item_number, itemData.sordernumber + "[详情]");
+                holder.getView(R.id.allorder_item_number).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        OrderDetailActivity.jumpOrderDetailActivity(mContext);
+                    }
+                });
+
                 TextView allorder_item_cancel = holder.getView(R.id.allorder_item_cancel);
                 TextView conutiPay = holder.getView(R.id.allorder_item_conuti);
                 LinearLayout linearLayout = holder.getView(R.id.allorder_item_linear);
