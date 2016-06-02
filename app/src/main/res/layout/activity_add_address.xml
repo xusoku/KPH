@@ -147,6 +147,10 @@
         android:layout_width="fill_parent"
         android:layout_height="15dp"
         android:background="@color/colorlightgray" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
     <com.davis.kangpinhui.views.CustomTypefaceTextView
         android:id="@+id/delete_address"
         android:layout_width="match_parent"
@@ -156,7 +160,8 @@
         android:clickable="true"
         android:onClick="doClick"
         android:textSize="@dimen/text_size_17"
-        android:background="@color/white"
+        android:background="?android:attr/selectableItemBackground"
         android:textColor="@color/red"/>
+    </FrameLayout>
 </LinearLayout>
 </LinearLayout>

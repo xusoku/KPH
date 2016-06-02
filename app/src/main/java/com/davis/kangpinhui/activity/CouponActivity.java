@@ -77,7 +77,6 @@ public class CouponActivity extends BaseActivity {
             @Override
             public View getIndicatorView(int position) {
                 TextView textView = (TextView) getLayoutInflater().inflate(R.layout.layout_allorder_tab_item, null);
-                textView.setTextSize(CommonManager.dpToPx(20));
                 textView.setText(tabNames[position]);
                 return textView;
             }

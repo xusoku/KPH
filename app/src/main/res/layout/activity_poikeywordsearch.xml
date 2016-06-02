@@ -7,12 +7,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_65dp"
+        android:gravity="center_vertical"
         android:background="@color/colormain">
 
         <ImageView
             android:id="@+id/searchText_back"
-            android:layout_width="@dimen/common_measure_50dp"
-            android:layout_height="@dimen/common_measure_50dp"
+            android:layout_width="@dimen/common_measure_40dp"
+            android:layout_height="@dimen/common_measure_40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/common_measure_10dp"
             android:layout_marginRight="@dimen/common_measure_10dp"
@@ -21,16 +22,20 @@
         <AutoCompleteTextView
             android:id="@+id/searchText"
             android:layout_width="0dp"
-            android:layout_height="@dimen/common_measure_60dp"
+            android:layout_height="wrap_content"
             android:gravity="bottom"
+            android:textColor="@color/white"
+            android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/common_measure_10dp"
             android:layout_weight="1"
             android:background="@null"
+            android:drawablePadding="10dp"
             android:drawableBottom="@drawable/line" />
     </LinearLayout>
 
     <com.amap.api.maps2d.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>

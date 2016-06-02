@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -31,13 +32,18 @@
         <com.davis.kangpinhui.views.CustomTypefaceEditText
             android:id="@+id/search_et"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="bottom"
             android:hint="@string/classic_search"
+            android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:singleLine="true"
             android:ellipsize="end"
+            android:background="@color/colormain"
+            android:drawablePadding="10dp"
+            android:drawableBottom="@drawable/line"
             android:textSize="@dimen/text_size_17" />
 
         <LinearLayout
@@ -55,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/ic_favorites" />
+                android:src="@mipmap/index_search" />
         </LinearLayout>
     </LinearLayout>
 
@@ -80,7 +86,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorgray"
+            android:background="@color/colorlightgray"
             android:layout_marginLeft="@dimen/common_measure_15dp"/>
         <ListView
             android:id="@+id/search_list_histroy"
