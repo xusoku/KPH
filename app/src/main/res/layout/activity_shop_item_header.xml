@@ -8,14 +8,19 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_15dp"
-        android:background="@color/colorgray" />
+        android:background="@color/colorlightgray" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_70dp"
+        android:background="@color/white">
     <LinearLayout
         android:id="@+id/shop_location_headerid"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_70dp"
         android:layout_centerInParent="true"
         android:gravity="center"
+        android:background="?android:attr/selectableItemBackground"
         android:orientation="horizontal">
 
         <ImageView
@@ -30,9 +35,10 @@
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_17" />
     </LinearLayout>
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_15dp"
-        android:background="@color/colorgray" />
+        android:background="@color/colorlightgray" />
 </LinearLayout>
