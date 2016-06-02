@@ -257,7 +257,7 @@
                     android:id="@+id/add_cart_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_recents" />
+                    android:src="@mipmap/ic_nearby" />
             </LinearLayout>
 
             <LinearLayout

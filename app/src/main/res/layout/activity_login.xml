@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="@dimen/common_measure_250dp"
             android:layout_height="@dimen/common_measure_150dp"
-            android:src="@mipmap/logo_login"
+            android:src="@mipmap/logo"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/common_measure_20dp"/>
 

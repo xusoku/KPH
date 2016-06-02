@@ -1,15 +1,8 @@
 package com.davis.kangpinhui.fragment;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,10 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.davis.kangpinhui.AppApplication;
-import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.AllOrderActivity;
 import com.davis.kangpinhui.activity.CartListActivity;
@@ -32,6 +22,7 @@ import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.activity.RechargeListActivity;
 import com.davis.kangpinhui.activity.SettingActivity;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
+import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.util.GlideCircleTransform;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.UtilText;
@@ -79,7 +70,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         fragment_mine_price = $(R.id.fragment_mine_price);
         fragment_mine_price_info = $(R.id.fragment_mine_price_info);
 
-        Glide.with(this).load(R.mipmap.default_user).transform(new GlideCircleTransform(getActivity())).into(fragment_mine_photo);
+        Glide.with(this).load(R.mipmap.mine_user_defualt).transform(new GlideCircleTransform(getActivity())).into(fragment_mine_photo);
     }
 
     @Override
