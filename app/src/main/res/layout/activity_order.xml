@@ -88,6 +88,7 @@
                 <RelativeLayout
                     android:id="@+id/order_paytype_relative"
                     android:onClick="doClick"
+                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -136,6 +137,7 @@
                 <RelativeLayout
                     android:onClick="doClick"
                     android:layout_width="match_parent"
+                    android:background="@color/white"
                     android:layout_height="match_parent">
 
                     <com.davis.kangpinhui.views.CustomTypefaceEditText
@@ -165,6 +167,7 @@
                 <RelativeLayout
                     android:id="@+id/order_paytime_relative"
                     android:onClick="doClick"
+                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -192,6 +195,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_measure_80dp"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <View
@@ -227,6 +231,7 @@
                     android:layout_width="match_parent"
                     android:clickable="true"
                     android:onClick="doClick"
+                    android:background="@color/white"
                     android:layout_height="match_parent">
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
