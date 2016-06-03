@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="3dp">
+        app:cardBackgroundColor="@color/white"
+        android:layout_margin="@dimen/common_measure_5dp"
+        app:cardCornerRadius="3dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,8 +37,8 @@
 
                 <ImageView
                     android:id="@+id/add_cart_item_iv"
-                    android:layout_width="@dimen/common_measure_100dp"
-                    android:layout_height="@dimen/common_measure_100dp"
+                    android:layout_width="@dimen/common_measure_110dp"
+                    android:layout_height="@dimen/common_measure_110dp"
                     android:src="@mipmap/ic_nearby" />
 
                 <LinearLayout
@@ -85,7 +87,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/common_measure_70dp"
                 android:layout_marginLeft="@dimen/common_measure_10dp"
                 android:layout_marginRight="@dimen/common_measure_10dp">
 
@@ -119,6 +121,7 @@
                     android:gravity="center"
                     android:text="12"
                     android:textColor="@color/black"
+                    android:layout_centerVertical="true"
                     android:textSize="@dimen/text_size_17" />
 
                 <TextView

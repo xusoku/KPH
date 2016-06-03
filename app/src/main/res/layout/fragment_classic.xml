@@ -55,6 +55,7 @@
                 android:id="@+id/classic_rootid_list"
                 android:layout_width="@dimen/common_measure_120dp"
                 android:layout_height="match_parent"
+                android:background="@color/colorlightgray"
                 android:divider="@null"
                 android:scrollbars="none" />
             <com.davis.kangpinhui.views.MySwipeRefreshLayout
@@ -75,7 +76,7 @@
         </LinearLayout>
         <LinearLayout
             android:id="@+id/no_linear_shopid"
-            android:background="@color/white"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <include layout="@layout/fragment_noshopid_layout"/>

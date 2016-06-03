@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="@dimen/common_measure_120dp"
         android:layout_height="match_parent"
+        android:background="@mipmap/bg_store_coupon_left"
         android:orientation="vertical">
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -37,8 +38,9 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/common_measure_50dp"
+        android:layout_marginLeft="@dimen/common_measure_0dp"
         android:layout_weight="1"
+        android:background="@mipmap/bg_store_coupon_right"
         android:orientation="vertical">
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
