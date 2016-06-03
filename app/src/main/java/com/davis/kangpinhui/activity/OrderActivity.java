@@ -356,7 +356,12 @@ public class OrderActivity extends BaseActivity {
                     @Override
                     public void onOptionsSelect(int options1, int option2) {
 
-                        timeTape = (list.get(options1) + " " + arrayLists.get(options1).get(option2));
+                        if(arrayLists.get(options1).size()==0){
+                            timeTape = (list.get(options1) );
+
+                        }else{
+                            timeTape = (list.get(options1) + " " + arrayLists.get(options1).get(option2));
+                        }
                         order_paytype_time.setText(timeTape);
                     }
                 });
