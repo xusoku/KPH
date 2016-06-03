@@ -10,4 +10,7 @@ public class Banner implements Serializable {
     public String title;
     public String picurl;
     public String link;
+    public String tempvalue;
+    public String gotype;
+
 }

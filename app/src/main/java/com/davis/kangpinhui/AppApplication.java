@@ -13,6 +13,7 @@ import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.activity.LoginActivity;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.WeiXinUtil;
+import com.facebook.stetho.Stetho;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 
 import java.util.ArrayList;
@@ -51,6 +52,8 @@ public class AppApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Stetho.initializeWithDefaults(this);
 //        instance
         instance = (AppApplication) getApplicationContext();
 

@@ -156,7 +156,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private void getDate() {
-        Call<BaseModel<Index>> call = ApiInstant.getInstant().getIndex(AppApplication.apptype, AppApplication.shopid, "");
+        Call<BaseModel<Index>> call = ApiInstant.getInstant().getIndex(AppApplication.apptype, AppApplication.shopid, AppApplication.token);
         call.enqueue(new ApiCallback<BaseModel<Index>>() {
             @Override
             public void onSucssce(BaseModel<Index> indexBaseModel) {
@@ -200,8 +200,19 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String url = itemData.picurl;
-//                        CommonManager.processBannerClick(mContext, url);
+                        String gotype = itemData.gotype;
+                        String tempvalue = itemData.tempvalue;
+                        if(gotype.equals("detail")){
+                            ProductDetailActivity.jumpProductDetailActivity(getActivity(),tempvalue);
+                        }else if(gotype.equals("rootlist")){
+                            SearchResultActivity.jumpSearchResultActivity(getActivity(),"",false,"",tempvalue);
+                        }else if(gotype.equals("list")){
+                            SearchResultActivity.jumpSearchResultActivity(getActivity(),"",false,tempvalue,"");
+                        }else if(gotype.equals("special")){
+                            SearchResultActivity.jumpSearchResultActivity(getActivity(),itemData.title,true,tempvalue);
+                        }else if(gotype.equals("search")){
+                            SearchResultActivity.jumpSearchResultActivity(getActivity(),tempvalue,true);
+                        }
                     }
                 });
             }
@@ -262,7 +273,6 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         adapter.setOnItemClickLitener(new CommonRecyclerAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                ToastUitl.showToast("" + position);
                 ProductDetailActivity.jumpProductDetailActivity(getActivity(), list.get(position).iproductid);
             }
 

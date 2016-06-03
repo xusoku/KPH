@@ -43,7 +43,6 @@ import retrofit2.Call;
 public class SearchResultActivity extends BaseActivity {
 
     private String key = "";
-    private boolean isSearch = true;
     private LinearLayout search_back;
     private LinearLayout search_right_iv;
     private EditText search_et;
@@ -53,17 +52,20 @@ public class SearchResultActivity extends BaseActivity {
     private LinearLayout search_all_sort;
     private TextView search_all_classic_text;
     private TextView search_all_sort_text;
-
     private int Page = 0;
+
     private int PageSize = 20;
     private int TotalPage = 0;
     private CommonRecyclerAdapter<Product> adapter;
     private ArrayList<Product> list;
-
     private boolean isLoadOrRefresh = false;
+
     private String sortid = "0";
     private String rootid = "0";
     private String classid = "0";
+
+    //判断是不是从搜索进来的
+    private boolean isSearch = true;
 
     //专题数据判断
     private boolean type = false;
@@ -194,10 +196,10 @@ public class SearchResultActivity extends BaseActivity {
                 if (type) {
                     getActivedlist();
                 } else {
-                    if (!isSearch) {
-                        getProductList(Page, PageSize);
-                    } else {
+                    if (isSearch) {
                         getSearchProductList(Page, PageSize);
+                    } else {
+                        getProductList(Page, PageSize);
                     }
                 }
 
@@ -216,10 +218,10 @@ public class SearchResultActivity extends BaseActivity {
         if (type) {
             getActivedlist();
         } else {
-            if (!isSearch) {
-                getProductList(Page, PageSize);
-            } else {
+            if (isSearch) {
                 getSearchProductList(Page, PageSize);
+            } else {
+                getProductList(Page, PageSize);
             }
         }
     }
