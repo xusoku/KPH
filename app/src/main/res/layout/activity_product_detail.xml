@@ -257,7 +257,7 @@
                     android:id="@+id/add_cart_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_nearby" />
+                    android:src="@mipmap/index_cart" />
             </LinearLayout>
 
             <FrameLayout
@@ -314,5 +314,5 @@
         android:layout_marginTop="@dimen/common_measure_25dp"
         android:onClick="doClick"
         android:scaleType="centerInside"
-        android:src="@mipmap/ic_nearby" />
+        android:src="@mipmap/index_cart" />
 </RelativeLayout>

@@ -33,6 +33,7 @@ import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.CommonManager;
+import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
 
@@ -172,6 +173,9 @@ public class SearchResultActivity extends BaseActivity {
             public void convert(BaseViewHolder holder, Product itemData, int position) {
 
                 ImageView iv = holder.getView(R.id.search_result_item_iv);
+
+                LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams((int)DisplayMetricsUtils.getWidth()/2-30,(int)DisplayMetricsUtils.getWidth()/2-30);
+                iv.setLayoutParams(layoutParams);
                 Glide.with(mActivity).load(itemData.picurl).into(iv);
 
                 TextView tv_name = holder.getView(R.id.search_result_item_name);
