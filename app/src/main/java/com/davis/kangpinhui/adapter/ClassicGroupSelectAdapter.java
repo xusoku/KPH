@@ -9,6 +9,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -222,6 +223,7 @@ public class ClassicGroupSelectAdapter extends BaseAdapter
                 viewHolder.textView = (TextView) convertView
                         .findViewById(R.id.classic_rootid_right_nogrid_title);
                 viewHolder.imageView = (ImageView) convertView.findViewById(R.id.classic_rootid_right_nogrid_image);
+                viewHolder.classic_rootid_right_nogrid_linear= (LinearLayout) convertView.findViewById(R.id.classic_rootid_right_nogrid_linear);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -232,7 +234,7 @@ public class ClassicGroupSelectAdapter extends BaseAdapter
             viewHolder.textView.setText(category.name);
             Glide.with(mContext).load(category.picurl).into(viewHolder.imageView);
 
-           convertView.setOnClickListener(new View.OnClickListener() {
+           viewHolder.classic_rootid_right_nogrid_linear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     SearchResultActivity.jumpSearchResultActivity(mContext,"",false,category.id,tcategory.id);
@@ -245,6 +247,7 @@ public class ClassicGroupSelectAdapter extends BaseAdapter
         final class ViewHolder {
             TextView textView;
             ImageView imageView;
+            LinearLayout classic_rootid_right_nogrid_linear;
         }
     }
 
