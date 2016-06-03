@@ -57,8 +57,8 @@
                             android:layout_marginRight="@dimen/common_measure_10dp"
                             android:layout_marginTop="@dimen/common_measure_20dp"
                             android:text="¥14.9"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_22" />
+                            android:textColor="@color/colorgray"
+                            android:textSize="@dimen/text_size_17" />
 
                         <View
                             android:layout_width="match_parent"
@@ -249,9 +249,9 @@
                 android:id="@+id/add_cart_number_linear"
                 android:layout_width="@dimen/common_measure_70dp"
                 android:layout_height="match_parent"
-                android:onClick="doClick"
                 android:background="?android:attr/selectableItemBackground"
-                android:gravity="center">
+                android:gravity="center"
+                android:onClick="doClick">
 
                 <ImageView
                     android:id="@+id/add_cart_icon"
@@ -260,23 +260,28 @@
                     android:src="@mipmap/ic_nearby" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/add_cart_addlinear"
+            <FrameLayout
                 android:layout_width="@dimen/common_measure_150dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:onClick="doClick"
-                android:background="?android:attr/selectableItemBackground">
+                android:background="@color/colormain">
 
-                <com.davis.kangpinhui.views.CustomTypefaceTextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/add_cart_addlinear"
+                    android:layout_width="@dimen/common_measure_150dp"
                     android:layout_height="match_parent"
-                    android:background="@color/colormain"
-                    android:gravity="center"
-                    android:text="加入购物车"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_22" />
-            </LinearLayout>
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="doClick">
+
+                    <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="加入购物车"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_22" />
+                </LinearLayout>
+            </FrameLayout>
         </RelativeLayout>
     </LinearLayout>
 
@@ -284,19 +289,20 @@
         android:id="@+id/product_detail_title_text_linear"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_80dp"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_measure_25dp"
-            android:background="@color/colormain"/>
+            android:background="@color/colormain" />
+
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/product_detail_title_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_measure_65dp"
+            android:background="@color/colormain"
             android:gravity="center"
             android:text="产品详情"
-            android:background="@color/colormain"
             android:textColor="@color/white"
             android:textSize="@dimen/common_measure_22dp" />
     </LinearLayout>
@@ -306,7 +312,7 @@
         android:layout_width="@dimen/common_measure_65dp"
         android:layout_height="@dimen/common_measure_65dp"
         android:layout_marginTop="@dimen/common_measure_25dp"
-        android:scaleType="centerInside"
         android:onClick="doClick"
+        android:scaleType="centerInside"
         android:src="@mipmap/ic_nearby" />
 </RelativeLayout>

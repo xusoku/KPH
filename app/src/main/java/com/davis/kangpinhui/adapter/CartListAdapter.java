@@ -19,6 +19,7 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.util.UtilText;
 
 import java.util.ArrayList;
 
@@ -50,7 +51,10 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
         holder.setImageByUrl(R.id.add_cart_item_iv, ApiService.picurl + itemData.picurl);
         holder.setText(R.id.add_cart_item_title, itemData.productName);
         holder.setText(R.id.add_cart_item_sstandent, "规格:" + itemData.sstandard);
-        holder.setText(R.id.add_cart_item_price, itemData.iprice + "/" + itemData.sstandard);
+        TextView textView=holder.getView(R.id.add_cart_item_price);
+        textView.setText("");
+        textView.append(UtilText.getBigProductDetail("¥" + itemData.iprice));
+        textView.append("/" + itemData.sstandard);
         holder.setText(R.id.add_cart_item_add_center, (int) Float.parseFloat(itemData.inumber) + "");
 
         CheckBox checkBox = holder.getView(R.id.add_cart_item_checkbox);

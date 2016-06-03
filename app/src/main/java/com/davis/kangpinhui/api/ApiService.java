@@ -93,13 +93,13 @@ public interface ApiService {
             );
 
     //6、商品搜索
-    @FormUrlEncoded
+//    @FormUrlEncoded
     @POST("product/search.do")
     Call<BaseModel<Page<ArrayList<Product>>>> getSearchProductlist(
             @Query("apptype") String apptype,
             @Query("iordertype") String iordertype,
             @Query("shopid") String shopid,
-            @Field("keyword") String keyword,
+            @Query("keyword") String keyword,
             @Query("ipage") String ipage,
             @Query("ipagesize") String ipagesize
             );

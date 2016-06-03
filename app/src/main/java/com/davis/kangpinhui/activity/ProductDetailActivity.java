@@ -25,6 +25,7 @@ import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.BadgeView;
 import com.davis.kangpinhui.views.FlowLayout;
 import com.davis.kangpinhui.views.dargview.DavisWebView;
@@ -98,7 +99,7 @@ public class ProductDetailActivity extends BaseActivity {
 
 
         backgroundDefaultBadge = new BadgeView(this);
-        backgroundDefaultBadge.setTargetView(add_cart_icon);
+        backgroundDefaultBadge.setTargetView(add_cart_number_linear);
         setcartNumber();
         initPopupWindow();
     }
@@ -150,7 +151,10 @@ public class ProductDetailActivity extends BaseActivity {
 
     public void setBindData(ProductDetail productDetail) {
         product_detail_title.setText(productDetail.sphysicname);
-        product_detail_price.setText(productDetail.fprice + "/" + productDetail.sstandard);
+        product_detail_price.setText("");
+        product_detail_price.append(UtilText.getProductDetail("¥"));
+        product_detail_price.append(UtilText.getBigProductDetail(productDetail.fprice));
+        product_detail_price.append("/" + productDetail.sstandard);
         product_detail_logo_text.setText(productDetail.sbrandname);
         product_detail_date.setText(productDetail.sshelflife);
         product_detail_save.setText(productDetail.sstorage);
@@ -162,8 +166,18 @@ public class ProductDetailActivity extends BaseActivity {
     private void setBindPopData(final ProductDetail productDetail) {
         Glide.with(this).load(ApiService.picurl + productDetail.spicurl).into(add_cart_image);
 
-        add_cart_text_vip_price.setText("会员价" + productDetail.fvipprice + "/" + productDetail.sstandard);
-        add_cart_text_price.setText("康品价" + productDetail.fprice + "/" + productDetail.sstandard);
+        add_cart_text_vip_price.setText("");
+        add_cart_text_price.setText("");
+
+        add_cart_text_vip_price.append("会员价");
+        add_cart_text_vip_price.append(UtilText.getProductDetail("¥"));
+        add_cart_text_vip_price.append(UtilText.getBigProductDetail(productDetail.fvipprice));
+        add_cart_text_vip_price.append("/" + productDetail.sstandard);
+
+        add_cart_text_price.append("康品价");
+        add_cart_text_price.append(UtilText.getProductDetail("¥"));
+        add_cart_text_price.append(UtilText.getBigProductDetail(productDetail.fprice));
+        add_cart_text_price.append("/" + productDetail.sstandard);
 
         add_cart_add_center.setText("1");
 

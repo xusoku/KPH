@@ -118,7 +118,7 @@ public class LocalUtil implements AMapLocationListener {
                 ToastUitl.showToast("您所在的范围不再配送区,请选择配送区域");
                 if(!flag) {
                     AppManager.getAppManager().finishActivity(ShopActivity.class);
-                    EventBus.getDefault().post(new Address());
+//                    EventBus.getDefault().post(new Address());
                 }
             }
 

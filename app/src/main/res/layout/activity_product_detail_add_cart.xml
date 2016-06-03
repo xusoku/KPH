@@ -50,6 +50,7 @@
                 android:layout_marginTop="@dimen/common_measure_10dp"
                 android:layout_toRightOf="@id/add_cart_image"
                 android:text=""
+                android:textColor="@color/colorgray"
                 android:textSize="@dimen/text_size_17" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -61,6 +62,7 @@
                 android:layout_marginTop="@dimen/common_measure_10dp"
                 android:layout_toRightOf="@id/add_cart_image"
                 android:text=""
+                android:textColor="@color/colorgray"
                 android:textSize="@dimen/text_size_17" />
 
             <ImageView
@@ -188,15 +190,21 @@
                 android:layout_height="@dimen/common_measure_50dp" />
         </LinearLayout>
 
-        <com.davis.kangpinhui.views.CustomTypefaceTextView
-            android:id="@+id/add_cart_add_btn"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/common_measure_50dp"
-            android:background="@color/lightblue"
-            android:gravity="center"
-            android:text="确定"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_17" />
+            android:layout_height="@dimen/common_measure_60dp"
+            android:background="@color/lightblue">
+
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/add_cart_add_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_measure_60dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_17" />
+        </FrameLayout>
 
     </LinearLayout>
 

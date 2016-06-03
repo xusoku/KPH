@@ -14,8 +14,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scrollbars="none"
-        android:divider="@color/white"
-        android:dividerHeight="@dimen/common_measure_10dp"></ListView>
+        android:divider="@color/colorlightgray"
+        android:dividerHeight="@dimen/common_measure_10dp"/>
 
     <RelativeLayout
         android:id="@+id/add_cart_relative"
