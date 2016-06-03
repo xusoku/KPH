@@ -114,26 +114,25 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.v7.widget.CardView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_measure_64dp"
             android:layout_marginLeft="@dimen/common_measure_30dp"
             android:layout_marginRight="@dimen/common_measure_30dp"
             android:layout_marginTop="@dimen/common_measure_30dp"
-            app:cardCornerRadius="3dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="#70ffffff">
+            android:background="#70ffffff">
             <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:id="@+id/login_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_22"
                 android:gravity="center"
                 android:onClick="doClick"
                 android:clickable="true"
                 android:text="注册"/>
-        </android.support.v7.widget.CardView>
+        </FrameLayout>
 
         <RelativeLayout
             android:id="@+id/login_forget_relative"
