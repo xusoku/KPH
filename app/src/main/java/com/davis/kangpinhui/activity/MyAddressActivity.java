@@ -107,25 +107,26 @@ public class MyAddressActivity extends BaseActivity {
                 holder.setText(R.id.my_address_item_phone, itemData.smobile);
                 holder.setText(R.id.my_address_item_text, itemData.saddress);
 
-                ImageView my_address_item_edit=holder.getView(R.id.my_address_item_edit);
+                ImageView my_address_item_edit = holder.getView(R.id.my_address_item_edit);
                 my_address_item_edit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AddAddressActivity.jumpAddAddressActivity(MyAddressActivity.this,"0",itemData.iuseraddressid);
+                        AddAddressActivity.jumpAddAddressActivity(MyAddressActivity.this, "0", itemData.iuseraddressid);
+                    }
+                });
+
+                holder.getView(R.id.my_address_item_linear).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (isOrder) {
+                            AppApplication.address = itemData;
+                            finish();
+                        }
                     }
                 });
             }
         });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(isOrder){
-                    AppApplication.address=list.get(position);
-                    finish();
-                }
-            }
-        });
     }
 
     @Override
