@@ -71,7 +71,8 @@
             <com.davis.kangpinhui.views.StretchedListView
                 android:id="@+id/order_address_lst"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
 
             <LinearLayout
                 android:id="@+id/order_paytype_linear"

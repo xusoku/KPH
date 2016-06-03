@@ -53,7 +53,7 @@
                         android:layout_marginTop="@dimen/common_measure_10dp"
                         android:text="asdfsdafasf"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_22" />
+                        android:textSize="@dimen/text_size_17" />
 
                     <View
                         android:layout_width="wrap_content"
@@ -66,8 +66,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/common_measure_20dp"
                         android:text="asdfsdafasf"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_17" />
+                        android:textColor="@color/colorgray"
+                        android:textSize="@dimen/text_size_15" />
                 </LinearLayout>
 
 
