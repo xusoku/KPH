@@ -143,18 +143,27 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
     public void getBindView(final ArrayList<Shop> list){
          adapter= new CommonBaseAdapter<Shop>(this, list, R.layout.activity_shop_item) {
             @Override
-            public void convert(ViewHolder holder, Shop itemData, int position) {
+            public void convert(ViewHolder holder, final Shop itemData, int position) {
                 holder.setText(R.id.stop_name,itemData.shopname);
                 holder.setText(R.id.stop_address,itemData.address);
+
+                holder.getView(R.id.shop_item_linear).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this, itemData,type);
+
+                    }
+                });
+
             }
         };
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this, list.get(position-1),type);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this, list.get(position-1),type);
+//            }
+//        });
     }
     @Override
     protected void setListener() {
