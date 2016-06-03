@@ -16,7 +16,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorgray"
+        android:background="@color/colorlightgray"
         android:layout_marginLeft="@dimen/common_measure_15dp"
         android:layout_marginRight="@dimen/common_measure_15dp"/>
 </LinearLayout>
