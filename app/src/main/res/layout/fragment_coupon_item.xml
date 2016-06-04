@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/common_measure_150dp"
-    android:background="@drawable/bg_flow_tag_unselect"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="@dimen/common_measure_120dp"
+        android:layout_width="@dimen/common_measure_150dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:background="@mipmap/coupon_bg_available_left_60"
         android:orientation="vertical">
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -22,35 +25,48 @@
             android:textSize="@dimen/common_measure_30dp"
             android:textStyle="bold" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorlightgray" />
+
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/coupon_item_price_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12tianasdf"
-            android:textColor="@color/red"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_measure_20dp"
+            android:ellipsize="end"
             android:gravity="center"
             android:singleLine="true"
-            android:ellipsize="end"
+            android:text="12tianasdf"
+            android:textColor="@color/red"
             android:textSize="@dimen/text_size_17" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/common_measure_0dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"
         android:layout_weight="1"
+        android:background="@mipmap/coupon_bg_available_right"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/coupon_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_measure_20dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="¥5.00"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_17"
-            android:singleLine="true"
-            android:ellipsize="end"
             android:textStyle="bold" />
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -58,21 +74,25 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:gravity="center_vertical"
+            android:maxLines="3"
             android:text="asdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfas"
             android:textColor="@color/black"
-            android:maxLines="3"
-            android:ellipsize="end"
             android:textSize="@dimen/text_size_17" />
-
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorlightgray" />
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/coupon_item_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_measure_20dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="12tianasdf"
             android:textColor="@color/red"
-            android:singleLine="true"
-            android:ellipsize="end"
             android:textSize="@dimen/text_size_17" />
     </LinearLayout>
 
