@@ -11,5 +11,6 @@
         android:scrollbars="none"
         android:divider="@null"
         android:listSelector="@null"
+        android:background="@color/white"
         android:dividerHeight="@dimen/common_measure_10dp"/>
 </LinearLayout>
