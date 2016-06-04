@@ -28,8 +28,9 @@
             android:layout_height="@dimen/common_measure_61dp"
             android:ellipsize="end"
             android:maxLines="2"
+            android:padding="@dimen/common_measure_10dp"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_22" />
+            android:textSize="@dimen/text_size_17" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,10 +42,11 @@
                 android:id="@+id/search_result_item_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_measure_10dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_17" />
+                android:textColor="@color/colorgray"
+                android:textSize="@dimen/text_size_15" />
 
             <LinearLayout
                 android:id="@+id/search_cart_iv"

@@ -34,10 +34,12 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
+import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
 import retrofit2.Call;
 
@@ -182,7 +184,10 @@ public class SearchResultActivity extends BaseActivity {
                 tv_name.setText(itemData.productname);
 
                 TextView tv_price = holder.getView(R.id.search_result_item_price);
-                tv_price.setText(itemData.fprice);
+                tv_price.setText("");
+                tv_price.append(UtilText.getIndexPrice("¥"));
+                tv_price.append(UtilText.getBigProductDetail(itemData.fprice));
+                tv_price.append("/" + itemData.sstandard);
             }
         };
         if (!type) {
@@ -500,6 +505,12 @@ public class SearchResultActivity extends BaseActivity {
                 closePopuw();
                 Page = 1;
                 isLoadOrRefresh = true;
+                search_all_sort_text.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        search_result_recycler.scrollTo(0, 0);
+                    }
+                },100);
                 if (isSearch) {
                     getSearchProductList(Page, PageSize);
                 } else {
@@ -600,6 +611,12 @@ public class SearchResultActivity extends BaseActivity {
                     classid = category.clist.get(position).id;
                 Page = 0;
                 isLoadOrRefresh = true;
+                search_all_sort_text.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        search_result_recycler.scrollTo(0, 0);
+                    }
+                },100);
                 isSearch = false;
                 getProductList(Page++, PageSize);
                 closePopuw();
