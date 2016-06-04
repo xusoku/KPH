@@ -24,6 +24,10 @@
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/colormain</item>
     </style>
+    <style name="colormainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/colormain</item>
+    </style>
 
 
 

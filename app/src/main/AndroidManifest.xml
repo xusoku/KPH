@@ -89,10 +89,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RechargeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/colormainTheme"/>
         <activity
             android:name=".activity.LetterheadActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/colormainTheme"/>
         <activity
             android:name=".activity.RechargeListActivity"
             android:screenOrientation="portrait" />

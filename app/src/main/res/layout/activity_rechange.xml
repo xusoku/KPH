@@ -107,7 +107,6 @@
             android:background="@drawable/bg_flow_tag_unselect"
             android:gravity="center_vertical"
             android:hint="请填写订单备注（选填）"
-            android:textCursorDrawable="@color/colorgray"
             android:paddingLeft="@dimen/common_measure_10dp"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_17" />
