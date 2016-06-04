@@ -41,7 +41,7 @@
                     android:layout_centerVertical="true"
                     android:layout_margin="@dimen/common_measure_10dp"
                     android:gravity="center"
-                    android:src="@mipmap/ic_recommend_more" />
+                    android:src="@mipmap/ic_right_arrow" />
 
                 <com.davis.kangpinhui.views.CustomTypefaceTextView
                     android:id="@+id/order_address_pepole"
@@ -107,7 +107,7 @@
                         android:layout_centerVertical="true"
                         android:layout_margin="@dimen/common_measure_10dp"
                         android:gravity="center"
-                        android:src="@mipmap/ic_recommend_more"
+                        android:src="@mipmap/ic_right_arrow"
                         />
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -249,7 +249,7 @@
                         android:layout_centerVertical="true"
                         android:layout_margin="@dimen/common_measure_10dp"
                         android:gravity="center"
-                        android:src="@mipmap/ic_recommend_more"
+                        android:src="@mipmap/ic_right_arrow"
                         />
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
