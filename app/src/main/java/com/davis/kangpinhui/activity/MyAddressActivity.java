@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.Address;
@@ -16,6 +17,7 @@ import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.util.ToastUitl;
 
 import java.util.ArrayList;
 
@@ -107,6 +109,14 @@ public class MyAddressActivity extends BaseActivity {
                 holder.setText(R.id.my_address_item_phone, itemData.smobile);
                 holder.setText(R.id.my_address_item_text, itemData.saddress);
 
+                TextView  my_address_item_info=holder.getView(R.id.my_address_item_info);
+                if(itemData.shopid.equals("0")){
+                    my_address_item_info.setVisibility(View.VISIBLE);
+                }else{
+                    my_address_item_info.setVisibility(View.GONE);
+                }
+
+
                 ImageView my_address_item_edit = holder.getView(R.id.my_address_item_edit);
                 my_address_item_edit.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -119,8 +129,13 @@ public class MyAddressActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         if (isOrder) {
-                            AppApplication.address = itemData;
-                            finish();
+
+                            if(AppApplication.shopid.equals(itemData.shopid)) {
+                                AppApplication.address = itemData;
+                                finish();
+                            }else{
+                                ToastUitl.showToast("该地址区域不符合");
+                            }
                         }
                     }
                 });

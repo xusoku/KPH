@@ -31,6 +31,19 @@
                 android:textSize="@dimen/text_size_17" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/my_address_item_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/my_address_item_people"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="完善信息"
+                android:textColor="@color/red"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone"
+                android:textSize="@dimen/text_size_17" />
+
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:id="@+id/my_address_item_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,8 +70,9 @@
         <ImageView
             android:id="@+id/my_address_item_edit"
             android:layout_width="@dimen/common_measure_65dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/common_measure_65dp"
             android:paddingRight="@dimen/common_measure_15dp"
-            android:src="@mipmap/ic_favorites" />
+            android:scaleType="centerInside"
+            android:src="@mipmap/address_small_edit" />
     </LinearLayout>
 </FrameLayout>

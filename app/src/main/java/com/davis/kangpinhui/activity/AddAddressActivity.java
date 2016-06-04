@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.amap.api.services.core.PoiItem;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.Address;
+import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
@@ -219,10 +220,16 @@ public class AddAddressActivity extends BaseActivity {
 
     private void bindView(Address address) {
 
-        add_des_address_text.setText(address.saddress);
+        if(address.shopid.equals("0")){
+            add_des_address_text.setText("");
+            add_address_text.setText("");
+        }else{
+            add_des_address_text.setText(address.saddress);
+            add_address_text.setText(address.saddressperfix);
+        }
+
         add_address_people.setText(address.saddressname);
         add_address_phone.setText(address.smobile);
-        add_address_text.setText(address.saddressperfix);
     }
     private void deleteaddress() {
         Call<BaseModel<Address>> call= ApiInstant.getInstant().deleteAddress(AppApplication.apptype,AppApplication.token,addressid);
@@ -246,7 +253,7 @@ public class AddAddressActivity extends BaseActivity {
     public void doClick(View view) {
         switch (view.getId()) {
             case R.id.add_address_text:
-               ShopActivity.jumpShopActivity(this,"my_address");
+                getShopidDetail();
                 break;
             case R.id.delete_address:
                 new AlertDialog.Builder(this).setMessage("确定要删除?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -257,5 +264,21 @@ public class AddAddressActivity extends BaseActivity {
                 }).setNegativeButton("取消",null).show();
                 break;
         }
+    }
+
+    public  void getShopidDetail(){
+        Call<BaseModel<Shop>> call=ApiInstant.getInstant().getShopDetail(AppApplication.apptype,AppApplication.shopid);
+        call.enqueue(new ApiCallback<BaseModel<Shop>>() {
+            @Override
+            public void onSucssce(BaseModel<Shop> shopBaseModel) {
+                Shop shop=shopBaseModel.object;
+                PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(AddAddressActivity.this,shop,"my_address");
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
     }
 }

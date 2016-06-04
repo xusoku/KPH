@@ -22,6 +22,7 @@
                 android:onClick="doClick"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_measure_120dp"
+                android:paddingBottom="5dp"
                 android:background="@color/colorlightgray">
 
                 <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -64,6 +65,12 @@
                     android:text="asdf"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_17" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/repeat_bg"/>
             </RelativeLayout>
 
             <com.davis.kangpinhui.views.StretchedListView
