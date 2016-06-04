@@ -41,6 +41,7 @@ public class AppApplication extends Application {
 
     public static ArrayList<Shop> shoplist=new ArrayList<>();
 
+    public static ArrayList<Category> classiclist1 = new ArrayList<>();
     public static ArrayList<Category> classiclist = new ArrayList<>();
 
     public static IWXAPI wxApi;

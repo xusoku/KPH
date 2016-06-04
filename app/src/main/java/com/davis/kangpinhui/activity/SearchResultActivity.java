@@ -150,7 +150,7 @@ public class SearchResultActivity extends BaseActivity {
         search_result_title_linear = $(R.id.search_result_title_linear);
         search_result_card = $(R.id.search_result_card);
 
-        if(type){
+        if (type) {
             search_result_title_linear.setVisibility(View.GONE);
             search_result_card.setVisibility(View.GONE);
         }
@@ -176,7 +176,7 @@ public class SearchResultActivity extends BaseActivity {
 
                 ImageView iv = holder.getView(R.id.search_result_item_iv);
 
-                LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams((int)DisplayMetricsUtils.getWidth()/2-30,(int)DisplayMetricsUtils.getWidth()/2-30);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) DisplayMetricsUtils.getWidth() / 2 - 30, (int) DisplayMetricsUtils.getWidth() / 2 - 30);
                 iv.setLayoutParams(layoutParams);
                 Glide.with(mActivity).load(itemData.picurl).into(iv);
 
@@ -256,7 +256,7 @@ public class SearchResultActivity extends BaseActivity {
 
             }
         });
-        if(!type) {
+        if (!type) {
             search_result_recycler.setOnLoadListener(new LoadMoreRecyclerView.OnLoadListener() {
                 @Override
                 public void onLoad(LoadMoreRecyclerView recyclerView) {
@@ -445,6 +445,7 @@ public class SearchResultActivity extends BaseActivity {
                 }
             }
         });
+        classiclist = new ArrayList<>();
         getClassicData();
     }
 
@@ -510,7 +511,7 @@ public class SearchResultActivity extends BaseActivity {
                     public void run() {
                         search_result_recycler.scrollTo(0, 0);
                     }
-                },100);
+                }, 100);
                 if (isSearch) {
                     getSearchProductList(Page, PageSize);
                 } else {
@@ -522,25 +523,34 @@ public class SearchResultActivity extends BaseActivity {
     }
 
 
+    public ArrayList<Category> classiclist;
+
     private void getClassicData() {
         if (AppApplication.classiclist.size() > 0) {
-            if (!AppApplication.classiclist.get(0).name.equals("全部分类")) {
-                Category category = new Category();
-                category.name = "全部分类";
-                category.id = "0";
-                Category category1 = new Category();
-                category1.name = "全部";
-                category1.id = "0";
-                category.clist.add(category1);
-                AppApplication.classiclist.add(0, category);
+            classiclist.clear();
+            classiclist.addAll(AppApplication.classiclist);
+            Category category = new Category();
+            category.name = "全部分类";
+            category.id = "0";
+            Category category1 = new Category();
+            category1.name = "全部";
+            category1.id = "0";
+            category.clist.add(0,category1);
+            for(Category cat:classiclist){
+                Category category2 = new Category();
+                category2.name = "全部"+cat.name;
+                category2.id = "0";
+                cat.clist.add(0,category2);
             }
-            AppApplication.classiclist.get(0).isOnclick = true;
+            classiclist.add(0, category);
+            classiclist.get(0).isOnclick = true;
             bindClassicView();
         } else {
             Call<BaseModel<ArrayList<Category>>> call = ApiInstant.getInstant().categoryLevel2(AppApplication.apptype, "");
             call.enqueue(new ApiCallback<BaseModel<ArrayList<Category>>>() {
                 @Override
                 public void onSucssce(BaseModel<ArrayList<Category>> arrayListBaseModel) {
+                    AppApplication.classiclist.clear();
                     AppApplication.classiclist.addAll(arrayListBaseModel.object);
                     getClassicData();
                 }
@@ -553,7 +563,7 @@ public class SearchResultActivity extends BaseActivity {
     }
 
     private void bindClassicView() {
-        final CommonBaseAdapter adapter = new CommonBaseAdapter<Category>(this, AppApplication.classiclist, R.layout.fragment_classic_left_item) {
+        final CommonBaseAdapter adapter = new CommonBaseAdapter<Category>(this, classiclist, R.layout.fragment_classic_left_item) {
             @Override
             public void convert(ViewHolder holder, Category itemData, int position) {
                 TextView textView = holder.getView(R.id.classic_rootid_list_item);
@@ -567,7 +577,7 @@ public class SearchResultActivity extends BaseActivity {
             }
         };
         pop_list_classic_main.setAdapter(adapter);
-        pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, AppApplication.classiclist.get(0).clist, R.layout.fragment_classic_left_item) {
+        pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, classiclist.get(0).clist, R.layout.fragment_classic_left_item) {
             @Override
             public void convert(ViewHolder holder, Category itemData, int position) {
                 TextView textView = holder.getView(R.id.classic_rootid_list_item);
@@ -580,13 +590,13 @@ public class SearchResultActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                for (Category category : AppApplication.classiclist) {
+                for (Category category : classiclist) {
                     category.isOnclick = false;
                 }
-                AppApplication.classiclist.get(position).isOnclick = true;
-                rootid = AppApplication.classiclist.get(position).id;
+               classiclist.get(position).isOnclick = true;
+                rootid = classiclist.get(position).id;
                 adapter.notifyDataSetChanged();
-                pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, AppApplication.classiclist.get(position).clist, R.layout.fragment_classic_left_item) {
+                pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, classiclist.get(position).clist, R.layout.fragment_classic_left_item) {
                     @Override
                     public void convert(ViewHolder holder, Category itemData, int position) {
                         TextView textView = holder.getView(R.id.classic_rootid_list_item);
@@ -602,7 +612,7 @@ public class SearchResultActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long ids) {
                 Category category = null;
-                for (Category category1 : AppApplication.classiclist) {
+                for (Category category1 : classiclist) {
                     if (category1.id.equals(rootid)) {
                         category = category1;
                     }
@@ -616,7 +626,7 @@ public class SearchResultActivity extends BaseActivity {
                     public void run() {
                         search_result_recycler.scrollTo(0, 0);
                     }
-                },100);
+                }, 100);
                 isSearch = false;
                 getProductList(Page++, PageSize);
                 closePopuw();
