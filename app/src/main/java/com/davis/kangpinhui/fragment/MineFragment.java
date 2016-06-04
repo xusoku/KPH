@@ -16,6 +16,7 @@ import com.davis.kangpinhui.activity.AllOrderActivity;
 import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.CouponActivity;
 import com.davis.kangpinhui.activity.FeedBackActivity;
+import com.davis.kangpinhui.activity.HistroyBillActivity;
 import com.davis.kangpinhui.activity.MyAddressActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
 import com.davis.kangpinhui.activity.RechargeActivity;
@@ -146,7 +147,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 FeedBackActivity.jumpFeedBackActivity(getActivity());
                 break;
             case R.id.mine_histroy_bill:
-                FeedBackActivity.jumpFeedBackActivity(getActivity());
+                HistroyBillActivity.jumpHistroyBillActivity(getActivity());
                 break;
             case R.id.mine_rechange:
                 RechargeListActivity.jumpRechargeListActivity(getActivity());

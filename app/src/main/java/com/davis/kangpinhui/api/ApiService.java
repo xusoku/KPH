@@ -201,9 +201,8 @@ public interface ApiService {
 
     //13 用户消费信息接口
     @GET("moneyinfo/list.do")
-    Call<BaseModel<Page<Consume>>> getConsumelist(
+    Call<BaseModel<Page<ArrayList<Consume>>>> getConsumelist(
             @Query("apptype") String apptype,
-            @Query("ordernum") String ordernum,
             @Query("ipage") String ipage,
             @Query("ipagesize") String ipagesize,
             @Query("token") String token

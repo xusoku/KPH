@@ -18,11 +18,29 @@ import android.text.style.UnderlineSpan;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by davis on 16/5/23.
  */
 public class UtilText {
 
+    public static String getFloatToString(String str){
+        Float f=Float.parseFloat(str);
+        DecimalFormat fnum  =   new  DecimalFormat("##0.00");
+         String  dd=fnum.format(f);
+        return  dd;
+    }
+    public static SpannableString getFCToS(String str){
+        Float f=Float.parseFloat(str);
+        DecimalFormat fnum  =   new  DecimalFormat("##0.00");
+         String  dd=fnum.format(f);
+
+        SpannableString spanString = new SpannableString(dd);
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor("#F19a00"));
+        spanString.setSpan(span, 0, spanString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spanString;
+    }
     public static SpannableString getProductDetail(String str){
         if(str.contains(".0")){
             str=str.substring(0,str.length()-2);
