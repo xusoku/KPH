@@ -32,6 +32,7 @@
                 android:singleLine="true"
                 android:text="送至：光兰命运"
                 android:textColor="@color/white"
+                android:drawableRight="@mipmap/abc_spinner_mtrl_am_alpha"
                 android:textSize="@dimen/text_size_17" />
         </LinearLayout>
 
