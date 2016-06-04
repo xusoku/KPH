@@ -35,7 +35,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@null"
-            android:src="@mipmap/ic_nearby"
+            android:src="@mipmap/btn_titlebar_back_normal"
             android:layout_centerVertical="true"
             android:onClick="doClick"
             android:padding="15dp"
