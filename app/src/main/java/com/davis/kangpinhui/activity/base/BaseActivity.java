@@ -92,6 +92,13 @@ public abstract class BaseActivity extends AppCompatActivity
         stubLoadingFailed = (ViewStub) findViewById(R.id.stubLoadingFailed);
 
         hideTopBar();
+
+        btnLeft.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

@@ -26,7 +26,7 @@
                         android:layout_width="@dimen/common_measure_50dp"
                         android:layout_height="@dimen/common_measure_50dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/common_measure_20dp"
+                        android:layout_marginLeft="@dimen/common_measure_10dp"
                         android:scaleType="centerInside"
                         android:src="@mipmap/ic_favorites" />
 
@@ -35,7 +35,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/common_measure_20dp"
+                        android:layout_marginLeft="@dimen/common_measure_10dp"
                         android:layout_toRightOf="@id/mine_left_image"
                         android:text="aaa"
                         android:textColor="@color/colorgray"

@@ -35,7 +35,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private MineCustomLayout mine_allorder;
     private MineCustomLayout mine_feedback_linear, mine_histroy_bill, mine_rechange, mine_setting, mine_kefu, mine_ti_huo, mine_myaddress, mine_mycoup, mine_cart, mine_allorder_sending,
-            mine_allorder_unpay;
+            mine_allorder_unpay,mine_allorder_unsend;
     private TextView fragment_mine_name,fragment_mine_price,fragment_mine_price_info;
 
     private ImageView fragment_mine_photo;
@@ -54,6 +54,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     protected void findViews(View view) {
 
         fragment_mine_name = $(R.id.fragment_mine_name);
+        mine_allorder_unsend = $(R.id.mine_allorder_unsend);
         fragment_mine_photo = $(R.id.fragment_mine_photo);
         mine_allorder = $(R.id.mine_allorder);
         mine_feedback_linear = $(R.id.mine_feedback_linear);
@@ -93,6 +94,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         if(mine_allorder_unpay!=null) {
             mine_allorder_unpay.setText(UtilText.getminenumber("待付款  (" + AppApplication.getOrderunpaid() + ")"));
             mine_allorder_sending.setText(UtilText.getminenumber("配送中 (" + AppApplication.getOrdersending() + ")"));
+            mine_allorder_unsend.setText(UtilText.getminenumber("待配送 (" + AppApplication.getOrderwaitsend() + ")"));
             mine_cart.setText(UtilText.getminenumber("购物车 (" + (int)Float.parseFloat(AppApplication.getCartcount()) + ")"));
             mine_mycoup.setText(("我的优惠券 (" + AppApplication.getCouponcount() + "张)"));
         }
@@ -112,6 +114,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mine_cart.setOnClickListener(this);
         mine_allorder_sending.setOnClickListener(this);
         mine_allorder_unpay.setOnClickListener(this);
+        mine_allorder_unsend.setOnClickListener(this);
         fragment_mine_price_info.setOnClickListener(this);
         fragment_mine_price.setOnClickListener(this);
         fragment_mine_photo.setOnClickListener(this);
@@ -166,6 +169,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.mine_allorder_unpay:
                 AllOrderActivity.jumpAllOrderActivity(getActivity(), 1);
+                break;
+            case R.id.mine_allorder_unsend:
+                AllOrderActivity.jumpAllOrderActivity(getActivity(), 2);
                 break;
             case R.id.fragment_mine_price:
                 RechargeActivity.jumpRechangeActivity(getActivity());
