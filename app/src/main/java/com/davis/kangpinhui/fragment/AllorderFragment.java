@@ -80,37 +80,59 @@ public class AllorderFragment extends BaseFragment {
                 holder.getView(R.id.allorder_item_number).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        OrderDetailActivity.jumpOrderDetailActivity(mContext,itemData.sordernumber);
+                        OrderDetailActivity.jumpOrderDetailActivity(mContext, itemData.sordernumber);
                     }
                 });
 
                 TextView allorder_item_cancel = holder.getView(R.id.allorder_item_cancel);
                 TextView conutiPay = holder.getView(R.id.allorder_item_conuti);
                 LinearLayout linearLayout = holder.getView(R.id.allorder_item_linear);
-                if (itemData.stype.equals("0")) {
-                    holder.setText(R.id.allorder_item_type, "待配送");
+
+
+//                if((payType==0|| payType==1|| payType==4)&& Stype==0){
+////待支付
+//                } else if(payType!=2&& Stype==1){
+////已支付
+//                }else if(Stype==2 || Stype==1){
+////代配送
+//                } else if(Stype==3){
+////配送中
+//                } else if(Stype==4|| Stype==5){
+//已完成
+//                }else if(Stype==6){
+//已关闭
+//                }else if(Stype==0&&paytype==2){
+//待配送
+//            }
+                String payType = itemData.spaytype;
+                if ((payType.equals("0") || payType.equals("4") || payType.equals("1")) && itemData.stype.equals("0")) {
+                    holder.setText(R.id.allorder_item_type, "待付款");
+                    conutiPay.setVisibility(View.VISIBLE);
                     linearLayout.setVisibility(View.VISIBLE);
+                } else if (!payType.equals("2") && itemData.stype.equals("1")) {
+                    holder.setText(R.id.allorder_item_type, "已支付");
+                    conutiPay.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.VISIBLE);
+                } else if (itemData.stype.equals("2")||itemData.stype.equals("1")) {
+                    holder.setText(R.id.allorder_item_type, "待配送");
+                    linearLayout.setVisibility(View.GONE);
                 } else if (itemData.stype.equals("3")) {
                     holder.setText(R.id.allorder_item_type, "配送中");
-                    linearLayout.setVisibility(View.VISIBLE);
+                    linearLayout.setVisibility(View.GONE);
+                }else if (itemData.stype.equals("4")||itemData.stype.equals("5")) {
+                    holder.setText(R.id.allorder_item_type, "已完成");
+                    linearLayout.setVisibility(View.GONE);
                 } else if (itemData.stype.equals("6")) {
                     holder.setText(R.id.allorder_item_type, "已关闭");
                     linearLayout.setVisibility(View.GONE);
-                } else if (itemData.stype.equals("1")) {
-                    holder.setText(R.id.allorder_item_type,"已支付");
-                    linearLayout.setVisibility(View.VISIBLE);
+                } else if (payType.equals("2") &&itemData.stype.equals("0")) {
+                    holder.setText(R.id.allorder_item_type, "待配送");
+                    linearLayout.setVisibility(View.GONE);
                 } else {
                     holder.setText(R.id.allorder_item_type, "未知");
                     linearLayout.setVisibility(View.GONE);
                 }
-                String payType = itemData.spaytype;
-                if ((payType.equals("0") || payType.equals("4") || payType.equals("1")) && itemData.stype.equals("0")) {
-                    //还未付款，需要继续支付。
-                    conutiPay.setVisibility(View.VISIBLE);
-                    holder.setText(R.id.allorder_item_type, "待付款");
-                } else {
-                    conutiPay.setVisibility(View.GONE);
-                }
+
                 allorder_item_cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -120,20 +142,21 @@ public class AllorderFragment extends BaseFragment {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Call<BaseModel> call = ApiInstant.getInstant().cancelOrder(AppApplication.apptype, itemData.sordernumber, AppApplication.token);
-                                   call.enqueue(new ApiCallback<BaseModel>() {
-                                       @Override
-                                       public void onSucssce(BaseModel baseModel) {
-                                           ToastUitl.showToast("取消成功");
-                                           EventBus.getDefault().post(new Extendedinfo());
-                                           list.clear();
-                                           startFragmentLoading();
-                                           chageTitle();
-                                       }
-                                       @Override
-                                       public void onFailure() {
+                                        call.enqueue(new ApiCallback<BaseModel>() {
+                                            @Override
+                                            public void onSucssce(BaseModel baseModel) {
+                                                ToastUitl.showToast("取消成功");
+                                                EventBus.getDefault().post(new Extendedinfo());
+                                                list.clear();
+                                                startFragmentLoading();
+                                                chageTitle();
+                                            }
 
-                                       }
-                                   });
+                                            @Override
+                                            public void onFailure() {
+
+                                            }
+                                        });
                                     }
                                 }).show();
                     }
@@ -155,35 +178,35 @@ public class AllorderFragment extends BaseFragment {
 
     private void chageTitle() {
 
-       String [] tabNames= {"全部", "待付款", "待配送","配送中"};
+        String[] tabNames = {"全部", "待付款", "待配送", "配送中"};
 
-        tabNames[0]="全部("+(AppApplication.getOrderall())+")";
-        if(id==1) {
+        tabNames[0] = "全部(" + (AppApplication.getOrderall()) + ")";
+        if (id == 1) {
             tabNames[1] = "待付款(" + getString(AppApplication.getOrderunpaid()) + ")";
-            tabNames[2]="待配送("+AppApplication.getOrderwaitsend()+")";
-            tabNames[3]="配送中("+AppApplication.getOrdersending()+")";
-        }else if(id==2){
-            tabNames[2]="待配送("+getString(AppApplication.getOrderwaitsend())+")";
-            tabNames[1]="待付款("+AppApplication.getOrderunpaid()+")";
-            tabNames[3]="配送中("+AppApplication.getOrdersending()+")";
-        }else if(id==3){
-            tabNames[3]="配送中("+getString(AppApplication.getOrdersending())+")";
-            tabNames[1]="待付款("+AppApplication.getOrderunpaid()+")";
-            tabNames[2]="待配送("+AppApplication.getOrderwaitsend()+")";
+            tabNames[2] = "待配送(" + AppApplication.getOrderwaitsend() + ")";
+            tabNames[3] = "配送中(" + AppApplication.getOrdersending() + ")";
+        } else if (id == 2) {
+            tabNames[2] = "待配送(" + getString(AppApplication.getOrderwaitsend()) + ")";
+            tabNames[1] = "待付款(" + AppApplication.getOrderunpaid() + ")";
+            tabNames[3] = "配送中(" + AppApplication.getOrdersending() + ")";
+        } else if (id == 3) {
+            tabNames[3] = "配送中(" + getString(AppApplication.getOrdersending()) + ")";
+            tabNames[1] = "待付款(" + AppApplication.getOrderunpaid() + ")";
+            tabNames[2] = "待配送(" + AppApplication.getOrderwaitsend() + ")";
         }
 
-        AllOrderActivity allOrderActivity= (AllOrderActivity) getActivity();
+        AllOrderActivity allOrderActivity = (AllOrderActivity) getActivity();
 
-        if(allOrderActivity!=null){
-            allOrderActivity.chageTitle(tabNames,id);
+        if (allOrderActivity != null) {
+            allOrderActivity.chageTitle(tabNames, id);
         }
     }
 
-    private String getString(String string){
-        int i=Integer.parseInt(string);
-        if(i>=1)
-         i=i-1;
-        return i+"";
+    private String getString(String string) {
+        int i = Integer.parseInt(string);
+        if (i >= 1)
+            i = i - 1;
+        return i + "";
     }
 
     private void bindItemView(StretchedListView listView, ArrayList<OrderDetail> orderDetails) {

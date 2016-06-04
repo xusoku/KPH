@@ -12,6 +12,7 @@
         android:hint="有什么不爽的在这里吐槽吧"
         android:layout_height="@dimen/common_measure_178dp"
         android:layout_margin="@dimen/common_measure_14dp"
+        android:padding="5dp"
         android:background="@drawable/bg_flow_tag_unselect"/>
 
     <android.support.v7.widget.CardView

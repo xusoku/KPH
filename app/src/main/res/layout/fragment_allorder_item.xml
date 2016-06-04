@@ -39,7 +39,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/common_measure_10dp"
-                    android:text="待付款"
                     android:textColor="@color/red"
                     android:textSize="@dimen/text_size_17" />
             </RelativeLayout>
