@@ -287,7 +287,7 @@ public class LoadMoreRecyclerView extends RecyclerView {
 			break;
 		case NO_MORE_DATA:
 			mProgressBar.setVisibility(View.GONE);
-			mHintView.setText("没有更多了");
+			mHintView.setText("已加载全部数据");
 			break;
 		case UNAVAILABLE:
 			mAutoLoadingLayout.setVisibility(View.INVISIBLE);

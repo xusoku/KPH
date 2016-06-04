@@ -117,7 +117,7 @@ public class OrderDetailActivity extends BaseActivity {
                 holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
                 holder.setText(R.id.order_comfi_item_title, itemData.sproductname);
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
-                holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fmoney);
+                holder.setText(R.id.order_comfi_item_price, "¥" + (itemData.fprice));
                 holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.icount));
             }
         });
@@ -142,9 +142,10 @@ public class OrderDetailActivity extends BaseActivity {
             order_detail_state.setText("待配送");
         } else if (orderDetailOrder.stype.equals("3")) {
             order_detail_state.setText("配送中");
-
         } else if (orderDetailOrder.stype.equals("6")) {
             order_detail_state.setText("已关闭");
+        } else if (orderDetailOrder.stype.equals("1")) {
+            order_detail_state.setText("已支付");
         } else {
             order_detail_state.setText("未知");
         }
@@ -161,8 +162,8 @@ public class OrderDetailActivity extends BaseActivity {
         order_detail_people.setText(orderDetailOrder.snickName);
         order_detail_phone.setText(orderDetailOrder.smobile);
         order_detail_address.setText(orderDetailOrder.saddress);
-        order_detail_heji.setText("¥" + UtilText.getDivideZero(orderDetailOrder.fmoney));
-        order_detail_m_oney.setText("¥" + UtilText.getDivideZero(orderDetailOrder.fmoney));
+        order_detail_heji.setText("¥" + UtilText.getFloatToString(orderDetailOrder.fmoney));
+        order_detail_m_oney.setText("¥" + UtilText.getFloatToString(orderDetailOrder.fmoney));
         order_detail_time.setText(orderDetailOrder.daddtime);
         order_detail_code.setText(orderDetailOrder.sordernumber);
 
@@ -181,14 +182,14 @@ public class OrderDetailActivity extends BaseActivity {
             case R.id.order_detail_kefu:
                 new AlertDialog.Builder(this)
                         .setTitle("联系客服")
-                        .setMessage("客服电话："+AppApplication.kefu)
+                        .setMessage("客服电话：" + AppApplication.kefu)
                         .setPositiveButton("呼叫", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + AppApplication.kefu));
                                 startActivity(intent);
                             }
-                        }).setNegativeButton("取消",null)
+                        }).setNegativeButton("取消", null)
                         .show();
                 break;
         }

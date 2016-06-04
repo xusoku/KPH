@@ -89,21 +89,20 @@ public class AllorderFragment extends BaseFragment {
                 LinearLayout linearLayout = holder.getView(R.id.allorder_item_linear);
                 if (itemData.stype.equals("0")) {
                     holder.setText(R.id.allorder_item_type, "待配送");
-
                     linearLayout.setVisibility(View.VISIBLE);
                 } else if (itemData.stype.equals("3")) {
                     holder.setText(R.id.allorder_item_type, "配送中");
-
                     linearLayout.setVisibility(View.VISIBLE);
                 } else if (itemData.stype.equals("6")) {
                     holder.setText(R.id.allorder_item_type, "已关闭");
                     linearLayout.setVisibility(View.GONE);
+                } else if (itemData.stype.equals("1")) {
+                    holder.setText(R.id.allorder_item_type,"已支付");
+                    linearLayout.setVisibility(View.VISIBLE);
                 } else {
                     holder.setText(R.id.allorder_item_type, "未知");
                     linearLayout.setVisibility(View.GONE);
                 }
-
-
                 String payType = itemData.spaytype;
                 if ((payType.equals("0") || payType.equals("4") || payType.equals("1")) && itemData.stype.equals("0")) {
                     //还未付款，需要继续支付。
@@ -194,7 +193,7 @@ public class AllorderFragment extends BaseFragment {
                 holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
                 holder.setText(R.id.order_comfi_item_title, itemData.sproductname);
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
-                holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fmoney);
+                holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fprice);
                 holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.icount));
             }
         });

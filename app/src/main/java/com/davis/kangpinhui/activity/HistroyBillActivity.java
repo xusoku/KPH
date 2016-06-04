@@ -65,6 +65,9 @@ public class HistroyBillActivity extends BaseActivity {
 
     @Override
     protected void findViews() {
+
+        showTopBar();
+        setTitle("个人账单");
         viewHeader = getLayoutInflater().inflate(R.layout.activity_histroy_bill_header, null);
         histroy_bill_header_text=$(viewHeader,R.id.histroy_bill_header_text);
         histroy_bill_lst = $(R.id.content);
