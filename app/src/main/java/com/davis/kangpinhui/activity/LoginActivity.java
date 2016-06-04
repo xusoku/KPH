@@ -69,7 +69,8 @@ public class LoginActivity extends BaseActivity {
 
         login_btn = $(R.id.login_btn);
         login_phone = $(R.id.login_phone);
-        login_phone.setText("15222691381");
+        String str=SharePreferenceUtils.getSharedPreferences("kph").getString("username", "");
+        login_phone.setText(str);
         login_password = $(R.id.login_password);
         login_code = $(R.id.login_code);
         login_last_text = $(R.id.login_last_text);

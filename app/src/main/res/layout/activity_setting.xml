@@ -16,6 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:src="@mipmap/ic_nearby"
+        android:clickable="true"
+        android:onClick="doClick"
         app:line="false"
         app:text="关于我们"/>
     </FrameLayout>
@@ -23,13 +25,16 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_60dp"
         android:layout_margin="@dimen/common_measure_14dp"
+        app:cardBackgroundColor="#fe6215"
         app:cardCornerRadius="3dp">
         <TextView
             android:id="@+id/setting_logout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:background="#fe6215"
+            android:clickable="true"
+            android:onClick="doClick"
+            android:background="?android:attr/selectableItemBackground"
             android:textSize="@dimen/text_size_17"
             android:textColor="@color/white"
             android:text="退出当前账号"/>

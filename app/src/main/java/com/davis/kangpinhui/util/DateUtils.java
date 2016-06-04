@@ -263,10 +263,10 @@ public class DateUtils {
 	 *            Date 日期
 	 * @return 返回日份
 	 */
-	public static int getDay(Date date) {
+	public static int getDay(long date) {
 		calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		return calendar.get(Calendar.DAY_OF_MONTH);
+		calendar.setTimeInMillis(date);
+		return calendar.get(Calendar.DAY_OF_YEAR);
 	}
 
 	/**

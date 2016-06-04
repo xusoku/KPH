@@ -78,7 +78,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     protected void initData() {
 
         String name= SharePreferenceUtils.getSharedPreferences("kph").getString("username","");
-        if(!TextUtils.isEmpty(name)){
+        String token= SharePreferenceUtils.getSharedPreferences("kph").getString("token","");
+        if(!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(token)){
             name=name.substring(0,3)+"****"+name.substring(7,11);
             fragment_mine_name.setText(name);
         }
@@ -99,6 +100,20 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             mine_mycoup.setText(("我的优惠券 (" + AppApplication.getCouponcount() + "张)"));
         }
     }
+
+    public void setLoginout(){
+
+        if(mine_allorder_unpay!=null) {
+            mine_allorder_unpay.setText(UtilText.getminenumber("待付款"));
+            mine_allorder_sending.setText(UtilText.getminenumber("配送中"));
+            mine_allorder_unsend.setText(UtilText.getminenumber("待配送"));
+            mine_cart.setText(UtilText.getminenumber("购物车"));
+            mine_mycoup.setText(("我的优惠券"));
+            fragment_mine_name.setText("注册/登录");
+        }
+    }
+
+
 
     @Override
     protected void setListener() {

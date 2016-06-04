@@ -13,9 +13,12 @@ import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
+import com.davis.kangpinhui.util.DateUtils;
+import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.views.LoadMoreListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 
@@ -61,16 +64,28 @@ public class CouponFragment extends BaseFragment {
             @Override
             public void convert(ViewHolder holder, Coupon itemData, int position) {
 
-                holder.setText(R.id.coupon_item_price,"¥"+itemData.fmoney);
+                holder.setText(R.id.coupon_item_price, "¥" + itemData.fmoney);
 
-                holder.setText(R.id.coupon_item_price_item,itemData.starttime);
+                if (id == 0) {
+                    long endtime=Long.parseLong(itemData.endtime);
+                    LogUtils.e("end",DateUtils.date2Str(endtime));
+                    long current=System.currentTimeMillis();
+                    LogUtils.e("cur",DateUtils.date2Str(current));
+                    int day=DateUtils.getDay(endtime-current);
+                    holder.setText(R.id.coupon_item_price_item,"剩余"+day+"天过期" );
+                } else if (id==1) {
+                    holder.setText(R.id.coupon_item_price_item, "已使用");
+                } else if (id==2) {
+                    holder.setText(R.id.coupon_item_price_item, "已过期");
+                }
+                holder.setText(R.id.coupon_item_title, itemData.title);
+                holder.setText(R.id.coupon_item_content, itemData.context);
 
-                holder.setText(R.id.coupon_item_title,itemData.title);
-                holder.setText(R.id.coupon_item_content,itemData.context);
-                holder.setText(R.id.coupon_item_time,"有效期至:"+itemData.endtime);
-                if(id==1||id==2){
+                String string = DateUtils.date2Str(Long.parseLong(itemData.endtime), "yyyy-MM-dd");
+                holder.setText(R.id.coupon_item_time, "有效期至:" + string);
+                if (id == 1 || id == 2) {
                     holder.getView(R.id.coupon_item_time).setVisibility(View.GONE);
-                }else if(id==0){
+                } else if (id == 0) {
                     holder.getView(R.id.coupon_item_time).setVisibility(View.VISIBLE);
                 }
 
@@ -127,6 +142,7 @@ public class CouponFragment extends BaseFragment {
                     mine_allorder_list.onLoadSucess(true);
                 }
             }
+
             @Override
             public void onFailure() {
 
