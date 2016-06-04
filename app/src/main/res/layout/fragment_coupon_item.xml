@@ -11,14 +11,14 @@
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="3dp"
         android:layout_marginTop="3dp"
+        android:padding="3dp"
         android:background="@mipmap/coupon_bg_available_left_60"
         android:orientation="vertical">
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/coupon_item_price"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="@dimen/common_measure_100dp"
             android:gravity="center"
             android:text="¥5.00"
             android:textColor="@color/colormain"
@@ -28,12 +28,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorlightgray" />
+            android:background="@color/colorlightgray"
+            android:paddingRight="3dp"/>
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/coupon_item_price_item"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/common_measure_20dp"
+            android:layout_height="@dimen/common_measure_30dp"
             android:ellipsize="end"
             android:gravity="center"
             android:singleLine="true"
@@ -43,52 +44,49 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="3dp"
         android:layout_marginRight="3dp"
         android:layout_marginTop="3dp"
-        android:layout_weight="1"
+        android:padding="3dp"
         android:background="@mipmap/coupon_bg_available_right"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
-        <com.davis.kangpinhui.views.CustomTypefaceTextView
-            android:id="@+id/coupon_item_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_measure_20dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="¥5.00"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_17"
-            android:textStyle="bold" />
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/coupon_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_measure_20dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="¥5.00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_17"
+                android:textStyle="bold" />
 
-        <com.davis.kangpinhui.views.CustomTypefaceTextView
-            android:id="@+id/coupon_item_content"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:maxLines="3"
-            android:text="asdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfas"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_17" />
-        </LinearLayout>
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/coupon_item_content"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="3"
+                android:text="aasdfsadasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfas"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_17" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorlightgray" />
+            android:background="@color/colorlightgray"
+            android:layout_marginBottom="3dp"/>
+
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/coupon_item_time"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/common_measure_20dp"
+            android:layout_height="@dimen/common_measure_30dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="12tianasdf"
