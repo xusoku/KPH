@@ -68,6 +68,11 @@ public class CouponFragment extends BaseFragment {
                 holder.setText(R.id.coupon_item_title,itemData.title);
                 holder.setText(R.id.coupon_item_content,itemData.context);
                 holder.setText(R.id.coupon_item_time,"有效期至:"+itemData.endtime);
+                if(id==1||id==2){
+                    holder.getView(R.id.coupon_item_time).setVisibility(View.GONE);
+                }else if(id==0){
+                    holder.getView(R.id.coupon_item_time).setVisibility(View.VISIBLE);
+                }
 
 
             }
