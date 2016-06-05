@@ -523,27 +523,47 @@ public class SearchResultActivity extends BaseActivity {
     }
 
 
-
     private void getClassicData() {
         if (AppApplication.classiclist.size() > 0) {
-            Category category = new Category();
-            category.name = "全部分类";
-            category.id = "0";
-            Category category1 = new Category();
-            category1.name = "全部";
-            category1.id = "0";
-            category.clist.add(0, category1);
-            for(Category cat:AppApplication.classiclist){
-                if(cat.clist.get(0).id.equals("0")){
+
+            for (Category cat : AppApplication.classiclist) {
+                if (cat.clist.get(0).id.equals("0")) {
                     continue;
                 }
                 Category category2 = new Category();
-                category2.name = "全部"+cat.name;
+                category2.name = "全部" + cat.name;
                 category2.id = "0";
-                cat.clist.add(0,category2);
+                cat.clist.add(0, category2);
             }
-            AppApplication.classiclist.add(0, category);
-            AppApplication.classiclist.get(0).isOnclick = true;
+
+
+            if (!AppApplication.classiclist.get(0).id.equals("0")) {
+                Category category = new Category();
+                category.name = "全部分类";
+                category.id = "0";
+                Category category1 = new Category();
+                category1.name = "全部";
+                category1.id = "0";
+                category.clist.add(0, category1);
+                AppApplication.classiclist.add(0, category);
+            }
+
+
+
+            for(Category category : AppApplication.classiclist){
+                category.isOnclick = false;
+                if(rootid.equals(category.id)){
+                    category.isOnclick=true;
+                    bindClassRightView(category.clist);
+                    for(Category category1:category.clist){
+                        if(category1.id.equals(classid)){
+                            search_all_classic_text.setText(category1.name);
+                            break;
+                        }
+                    }
+                }
+            }
+
             bindClassicView();
         } else {
             Call<BaseModel<ArrayList<Category>>> call = ApiInstant.getInstant().categoryLevel2(AppApplication.apptype, "");
@@ -577,15 +597,7 @@ public class SearchResultActivity extends BaseActivity {
             }
         };
         pop_list_classic_main.setAdapter(adapter);
-        pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, AppApplication.classiclist.get(0).clist, R.layout.fragment_classic_left_item) {
-            @Override
-            public void convert(ViewHolder holder, Category itemData, int position) {
-                TextView textView = holder.getView(R.id.classic_rootid_list_item);
-                textView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                textView.setTextColor(getResources().getColor(R.color.black));
-                textView.setText(itemData.name);
-            }
-        });
+
         pop_list_classic_main.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -632,6 +644,18 @@ public class SearchResultActivity extends BaseActivity {
                 closePopuw();
                 search_et.setText("");
                 search_all_classic_text.setText(category.clist.get(position).name);
+            }
+        });
+    }
+
+    private void bindClassRightView(ArrayList<Category> list){
+        pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, list, R.layout.fragment_classic_left_item) {
+            @Override
+            public void convert(ViewHolder holder, Category itemData, int position) {
+                TextView textView = holder.getView(R.id.classic_rootid_list_item);
+                textView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                textView.setTextColor(getResources().getColor(R.color.black));
+                textView.setText(itemData.name);
             }
         });
     }
