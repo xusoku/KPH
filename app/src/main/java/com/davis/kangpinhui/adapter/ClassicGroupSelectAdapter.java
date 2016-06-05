@@ -51,6 +51,11 @@ public class ClassicGroupSelectAdapter extends BaseAdapter
         }
         // 获取数据
         Category itemEntity = (Category) getItem(position);
+        if(itemEntity.clist.size()>0){
+            if(itemEntity.clist.get(0).id.equals("0")){
+                itemEntity.clist.remove(0);
+            }
+        }
         GridViewAdapter gridViewAdapter = new GridViewAdapter(itemEntity);
         viewHolder.noScrollGridView.setAdapter(gridViewAdapter);
 
