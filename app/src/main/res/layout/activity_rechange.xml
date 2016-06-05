@@ -26,6 +26,9 @@
             android:textSize="@dimen/text_size_17"
             android:textStyle="bold" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/recharge_letterhead"
             android:layout_width="match_parent"
@@ -35,13 +38,21 @@
             android:background="@drawable/bg_flow_tag_unselect"
             android:clickable="true"
             android:drawablePadding="@dimen/common_measure_10dp"
-            android:drawableRight="@mipmap/ic_right_arrow"
+
             android:gravity="center_vertical"
             android:onClick="doClick"
             android:paddingLeft="@dimen/common_measure_10dp"
             android:text="不开具发票"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_17" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_right_arrow"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/common_measure_15dp"/>
+        </RelativeLayout>
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:layout_width="wrap_content"
