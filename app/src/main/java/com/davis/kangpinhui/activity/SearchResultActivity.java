@@ -80,6 +80,7 @@ public class SearchResultActivity extends BaseActivity {
 
     private CardView search_result_card;
     private LinearLayout search_result_title_linear;
+    private AddCartPopuWindow addCartPopuWindow;
 
     /**
      * 搜索
@@ -173,7 +174,7 @@ public class SearchResultActivity extends BaseActivity {
 
         adapter = new CommonRecyclerAdapter<Product>(this, list, R.layout.activity_search_result_item) {
             @Override
-            public void convert(BaseViewHolder holder, Product itemData, int position) {
+            public void convert(BaseViewHolder holder, final Product itemData, int position) {
 
                 ImageView iv = holder.getView(R.id.search_result_item_iv);
 
@@ -189,6 +190,14 @@ public class SearchResultActivity extends BaseActivity {
                 tv_price.append(UtilText.getIndexPrice("¥"));
                 tv_price.append(UtilText.getBigProductDetail(itemData.fprice));
                 tv_price.append("/" + itemData.sstandard);
+
+                holder.getView(R.id.search_cart_iv).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addCartPopuWindow.setBindPopData(itemData);
+                        addCartPopuWindow.addpopupWindow.showAtLocation(search_result_title_linear, Gravity.NO_GRAVITY, 0, 0);
+                    }
+                });
             }
         };
         if (!type) {
@@ -216,7 +225,7 @@ public class SearchResultActivity extends BaseActivity {
             }
         });
 
-
+        addCartPopuWindow=new AddCartPopuWindow(this);
     }
 
     @Override

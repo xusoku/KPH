@@ -58,7 +58,7 @@ public class ProductDetailActivity extends BaseActivity {
     private TextView product_detail_title_text;
     private LinearLayout product_detail_title_text_linear, add_cart_number_linear;
 
-    private PopupWindow addpopupWindow;
+    private AddCartPopuWindow addpopupWindow;
     private ImageView add_cart_icon;
 
     private ProductDetail productDetail;
@@ -101,7 +101,8 @@ public class ProductDetailActivity extends BaseActivity {
         backgroundDefaultBadge = new BadgeView(this);
         backgroundDefaultBadge.setTargetView(add_cart_number_linear);
         setcartNumber();
-        initPopupWindow();
+        addpopupWindow=new AddCartPopuWindow(this);
+        addpopupWindow.setBackgroundDefaultBadge(backgroundDefaultBadge);
     }
 
     @Override
@@ -122,7 +123,7 @@ public class ProductDetailActivity extends BaseActivity {
                 ArrayList<String> bannerList = productDetail.piclist;
                 getBannerData(bannerList);
                 setBindData(productDetail);
-                setBindPopData(productDetail);
+                addpopupWindow.setBindPopData(productDetail);
             }
 
             @Override
@@ -163,114 +164,6 @@ public class ProductDetailActivity extends BaseActivity {
         product_detail_xweb.loadDataWithBaseURL(null, (productDetail.scontentinfo), "text/html", "utf-8", null);
     }
 
-    private void setBindPopData(final ProductDetail productDetail) {
-        Glide.with(this).load(ApiService.picurl + productDetail.spicurl).into(add_cart_image);
-
-        add_cart_text_vip_price.setText("");
-        add_cart_text_price.setText("");
-
-        add_cart_text_vip_price.append("会员价");
-        add_cart_text_vip_price.append(UtilText.getProductDetail("¥"));
-        add_cart_text_vip_price.append(UtilText.getBigProductDetail(productDetail.fvipprice));
-        add_cart_text_vip_price.append("/" + productDetail.sstandard);
-
-        add_cart_text_price.append("康品价");
-        add_cart_text_price.append(UtilText.getProductDetail("¥"));
-        add_cart_text_price.append(UtilText.getBigProductDetail(productDetail.fprice));
-        add_cart_text_price.append("/" + productDetail.sstandard);
-
-        add_cart_add_center.setText("1");
-
-
-        add_cart_add_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (AppApplication.isLogin(ProductDetailActivity.this)) {
-
-                    String num = add_cart_add_center.getText().toString().trim();
-                    Call<BaseModel> call = ApiInstant.getInstant().addCart(AppApplication.apptype, AppApplication.shopid, num, productDetail.iproductid, srequire, AppApplication.token);
-
-                    call.enqueue(new ApiCallback<BaseModel>() {
-                        @Override
-                        public void onSucssce(BaseModel baseModel) {
-                            ToastUitl.showToast("添加成功");
-                            EventBus.getDefault().post(new Extendedinfo());
-
-                            String number = AppApplication.getCartcount();
-                            if (TextUtils.isEmpty(number) || number.equals("0.0")) {
-                                number = "0";
-                            }
-                            int n = (int)Float.parseFloat(number);
-                            n++;
-                            backgroundDefaultBadge.setText(n + "");
-
-                            addpopupWindow.dismiss();
-                        }
-
-                        @Override
-                        public void onFailure() {
-
-                        }
-                    });
-                }
-
-            }
-        });
-        add_cart_guige.setText(productDetail.sstandard);
-        add_cart_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String number = add_cart_add_center.getText().toString().trim();
-
-                int n = Integer.valueOf(number);
-                n++;
-                add_cart_add_center.setText(n + "");
-            }
-        });
-
-        add_cart_add_mins.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String number = add_cart_add_center.getText().toString().trim();
-
-                int n = Integer.valueOf(number);
-
-                if (n <= 1) {
-                    n = 1;
-                } else {
-                    n--;
-                }
-                add_cart_add_center.setText(n + "");
-            }
-        });
-
-
-        if (!TextUtils.isEmpty(productDetail.srequire)) {
-            add_cart_add_linear_sp.setVisibility(View.VISIBLE);
-
-            String req = productDetail.srequire;
-            String[] list = req.split(" ");
-            getRequre(list);
-        } else {
-            add_cart_add_linear_sp.setVisibility(View.GONE);
-        }
-
-
-    }
-
-    private String[] list;
-
-    private void getRequre(String[] list) {
-
-        this.list = list;
-        for (int i = 0; i < list.length; i++) {
-            add_cart_flow.addView(newFlowTagView(list[i], i));
-        }
-
-
-    }
 
     @Override
     protected void setListener() {
@@ -298,7 +191,7 @@ public class ProductDetailActivity extends BaseActivity {
                 break;
             case R.id.add_cart_addlinear:
                 if (productDetail != null) {
-                    addpopupWindow.showAtLocation(product_detail_drag, Gravity.NO_GRAVITY, 0, 0);
+                    addpopupWindow.addpopupWindow.showAtLocation(product_detail_drag, Gravity.NO_GRAVITY, 0, 0);
                 } else {
                     ToastUitl.showToast("暂无数据");
                 }
@@ -310,140 +203,12 @@ public class ProductDetailActivity extends BaseActivity {
 
     }
 
-
-    private ImageView add_cart_image, add_cart_image_close;
-
-    private TextView add_cart_text_vip_price, add_cart_text_price, add_cart_guige,
-            add_cart_add_mins, add_cart_add, add_cart_add_center, add_cart_add_btn;
-
-    private LinearLayout add_cart_add_linear_sp;
-
-    private View add_cart_pop_view;
-    private FlowLayout add_cart_flow;
-
     private BadgeView backgroundDefaultBadge;
-
-    //初始化分类
-    private void initPopupWindow() {
-        // TODO Auto-generated method stub
-        View view = getLayoutInflater().inflate(R.layout.activity_product_detail_add_cart, null);
-
-        add_cart_flow = $(view, R.id.add_cart_flow);
-        add_cart_pop_view = $(view, R.id.add_cart_pop_view);
-        add_cart_add_linear_sp = $(view, R.id.add_cart_add_linear_sp);
-        add_cart_image = $(view, R.id.add_cart_image);
-        add_cart_image_close = $(view, R.id.add_cart_image_close);
-        add_cart_text_vip_price = $(view, R.id.add_cart_text_vip_price);
-        add_cart_text_price = $(view, R.id.add_cart_text_price);
-        add_cart_add_mins = $(view, R.id.add_cart_add_mins);
-        add_cart_add_center = $(view, R.id.add_cart_add_center);
-        add_cart_add_btn = $(view, R.id.add_cart_add_btn);
-        add_cart_guige = $(view, R.id.add_cart_guige);
-        add_cart_add = $(view, R.id.add_cart_add);
-        addpopupWindow = new PopupWindow(view,
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT);
-        addpopupWindow.setFocusable(true);
-        addpopupWindow.setOutsideTouchable(true);
-        addpopupWindow.setAnimationStyle(R.style.popwin_add_cart_anim_style);
-        addpopupWindow.setOnDismissListener(new popupWindowclickListener());
-        addpopupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (addpopupWindow != null && addpopupWindow.isShowing()) {
-                    addpopupWindow.dismiss();
-                }
-            }
-        });
-
-        add_cart_pop_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (addpopupWindow != null && addpopupWindow.isShowing()) {
-                    addpopupWindow.dismiss();
-                }
-            }
-        });
-        add_cart_image_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (addpopupWindow != null && addpopupWindow.isShowing()) {
-                    addpopupWindow.dismiss();
-                }
-            }
-        });
-    }
-
-    class popupWindowclickListener implements PopupWindow.OnDismissListener {
-        @Override
-        public void onDismiss() {
-            if (add_cart_add_center != null) {
-                add_cart_add_center.setText("1");
-            }
-        }
-    }
 
     public void setcartNumber() {
         String number = AppApplication.getCartcount();
         if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0"))
             backgroundDefaultBadge.setText((int)Float.parseFloat(number)+"");
-    }
-
-    public View newFlowTagView(final String tag, final int i) {
-        final TextView textView = (TextView) View.inflate(mActivity, R.layout.layout_flow_tag, null);
-        FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
-        int dp = CommonManager.dpToPx(25);
-        params.setMargins(dp, dp, dp, dp);
-        textView.setLayoutParams(params);
-        textView.setText(tag);
-        textView.setTextColor(getResources().getColor(R.color.black));
-        textView.setBackgroundResource(R.drawable.bg_flow_tag_unselect);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getRequre(i);
-                srequire=tag;
-            }
-        });
-        return textView;
-    }
-
-    public View newFlowTag(final String tag, final int i) {
-        final TextView textView = (TextView) View.inflate(mActivity, R.layout.layout_flow_tag, null);
-        FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
-        int dp = CommonManager.dpToPx(25);
-        params.setMargins(dp, dp, dp, dp);
-        textView.setLayoutParams(params);
-        textView.setText(tag);
-        textView.setTextColor(getResources().getColor(R.color.black));
-        textView.setBackgroundColor(getResources().getColor(R.color.lightblue));
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getRequre(-1);
-                srequire="";
-            }
-        });
-        return textView;
-    }
-
-    private String srequire = "";
-
-    private void getRequre(int j) {
-        add_cart_flow.removeAllViews();
-        for (int i = 0; i < list.length; i++) {
-            if (i == j) {
-                add_cart_flow.addView(newFlowTag(list[i], i));
-            } else {
-                add_cart_flow.addView(newFlowTagView(list[i], i));
-            }
-        }
-
-
     }
 
 }
