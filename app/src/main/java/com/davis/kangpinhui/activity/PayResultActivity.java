@@ -1,16 +1,32 @@
 package com.davis.kangpinhui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 
 public class PayResultActivity extends BaseActivity {
 
-    private LinearLayout pay_result_sucess,pay_result_fail;
+    private LinearLayout pay_result_sucess, pay_result_fail;
+
+    private TextView pay_result_see_detail;
+    private boolean flag = false;
+
+    public static void jumpPayResultActivity(Context cot, boolean flag) {
+        if (AppApplication.isLogin(cot)) {
+            Intent it = new Intent(cot, PayResultActivity.class);
+            it.putExtra("flag", flag);
+            cot.startActivity(it);
+        }
+    }
+
     @Override
     protected int setLayoutView() {
         return R.layout.activity_pay_result;
@@ -18,14 +34,23 @@ public class PayResultActivity extends BaseActivity {
 
     @Override
     protected void initVariable() {
-
+        flag = getIntent().getBooleanExtra("flag", false);
     }
 
     @Override
     protected void findViews() {
 
-        pay_result_sucess=$(R.id.pay_result_sucess);
-        pay_result_fail=$(R.id.pay_result_fail);
+        showTopBar();
+        setTitle("支付结果");
+
+        pay_result_see_detail = $(R.id.pay_result_see_detail);
+        pay_result_sucess = $(R.id.pay_result_sucess);
+        pay_result_fail = $(R.id.pay_result_fail);
+        if (flag) {
+            pay_result_sucess.setVisibility(View.VISIBLE);
+        } else {
+            pay_result_fail.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -41,5 +66,9 @@ public class PayResultActivity extends BaseActivity {
     @Override
     public void doClick(View view) {
 
+        if(view.getId()==R.id.pay_result_see_detail){
+            AllOrderActivity.jumpAllOrderActivity(this,0);
+            finish();
+        }
     }
 }

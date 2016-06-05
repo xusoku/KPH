@@ -26,6 +26,7 @@ import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.api.ApiService;
+import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.StretchedListView;
@@ -459,8 +460,15 @@ public class OrderActivity extends BaseActivity {
                 EventBus.getDefault().post(new Extendedinfo());
                 if(payTape.equals("0")) {
                     thridPayUtil.alipay("0.01", baseModel.object.sordernumber);
-                }else if(payTape.equals("4")){
+                }else if(payTape.equals("4")){//微信
                     getWeixinPay(baseModel.object.sordernumber);
+                }else if(payTape.equals("3")){//余额支付", "
+                    PayResultActivity.jumpPayResultActivity(OrderActivity.this,true);
+                    finish();
+                    AppManager.getAppManager().finishActivity(CartListActivity.class);
+
+                }else if(payTape.equals("2")){//货到付款
+
                 }
       }
 
@@ -481,6 +489,9 @@ public class OrderActivity extends BaseActivity {
             }
             @Override
             public void onFailure() {
+                PayResultActivity.jumpPayResultActivity(OrderActivity.this,false);
+                finish();
+                AppManager.getAppManager().finishActivity(CartListActivity.class);
 
             }
         });

@@ -24,7 +24,7 @@
 
                     android:layout_marginTop="@dimen/common_measure_120dp"/>
 
-                <TextView
+                <com.davis.kangpinhui.views.CustomTypefaceTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_22"
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:visibility="gone"
+            android:visibility="visible"
             android:orientation="vertical">
 
             <ImageView
@@ -50,7 +50,7 @@
                 android:layout_marginTop="@dimen/common_measure_120dp"/>
 
 
-            <TextView
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_22"
@@ -59,17 +59,24 @@
                 android:text="支付失败"
                 />
 
-            <TextView
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_measure_50dp"
+                android:background="@drawable/bg_miancolor_unselect">
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:id="@+id/pay_result_see_detail"
                 android:layout_width="@dimen/common_measure_120dp"
                 android:layout_height="@dimen/common_measure_40dp"
                 android:textSize="@dimen/text_size_17"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:background="@drawable/bg_miancolor_unselect"
-                android:layout_marginTop="@dimen/common_measure_50dp"
-                android:text="查看订单 "
+                android:clickable="true"
+                android:onClick="doClick"
+                android:background="?android:attr/selectableItemBackground"
+               android:text="查看订单 "
                 />
+            </FrameLayout>
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>
