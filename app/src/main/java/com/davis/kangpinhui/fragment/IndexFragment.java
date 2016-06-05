@@ -232,7 +232,6 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
                 String image = itemData.picurl;
                 ArrayList<Product> list = itemData.list;
-                LogUtils.e(TAG, list.toString());
 
                 holder.setImageByUrl(R.id.fragment_index_item_image, image);
 

@@ -446,7 +446,6 @@ public class SearchResultActivity extends BaseActivity {
                 }
             }
         });
-        classiclist = new ArrayList<>();
         getClassicData();
     }
 
@@ -524,13 +523,9 @@ public class SearchResultActivity extends BaseActivity {
     }
 
 
-    public ArrayList<Category> classiclist;
 
     private void getClassicData() {
         if (AppApplication.classiclist.size() > 0) {
-            classiclist.clear();
-            ArrayList<Category> aa = AppApplication.classiclist;
-            classiclist.addAll(aa);
             Category category = new Category();
             category.name = "全部分类";
             category.id = "0";
@@ -538,7 +533,7 @@ public class SearchResultActivity extends BaseActivity {
             category1.name = "全部";
             category1.id = "0";
             category.clist.add(0, category1);
-            for(Category cat:classiclist){
+            for(Category cat:AppApplication.classiclist){
                 if(cat.clist.get(0).id.equals("0")){
                     continue;
                 }
@@ -547,8 +542,8 @@ public class SearchResultActivity extends BaseActivity {
                 category2.id = "0";
                 cat.clist.add(0,category2);
             }
-            classiclist.add(0, category);
-            classiclist.get(0).isOnclick = true;
+            AppApplication.classiclist.add(0, category);
+            AppApplication.classiclist.get(0).isOnclick = true;
             bindClassicView();
         } else {
             Call<BaseModel<ArrayList<Category>>> call = ApiInstant.getInstant().categoryLevel2(AppApplication.apptype, "");
@@ -568,7 +563,7 @@ public class SearchResultActivity extends BaseActivity {
     }
 
     private void bindClassicView() {
-        final CommonBaseAdapter adapter = new CommonBaseAdapter<Category>(this, classiclist, R.layout.fragment_classic_left_item) {
+        final CommonBaseAdapter adapter = new CommonBaseAdapter<Category>(this, AppApplication.classiclist, R.layout.fragment_classic_left_item) {
             @Override
             public void convert(ViewHolder holder, Category itemData, int position) {
                 TextView textView = holder.getView(R.id.classic_rootid_list_item);
@@ -582,7 +577,7 @@ public class SearchResultActivity extends BaseActivity {
             }
         };
         pop_list_classic_main.setAdapter(adapter);
-        pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, classiclist.get(0).clist, R.layout.fragment_classic_left_item) {
+        pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, AppApplication.classiclist.get(0).clist, R.layout.fragment_classic_left_item) {
             @Override
             public void convert(ViewHolder holder, Category itemData, int position) {
                 TextView textView = holder.getView(R.id.classic_rootid_list_item);
@@ -595,13 +590,13 @@ public class SearchResultActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                for (Category category : classiclist) {
+                for (Category category : AppApplication.classiclist) {
                     category.isOnclick = false;
                 }
-               classiclist.get(position).isOnclick = true;
-                rootid = classiclist.get(position).id;
+                AppApplication.classiclist.get(position).isOnclick = true;
+                rootid = AppApplication.classiclist.get(position).id;
                 adapter.notifyDataSetChanged();
-                pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, classiclist.get(position).clist, R.layout.fragment_classic_left_item) {
+                pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, AppApplication.classiclist.get(position).clist, R.layout.fragment_classic_left_item) {
                     @Override
                     public void convert(ViewHolder holder, Category itemData, int position) {
                         TextView textView = holder.getView(R.id.classic_rootid_list_item);
@@ -617,7 +612,7 @@ public class SearchResultActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long ids) {
                 Category category = null;
-                for (Category category1 : classiclist) {
+                for (Category category1 : AppApplication.classiclist) {
                     if (category1.id.equals(rootid)) {
                         category = category1;
                     }
