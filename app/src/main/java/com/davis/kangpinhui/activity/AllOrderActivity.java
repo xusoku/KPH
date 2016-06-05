@@ -122,15 +122,15 @@ public class AllOrderActivity extends BaseActivity {
                 TextView textView = (TextView) getLayoutInflater().inflate(R.layout.layout_allorder_tab_item, null);
 //                textView.setTextSize(CommonManager.dpToPx(20));
                 textView.setText(str[position]);
-                if(position==i){
-                    textView.setTextColor(getResources().getColor(R.color.colormain));
-                }
+
                 return textView;
             }
 
             @Override
             public void onPageScrolled(View view, int position, float selectPercent) {
-
+                if(position==i){
+                    ((TextView)(view)).setTextColor(getResources().getColor(R.color.colormain));
+                }
             }
         });
     }

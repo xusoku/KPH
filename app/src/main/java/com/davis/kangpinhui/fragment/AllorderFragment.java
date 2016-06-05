@@ -193,6 +193,10 @@ public class AllorderFragment extends BaseFragment {
             tabNames[3] = "配送中(" + getString(AppApplication.getOrdersending()) + ")";
             tabNames[1] = "待付款(" + AppApplication.getOrderunpaid() + ")";
             tabNames[2] = "待配送(" + AppApplication.getOrderwaitsend() + ")";
+        }else{
+            tabNames[1] = "待付款(" + AppApplication.getOrderunpaid() + ")";
+            tabNames[2] = "待配送(" + AppApplication.getOrderwaitsend() + ")";
+            tabNames[3] = "配送中(" + AppApplication.getOrdersending() + ")";
         }
 
         AllOrderActivity allOrderActivity = (AllOrderActivity) getActivity();
