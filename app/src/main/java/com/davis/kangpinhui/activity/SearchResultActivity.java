@@ -34,6 +34,7 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
+import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
@@ -528,15 +529,19 @@ public class SearchResultActivity extends BaseActivity {
     private void getClassicData() {
         if (AppApplication.classiclist.size() > 0) {
             classiclist.clear();
-            classiclist.addAll(AppApplication.classiclist);
+            ArrayList<Category> aa = AppApplication.classiclist;
+            classiclist.addAll(aa);
             Category category = new Category();
             category.name = "全部分类";
             category.id = "0";
             Category category1 = new Category();
             category1.name = "全部";
             category1.id = "0";
-            category.clist.add(0,category1);
+            category.clist.add(0, category1);
             for(Category cat:classiclist){
+                if(cat.clist.get(0).id.equals("0")){
+                    continue;
+                }
                 Category category2 = new Category();
                 category2.name = "全部"+cat.name;
                 category2.id = "0";
