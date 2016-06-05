@@ -526,9 +526,9 @@ public class SearchResultActivity extends BaseActivity {
     public ArrayList<Category> classiclist;
 
     private void getClassicData() {
-        if (AppApplication.getApplication().classiclist.size() > 0) {
+        if (AppApplication.classiclist.size() > 0) {
             classiclist.clear();
-            classiclist.addAll(AppApplication.getApplication().classiclist);
+            classiclist.addAll(AppApplication.classiclist);
             Category category = new Category();
             category.name = "全部分类";
             category.id = "0";
@@ -550,8 +550,8 @@ public class SearchResultActivity extends BaseActivity {
             call.enqueue(new ApiCallback<BaseModel<ArrayList<Category>>>() {
                 @Override
                 public void onSucssce(BaseModel<ArrayList<Category>> arrayListBaseModel) {
-                    AppApplication.getApplication().classiclist.clear();
-                    AppApplication.getApplication().classiclist.addAll(arrayListBaseModel.object);
+                    AppApplication.classiclist.clear();
+                    AppApplication.classiclist.addAll(arrayListBaseModel.object);
                     getClassicData();
                 }
 
