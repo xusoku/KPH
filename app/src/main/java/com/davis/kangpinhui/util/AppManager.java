@@ -117,7 +117,7 @@ public class AppManager {
 	 * 退出应用程序
 	 */
 	public void AppExit(Context context) {
-		AppApplication.classiclist.clear();
+		AppApplication.getApplication().classiclist.clear();
 		AppApplication.shoplist.clear();
 		finishAllActivity();
 	}
