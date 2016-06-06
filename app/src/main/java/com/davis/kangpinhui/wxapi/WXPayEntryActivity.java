@@ -9,6 +9,7 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.OrderActivity;
 import com.davis.kangpinhui.activity.PayResultActivity;
+import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
@@ -55,10 +56,12 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 			if (resp.errCode == 0) {//成功
 //				EventBus.getDefault().post(new WxPayEvent());
 				ToastUitl.showToast("支付成功");
-				PayResultActivity.jumpPayResultActivity(this, true);
+				PayResultActivity.jumpPayResultActivity(this, true, AppApplication.getApplication().isYue);
 				finish();
+				AppManager.getAppManager().finishActivity(RechargeActivity.class);
 				AppManager.getAppManager().finishActivity(CartListActivity.class);
 				AppManager.getAppManager().finishActivity(OrderActivity.class);
+				AppApplication.getApplication().isYue=false;
 			} else {
 				String messge="";
 				if (resp.errCode == -1) {
@@ -68,10 +71,12 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 				}
 				messge="支付失败";
 				ToastUitl.showToast(messge);
-				PayResultActivity.jumpPayResultActivity(this, false);
+				PayResultActivity.jumpPayResultActivity(this, false, AppApplication.getApplication().isYue);
 				finish();
+				AppManager.getAppManager().finishActivity(RechargeActivity.class);
 				AppManager.getAppManager().finishActivity(CartListActivity.class);
 				AppManager.getAppManager().finishActivity(OrderActivity.class);
+				AppApplication.getApplication().isYue=false;
 			}
 			finish();
 		}

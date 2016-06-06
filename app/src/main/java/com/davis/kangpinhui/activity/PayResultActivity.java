@@ -18,11 +18,21 @@ public class PayResultActivity extends BaseActivity {
 
     private TextView pay_result_see_detail;
     private boolean flag = false;
+    private boolean isYue = false;
 
     public static void jumpPayResultActivity(Context cot, boolean flag) {
         if (AppApplication.isLogin(cot)) {
             Intent it = new Intent(cot, PayResultActivity.class);
             it.putExtra("flag", flag);
+            cot.startActivity(it);
+        }
+    }
+
+    public static void jumpPayResultActivity(Context cot, boolean flag,boolean isYue) {
+        if (AppApplication.isLogin(cot)) {
+            Intent it = new Intent(cot, PayResultActivity.class);
+            it.putExtra("flag", flag);
+            it.putExtra("isyue", isYue);
             cot.startActivity(it);
         }
     }
@@ -35,6 +45,7 @@ public class PayResultActivity extends BaseActivity {
     @Override
     protected void initVariable() {
         flag = getIntent().getBooleanExtra("flag", false);
+        isYue = getIntent().getBooleanExtra("isyue", false);
     }
 
     @Override
@@ -67,7 +78,11 @@ public class PayResultActivity extends BaseActivity {
     public void doClick(View view) {
 
         if(view.getId()==R.id.pay_result_see_detail){
-            AllOrderActivity.jumpAllOrderActivity(this,0);
+            if(isYue){
+                RechargeListActivity.jumpRechargeListActivity(this);
+            }else {
+                AllOrderActivity.jumpAllOrderActivity(this, 0);
+            }
             finish();
         }
     }

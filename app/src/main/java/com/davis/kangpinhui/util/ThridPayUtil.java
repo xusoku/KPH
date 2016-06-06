@@ -8,6 +8,7 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.OrderActivity;
 import com.davis.kangpinhui.activity.PayResultActivity;
+import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.util.alipay.PayResult;
 import com.davis.kangpinhui.util.alipay.ZhifubaoPayUtil;
@@ -21,6 +22,7 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 public class ThridPayUtil {
 
     private Activity context;
+    private boolean isYue=false;
     public ThridPayUtil(Activity context){
         this.context=context;
     }
@@ -70,8 +72,19 @@ public class ThridPayUtil {
      * @param code 订单
      */
     public void alipay(String totalPrice,String code){
+        isYue=false;
         ZhifubaoPayUtil payUtil=new ZhifubaoPayUtil(context,mHandler);
         payUtil.pay("康品汇生鲜","康品汇生鲜", totalPrice+"",code);
+    }
+    /**
+     * 支付宝余额充值
+     * @param totalPrice 金额
+     * @param code 订单
+     */
+    public void alipayyue(String totalPrice,String code){
+        isYue=true;
+        ZhifubaoPayUtil payUtil=new ZhifubaoPayUtil(context,mHandler);
+        payUtil.pay("康品汇充值","康品汇充值", totalPrice+"",code);
     }
 
     /**
@@ -88,7 +101,8 @@ public class ThridPayUtil {
                     // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
                     if (TextUtils.equals(resultStatus, "9000")) {
                         ToastUitl.showToast("支付成功");
-                        PayResultActivity.jumpPayResultActivity(context, true);
+                        PayResultActivity.jumpPayResultActivity(context, true, isYue);
+                        AppManager.getAppManager().finishActivity(RechargeActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);
                         AppManager.getAppManager().finishActivity(OrderActivity.class);
                     } else {
@@ -100,7 +114,8 @@ public class ThridPayUtil {
                             // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
                             ToastUitl.showToast("支付失败");
                         }
-                        PayResultActivity.jumpPayResultActivity(context, false);
+                        PayResultActivity.jumpPayResultActivity(context, false,isYue);
+                        AppManager.getAppManager().finishActivity(RechargeActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);
                         AppManager.getAppManager().finishActivity(OrderActivity.class);
                     }

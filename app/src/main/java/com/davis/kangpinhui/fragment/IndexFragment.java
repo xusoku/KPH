@@ -206,9 +206,15 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                     @Override
                     public void onClick(View view) {
                         String gotype = itemData.gotype;
+                        if(TextUtils.isEmpty(gotype)){
+                            gotype="";
+                        }
                         String tempvalue = itemData.tempvalue;
+                        if(TextUtils.isEmpty(tempvalue)){
+                            tempvalue="";
+                        }
                         if(gotype.equals("detail")){
-                            ProductDetailActivity.jumpProductDetailActivity(getActivity(),tempvalue);
+                            ProductDetailActivity.jumpProductDetailActivity(getActivity(), tempvalue);
                         }else if(gotype.equals("rootlist")){
                             SearchResultActivity.jumpSearchResultActivity(getActivity(),"",false,"",tempvalue);
                         }else if(gotype.equals("list")){
@@ -217,6 +223,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                             SearchResultActivity.jumpSearchResultActivity(getActivity(),itemData.title,true,tempvalue);
                         }else if(gotype.equals("search")){
                             SearchResultActivity.jumpSearchResultActivity(getActivity(),tempvalue,true);
+                        }else{
+                            ToastUitl.showToast("暂无定义");
                         }
                     }
                 });

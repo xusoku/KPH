@@ -47,6 +47,8 @@ public class AppApplication extends Application {
 
     public static IWXAPI wxApi;
 
+    public  boolean  isYue=false;
+
     public static AppApplication getApplication() {
         return instance;
     }
