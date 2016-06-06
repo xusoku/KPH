@@ -129,7 +129,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));// 设置指定的可视区域地图
 
 
-        aMap.addPolygon(new PolygonOptions().addAll(createDDRectangle(shop.polygon)).fillColor(Color.parseColor("#550000ff"))
+        aMap.addPolygon(new PolygonOptions().addAll(createDDRectangle(shop.polygon)).fillColor(Color.parseColor("#5591d6e6"))
                 .strokeColor(Color.RED).strokeWidth(1));
         searchText = (AutoCompleteTextView) findViewById(R.id.searchText);
         searchText.addTextChangedListener(this);// 添加文本输入框监听事件
