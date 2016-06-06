@@ -411,6 +411,7 @@ public class SearchResultActivity extends BaseActivity {
 
         switch (view.getId()) {
             case R.id.search_back:
+                finish();
                 break;
             case R.id.search_all_sort:
                 sortpopupWindow.showAsDropDown(search_all_classic, 0, 5);

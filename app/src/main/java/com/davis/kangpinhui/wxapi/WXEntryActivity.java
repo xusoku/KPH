@@ -11,7 +11,6 @@ import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
-	private static String APP_ID = "wx5a9e0008073841f8";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
