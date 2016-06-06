@@ -40,9 +40,14 @@
 
 
 
--keep public class com.dym.film.R$*{
-public static final int *;
-}
+#ShareSDK
+-keep class cn.sharesdk.**{*;}
+-keep class **.R$* {*;}
+-keep class **.R{*;}
+-keep class com.mob.**{*;}
+-dontwarn com.mob.**
+-dontwarn cn.sharesdk.**
+-dontwarn **.R$*
 
 -keepclasseswithmembernames class * {
     native <methods>;
