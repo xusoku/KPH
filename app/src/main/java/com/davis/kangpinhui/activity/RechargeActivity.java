@@ -139,7 +139,7 @@ public class RechargeActivity extends BaseActivity {
                 call.enqueue(new ApiCallback<BaseModel<Recharge>>() {
                     @Override
                     public void onSucssce(BaseModel<Recharge> rechargeBaseModel) {
-                        ToastUitl.showToast("充值成功");
+//                        ToastUitl.showToast("充值成功");
 
                         if (payTape.equals("2")) {
                             thridPayUtil.alipayyue("0.01", rechargeBaseModel.object.schargenumber);

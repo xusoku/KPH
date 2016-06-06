@@ -128,11 +128,14 @@ public class AllOrderActivity extends BaseActivity {
 
             @Override
             public void onPageScrolled(View view, int position, float selectPercent) {
-                if(position==i){
-                    ((TextView)(view)).setTextColor(getResources().getColor(R.color.colormain));
-                }
+//                if(position==i){
+//                    ((TextView)(view)).setSelected(true);
+//                }
             }
+
+
         });
+        indicator.setViewPager(viewPager, i);
     }
 
     @Override
