@@ -18,6 +18,8 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 
 import java.util.ArrayList;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by davis on 16/5/18.
  */
@@ -62,6 +64,8 @@ public class AppApplication extends Application {
 
 
         wxApi = WeiXinUtil.WXInit(getApplicationContext());
+
+        ShareSDK.initSDK(this);
     }
 
     public static boolean isLogin(Context context) {
