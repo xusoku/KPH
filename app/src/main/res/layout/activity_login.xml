@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colormain"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colormain"
+        android:layout_height="0dp"
+
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <ImageView
@@ -176,4 +179,16 @@
             android:clickable="true"
             android:text="＜ 随便逛逛"/>
     </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/login_wechat"
+        android:layout_width="@dimen/common_measure_60dp"
+        android:layout_height="@dimen/common_measure_60dp"
+        android:clickable="true"
+        android:onClick="doClick"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/common_measure_30dp"
+        android:src="@mipmap/logo_wechat"/>
+
 </LinearLayout>

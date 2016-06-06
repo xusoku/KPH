@@ -24,6 +24,7 @@ import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.RegexUtils;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.util.WeixinLoginUtil;
 
 import de.greenrobot.event.EventBus;
 import retrofit2.Call;
@@ -142,6 +143,10 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.login_forget_password:
 
+                break;
+            case R.id.login_wechat:
+
+                new WeixinLoginUtil(this).startLogin();
                 break;
             case R.id.login_register_text:
                 isLogin = false;
