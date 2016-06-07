@@ -76,7 +76,7 @@
             android:textSize="@dimen/text_size_17"
             android:ellipsize="end"
             android:hint="具体信息（如楼号/层号）"
-            android:drawableRight="@mipmap/address_small_edit"
+            android:drawableRight="@mipmap/myadress_add"
             android:paddingRight="10dp"/>
     </LinearLayout>
 

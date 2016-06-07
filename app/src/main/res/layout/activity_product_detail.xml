@@ -215,7 +215,7 @@
                             <com.davis.kangpinhui.views.CustomTypefaceTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableRight="@mipmap/ic_favorites"
+                                android:drawableRight="@mipmap/triangle_down"
                                 android:gravity="center"
                                 android:text="继续拖动,查看图片详情"
                                 android:textSize="@dimen/text_size_11" />

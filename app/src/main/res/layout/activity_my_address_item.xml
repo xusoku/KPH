@@ -73,6 +73,6 @@
             android:layout_height="@dimen/common_measure_65dp"
             android:paddingRight="@dimen/common_measure_15dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/address_small_edit" />
+            android:src="@mipmap/my_andress_fix" />
     </LinearLayout>
 </FrameLayout>

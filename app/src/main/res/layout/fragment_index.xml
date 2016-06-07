@@ -19,7 +19,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:id="@+id/index_local_select"
@@ -33,6 +33,10 @@
                 android:text="送至：光兰命运"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
+            <ImageView
+                android:layout_width="@dimen/common_measure_20dp"
+                android:layout_height="@dimen/common_measure_20dp"
+                android:src="@mipmap/index_whrit_trigle"/>
         </LinearLayout>
 
         <LinearLayout

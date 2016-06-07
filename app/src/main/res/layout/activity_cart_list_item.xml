@@ -38,8 +38,7 @@
                 <ImageView
                     android:id="@+id/add_cart_item_iv"
                     android:layout_width="@dimen/common_measure_110dp"
-                    android:layout_height="@dimen/common_measure_110dp"
-                    android:src="@mipmap/ic_nearby" />
+                    android:layout_height="@dimen/common_measure_110dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -75,9 +74,10 @@
 
                 <ImageView
                     android:id="@+id/add_cart_add_del"
-                    android:layout_width="@dimen/common_measure_60dp"
-                    android:layout_height="@dimen/common_measure_60dp"
-                    android:src="@mipmap/ic_nearby" />
+                    android:layout_width="@dimen/common_measure_40dp"
+                    android:layout_height="@dimen/common_measure_40dp"
+                    android:layout_marginRight="@dimen/common_measure_10dp"
+                    android:src="@mipmap/cart_del" />
             </LinearLayout>
 
             <View
