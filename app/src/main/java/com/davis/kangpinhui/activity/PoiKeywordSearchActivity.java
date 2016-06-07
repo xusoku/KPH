@@ -73,9 +73,9 @@ public class PoiKeywordSearchActivity extends Activity implements
 
 
     private Shop shop;
-    private String type="";
+    private String type = "";
 
-    public static void jumpPoiKeywordSearchActivity(Context cot, Shop id,String str) {
+    public static void jumpPoiKeywordSearchActivity(Context cot, Shop id, String str) {
         Intent it = new Intent(cot, PoiKeywordSearchActivity.class);
         it.putExtra("id", id);
         it.putExtra("type", str);
@@ -92,7 +92,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         shop = getIntent().getParcelableExtra("id");
 
-        type=getIntent().getStringExtra("type");
+        type = getIntent().getStringExtra("type");
         if (shop == null) {
             return;
         }
@@ -126,8 +126,17 @@ public class PoiKeywordSearchActivity extends Activity implements
         String[] s = shop.center.split(",");
         LatLng latLng = new LatLng(Double.parseDouble(s[1]), Double.parseDouble(s[0]));
 
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));// 设置指定的可视区域地图
+        LatLonPoint a = new LatLonPoint(Double.parseDouble(s[0]), Double.parseDouble(s[1]));
 
+        PoiItem aa = new PoiItem("", a, "", "");
+        ArrayList<PoiItem> aaa = new ArrayList<PoiItem>();
+        PoiOverlay poiOverlay = new PoiOverlay(aMap, aaa);
+        poiOverlay.removeFromMap();
+        poiOverlay.addToMap();
+        poiOverlay.zoomToSpan();
+
+
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));// 设置指定的可视区域地图
 
         aMap.addPolygon(new PolygonOptions().addAll(createDDRectangle(shop.polygon)).fillColor(Color.parseColor("#550192dc"))
                 .strokeColor(Color.RED).strokeWidth(1));
@@ -166,6 +175,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         poiSearch.setOnPoiSearchListener(this);
         poiSearch.searchPOIAsyn();
     }
+
     /**
      * 开始进行poi搜索
      */
@@ -270,8 +280,8 @@ public class PoiKeywordSearchActivity extends Activity implements
                         popupWindow.showAsDropDown(searchText_back, 0, 0);
                         list.addAll(poiItems);
                         adapter.notifyDataSetChanged();
-                        if(list.size()>=20)
-                        listView.onLoadSucess(true);
+                        if (list.size() >= 20)
+                            listView.onLoadSucess(true);
                         else listView.onLoadSucess(false);
                     } else {
                         ToastUitl.showToast("没有搜索到结果");
@@ -305,7 +315,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         View view = getLayoutInflater().inflate(R.layout.activity_poikeywordsearch_pop, null);
         listView = (LoadMoreListView) view.findViewById(R.id.poi_search_lst);
         popupWindow = new PopupWindow(view,
-                LinearLayout.LayoutParams.MATCH_PARENT, (int)DisplayMetricsUtils.getHeight()/10*9);
+                LinearLayout.LayoutParams.MATCH_PARENT, (int) DisplayMetricsUtils.getHeight() / 10 * 9);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(false);
         popupWindow.setAnimationStyle(R.style.popwin_recent_anim_style);
@@ -315,11 +325,11 @@ public class PoiKeywordSearchActivity extends Activity implements
             @Override
             public void convert(ViewHolder holder, PoiItem itemData, int position) {
                 holder.setText(R.id.poi_item_title, itemData.getTitle());
-                holder.setText(R.id.poi_item_address, "地址:"+itemData.getSnippet());
-                if(!TextUtils.isEmpty(itemData.getTel())){
+                holder.setText(R.id.poi_item_address, "地址:" + itemData.getSnippet());
+                if (!TextUtils.isEmpty(itemData.getTel())) {
                     holder.getView(R.id.poi_item_phone).setVisibility(View.VISIBLE);
-                    holder.setText(R.id.poi_item_phone, "电话:"+itemData.getTel());}
-                else{
+                    holder.setText(R.id.poi_item_phone, "电话:" + itemData.getTel());
+                } else {
                     holder.getView(R.id.poi_item_phone).setVisibility(View.GONE);
                 }
 
@@ -340,21 +350,21 @@ public class PoiKeywordSearchActivity extends Activity implements
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(!TextUtils.isEmpty(type)&&type.equals("my_address")){
-                    AppApplication.poiItem=list.get(position);
+                if (!TextUtils.isEmpty(type) && type.equals("my_address")) {
+                    AppApplication.poiItem = list.get(position);
                     finish();
                     AppManager.getAppManager().finishActivity(ShopActivity.class);
                     CommonManager.dismissSoftInputMethod(PoiKeywordSearchActivity.this, listView.getWindowToken());
                     return;
                 }
-                SharePreferenceUtils.getSharedPreferences().putString("address",list.get(position).getTitle());
+                SharePreferenceUtils.getSharedPreferences().putString("address", list.get(position).getTitle());
                 LatLonPoint s = list.get(position).getLatLonPoint();
                 LatLng latLng = new LatLng(s.getLatitude(), s.getLongitude());
                 LocalUtil.getShopid(latLng, AppApplication.shoplist);
                 finish();
                 AppManager.getAppManager().finishActivity(ShopActivity.class);
                 EventBus.getDefault().post(new Address());
-                CommonManager.dismissSoftInputMethod(PoiKeywordSearchActivity.this,listView.getWindowToken());
+                CommonManager.dismissSoftInputMethod(PoiKeywordSearchActivity.this, listView.getWindowToken());
 
             }
         });

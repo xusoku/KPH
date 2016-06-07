@@ -124,7 +124,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@id/order_paytype_right"
                         android:text="余额支付"
-                        android:textSize="@dimen/text_size_11" />
+                        android:textSize="@dimen/text_size_17" />
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
@@ -266,7 +266,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@id/order_paytypecoup_right"
                         android:text="不使用优惠券"
-                        android:textSize="@dimen/text_size_11" />
+                        android:textSize="@dimen/text_size_17" />
                 </RelativeLayout>
             </LinearLayout>
 

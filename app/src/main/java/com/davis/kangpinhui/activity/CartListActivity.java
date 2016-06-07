@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.Cart;
+import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
@@ -21,6 +22,7 @@ import com.davis.kangpinhui.util.ToastUitl;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 
 public class CartListActivity extends BaseActivity {
@@ -98,6 +100,7 @@ public class CartListActivity extends BaseActivity {
                     @Override
                     public void listChange() {
                         list.clear();
+                        EventBus.getDefault().post(new Extendedinfo());
                         startActivityLoading();
                     }
                 });

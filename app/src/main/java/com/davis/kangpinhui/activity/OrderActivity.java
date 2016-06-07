@@ -6,8 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
@@ -88,8 +90,17 @@ public class OrderActivity extends BaseActivity {
             order_address_text.setText(AppApplication.address.saddress);
             order_address_phone.setText(AppApplication.address.smobile);
             order_address_pepole.setText(AppApplication.address.saddressname);
+            RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(15,15,15,15);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            order_address_text.setLayoutParams(layoutParams);
         } else {
             order_address_text.setText("暂无地址");
+            RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            layoutParams.setMargins(15,15,15,15);
+            order_address_text.setLayoutParams(layoutParams);
+
             order_address_phone.setText("");
             order_address_pepole.setText("");
         }
