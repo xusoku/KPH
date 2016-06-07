@@ -189,7 +189,7 @@ public class OrderActivity extends BaseActivity {
     }
 
     private void getorderlist() {
-        Call<BaseModel<ArrayList<Cart>>> call = ApiInstant.getInstant().getCartlist(AppApplication.apptype, AppApplication.shopid, "", AppApplication.token);
+        Call<BaseModel<ArrayList<Cart>>> call = ApiInstant.getInstant().getCartlist(AppApplication.apptype, AppApplication.shopid, ids, AppApplication.token);
         call.enqueue(new ApiCallback<BaseModel<ArrayList<Cart>>>() {
             @Override
             public void onSucssce(BaseModel<ArrayList<Cart>> arrayListBaseModel) {

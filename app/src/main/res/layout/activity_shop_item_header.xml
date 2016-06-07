@@ -26,13 +26,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_friends" />
+            android:layout_marginRight="@dimen/common_measure_10dp"
+            android:src="@mipmap/location_icon" />
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mine_location"
-            android:textColor="@color/black"
+            android:textColor="@color/colormain"
             android:textSize="@dimen/text_size_17" />
     </LinearLayout>
     </FrameLayout>

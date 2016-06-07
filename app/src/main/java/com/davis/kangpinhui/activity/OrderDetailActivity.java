@@ -23,6 +23,7 @@ import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.OrderDetail;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.StretchedListView;
 
@@ -123,49 +124,54 @@ public class OrderDetailActivity extends BaseActivity {
         });
     }
 
-    private void bindView(Order<ArrayList<OrderDetail>> orderDetailOrder) {
+    private void bindView(Order<ArrayList<OrderDetail>> itemData) {
 
 
-        String payType = orderDetailOrder.spaytype;
-        if ((payType.equals("0") || payType.equals("4") || payType.equals("1")) && orderDetailOrder.stype.equals("0")) {
-            //还未付款，需要继续支付。
+        String payType = itemData.spaytype;
+
+        if ((payType.equals("0") || payType.equals("4") || payType.equals("1")) && itemData.stype.equals("0")) {
             order_detail_state.append("待付款    ");
             order_detail_state.append(UtilText.getOrderDetail("继续付款"));
             order_detail_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    ToastUitl.showToast("aa");
                 }
             });
-
-        } else if (orderDetailOrder.stype.equals("0")) {
-            order_detail_state.setText("待配送");
-        } else if (orderDetailOrder.stype.equals("3")) {
-            order_detail_state.setText("配送中");
-        } else if (orderDetailOrder.stype.equals("6")) {
-            order_detail_state.setText("已关闭");
-        } else if (orderDetailOrder.stype.equals("1")) {
+        } else if (!payType.equals("2") && itemData.stype.equals("1")) {
             order_detail_state.setText("已支付");
+        } else if (itemData.stype.equals("2")||itemData.stype.equals("1")) {
+            order_detail_state.setText("待配送");
+        } else if (itemData.stype.equals("3")) {
+            order_detail_state.setText("配送中");
+        } else if (itemData.stype.equals("4")||itemData.stype.equals("5")) {
+            order_detail_state.setText("已完成");
+        } else if (itemData.stype.equals("6")) {
+            order_detail_state.setText("已关闭");
+        } else if (payType.equals("2") &&itemData.stype.equals("0")) {
+            order_detail_state.setText("待配送");
         } else {
-            order_detail_state.setText("未知");
+            order_detail_state.setText( "未知");
         }
+
+
 
         CharSequence[] charSequences = {"余额支付", "货到付款", "支付宝支付", "微信支付"};
         String[] type = {"3", "2", "0", "4"};
 
         for (int i = 0; i < type.length; i++) {
-            if (type[i].equals(orderDetailOrder.spaytype)) {
+            if (type[i].equals(itemData.spaytype)) {
                 order_detail_paytype.setText(charSequences[i]);
             }
         }
 
-        order_detail_people.setText(orderDetailOrder.snickName);
-        order_detail_phone.setText(orderDetailOrder.smobile);
-        order_detail_address.setText(orderDetailOrder.saddress);
-        order_detail_heji.setText("¥" + UtilText.getFloatToString(orderDetailOrder.fmoney));
-        order_detail_m_oney.setText("¥" + UtilText.getFloatToString(orderDetailOrder.fmoney));
-        order_detail_time.setText(orderDetailOrder.daddtime);
-        order_detail_code.setText(orderDetailOrder.sordernumber);
+        order_detail_people.setText(itemData.snickName);
+        order_detail_phone.setText(itemData.smobile);
+        order_detail_address.setText(itemData.saddress);
+        order_detail_heji.setText("¥" + UtilText.getFloatToString(itemData.fmoney));
+        order_detail_m_oney.setText("¥" + UtilText.getFloatToString(itemData.fmoney));
+        order_detail_time.setText(itemData.daddtime);
+        order_detail_code.setText(itemData.sordernumber);
 
     }
 

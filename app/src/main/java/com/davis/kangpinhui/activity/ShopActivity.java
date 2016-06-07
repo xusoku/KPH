@@ -145,7 +145,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void convert(ViewHolder holder, final Shop itemData, int position) {
                 holder.setText(R.id.stop_name,itemData.shopname);
-                holder.setText(R.id.stop_address,itemData.address);
+                holder.setText(R.id.stop_address,itemData.hotarea);
 
                 holder.getView(R.id.shop_item_linear).setOnClickListener(new View.OnClickListener() {
                     @Override

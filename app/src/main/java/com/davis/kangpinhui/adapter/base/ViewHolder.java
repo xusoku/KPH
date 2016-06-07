@@ -2,6 +2,7 @@ package com.davis.kangpinhui.adapter.base;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,9 @@ public class ViewHolder
      */
     public ViewHolder setText(int viewId, String text)
     {
+        if (TextUtils.isEmpty(text)){
+            text="";
+        }
         TextView view = getView(viewId);
         view.setText(text);
         return this;
