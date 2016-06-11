@@ -91,14 +91,12 @@ public class OrderActivity extends BaseActivity {
             order_address_phone.setText(AppApplication.address.smobile);
             order_address_pepole.setText(AppApplication.address.saddressname);
             RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(15,15,15,15);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             order_address_text.setLayoutParams(layoutParams);
         } else {
             order_address_text.setText("暂无地址");
             RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-            layoutParams.setMargins(15,15,15,15);
+            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
             order_address_text.setLayoutParams(layoutParams);
 
             order_address_phone.setText("");

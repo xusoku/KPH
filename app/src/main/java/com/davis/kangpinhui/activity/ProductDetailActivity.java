@@ -24,6 +24,7 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.util.CommonManager;
+import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.BadgeView;
@@ -83,6 +84,9 @@ public class ProductDetailActivity extends BaseActivity {
     protected void findViews() {
         setTranslucentStatusBarGone();
         product_detail_banner = $(R.id.product_detail_banner);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) DisplayMetricsUtils.getWidth(), (int) DisplayMetricsUtils.getWidth());
+        product_detail_banner.setLayoutParams(layoutParams);
+
         add_cart_number_linear = $(R.id.add_cart_number_linear);
         product_detail_drag = $(R.id.product_detail_drag);
         product_detail_title = $(R.id.product_detail_title);

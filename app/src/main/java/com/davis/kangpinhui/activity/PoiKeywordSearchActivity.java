@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -24,8 +25,10 @@ import android.widget.RelativeLayout;
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.Marker;
+import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.PolygonOptions;
 import com.amap.api.maps2d.overlay.PoiOverlay;
 import com.amap.api.services.core.LatLonPoint;
@@ -126,14 +129,12 @@ public class PoiKeywordSearchActivity extends Activity implements
         String[] s = shop.center.split(",");
         LatLng latLng = new LatLng(Double.parseDouble(s[1]), Double.parseDouble(s[0]));
 
-        LatLonPoint a = new LatLonPoint(Double.parseDouble(s[0]), Double.parseDouble(s[1]));
-
-        PoiItem aa = new PoiItem("", a, "", "");
-        ArrayList<PoiItem> aaa = new ArrayList<PoiItem>();
-        PoiOverlay poiOverlay = new PoiOverlay(aMap, aaa);
-        poiOverlay.removeFromMap();
-        poiOverlay.addToMap();
-        poiOverlay.zoomToSpan();
+        //绘制marker
+        Marker marker = aMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
+                        .decodeResource(getResources(), R.mipmap.ic_favorites)))
+                .draggable(true));
 
 
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));// 设置指定的可视区域地图
