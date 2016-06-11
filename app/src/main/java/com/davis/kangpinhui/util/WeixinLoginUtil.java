@@ -135,7 +135,7 @@ public class WeixinLoginUtil implements Handler.Callback,PlatformActionListener 
                 call.enqueue(new ApiCallback<BaseModel<UserInfo>>() {
                     @Override
                     public void onSucssce(BaseModel<UserInfo> userInfoBaseModel) {
-                        Log.e("aaa", userInfoBaseModel.object.snickname+"");
+                        Log.e("aaa", userInfoBaseModel.object.snickname+"===fdsf");
                     }
 
                     @Override
