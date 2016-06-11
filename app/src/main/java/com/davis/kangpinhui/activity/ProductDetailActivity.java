@@ -2,6 +2,7 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -60,7 +61,7 @@ public class ProductDetailActivity extends BaseActivity {
     private LinearLayout product_detail_title_text_linear, add_cart_number_linear;
 
     private AddCartPopuWindow addpopupWindow;
-    private ImageView add_cart_icon;
+    private ImageView add_cart_icon,product_detail_back;
 
     private ProductDetail productDetail;
 
@@ -87,6 +88,7 @@ public class ProductDetailActivity extends BaseActivity {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) DisplayMetricsUtils.getWidth(), (int) DisplayMetricsUtils.getWidth());
         product_detail_banner.setLayoutParams(layoutParams);
 
+        product_detail_back = $(R.id.product_detail_back);
         add_cart_number_linear = $(R.id.add_cart_number_linear);
         product_detail_drag = $(R.id.product_detail_drag);
         product_detail_title = $(R.id.product_detail_title);
