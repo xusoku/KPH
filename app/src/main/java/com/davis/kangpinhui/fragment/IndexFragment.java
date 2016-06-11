@@ -66,6 +66,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private LinearLayout no_linear_shopid;
     private TextView no_shopid_add_address;
     private TextView no_shopid_see_sending;
+    private TextView no_shopid_text;
     private MySwipeRefreshLayout index_refresh;
 
     private boolean isRefreshOrLoad = false;
@@ -97,6 +98,11 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
 
         no_linear_shopid = $(view, R.id.no_linear_shopid);
+        no_shopid_text = $(view, R.id.no_shopid_text);
+        no_shopid_text.setText("");
+        no_shopid_text.append("Hi，小康恭候多时了～");
+        no_shopid_text.append(UtilText.getOrderDetail("门店周边三公里平均一小时送达"));
+        no_shopid_text.append("，请输入地址找到为您服务的门店吧!");
         no_shopid_add_address = $(view, R.id.no_shopid_add_address);
         no_shopid_see_sending = $(view, R.id.no_shopid_see_sending);
         index_refresh = $(view, R.id.index_refresh);

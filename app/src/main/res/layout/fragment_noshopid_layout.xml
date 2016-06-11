@@ -19,10 +19,9 @@
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/no_shopid_text"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/common_measure_300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_measure_20dp"
-            android:text="很抱歉,我们目前只支持配送上海浦东新\n              区,欢迎有时间到店体验"
             android:textColor="@color/colorgray"
             android:lineSpacingExtra="1dp"
             android:textSize="@dimen/text_size_17" />
