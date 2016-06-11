@@ -7,8 +7,10 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -61,6 +63,9 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initVariable() {
         progressDialog=new ProgressDialog(this);
+        RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        progressDialog.setMessage("请稍等...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setCancelable(true);
 
@@ -72,6 +77,9 @@ public class LoginActivity extends BaseActivity {
         login_btn = $(R.id.login_btn);
         login_phone = $(R.id.login_phone);
         String str=SharePreferenceUtils.getSharedPreferences("kph").getString("username", "");
+        if(str.length()>11){
+            str="";
+        }
         login_phone.setText(str);
         login_password = $(R.id.login_password);
         login_code = $(R.id.login_code);
