@@ -48,6 +48,7 @@ public class WeixinLoginUtil implements Handler.Callback,PlatformActionListener 
 
     public void startLogin(){
         Platform weixinfd = ShareSDK.getPlatform(Wechat.NAME);
+        progressDialog.show();
         weixinfd.setPlatformActionListener(this);
 
         if (weixinfd.isValid()) {
@@ -158,6 +159,7 @@ public class WeixinLoginUtil implements Handler.Callback,PlatformActionListener 
             break;
             case 2: {
                 // 失败
+                progressDialog.dismiss();
                 Toast.makeText(context, "失败", Toast.LENGTH_SHORT).show();
 
                 String expName = msg.obj.getClass().getSimpleName();
@@ -170,6 +172,7 @@ public class WeixinLoginUtil implements Handler.Callback,PlatformActionListener 
             break;
             case 3: {
                 // 取消
+                progressDialog.dismiss();
                 Toast.makeText(context, "取消····", Toast.LENGTH_SHORT)
                         .show();
             }

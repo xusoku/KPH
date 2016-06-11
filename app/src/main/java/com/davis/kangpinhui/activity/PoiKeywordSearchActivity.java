@@ -133,7 +133,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         Marker marker = aMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
-                        .decodeResource(getResources(), R.mipmap.ic_favorites)))
+                        .decodeResource(getResources(), R.mipmap.mine_address)))
                 .draggable(true));
 
 
@@ -281,6 +281,14 @@ public class PoiKeywordSearchActivity extends Activity implements
                         popupWindow.showAsDropDown(searchText_back, 0, 0);
                         list.addAll(poiItems);
                         adapter.notifyDataSetChanged();
+                        searchText.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                searchText.setFocusableInTouchMode(true);
+                                searchText.setFocusable(true);
+                            }
+                        },100);
+
                         if (list.size() >= 20)
                             listView.onLoadSucess(true);
                         else listView.onLoadSucess(false);

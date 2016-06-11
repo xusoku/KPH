@@ -28,14 +28,14 @@
                 android:layout_centerVertical="true"
                 android:ellipsize="end"
                 android:paddingLeft="@dimen/common_measure_16dp"
-                android:paddingRight="@dimen/common_measure_16dp"
+                android:paddingRight="@dimen/common_measure_5dp"
                 android:singleLine="true"
                 android:text="送至：光兰命运"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
             <ImageView
-                android:layout_width="@dimen/common_measure_20dp"
-                android:layout_height="@dimen/common_measure_20dp"
+                android:layout_width="@dimen/common_measure_10dp"
+                android:layout_height="@dimen/common_measure_10dp"
                 android:src="@mipmap/index_whrit_trigle"/>
         </LinearLayout>
 
