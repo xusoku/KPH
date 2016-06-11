@@ -6,14 +6,25 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.api.ApiCallback;
+import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.model.UserInfo;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.mob.tools.utils.UIHandler;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.wechat.friends.Wechat;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -61,16 +72,8 @@ public class WeixinLoginUtil implements Handler.Callback,PlatformActionListener 
 
         }
         UIHandler.sendMessage(msg, this);
-        System.out.println(res);
-        //获取资料
-        platform.getDb().getUserName();//获取用户名字
-        platform.getDb().getUserIcon(); //获取用户头像
-        platform.getDb().getUserId(); //
-        platform.getDb().getUserGender(); //
 
-        Log.e("aaa", platform.getId()+"");
-        Log.e("aaa", platform.getDb().getUserId());
-        Log.e("aaa",platform.getDb().getToken());
+
 
     }
 
@@ -97,7 +100,48 @@ public class WeixinLoginUtil implements Handler.Callback,PlatformActionListener 
                 // 成功
                 Platform platform= (Platform) msg.obj;
 
-                Toast.makeText(context, "成功" + platform.getDb().getUserName(), Toast.LENGTH_SHORT).show();
+                //获取资料
+                platform.getDb().getUserName();//获取用户名字
+                platform.getDb().getUserIcon(); //获取用户头像
+                platform.getDb().getUserId(); //
+                platform.getDb().getUserGender();
+
+
+                Log.e("aaa1", platform.getDb().getUserIcon());
+                Log.e("aaa1", platform.getDb().getUserName());
+                Log.e("aaa1", platform.getDb().getUserId());
+                Log.e("aaa1", platform.getDb().getUserGender());
+                String name="";
+                try {
+                     name=URLEncoder.encode(platform.getDb().getUserName(),"utf-8");
+                } catch (UnsupportedEncodingException e) {
+                     name="";
+                    e.printStackTrace();
+                }
+
+                String sex="m".equals(platform.getDb().getUserGender())?"0":("f".equals(platform.getDb().getUserGender())?"1":null);
+                String sss="{\"openid\":\""+platform.getDb().getUserId()+"\"," +
+                        "\"nickname\":\""+name+"\"," +
+                        "\"sex\":1," +
+                        "\"language\":\"zh_CN\"," +
+                        "\"city\":\"\"," +
+                        "\"province\":\"\"," +
+                        "\"country\":\"CN\"," +
+                        "\"headimgurl\":\""+platform.getDb().getUserIcon()+"\"," +
+                        "\"privilege\":[]," +
+                        "\"unionid\":\""+platform.getDb().getUserId()+"\"}";
+                Call<BaseModel<UserInfo>> call = ApiInstant.getInstant().weixinLogin(AppApplication.apptype, sss);
+
+                call.enqueue(new ApiCallback<BaseModel<UserInfo>>() {
+                    @Override
+                    public void onSucssce(BaseModel<UserInfo> userInfoBaseModel) {
+                        Log.e("aaa", userInfoBaseModel.object.snickname+"");
+                    }
+
+                    @Override
+                    public void onFailure() {
+                    }
+                });
             }
             break;
             case 2: {

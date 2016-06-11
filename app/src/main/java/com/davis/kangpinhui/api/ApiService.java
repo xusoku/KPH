@@ -24,6 +24,7 @@ import com.davis.kangpinhui.model.basemodel.Page;
 import java.util.ArrayList;
 
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -413,6 +414,20 @@ public interface ApiService {
             @Query("apptype") String apptype,
             @Query("orderNum") String shopid,
             @Query("token") String token
+    );
+    //32 微信登录
+    @POST("wechat/login.do")
+    Call<BaseModel<UserInfo>> weixinLogin(
+            @Query("apptype") String apptype,
+            @Query("context") String context
+    );
+    //32 微信参数获取
+//    https://api.weixin.qq.com/sns/userinfo?access_token=V2m-4JQJZDhz9-lcI4nI_4DCU6cnGMSE0CgKd5r5uUHdK16ZLMfIbmBNf1ve_FQNAb_v5LWnZnYCynKgMMTN2INTl6ONUAXBXHdkttTe8Yk&openid=oxBZjuHK2IEpa2KwiVz2oP1EUnS8
+    @GET("http://api.weixin.qq.com/sns/userinfo")
+    Call<Response> weixinLoginParam(
+            @Query("access_token") String access_token,
+            @Query("openid") String openid
+
     );
 
 

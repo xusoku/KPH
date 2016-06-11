@@ -1,7 +1,10 @@
 package com.davis.kangpinhui.api;
 
 
+import android.util.Log;
+
 import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 
 import retrofit2.Call;
@@ -33,6 +36,7 @@ public abstract  class ApiCallback<T> implements Callback<T> {
     @Override
     public void onFailure(Call<T> call, Throwable t) {
         onFailure();
+        Log.e("aaa", t.getMessage().toString());
         ToastUitl.showToast("网络异常");
     }
     //    @Override

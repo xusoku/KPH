@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -147,6 +148,40 @@ public class LoginActivity extends BaseActivity {
             case R.id.login_wechat:
 
                 new WeixinLoginUtil(this).startLogin();
+
+
+
+//
+//                String sss="{\"openid\":\"oxBZjuHK2IEpa2KwiVz2oP1EUnS8\"," +
+//                        "\"nickname\":\"aaa\"," +
+//                        "\"sex\":1," +
+//                        "\"language\":\"zh_CN\"," +
+//                        "\"city\":\"\"," +
+//                        "\"province\":\"\"," +
+//                        "\"country\":\"CN\"," +
+//                        "\"headimgurl\":\"http:\\/\\/wx.qlogo.cn\\/mmopen\\/AicNQpicwqnHTFeBZCXpPk4fPFGN1FwichI1jiaEXHYf4wxxjBdXJ1icexyGbkeAsLIPOibH5z1DmTrsdcOGsdQRGZsicKtsDF5HJtd\\/0\"," +
+//                        "\"privilege\":[]," +
+//                        "\"unionid\":\"oxBZjuHK2IEpa2KwiVz2oP1EUnS8\"}";
+//                Call<BaseModel<UserInfo>> calla = ApiInstant.getInstant().weixinLogin(AppApplication.apptype, sss);
+//
+//                calla.enqueue(new ApiCallback<BaseModel<UserInfo>>() {
+//                    @Override
+//                    public void onSucssce(BaseModel<UserInfo> userInfoBaseModel) {
+//                        Log.e("aaa", userInfoBaseModel.object.snickname);
+//                    }
+//
+//                    @Override
+//                    public void onFailure() {
+//                        Log.e("aaa", "aaa");
+//                    }
+//                });
+
+
+
+
+
+
+
                 break;
             case R.id.login_register_text:
                 isLogin = false;
