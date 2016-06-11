@@ -37,7 +37,7 @@
                         <com.davis.kangpinhui.views.loopbanner.LoopBanner
                             android:id="@+id/product_detail_banner"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/common_measure_400dp" />
+                            android:layout_height="wrap_content" />
 
                         <com.davis.kangpinhui.views.CustomTypefaceTextView
                             android:id="@+id/product_detail_title"
