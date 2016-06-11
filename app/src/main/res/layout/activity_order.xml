@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
         android:id="@+id/content"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -19,65 +20,70 @@
 
             <RelativeLayout
                 android:id="@+id/order_address_relative"
-                android:onClick="doClick"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_measure_120dp"
-                android:paddingBottom="5dp"
-                android:background="@color/colorlightgray">
+                android:background="@color/colorlightgray"
+                android:onClick="doClick"
+                android:paddingBottom="6dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/common_measure_10dp"
+                    android:paddingTop="@dimen/common_measure_20dp">
 
 
-                <com.davis.kangpinhui.views.CustomTypefaceTextView
-                    android:id="@+id/order_address_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_name"
-                    android:textColor="@color/colormain"
-                    android:textSize="@dimen/text_size_17" />
+                    <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:id="@+id/order_address_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textColor="@color/colormain"
+                        android:textSize="@dimen/text_size_17" />
 
-                <ImageView
-                    android:id="@+id/order_address_right"
-                    android:layout_width="@dimen/common_measure_20dp"
-                    android:layout_height="@dimen/common_measure_20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="@dimen/common_measure_10dp"
-                    android:gravity="center"
-                    android:src="@mipmap/ic_right_arrow" />
+                    <ImageView
+                        android:id="@+id/order_address_right"
+                        android:layout_width="@dimen/common_measure_20dp"
+                        android:layout_height="@dimen/common_measure_20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/common_measure_10dp"
+                        android:gravity="center"
+                        android:src="@mipmap/ic_right_arrow" />
 
-                <com.davis.kangpinhui.views.CustomTypefaceTextView
-                    android:id="@+id/order_address_pepole"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/order_address_text"
-                    android:layout_marginTop="@dimen/common_measure_15dp"
-                    android:text="asdf"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_17" />
+                    <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:id="@+id/order_address_pepole"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/order_address_text"
+                        android:layout_marginTop="@dimen/common_measure_15dp"
+                        android:text="asdf"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_17" />
 
 
-                <com.davis.kangpinhui.views.CustomTypefaceTextView
-                    android:id="@+id/order_address_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/order_address_text"
-                    android:layout_margin="@dimen/common_measure_15dp"
-                    android:layout_toLeftOf="@id/order_address_right"
-                    android:text="asdf"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_17" />
-
+                    <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:id="@+id/order_address_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/order_address_text"
+                        android:layout_marginTop="@dimen/common_measure_15dp"
+                        android:layout_toLeftOf="@id/order_address_right"
+                        android:text="asdf"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_17" />
+                </RelativeLayout>
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="5dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@drawable/repeat_bg"/>
+                    android:background="@drawable/repeat_bg" />
             </RelativeLayout>
 
             <com.davis.kangpinhui.views.StretchedListView
                 android:id="@+id/order_address_lst"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:id="@+id/order_paytype_linear"
@@ -92,10 +98,10 @@
 
                 <RelativeLayout
                     android:id="@+id/order_paytype_relative"
-                    android:onClick="doClick"
-                    android:background="@color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:onClick="doClick">
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
                         android:layout_width="wrap_content"
@@ -114,8 +120,7 @@
                         android:layout_centerVertical="true"
                         android:layout_margin="@dimen/common_measure_10dp"
                         android:gravity="center"
-                        android:src="@mipmap/ic_right_arrow"
-                        />
+                        android:src="@mipmap/ic_right_arrow" />
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
                         android:id="@+id/order_paytype_text"
@@ -127,6 +132,7 @@
                         android:textSize="@dimen/text_size_17" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/add_cart_add_passwrod_linear"
                 android:layout_width="match_parent"
@@ -139,10 +145,10 @@
                     android:background="@color/colorlightgray" />
 
                 <RelativeLayout
-                    android:onClick="doClick"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@color/white"
-                    android:layout_height="match_parent">
+                    android:onClick="doClick">
 
                     <com.davis.kangpinhui.views.CustomTypefaceEditText
                         android:id="@+id/add_cart_add_passwrod"
@@ -150,9 +156,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/common_measure_15dp"
-                        android:password="true"
-                        android:hint="请输入卡号密码"
                         android:background="@android:color/transparent"
+                        android:hint="请输入卡号密码"
+                        android:password="true"
                         android:textSize="@dimen/text_size_17" />
 
                 </RelativeLayout>
@@ -170,10 +176,10 @@
 
                 <RelativeLayout
                     android:id="@+id/order_paytime_relative"
-                    android:onClick="doClick"
-                    android:background="@color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:onClick="doClick">
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
                         android:layout_width="wrap_content"
@@ -182,6 +188,7 @@
                         android:layout_marginLeft="@dimen/common_measure_15dp"
                         android:text="配送时间"
                         android:textSize="@dimen/text_size_17" />
+
                     <ImageView
                         android:id="@+id/order_paytypecoup_right1"
                         android:layout_width="@dimen/common_measure_20dp"
@@ -190,15 +197,14 @@
                         android:layout_centerVertical="true"
                         android:layout_margin="@dimen/common_measure_10dp"
                         android:gravity="center"
-                        android:src="@mipmap/ic_right_arrow"
-                        />
+                        android:src="@mipmap/ic_right_arrow" />
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
                         android:id="@+id/order_paytype_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@id/order_paytypecoup_right1"
                         android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/order_paytypecoup_right1"
                         android:text="请选择配送时间"
                         android:textSize="@dimen/text_size_17" />
 
@@ -243,10 +249,10 @@
                 <RelativeLayout
                     android:id="@+id/order_coup_relatie"
                     android:layout_width="match_parent"
-                    android:clickable="true"
-                    android:onClick="doClick"
+                    android:layout_height="match_parent"
                     android:background="@color/white"
-                    android:layout_height="match_parent">
+                    android:clickable="true"
+                    android:onClick="doClick">
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
                         android:layout_width="wrap_content"
@@ -257,7 +263,6 @@
                         android:textSize="@dimen/text_size_17" />
 
 
-
                     <ImageView
                         android:id="@+id/order_paytypecoup_right"
                         android:layout_width="@dimen/common_measure_20dp"
@@ -266,8 +271,7 @@
                         android:layout_centerVertical="true"
                         android:layout_margin="@dimen/common_measure_10dp"
                         android:gravity="center"
-                        android:src="@mipmap/ic_right_arrow"
-                        />
+                        android:src="@mipmap/ic_right_arrow" />
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
                         android:id="@+id/order_paytypecoup_text"
@@ -297,20 +301,19 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/common_measure_10dp"
-            android:textSize="@dimen/common_measure_30dp"
-            android:textStyle="bold"
+            android:gravity="center"
             android:text="¥0"
             android:textColor="@color/white"
-            android:gravity="center">
-        </com.davis.kangpinhui.views.CustomTypefaceTextView>
+            android:textSize="@dimen/common_measure_30dp"
+            android:textStyle="bold"></com.davis.kangpinhui.views.CustomTypefaceTextView>
 
         <LinearLayout
             android:id="@+id/order_list_addlinear"
             android:layout_width="@dimen/common_measure_150dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:onClick="doClick"
-            android:background="?android:attr/selectableItemBackground">
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="doClick">
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:layout_width="match_parent"
