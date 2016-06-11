@@ -10,7 +10,9 @@ import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
@@ -23,6 +25,7 @@ import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.OrderDetail;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.util.DateUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.StretchedListView;
@@ -44,8 +47,17 @@ public class OrderDetailActivity extends BaseActivity {
     private String code = "";
 
     private TextView order_detail_state, order_detail_people, order_detail_phone,
-            order_detail_address, order_detail_paytype, order_detail_heji, order_detail_m_oney, order_detail_time,
+            order_detail_address, order_detail_paytype, order_detail_m_oney, order_detail_time,
             order_detail_code, order_detail_kefu;
+
+    private TextView order_detail_coup_money;
+    private LinearLayout order_copu_linear;
+
+    private TextView order_detail_sentting_money;
+    private LinearLayout order_sending_linear;
+
+    private TextView order_detail_jiaoyi_code;
+    private LinearLayout order_jiayicode_linear;
 
     private StretchedListView order_detail_lst;
 
@@ -70,12 +82,17 @@ public class OrderDetailActivity extends BaseActivity {
         order_detail_phone = $(R.id.order_detail_phone);
         order_detail_address = $(R.id.order_detail_address);
         order_detail_paytype = $(R.id.order_detail_paytype);
-        order_detail_heji = $(R.id.order_detail_heji);
+        order_copu_linear = $(R.id.order_copu_linear);
+        order_detail_coup_money = $(R.id.order_detail_coup_money);
         order_detail_m_oney = $(R.id.order_detail_m_oney);
         order_detail_time = $(R.id.order_detail_time);
         order_detail_code = $(R.id.order_detail_code);
         order_detail_kefu = $(R.id.order_detail_kefu);
         order_detail_lst = $(R.id.order_detail_lst);
+        order_detail_sentting_money = $(R.id.order_detail_sentting_money);
+        order_sending_linear = $(R.id.order_sending_linear);
+        order_detail_jiaoyi_code = $(R.id.order_detail_jiaoyi_code);
+        order_jiayicode_linear = $(R.id.order_jiayicode_linear);
     }
 
     @Override
@@ -165,14 +182,34 @@ public class OrderDetailActivity extends BaseActivity {
             }
         }
 
-        order_detail_people.setText(itemData.snickName);
+        order_detail_people.setText(itemData.sconsignee);
         order_detail_phone.setText(itemData.smobile);
         order_detail_address.setText(itemData.saddress);
-        order_detail_heji.setText("¥" + UtilText.getFloatToString(itemData.fmoney));
-        order_detail_m_oney.setText("¥" + UtilText.getFloatToString(itemData.fmoney));
-        order_detail_time.setText(itemData.daddtime);
+        order_detail_time.setText(DateUtils.date2Str(Long.parseLong(itemData.daddtime),"yyyy-MM-dd"));
         order_detail_code.setText(itemData.sordernumber);
 
+        String coup_money=itemData.coupontotal;
+        if(TextUtils.isEmpty(coup_money)||coup_money.equals("0.0")) {
+            order_copu_linear.setVisibility(View.GONE);
+        }else{
+            order_detail_coup_money.setText("¥" + UtilText.getFloatToString(coup_money));
+        }
+
+        String code=itemData.stradeno;
+        if(TextUtils.isEmpty(code)) {
+            order_jiayicode_linear.setVisibility(View.GONE);
+        }else{
+            order_detail_jiaoyi_code.setText("¥" + UtilText.getFloatToString(code));
+        }
+
+        String send=itemData.fpostprice;
+        if(TextUtils.isEmpty(send)) {
+            send="";
+        }
+        order_detail_sentting_money.setText("¥" + UtilText.getFloatToString(send));
+
+        Float f=Float.parseFloat(itemData.fvipmoney)+Float.parseFloat(itemData.fmoney)-Float.parseFloat(itemData.freturnmoney);
+        order_detail_m_oney.setText("¥" + UtilText.getFloatToString(f+""));
     }
 
 
