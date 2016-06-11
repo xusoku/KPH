@@ -27,6 +27,7 @@
                         android:layout_height="@dimen/common_measure_45dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/common_measure_10dp"
+                        android:layout_marginRight="@dimen/common_measure_10dp"
                         android:scaleType="centerInside"
                         android:src="@mipmap/ic_favorites" />
 

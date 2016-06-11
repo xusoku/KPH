@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
-                    android:textColor="@color/red"
+                    android:textColor="@color/colormain"
                     android:textSize="@dimen/text_size_17" />
 
                 <ImageView
@@ -182,17 +182,27 @@
                         android:layout_marginLeft="@dimen/common_measure_15dp"
                         android:text="配送时间"
                         android:textSize="@dimen/text_size_17" />
-
+                    <ImageView
+                        android:id="@+id/order_paytypecoup_right1"
+                        android:layout_width="@dimen/common_measure_20dp"
+                        android:layout_height="@dimen/common_measure_20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/common_measure_10dp"
+                        android:gravity="center"
+                        android:src="@mipmap/ic_right_arrow"
+                        />
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
                         android:id="@+id/order_paytype_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_toLeftOf="@id/order_paytypecoup_right1"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/common_measure_10dp"
-                        android:text="下单即送，最快半小时免费送达"
+                        android:text="请选择配送时间"
                         android:textSize="@dimen/text_size_17" />
+
+
                 </RelativeLayout>
             </LinearLayout>
 
