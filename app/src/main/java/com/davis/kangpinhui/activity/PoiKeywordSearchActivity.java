@@ -14,13 +14,16 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
@@ -73,7 +76,7 @@ public class PoiKeywordSearchActivity extends Activity implements
     private PoiSearch poiSearch;// POI搜索
 
     private ImageView searchText_back;
-
+    private TextView poi_text;
 
     private Shop shop;
     private String type = "";
@@ -90,7 +93,9 @@ public class PoiKeywordSearchActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poikeywordsearch);
 
+        poi_text = (TextView) findViewById(R.id.poi_text);
         searchText_back = (ImageView) findViewById(R.id.searchText_back);
+        listView = (LoadMoreListView) findViewById(R.id.poi_search_lst);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         shop = getIntent().getParcelableExtra("id");
@@ -101,8 +106,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         }
         init();
         initPopupSortWindow();
-
-
+        setText("关键词");
         searchText_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +114,11 @@ public class PoiKeywordSearchActivity extends Activity implements
             }
         });
     }
+
+    private void setText(String s) {
+        poi_text.setText("配送范围内暂无与"+s+"相关的小区/大楼");
+    }
+
 
     /**
      * 初始化AMap对象
@@ -277,32 +286,27 @@ public class PoiKeywordSearchActivity extends Activity implements
                         poiOverlay.zoomToSpan();
                         aMap.addPolygon(new PolygonOptions().addAll(createDDRectangle(shop.polygon)).fillColor(Color.parseColor("#550000ff"))
                                 .strokeColor(Color.RED).strokeWidth(1));
-
-                        popupWindow.showAsDropDown(searchText_back, 0, 0);
+                        listView.setVisibility(View.VISIBLE);
                         list.addAll(poiItems);
                         adapter.notifyDataSetChanged();
-                        searchText.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                searchText.setFocusableInTouchMode(true);
-                                searchText.setFocusable(true);
-                            }
-                        },100);
 
                         if (list.size() >= 20)
                             listView.onLoadSucess(true);
                         else listView.onLoadSucess(false);
                     } else {
                         ToastUitl.showToast("没有搜索到结果");
+                        listView.setVisibility(View.GONE);
                         listView.onLoadSucess(false);
                     }
                 }
             } else {
                 ToastUitl.showToast("没有搜索到结果");
+                listView.setVisibility(View.GONE);
                 listView.onLoadSucess(false);
             }
         } else {
             ToastUitl.showToast("没有搜索到结果");
+            listView.setVisibility(View.GONE);
             listView.onLoadSucess(false);
         }
 
@@ -316,19 +320,10 @@ public class PoiKeywordSearchActivity extends Activity implements
 
     private LoadMoreListView listView;
     private ArrayList<PoiItem> list;
-    private PopupWindow popupWindow;
     private CommonBaseAdapter<PoiItem> adapter;
 
     private void initPopupSortWindow() {
         // TODO Auto-generated method stub
-        View view = getLayoutInflater().inflate(R.layout.activity_poikeywordsearch_pop, null);
-        listView = (LoadMoreListView) view.findViewById(R.id.poi_search_lst);
-        popupWindow = new PopupWindow(view,
-                LinearLayout.LayoutParams.MATCH_PARENT, (int) DisplayMetricsUtils.getHeight() / 10 * 9);
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(false);
-        popupWindow.setAnimationStyle(R.style.popwin_recent_anim_style);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
         list = new ArrayList<>();
         adapter = new CommonBaseAdapter<PoiItem>(this, list, R.layout.activity_poikeywordsearch_item) {
             @Override
@@ -345,7 +340,6 @@ public class PoiKeywordSearchActivity extends Activity implements
             }
         };
         listView.setAdapter(adapter);
-        LogUtils.e("aaa", "footview");
 
         listView.setOnLoadListener(new LoadMoreListView.OnLoadListener() {
             @Override
