@@ -128,7 +128,9 @@ public class ViewHolder
 //        ImageLoader.getInstance().displayImage(url, (ImageView) getView(viewId));
         Glide.with(context)
                 .load(url)
-                .into((ImageView) getView(viewId));
+                .placeholder(R.mipmap.img_defualt_bg)
+                .error(R.mipmap.img_defualt_bg)
+                .into((ImageView)getView(viewId));
         return this;
     }
 

@@ -204,9 +204,10 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 // TODO Auto-generated method stub
                 ImageView imageView = (ImageView) holder.getConvertView();
                 String img = itemData.picurl;
-                Glide.with(getActivity()).load(img).into(imageView);
-//                        .placeholder(R.drawable.placeholder)
-//                        .error(R.drawable.imagenotfound)
+                Glide.with(getActivity()).load(img)
+                        .placeholder(R.mipmap.img_defualt_bg)
+                        .error(R.mipmap.img_defualt_bg)
+                        .into(imageView);
 
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -270,7 +271,11 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             public void convert(BaseViewHolder holder, Product itemData, int position) {
 
                 ImageView iv = holder.getView(R.id.fragment_index_item_image_item);
-                Glide.with(getActivity()).load(itemData.picurl).into(iv);
+                Glide.with(getActivity())
+                        .load(itemData.picurl)
+                        .placeholder(R.mipmap.img_defualt_bg)
+                        .error(R.mipmap.img_defualt_bg)
+                        .into(iv);
 
                 TextView tv_name = holder.getView(R.id.fragment_index_item_name);
                 tv_name.setText(itemData.productname);

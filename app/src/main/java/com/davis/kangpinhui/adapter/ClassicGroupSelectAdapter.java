@@ -237,7 +237,10 @@ public class ClassicGroupSelectAdapter extends BaseAdapter
             final Category category = categories.get(position);
 
             viewHolder.textView.setText(category.name);
-            Glide.with(mContext).load(category.picurl).into(viewHolder.imageView);
+            Glide.with(mContext).load(category.picurl)
+                    .placeholder(R.mipmap.img_defualt_bg)
+                    .error(R.mipmap.img_defualt_bg)
+                    .into(viewHolder.imageView);
 
            viewHolder.classic_rootid_right_nogrid_linear.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
@@ -83,12 +84,12 @@ public class RechargeListActivity extends BaseActivity {
                 }else if(itemData.srechargetype.equals("2")){
                     srechargetype="支付宝支付";
                 }
-                String stype="";
+                String stype="";//已支付、待付款
                 if(itemData.stype.equals("0")){
-                    stype="未付款";
-                }else if(itemData.srechargetype.equals("3")){
-                    stype="已付款";
-                }else if(itemData.srechargetype.equals("6")){
+                    stype="待付款";
+                }else if(itemData.stype.equals("3")){
+                    stype="已支付";
+                }else if(itemData.stype.equals("6")){
                     stype="已取消";
                 }
 
@@ -99,6 +100,18 @@ public class RechargeListActivity extends BaseActivity {
                 TextView tv=holder.getView(R.id.recharge_item_price_text);
                 tv.setText(UtilText.getRechargePrice("¥"+itemData.fmoney));
                 holder.setText(R.id.recharge_item_type_text, stype);
+
+                LinearLayout recharge_item_linear=holder.getView(R.id.recharge_item_linear);
+
+                if(itemData.stype.equals("0")&&(itemData.srechargetype.equals("4")||itemData.srechargetype.equals("2"))){
+                    recharge_item_linear.setVisibility(View.VISIBLE);
+                }
+                else if(itemData.stype.equals("3")){ //去掉支付按钮
+                    recharge_item_linear.setVisibility(View.GONE);
+                }else if(itemData.stype.equals("6")){ //去掉全部按钮
+                    recharge_item_linear.setVisibility(View.GONE);
+                }
+
 
 
                 holder.getView(R.id.recharge_item_cancel).setOnClickListener(new View.OnClickListener() {

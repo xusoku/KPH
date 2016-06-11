@@ -3,6 +3,7 @@ package com.davis.kangpinhui.util;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.mob.tools.utils.UIHandler;
@@ -64,6 +65,12 @@ public class WeixinLoginUtil implements Handler.Callback,PlatformActionListener 
         //获取资料
         platform.getDb().getUserName();//获取用户名字
         platform.getDb().getUserIcon(); //获取用户头像
+        platform.getDb().getUserId(); //
+        platform.getDb().getUserGender(); //
+
+        Log.e("aaa", platform.getId()+"");
+        Log.e("aaa", platform.getDb().getUserId());
+        Log.e("aaa",platform.getDb().getToken());
 
     }
 

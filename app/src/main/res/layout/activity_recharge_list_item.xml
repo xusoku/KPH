@@ -131,6 +131,7 @@
                 android:layout_marginRight="@dimen/common_measure_10dp"
                 android:text="状态:"
                 android:textColor="@color/red"
+                android:visibility="gone"
                 android:textSize="@dimen/text_size_17" />
         </RelativeLayout>
 

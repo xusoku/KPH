@@ -134,7 +134,10 @@ public class AddCartPopuWindow {
 
 
     public void setBindPopData(final ProductDetail productDetail) {
-        Glide.with(context).load(ApiService.picurl + productDetail.spicurl).into(add_cart_image);
+        Glide.with(context).load(ApiService.picurl + productDetail.spicurl)
+                .placeholder(R.mipmap.img_defualt_bg)
+                .error(R.mipmap.img_defualt_bg)
+                .into(add_cart_image);
 
         add_cart_text_vip_price.setText("");
         add_cart_text_price.setText("");
@@ -229,7 +232,10 @@ public class AddCartPopuWindow {
         }
     }
     public void setBindPopData(final Product productDetail) {
-        Glide.with(context).load( productDetail.picurl).into(add_cart_image);
+        Glide.with(context).load( productDetail.picurl)
+                .placeholder(R.mipmap.img_defualt_bg)
+                .error(R.mipmap.img_defualt_bg)
+                .into(add_cart_image);
 
         add_cart_text_vip_price.setText("");
         add_cart_text_price.setText("");

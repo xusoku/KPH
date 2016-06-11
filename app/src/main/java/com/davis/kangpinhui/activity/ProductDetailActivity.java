@@ -147,7 +147,10 @@ public class ProductDetailActivity extends BaseActivity {
                 // TODO Auto-generated method stub
                 ImageView imageView = (ImageView) holder.getConvertView();
                 String img = itemData;
-                Glide.with(ProductDetailActivity.this).load(img).into(imageView);
+                Glide.with(ProductDetailActivity.this).load(img)
+                        .placeholder(R.mipmap.img_defualt_bg)
+                        .error(R.mipmap.img_defualt_bg)
+                        .into(imageView);
 //                        .placeholder(R.drawable.placeholder)
 //                        .error(R.drawable.imagenotfound)
             }

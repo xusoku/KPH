@@ -180,7 +180,10 @@ public class SearchResultActivity extends BaseActivity {
 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) DisplayMetricsUtils.getWidth() / 2 - 30, (int) DisplayMetricsUtils.getWidth() / 2 - 30);
                 iv.setLayoutParams(layoutParams);
-                Glide.with(mActivity).load(itemData.picurl).into(iv);
+                Glide.with(mActivity).load(itemData.picurl)
+                        .placeholder(R.mipmap.img_defualt_bg)
+                        .error(R.mipmap.img_defualt_bg)
+                        .into(iv);
 
                 TextView tv_name = holder.getView(R.id.search_result_item_name);
                 tv_name.setText(itemData.productname);
