@@ -106,7 +106,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         }
         init();
         initPopupSortWindow();
-        setText("关键词");
+        setPoiText();
         searchText_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,8 +115,15 @@ public class PoiKeywordSearchActivity extends Activity implements
         });
     }
 
-    private void setText(String s) {
-        poi_text.setText("配送范围内暂无与"+s+"相关的小区/大楼");
+    private void setPoiText() {
+        String ss =searchText.getText().toString().trim();
+        if(TextUtils.isEmpty(ss)){
+            ss="关键词";
+            poi_text.setText("配送范围内暂无与"+ss+"相关的小区/大楼");
+        }else{
+            poi_text.setText("配送范围内暂无与\""+ss+"\"相关的小区/大楼");
+        }
+
     }
 
 
@@ -294,18 +301,18 @@ public class PoiKeywordSearchActivity extends Activity implements
                             listView.onLoadSucess(true);
                         else listView.onLoadSucess(false);
                     } else {
-                        ToastUitl.showToast("没有搜索到结果");
+                        setPoiText();
                         listView.setVisibility(View.GONE);
                         listView.onLoadSucess(false);
                     }
                 }
             } else {
-                ToastUitl.showToast("没有搜索到结果");
+                setPoiText();
                 listView.setVisibility(View.GONE);
                 listView.onLoadSucess(false);
             }
         } else {
-            ToastUitl.showToast("没有搜索到结果");
+            setPoiText();
             listView.setVisibility(View.GONE);
             listView.onLoadSucess(false);
         }
