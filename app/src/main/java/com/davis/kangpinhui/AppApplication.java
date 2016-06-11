@@ -93,6 +93,11 @@ public class AppApplication extends Application {
             return  "";
         }
     }
+    public static void setCartcount(String s) {
+        if (extendedinfo!=null) {
+            extendedinfo.cartcount=s;
+        }
+    }
     public static String getOrderall() {
         if (extendedinfo!=null) {
             return extendedinfo.orderall;

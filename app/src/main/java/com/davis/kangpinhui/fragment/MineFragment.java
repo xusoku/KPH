@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,11 +24,16 @@ import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.activity.RechargeListActivity;
 import com.davis.kangpinhui.activity.SettingActivity;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
+import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.UserInfo;
+import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.GlideCircleTransform;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.MineCustomLayout;
+import com.davis.kangpinhui.views.MySwipeRefreshLayout;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by davis on 16/5/19.
@@ -40,6 +46,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private TextView fragment_mine_name,fragment_mine_price,fragment_mine_price_info;
 
     private ImageView fragment_mine_photo;
+
+    private MySwipeRefreshLayout mine_swipe;
 
     @Override
     protected void initVariable() {
@@ -63,6 +71,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mine_rechange = $(R.id.mine_rechange);
         mine_setting = $(R.id.mine_setting);
         mine_kefu = $(R.id.mine_kefu);
+        mine_swipe = $(R.id.mine_refresh);
         mine_ti_huo = $(R.id.mine_ti_huo);
         mine_myaddress = $(R.id.mine_myaddress);
         mine_mycoup = $(R.id.mine_mycoup);
@@ -73,6 +82,20 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         fragment_mine_price_info = $(R.id.fragment_mine_price_info);
 
         Glide.with(this).load(R.mipmap.mine_user_defualt).transform(new GlideCircleTransform(getActivity())).into(fragment_mine_photo);
+        CommonManager.setRefreshingState(mine_swipe, false);
+        mine_swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                CommonManager.setRefreshingState(mine_swipe, true);
+                EventBus.getDefault().post(new Extendedinfo());
+                mine_allorder.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        CommonManager.setRefreshingState(mine_swipe, false);
+                    }
+                },1000);
+            }
+        });
     }
 
     @Override
@@ -99,8 +122,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         }
     }
     public void setNumber(){
-
         if(mine_allorder_unpay!=null) {
+            CommonManager.setRefreshingState(mine_swipe, false);
             mine_allorder_unpay.setText(UtilText.getminenumber("待付款  (" + AppApplication.getOrderunpaid() + ")"));
             mine_allorder_sending.setText(UtilText.getminenumber("配送中 (" + AppApplication.getOrdersending() + ")"));
             mine_allorder_unsend.setText(UtilText.getminenumber("待配送 (" + AppApplication.getOrderwaitsend() + ")"));

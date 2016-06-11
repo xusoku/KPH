@@ -437,7 +437,7 @@ public class OrderActivity extends BaseActivity {
                 @Override
                 public void onSucssce(BaseModel baseModel) {
                     ToastUitl.showToast("订单提交成功");
-                    EventBus.getDefault().post(new Extendedinfo());
+//                    EventBus.getDefault().post(new Extendedinfo());
                 }
 
                 @Override
@@ -466,7 +466,7 @@ public class OrderActivity extends BaseActivity {
             @Override
             public void onSucssce(BaseModel<Order> baseModel) {
                 ToastUitl.showToast("订单提交成功");
-                EventBus.getDefault().post(new Extendedinfo());
+//                EventBus.getDefault().post(new Extendedinfo());
                 if(payTape.equals("0")) {
                     thridPayUtil.alipay("0.01", baseModel.object.sordernumber);
                 }else if(payTape.equals("4")){//微信

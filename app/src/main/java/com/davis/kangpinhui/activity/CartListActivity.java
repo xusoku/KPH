@@ -100,7 +100,8 @@ public class CartListActivity extends BaseActivity {
                     @Override
                     public void listChange() {
                         list.clear();
-                        EventBus.getDefault().post(new Extendedinfo());
+
+//                        EventBus.getDefault().post(new Extendedinfo());
                         startActivityLoading();
                     }
                 });

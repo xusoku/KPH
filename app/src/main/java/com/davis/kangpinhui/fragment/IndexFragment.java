@@ -147,6 +147,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0") && backgroundDefaultBadge != null){
             backgroundDefaultBadge.setVisibility(View.VISIBLE);
             backgroundDefaultBadge.setText((int) Float.parseFloat(number) + "");
+        }else{
+            setcartNumberLoginout();
         }
     }
     public void setcartNumberLoginout() {
