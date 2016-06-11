@@ -59,6 +59,7 @@ public class SettingActivity extends BaseActivity {
             AppApplication.token = "";
             AppApplication.userInfo=new UserInfo();
             AppApplication.extendedinfo=null;
+            SharePreferenceUtils.getSharedPreferences().putString("nickname","");
             SharePreferenceUtils.getSharedPreferences().putString("token","");
             LoginActivity.jumpLoginActivity(this);
             EventBus.getDefault().post("loginout");

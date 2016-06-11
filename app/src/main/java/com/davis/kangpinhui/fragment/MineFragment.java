@@ -78,18 +78,25 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected void initData() {
 
-        String name= SharePreferenceUtils.getSharedPreferences("kph").getString("username","");
+        String name= SharePreferenceUtils.getSharedPreferences("kph").getString("nickname","");
         String token= SharePreferenceUtils.getSharedPreferences("kph").getString("token","");
         if(!TextUtils.isEmpty(name)&&!TextUtils.isEmpty(token)){
-            name=name.substring(0,3)+"****"+name.substring(7,11);
+            if(TextUtils.isDigitsOnly(name)){
+                name=name.substring(0,3)+"****"+name.substring(7,11);
+            }
             fragment_mine_name.setText(name);
         }
 
     }
 
     public void setUi(UserInfo userInfo){
-        String name=userInfo.susername.substring(0,3)+"****"+userInfo.susername.substring(7,11);
-        fragment_mine_name.setText(name);
+        String name=userInfo.snickname;
+        if(!TextUtils.isEmpty(name)){
+            if(TextUtils.isDigitsOnly(name)){
+                name=name.substring(0,3)+"****"+name.substring(7,11);
+            }
+            fragment_mine_name.setText(name);
+        }
     }
     public void setNumber(){
 

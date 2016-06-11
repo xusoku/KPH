@@ -140,6 +140,27 @@
                 android:textSize="@dimen/text_size_22" />
         </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_measure_64dp"
+            android:layout_marginLeft="@dimen/common_measure_30dp"
+            android:layout_marginRight="@dimen/common_measure_30dp"
+            android:layout_marginTop="@dimen/common_measure_30dp"
+            android:background="#70ffffff">
+
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/login_wechat_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="doClick"
+                android:text="微信登录"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_22" />
+        </FrameLayout>
+
         <RelativeLayout
             android:id="@+id/login_forget_relative"
             android:layout_width="match_parent"
@@ -189,6 +210,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colormain"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <ImageView

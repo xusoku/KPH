@@ -145,9 +145,10 @@ public class LoginActivity extends BaseActivity {
             case R.id.login_forget_password:
 
                 break;
-            case R.id.login_wechat:
-
-                new WeixinLoginUtil(this).startLogin();
+            case R.id.login_wechat_btn:
+                WeixinLoginUtil c=new WeixinLoginUtil(this);
+                c.setProgressDialog(progressDialog);
+                c.startLogin();
 
 
 
@@ -240,6 +241,7 @@ public class LoginActivity extends BaseActivity {
                                 AppApplication.address=userInfoBaseModel.object.useraddress;
                                 SharePreferenceUtils.getSharedPreferences("kph").putString("token", AppApplication.token);
                                 SharePreferenceUtils.getSharedPreferences("kph").putString("username", AppApplication.userInfo.susername);
+                                SharePreferenceUtils.getSharedPreferences("kph").putString("nickname", AppApplication.userInfo.snickname);
                                 EventBus.getDefault().post(AppApplication.userInfo);
                                 EventBus.getDefault().post(new Extendedinfo());
                             }
