@@ -15,7 +15,7 @@
         android:id="@+id/setting_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:src="@mipmap/ic_nearby"
+        app:src="@mipmap/mine_kefu"
         android:clickable="true"
         android:onClick="doClick"
         app:line="false"

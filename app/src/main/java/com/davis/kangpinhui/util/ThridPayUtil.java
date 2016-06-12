@@ -9,6 +9,7 @@ import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.OrderActivity;
 import com.davis.kangpinhui.activity.PayResultActivity;
 import com.davis.kangpinhui.activity.RechargeActivity;
+import com.davis.kangpinhui.activity.RechargeListActivity;
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.util.alipay.PayResult;
 import com.davis.kangpinhui.util.alipay.ZhifubaoPayUtil;
@@ -26,15 +27,6 @@ public class ThridPayUtil {
     public ThridPayUtil(Activity context){
         this.context=context;
     }
-
-
-//    支付宝去支付跳转：
-//            /alipay/product.do?token=5C271EB237F869484D9EFF7FF23D2895&orderNum=201604272228087903
-//
-//
-//    微信支付：
-//    用ajax调用下面URL地址。
-//            /weixin/product.do?token=5C271EB237F869484D9EFF7FF23D2895&orderNum=201604272228087903&openid=oZCBsuD21rTGrBifWiomwIL350Xk
 
 
 
@@ -102,6 +94,7 @@ public class ThridPayUtil {
                     if (TextUtils.equals(resultStatus, "9000")) {
                         ToastUitl.showToast("支付成功");
                         PayResultActivity.jumpPayResultActivity(context, true, isYue);
+                        AppManager.getAppManager().finishActivity(RechargeListActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);
                         AppManager.getAppManager().finishActivity(OrderActivity.class);
@@ -115,6 +108,7 @@ public class ThridPayUtil {
                             ToastUitl.showToast("支付失败");
                         }
                         PayResultActivity.jumpPayResultActivity(context, false,isYue);
+                        AppManager.getAppManager().finishActivity(RechargeListActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);
                         AppManager.getAppManager().finishActivity(OrderActivity.class);

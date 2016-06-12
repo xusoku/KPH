@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.Recharge;
+import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.model.basemodel.Page;
 import com.davis.kangpinhui.R;
@@ -20,6 +21,8 @@ import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.util.AppManager;
+import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.LoadMoreListView;
@@ -38,7 +41,7 @@ public class RechargeListActivity extends BaseActivity {
     private int TotalPage = 0;
     private CommonBaseAdapter<Recharge> adapter;
     private ArrayList<Recharge> list;
-
+    private ThridPayUtil thridPayUtil;
 
     public static void jumpRechargeListActivity(Context cot) {
         if (AppApplication.isLogin(cot)) {
@@ -62,7 +65,7 @@ public class RechargeListActivity extends BaseActivity {
 
         showTopBar();
         setTitle("查询订单");
-
+        thridPayUtil = new ThridPayUtil(this);
         listView = $(R.id.content);
 
         adapter = new CommonBaseAdapter<Recharge>(this, list, R.layout.activity_recharge_list_item) {
@@ -113,6 +116,16 @@ public class RechargeListActivity extends BaseActivity {
                 }
 
 
+                holder.getView(R.id.recharge_item_conuti).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (itemData.srechargetype.equals("2")) {
+                            thridPayUtil.alipayyue("0.01", itemData.schargenumber);
+                        } else if (itemData.srechargetype.equals("4")) {//微信
+                            getWeixinPay(itemData.schargenumber);
+                        }
+                    }
+                });
 
                 holder.getView(R.id.recharge_item_cancel).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -206,7 +219,7 @@ public class RechargeListActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RechargeDetailActivity.jumpRechargeDetailActivity(RechargeListActivity.this,list.get(position).schargenumber);
+                RechargeDetailActivity.jumpRechargeDetailActivity(RechargeListActivity.this, list.get(position).schargenumber);
             }
         });
     }
@@ -216,5 +229,24 @@ public class RechargeListActivity extends BaseActivity {
 
     }
 
+    public void getWeixinPay(String orderId) {
 
+        Call<BaseModel<WeixinInfo>> call = ApiInstant.getInstant().getWeixinProductInfo(AppApplication.apptype, orderId, AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel<WeixinInfo>>() {
+            @Override
+            public void onSucssce(BaseModel<WeixinInfo> weixinInfoBaseModel) {
+                AppApplication.getApplication().isYue=true;
+                thridPayUtil.wxpay(weixinInfoBaseModel.object);
+            }
+
+            @Override
+            public void onFailure() {
+                PayResultActivity.jumpPayResultActivity(RechargeListActivity.this, false, true);
+                finish();
+                AppManager.getAppManager().finishActivity(CartListActivity.class);
+
+            }
+        });
+
+    }
 }
