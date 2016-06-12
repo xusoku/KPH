@@ -149,7 +149,7 @@ public class PoiKeywordSearchActivity extends Activity implements
         Marker marker = aMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
-                        .decodeResource(getResources(), R.mipmap.mine_address)))
+                        .decodeResource(getResources(), R.mipmap.mark_b)))
                 .draggable(true));
 
 

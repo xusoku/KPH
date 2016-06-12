@@ -73,7 +73,7 @@ public class MyAddressActivity extends BaseActivity {
     protected void onActivityLoading() {
         super.onActivityLoading();
 
-        Call<BaseModel<ArrayList<Address>>> call = ApiInstant.getInstant().getAddresslist(AppApplication.apptype, AppApplication.token);
+        Call<BaseModel<ArrayList<Address>>> call = ApiInstant.getInstant().getAddresslist(AppApplication.apptype, AppApplication.shopid,AppApplication.token);
 
         call.enqueue(new ApiCallback<BaseModel<ArrayList<Address>>>() {
             @Override

@@ -94,7 +94,7 @@ public class AddAddressActivity extends BaseActivity {
         super.onResume();
         PoiItem poiItem=AppApplication.poiItem;
         if(poiItem!=null){
-            add_address_text.setText(poiItem.getProvinceName()+poiItem.getBusinessArea()+"");
+            add_address_text.setText(poiItem.getTitle()+"");
             add_des_address_text.setText(poiItem.getSnippet()+"");
         }
     }

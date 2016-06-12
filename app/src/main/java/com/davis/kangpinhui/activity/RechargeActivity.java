@@ -105,7 +105,7 @@ public class RechargeActivity extends BaseActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 price = pricetext[which] + "";
                                 recharge_price.setText(pricetext[which] + "");
-                                recharge_price_text.setText("总金额:"+"¥"+pricetext[which]);
+                                recharge_price_text.setText("¥"+pricetext[which]);
 
                             }
                         }).show();

@@ -137,6 +137,7 @@ public interface ApiService {
     @GET("address/list.do")
     Call<BaseModel<ArrayList<Address>>> getAddresslist(
             @Query("apptype") String apptype,
+            @Query("shopid") String shopid,
             @Query("token") String token
     );
 
