@@ -8,8 +8,10 @@ import android.os.Bundle;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.OrderActivity;
+import com.davis.kangpinhui.activity.OrderDetailActivity;
 import com.davis.kangpinhui.activity.PayResultActivity;
 import com.davis.kangpinhui.activity.RechargeActivity;
+import com.davis.kangpinhui.activity.RechargeListActivity;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
@@ -59,6 +61,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 				PayResultActivity.jumpPayResultActivity(this, true, AppApplication.getApplication().isYue);
 				finish();
 				AppManager.getAppManager().finishActivity(RechargeActivity.class);
+				AppManager.getAppManager().finishActivity(OrderDetailActivity.class);
+				AppManager.getAppManager().finishActivity(RechargeListActivity.class);
 				AppManager.getAppManager().finishActivity(CartListActivity.class);
 				AppManager.getAppManager().finishActivity(OrderActivity.class);
 				AppApplication.getApplication().isYue=false;
@@ -74,6 +78,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 				PayResultActivity.jumpPayResultActivity(this, false, AppApplication.getApplication().isYue);
 				finish();
 				AppManager.getAppManager().finishActivity(RechargeActivity.class);
+				AppManager.getAppManager().finishActivity(OrderDetailActivity.class);
+				AppManager.getAppManager().finishActivity(RechargeListActivity.class);
 				AppManager.getAppManager().finishActivity(CartListActivity.class);
 				AppManager.getAppManager().finishActivity(OrderActivity.class);
 				AppApplication.getApplication().isYue=false;

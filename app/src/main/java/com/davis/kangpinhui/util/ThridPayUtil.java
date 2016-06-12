@@ -8,6 +8,7 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.activity.AllOrderActivity;
 import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.OrderActivity;
+import com.davis.kangpinhui.activity.OrderDetailActivity;
 import com.davis.kangpinhui.activity.PayResultActivity;
 import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.activity.RechargeListActivity;
@@ -96,6 +97,7 @@ public class ThridPayUtil {
                         ToastUitl.showToast("支付成功");
                         PayResultActivity.jumpPayResultActivity(context, true, isYue);
                         AppManager.getAppManager().finishActivity(AllOrderActivity.class);
+                        AppManager.getAppManager().finishActivity(OrderDetailActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeListActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);
@@ -111,6 +113,7 @@ public class ThridPayUtil {
                         }
                         PayResultActivity.jumpPayResultActivity(context, false,isYue);
                         AppManager.getAppManager().finishActivity(AllOrderActivity.class);
+                        AppManager.getAppManager().finishActivity(OrderDetailActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeListActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);

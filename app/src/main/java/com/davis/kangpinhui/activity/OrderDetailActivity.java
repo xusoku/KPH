@@ -24,8 +24,11 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.OrderDetail;
+import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.DateUtils;
+import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.StretchedListView;
@@ -36,6 +39,7 @@ import retrofit2.Call;
 
 public class OrderDetailActivity extends BaseActivity {
 
+    private ThridPayUtil thridPayUtil;
     public static void jumpOrderDetailActivity(Context cot, String code) {
         if (AppApplication.isLogin(cot)) {
             Intent it = new Intent(cot, OrderDetailActivity.class);
@@ -77,6 +81,7 @@ public class OrderDetailActivity extends BaseActivity {
     protected void findViews() {
         showTopBar();
         setTitle("订单详情");
+        thridPayUtil = new ThridPayUtil(this);
         order_detail_state = $(R.id.order_detail_state);
         order_detail_people = $(R.id.order_detail_people);
         order_detail_phone = $(R.id.order_detail_phone);
@@ -141,7 +146,7 @@ public class OrderDetailActivity extends BaseActivity {
         });
     }
 
-    private void bindView(Order<ArrayList<OrderDetail>> itemData) {
+    private void bindView(final Order<ArrayList<OrderDetail>> itemData) {
 
 
         String payType = itemData.spaytype;
@@ -152,7 +157,11 @@ public class OrderDetailActivity extends BaseActivity {
             order_detail_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUitl.showToast("aa");
+                    if (itemData.spaytype.equals("0")) {
+                        thridPayUtil.alipay("0.01", itemData.sordernumber);
+                    } else if (itemData.spaytype.equals("4")) {//微信
+                        getWeixinPay(itemData.sordernumber);
+                    }
                 }
             });
         } else if (!payType.equals("2") && itemData.stype.equals("1")) {
@@ -236,5 +245,25 @@ public class OrderDetailActivity extends BaseActivity {
                         .show();
                 break;
         }
+    }
+    public void getWeixinPay(String orderId) {
+
+        Call<BaseModel<WeixinInfo>> call = ApiInstant.getInstant().getWeixinProductInfo(AppApplication.apptype, orderId, AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel<WeixinInfo>>() {
+            @Override
+            public void onSucssce(BaseModel<WeixinInfo> weixinInfoBaseModel) {
+                AppApplication.getApplication().isYue=false;
+                thridPayUtil.wxpay(weixinInfoBaseModel.object);
+            }
+
+            @Override
+            public void onFailure() {
+                PayResultActivity.jumpPayResultActivity(OrderDetailActivity.this, false, false);
+                finish();
+                AppManager.getAppManager().finishActivity(AllOrderActivity.class);
+
+            }
+        });
+
     }
 }
