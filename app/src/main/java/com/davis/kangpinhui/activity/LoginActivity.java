@@ -248,6 +248,7 @@ public class LoginActivity extends BaseActivity {
                                 AppApplication.token=userInfoBaseModel.object.token;
                                 AppApplication.address=userInfoBaseModel.object.useraddress;
                                 SharePreferenceUtils.getSharedPreferences("kph").putString("token", AppApplication.token);
+                                SharePreferenceUtils.getSharedPreferences("kph").putString("pic", AppApplication.userInfo.iuserid);
                                 SharePreferenceUtils.getSharedPreferences("kph").putString("username", AppApplication.userInfo.susername);
                                 SharePreferenceUtils.getSharedPreferences("kph").putString("nickname", AppApplication.userInfo.snickname);
                                 EventBus.getDefault().post(AppApplication.userInfo);

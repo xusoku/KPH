@@ -28,8 +28,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/common_measure_10dp"
                         android:layout_marginRight="@dimen/common_measure_10dp"
-                        android:scaleType="centerInside"
-                        android:src="@mipmap/ic_favorites" />
+                        android:scaleType="centerInside" />
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
                         android:id="@+id/mine_center_name"

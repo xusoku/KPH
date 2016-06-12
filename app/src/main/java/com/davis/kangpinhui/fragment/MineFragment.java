@@ -28,6 +28,7 @@ import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.GlideCircleTransform;
+import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.MineCustomLayout;
@@ -81,7 +82,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         fragment_mine_price = $(R.id.fragment_mine_price);
         fragment_mine_price_info = $(R.id.fragment_mine_price_info);
 
-        Glide.with(this).load(R.mipmap.mine_user_defualt).transform(new GlideCircleTransform(getActivity())).into(fragment_mine_photo);
+//        String str=SharePreferenceUtils.getSharedPreferences().getString("pic","");
+//        Glide.with(this).load("http://m.kangpinhui.com/images/person/"+str+".jpg")
+//                .transform(new GlideCircleTransform(getActivity()))
+//                .placeholder(R.mipmap.mine_user_defualt)
+//                .error(R.mipmap.mine_user_defualt)
+//                .into(fragment_mine_photo);
         CommonManager.setRefreshingState(mine_swipe, false);
         mine_swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -109,7 +115,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             }
             fragment_mine_name.setText(name);
         }
-
+        String str=SharePreferenceUtils.getSharedPreferences().getString("pic","");
+        LogUtils.e(TAG, "==" + str);
+        Glide.with(this).load("http://m.kangpinhui.com/images/person/"+str+".jpg")
+                .transform(new GlideCircleTransform(getActivity()))
+                .placeholder(R.mipmap.mine_user_defualt)
+                .error(R.mipmap.mine_user_defualt)
+                .into(fragment_mine_photo);
     }
 
     public void setUi(UserInfo userInfo){
@@ -119,6 +131,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 name=name.substring(0,3)+"****"+name.substring(7,11);
             }
             fragment_mine_name.setText(name);
+
+            LogUtils.e(TAG, "==" + userInfo.iuserid);
+            Glide.with(this).load("http://m.kangpinhui.com/images/person/"+userInfo.iuserid+".jpg")
+                    .transform(new GlideCircleTransform(getActivity()))
+                    .placeholder(R.mipmap.mine_user_defualt)
+                    .error(R.mipmap.mine_user_defualt)
+                    .into(fragment_mine_photo);
         }
     }
     public void setNumber(){
@@ -141,6 +160,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             mine_cart.setText(UtilText.getminenumber("购物车"));
             mine_mycoup.setText(("我的优惠券"));
             fragment_mine_name.setText("注册/登录");
+            Glide.with(this).load("")
+                    .transform(new GlideCircleTransform(getActivity()))
+                    .placeholder(R.mipmap.mine_user_defualt)
+                    .error(R.mipmap.mine_user_defualt)
+                    .into(fragment_mine_photo);
         }
     }
 

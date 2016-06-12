@@ -17,7 +17,7 @@
             android:id="@+id/order_comfi_item_iv"
             android:layout_width="@dimen/common_measure_100dp"
             android:layout_height="@dimen/common_measure_100dp"
-            android:src="@mipmap/ic_nearby" />
+            android:src="@mipmap/img_defualt_bg" />
 
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView

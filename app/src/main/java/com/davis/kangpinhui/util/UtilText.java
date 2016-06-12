@@ -193,14 +193,12 @@ public class UtilText {
         spanString.setSpan(span, 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
-
-
     /**
      * 图片
      */
     private void addImageSpan() {
         SpannableString spanString = new SpannableString(" ");
-        Drawable d = AppApplication.getApplication().getResources().getDrawable(R.mipmap.ic_favorites);
+        Drawable d = AppApplication.getApplication().getResources().getDrawable(R.mipmap.img_defualt_bg);
         d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
         ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
         spanString.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
