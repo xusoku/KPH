@@ -14,9 +14,8 @@ import com.davis.kangpinhui.activity.base.BaseActivity;
 
 public class PayResultActivity extends BaseActivity {
 
-    private LinearLayout pay_result_sucess, pay_result_fail;
+    private LinearLayout pay_result_product, pay_result_chongzhi;
 
-    private TextView pay_result_see_detail;
     private boolean flag = false;
     private boolean isYue = false;
 
@@ -54,13 +53,12 @@ public class PayResultActivity extends BaseActivity {
         showTopBar();
         setTitle("支付结果");
 
-        pay_result_see_detail = $(R.id.pay_result_see_detail);
-        pay_result_sucess = $(R.id.pay_result_sucess);
-        pay_result_fail = $(R.id.pay_result_fail);
+        pay_result_product = $(R.id.pay_result_product);
+        pay_result_chongzhi = $(R.id.pay_result_chongzhi);
         if (flag) {
-            pay_result_sucess.setVisibility(View.VISIBLE);
+            pay_result_product.setVisibility(View.VISIBLE);
         } else {
-            pay_result_fail.setVisibility(View.VISIBLE);
+            pay_result_chongzhi.setVisibility(View.VISIBLE);
         }
     }
 
@@ -77,7 +75,15 @@ public class PayResultActivity extends BaseActivity {
     @Override
     public void doClick(View view) {
 
-        if(view.getId()==R.id.pay_result_see_detail){
+        if(view.getId()==R.id.pay_result_kefu){
+            if(isYue){
+                RechargeListActivity.jumpRechargeListActivity(this);
+            }else {
+                AllOrderActivity.jumpAllOrderActivity(this, 0);
+            }
+            finish();
+        }
+        if(view.getId()==R.id.pay_result_kefu1){
             if(isYue){
                 RechargeListActivity.jumpRechargeListActivity(this);
             }else {
