@@ -15,15 +15,22 @@ import com.davis.kangpinhui.model.ProductDetail;
 import com.davis.kangpinhui.model.Recharge;
 import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.model.TakeGoodsdate;
+import com.davis.kangpinhui.model.TestModel;
 import com.davis.kangpinhui.model.Topic;
 import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.model.basemodel.Page;
+import com.davis.kangpinhui.util.LogUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -423,10 +430,51 @@ public interface ApiService {
     );
     //32 微信参数获取
 //    https://api.weixin.qq.com/sns/userinfo?access_token=V2m-4JQJZDhz9-lcI4nI_4DCU6cnGMSE0CgKd5r5uUHdK16ZLMfIbmBNf1ve_FQNAb_v5LWnZnYCynKgMMTN2INTl6ONUAXBXHdkttTe8Yk&openid=oxBZjuHK2IEpa2KwiVz2oP1EUnS8
-    @GET("http://api.weixin.qq.com/sns/userinfo")
-    Call<Response> weixinLoginParam(
+    @GET("https://api.weixin.qq.com/sns/userinfo")
+    Call<ResponseBody> weixinLoginParam(
             @Query("access_token") String access_token,
             @Query("openid") String openid
+
+    );
+//    |
+//    |用法
+//    |
+//    V
+//    Call<ResponseBody> calll=ApiInstant.getInstant().weixinLoginParam("","oxBZjuHK2IEpa2KwiVz2oP1EUnS8");
+//    calll.enqueue(new Callback<ResponseBody>() {
+//        @Override
+//        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//            StringBuilder sb = new StringBuilder();
+//            try {
+//                BufferedReader reader = new BufferedReader(
+//                        new InputStreamReader(response.body().byteStream()));
+//                String line;
+//                try {
+//                    while ((line = reader.readLine()) != null) {
+//                        sb.append(line);
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            String result = sb.toString();
+//            LogUtils.e("test", "==" + result);
+//        }
+//        @Override
+//        public void onFailure(Call<ResponseBody> call, Throwable t) {
+//            LogUtils.e("test","错误");
+//        }
+//    });
+
+    //33test
+//    https://api.weixin.qq.com/sns/userinfo?access_token=V2m-4JQJZDhz9-lcI4nI_4DCU6cnGMSE0CgKd5r5uUHdK16ZLMfIbmBNf1ve_FQNAb_v5LWnZnYCynKgMMTN2INTl6ONUAXBXHdkttTe8Yk&openid=oxBZjuHK2IEpa2KwiVz2oP1EUnS8
+    @GET("http://v5.pc.duomi.com/search-ajaxsearch-searchall")
+    Call<TestModel> test(
+            @Query("kw") String kw,
+            @Query("pi") String pi,
+            @Query("pz") String pz
 
     );
 
