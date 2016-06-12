@@ -288,7 +288,8 @@
     <LinearLayout
         android:id="@+id/product_detail_title_text_linear"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_80dp"
+        android:layout_height="@dimen/common_measure_90dp"
+        android:background="@color/colormain"
         android:orientation="vertical">
 
         <View
@@ -300,6 +301,7 @@
             android:id="@+id/product_detail_title_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_measure_65dp"
+            android:layout_marginTop="@dimen/common_measure_10dp"
             android:background="@color/colormain"
             android:gravity="center"
             android:text="产品详情"
@@ -307,13 +309,22 @@
             android:textSize="@dimen/common_measure_22dp" />
     </LinearLayout>
 
-    <ImageView
+    <LinearLayout
         android:id="@+id/product_detail_back"
-        android:layout_width="@dimen/common_measure_65dp"
-        android:layout_height="@dimen/common_measure_65dp"
-        android:layout_marginTop="@dimen/common_measure_25dp"
-        android:padding="@dimen/common_measure_20dp"
+        android:layout_width="@dimen/common_measure_40dp"
+        android:layout_height="@dimen/common_measure_40dp"
+        android:layout_marginTop="@dimen/common_measure_45dp"
+        android:layout_marginLeft="@dimen/common_measure_15dp"
+        android:padding="@dimen/common_measure_10dp"
+        android:background="@drawable/bg_back_unselect"
+        android:gravity="center"
         android:onClick="doClick"
-        android:scaleType="centerInside"
-        android:src="@mipmap/btn_titlebar_back_pressed" />
+        android:clickable="true"
+        android:orientation="horizontal">
+    <ImageView
+        android:layout_width="@dimen/common_measure_25dp"
+        android:layout_height="@dimen/common_measure_25dp"
+         android:scaleType="centerInside"
+        android:src="@mipmap/btn_titlebar_back_normal" />
+    </LinearLayout>
 </RelativeLayout>

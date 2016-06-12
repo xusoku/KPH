@@ -152,6 +152,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         }
     }
     public void setcartNumberLoginout() {
+        if(backgroundDefaultBadge!=null)
             backgroundDefaultBadge.setVisibility(View.GONE);
     }
 
