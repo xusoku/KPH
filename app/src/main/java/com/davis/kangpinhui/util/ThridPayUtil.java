@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.activity.AllOrderActivity;
 import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.OrderActivity;
 import com.davis.kangpinhui.activity.PayResultActivity;
@@ -94,8 +95,9 @@ public class ThridPayUtil {
                     if (TextUtils.equals(resultStatus, "9000")) {
                         ToastUitl.showToast("支付成功");
                         PayResultActivity.jumpPayResultActivity(context, true, isYue);
-                        AppManager.getAppManager().finishActivity(RechargeListActivity.class);
+                        AppManager.getAppManager().finishActivity(AllOrderActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeActivity.class);
+                        AppManager.getAppManager().finishActivity(RechargeListActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);
                         AppManager.getAppManager().finishActivity(OrderActivity.class);
                     } else {
@@ -108,6 +110,7 @@ public class ThridPayUtil {
                             ToastUitl.showToast("支付失败");
                         }
                         PayResultActivity.jumpPayResultActivity(context, false,isYue);
+                        AppManager.getAppManager().finishActivity(AllOrderActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeListActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);

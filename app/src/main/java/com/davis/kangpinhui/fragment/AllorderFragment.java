@@ -8,10 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.OrderDetailActivity;
+import com.davis.kangpinhui.activity.PayResultActivity;
 import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.OrderDetail;
+import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.model.basemodel.Page;
 import com.davis.kangpinhui.R;
@@ -21,6 +24,8 @@ import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
+import com.davis.kangpinhui.util.AppManager;
+import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreListView;
 import com.davis.kangpinhui.views.StretchedListView;
@@ -44,6 +49,7 @@ public class AllorderFragment extends BaseFragment {
     private int TotalPage = 0;
     private CommonBaseAdapter<Order<ArrayList<OrderDetail>>> adapter;
     private ArrayList<Order<ArrayList<OrderDetail>>> list;
+    private ThridPayUtil thridPayUtil;
 
     public static AllorderFragment newInstance(int id) {
         Bundle args = new Bundle();
@@ -67,7 +73,7 @@ public class AllorderFragment extends BaseFragment {
     @Override
     protected void findViews(View view) {
         mine_allorder_list = $(view, R.id.mine_allorder_list);
-
+        thridPayUtil = new ThridPayUtil(getActivity());
         list = new ArrayList<>();
         adapter = new CommonBaseAdapter<Order<ArrayList<OrderDetail>>>(getActivity(), list, R.layout.fragment_allorder_item) {
             @Override
@@ -165,7 +171,11 @@ public class AllorderFragment extends BaseFragment {
                 conutiPay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        if (itemData.spaytype.equals("2")) {
+                            thridPayUtil.alipayyue("0.01", itemData.sordernumber);
+                        } else if (itemData.spaytype.equals("4")) {//微信
+                            getWeixinPay(itemData.sordernumber);
+                        }
 
                     }
                 });
@@ -280,6 +290,24 @@ public class AllorderFragment extends BaseFragment {
             }
         });
     }
+    public void getWeixinPay(String orderId) {
 
+        Call<BaseModel<WeixinInfo>> call = ApiInstant.getInstant().getWeixinProductInfo(AppApplication.apptype, orderId, AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel<WeixinInfo>>() {
+            @Override
+            public void onSucssce(BaseModel<WeixinInfo> weixinInfoBaseModel) {
+                AppApplication.getApplication().isYue=false;
+                thridPayUtil.wxpay(weixinInfoBaseModel.object);
+            }
+
+            @Override
+            public void onFailure() {
+                PayResultActivity.jumpPayResultActivity(getActivity(), false, false);
+                AppManager.getAppManager().finishActivity(AllOrderActivity.class);
+
+            }
+        });
+
+    }
 
 }
