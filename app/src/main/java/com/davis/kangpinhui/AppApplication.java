@@ -47,7 +47,10 @@ public class AppApplication extends Application {
 
     public static IWXAPI wxApi;
 
+    //充值还是支付
     public  boolean  isYue=false;
+    //订单号
+    public String numberCode="";
 
     public static AppApplication getApplication() {
         return instance;

@@ -16,12 +16,14 @@
         android:visibility="visible">
 
         <ImageView
+            android:id="@+id/pay_result_iv"
             android:layout_width="@dimen/common_measure_70dp"
             android:layout_height="@dimen/common_measure_70dp"
             android:layout_marginTop="@dimen/common_measure_20dp"
             android:src="@mipmap/pay_result_ok" />
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/pay_result_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_measure_20dp"
@@ -391,7 +393,7 @@
                         android:textSize="@dimen/text_size_17" />
                 </LinearLayout>
             </LinearLayout>
-            <TextView
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:id="@+id/pay_result_kefu"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_measure_60dp"
@@ -583,7 +585,7 @@
                         android:textSize="@dimen/text_size_17" />
                 </LinearLayout>
             </LinearLayout>
-            <TextView
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:id="@+id/pay_result_kefu1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_measure_60dp"

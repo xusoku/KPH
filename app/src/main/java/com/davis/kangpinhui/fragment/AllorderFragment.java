@@ -171,6 +171,7 @@ public class AllorderFragment extends BaseFragment {
                 conutiPay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        AppApplication.getApplication().numberCode=itemData.sordernumber;
                         if (itemData.spaytype.equals("0")) {
                             thridPayUtil.alipay("0.01", itemData.sordernumber);
                         } else if (itemData.spaytype.equals("4")) {//微信

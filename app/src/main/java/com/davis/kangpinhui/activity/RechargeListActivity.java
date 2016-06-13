@@ -119,6 +119,7 @@ public class RechargeListActivity extends BaseActivity {
                 holder.getView(R.id.recharge_item_conuti).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        AppApplication.getApplication().numberCode=itemData.schargenumber;
                         if (itemData.srechargetype.equals("2")) {
                             thridPayUtil.alipayyue("0.01", itemData.schargenumber);
                         } else if (itemData.srechargetype.equals("4")) {//微信

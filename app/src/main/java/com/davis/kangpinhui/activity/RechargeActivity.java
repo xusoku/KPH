@@ -140,15 +140,13 @@ public class RechargeActivity extends BaseActivity {
                 call.enqueue(new ApiCallback<BaseModel<Recharge>>() {
                     @Override
                     public void onSucssce(BaseModel<Recharge> rechargeBaseModel) {
-//                        ToastUitl.showToast("充值成功");
-
+                        AppApplication.getApplication().numberCode=rechargeBaseModel.object.schargenumber;
                         if (payTape.equals("2")) {
                             thridPayUtil.alipayyue("0.01", rechargeBaseModel.object.schargenumber);
                         } else if (payTape.equals("4")) {//微信
                             getWeixinPay(rechargeBaseModel.object.schargenumber);
                         }
                     }
-
                     @Override
                     public void onFailure() {
 
