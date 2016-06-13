@@ -134,15 +134,18 @@ public class PayResultActivity extends BaseActivity {
             pay_result_iv.setImageResource(R.mipmap.pay_result_fail);
         }
 
+        code=AppApplication.getApplication().numberCode;
         if (isYue) {//支付类型
             getRechageInfo();
             pay_result_chongzhi.setVisibility(View.VISIBLE);
+            pay_result_product.setVisibility(View.GONE);
             pay_result_kefu.setText("查看我的充值");
             pay_result_kefu1.setText("查看我的充值");
 
         } else {
             getProdactOrderinfo();
             pay_result_product.setVisibility(View.VISIBLE);
+            pay_result_chongzhi.setVisibility(View.GONE);
             pay_result_kefu.setText("查看我的订单");
             pay_result_kefu1.setText("查看我的订单");
 
@@ -171,7 +174,7 @@ public class PayResultActivity extends BaseActivity {
     private void bindProdactOrderView(Order<ArrayList<OrderDetail>> itemData) {
         String payType = itemData.spaytype;
         if ((payType.equals("0") || payType.equals("4") || payType.equals("1")) && itemData.stype.equals("0")) {
-            pay_result_product_paystatus.setText("待付款    ");
+            pay_result_product_paystatus.setText("待付款");
         } else if (!payType.equals("2") && itemData.stype.equals("1")) {
             pay_result_product_paystatus.setText("已支付");
         } else if (itemData.stype.equals("2") || itemData.stype.equals("1")) {

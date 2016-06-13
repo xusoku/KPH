@@ -478,7 +478,9 @@ public class OrderActivity extends BaseActivity {
                     AppManager.getAppManager().finishActivity(CartListActivity.class);
 
                 }else if(payTape.equals("2")){//货到付款
-
+                    PayResultActivity.jumpPayResultActivity(OrderActivity.this,true);
+                    finish();
+                    AppManager.getAppManager().finishActivity(CartListActivity.class);
                 }
       }
 

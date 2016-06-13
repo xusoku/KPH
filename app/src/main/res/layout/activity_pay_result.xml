@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/common_measure_20dp"
             android:text="支付成功"
             android:textColor="@color/material_green"
-            android:textSize="@dimen/text_size_22" />
+            android:textSize="@dimen/text_size_17" />
     </LinearLayout>
 
     <View
@@ -393,18 +393,23 @@
                         android:textSize="@dimen/text_size_17" />
                 </LinearLayout>
             </LinearLayout>
-            <com.davis.kangpinhui.views.CustomTypefaceTextView
-                android:id="@+id/pay_result_kefu"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_measure_60dp"
                 android:layout_margin="@dimen/common_measure_20dp"
-                android:background="@drawable/bg_miancolor_unselect"
+                android:background="@drawable/bg_miancolor_unselect">
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/pay_result_kefu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="doClick"
                 android:text="联系客服"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -585,18 +590,23 @@
                         android:textSize="@dimen/text_size_17" />
                 </LinearLayout>
             </LinearLayout>
-            <com.davis.kangpinhui.views.CustomTypefaceTextView
-                android:id="@+id/pay_result_kefu1"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_measure_60dp"
                 android:layout_margin="@dimen/common_measure_20dp"
-                android:background="@drawable/bg_miancolor_unselect"
+                android:background="@drawable/bg_miancolor_unselect">
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/pay_result_kefu1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="doClick"
                 android:text="联系客服"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
+            </FrameLayout>
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>
