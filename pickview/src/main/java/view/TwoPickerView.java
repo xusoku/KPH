@@ -39,7 +39,7 @@ public class TwoPickerView<T> extends BasePickerView implements View.OnClickList
         // ----转轮
         final View optionspicker = findViewById(R.id.optionspicker);
         DisplayMetrics displayMetrics = new DisplayMetrics(context);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) displayMetrics.getWidth() / 3);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) displayMetrics.getWidth()/2);
         layoutParams.gravity = Gravity.CENTER_VERTICAL;
         optionspicker.setLayoutParams(layoutParams);
         wheelOptions = new TwoWheelOptions(optionspicker);

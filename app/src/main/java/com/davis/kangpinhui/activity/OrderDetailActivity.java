@@ -157,12 +157,21 @@ public class OrderDetailActivity extends BaseActivity {
             order_detail_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AppApplication.getApplication().numberCode=itemData.sordernumber;
-                    if (itemData.spaytype.equals("0")) {
-                        thridPayUtil.alipay("0.01", itemData.sordernumber);
-                    } else if (itemData.spaytype.equals("4")) {//微信
-                        getWeixinPay(itemData.sordernumber);
-                    }
+                    final CharSequence[] typepaytext = {"在线支付 微信支付", "在线支付 支付宝支付"};
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);
+                    builder.setTitle("支付方式")
+                            .setItems(typepaytext, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    AppApplication.getApplication().numberCode=itemData.sordernumber;
+                                    if (which==1) {
+                                        thridPayUtil.alipay("0.01", itemData.sordernumber);
+                                    } else if (which==0) {//微信
+                                        getWeixinPay(itemData.sordernumber);
+                                    }
+                                }
+                            }).show();
+
                 }
             });
         } else if (!payType.equals("2") && itemData.stype.equals("1")) {

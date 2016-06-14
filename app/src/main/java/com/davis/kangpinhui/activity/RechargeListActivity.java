@@ -119,12 +119,21 @@ public class RechargeListActivity extends BaseActivity {
                 holder.getView(R.id.recharge_item_conuti).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AppApplication.getApplication().numberCode=itemData.schargenumber;
-                        if (itemData.srechargetype.equals("2")) {
-                            thridPayUtil.alipayyue("0.01", itemData.schargenumber);
-                        } else if (itemData.srechargetype.equals("4")) {//微信
-                            getWeixinPay(itemData.schargenumber);
-                        }
+                        final CharSequence[] typepaytext = {"在线支付 微信支付", "在线支付 支付宝支付"};
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(RechargeListActivity.this);
+                        builder.setTitle("支付方式")
+                                .setItems(typepaytext, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        AppApplication.getApplication().numberCode=itemData.schargenumber;
+                                        if (which==1) {
+                                            thridPayUtil.alipayyue("0.01", itemData.schargenumber);
+                                        } else if (which==0) {//微信
+                                            getWeixinPay(itemData.schargenumber);
+                                        }
+                                    }
+                                }).show();
+
                     }
                 });
 

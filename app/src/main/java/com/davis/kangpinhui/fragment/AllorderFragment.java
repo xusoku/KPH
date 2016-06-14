@@ -51,6 +51,7 @@ public class AllorderFragment extends BaseFragment {
     private ArrayList<Order<ArrayList<OrderDetail>>> list;
     private ThridPayUtil thridPayUtil;
 
+
     public static AllorderFragment newInstance(int id) {
         Bundle args = new Bundle();
         args.putInt("id", id);
@@ -171,12 +172,22 @@ public class AllorderFragment extends BaseFragment {
                 conutiPay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AppApplication.getApplication().numberCode=itemData.sordernumber;
-                        if (itemData.spaytype.equals("0")) {
-                            thridPayUtil.alipay("0.01", itemData.sordernumber);
-                        } else if (itemData.spaytype.equals("4")) {//微信
-                            getWeixinPay(itemData.sordernumber);
-                        }
+                        final CharSequence[] typepaytext = {"在线支付 微信支付", "在线支付 支付宝支付"};
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle("支付方式")
+                                .setItems(typepaytext, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        AppApplication.getApplication().numberCode=itemData.sordernumber;
+                                        if (which==1) {
+                                            thridPayUtil.alipay("0.01", itemData.sordernumber);
+                                        } else if (which==0) {//微信
+                                            getWeixinPay(itemData.sordernumber);
+                                        }
+
+                                    }
+                                }).show();
+
 
                     }
                 });
