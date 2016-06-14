@@ -1,14 +1,20 @@
 package view;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 import com.davis.pickview.R;
 
 import java.util.ArrayList;
+
+import utils.DisplayMetrics;
 
 public class TwoPickerView<T> extends BasePickerView implements View.OnClickListener {
     TwoWheelOptions wheelOptions;
@@ -32,6 +38,10 @@ public class TwoPickerView<T> extends BasePickerView implements View.OnClickList
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         // ----转轮
         final View optionspicker = findViewById(R.id.optionspicker);
+        DisplayMetrics displayMetrics = new DisplayMetrics(context);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) displayMetrics.getWidth() / 3);
+        layoutParams.gravity = Gravity.CENTER_VERTICAL;
+        optionspicker.setLayoutParams(layoutParams);
         wheelOptions = new TwoWheelOptions(optionspicker);
     }
 

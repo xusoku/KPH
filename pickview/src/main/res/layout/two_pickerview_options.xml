@@ -14,18 +14,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <com.davis.pickview.WheelView
             android:id="@+id/options1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             />
 
         <com.davis.pickview.WheelView
             android:id="@+id/options2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
