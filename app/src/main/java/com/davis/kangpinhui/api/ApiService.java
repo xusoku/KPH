@@ -413,7 +413,7 @@ public interface ApiService {
     @GET("weixin/pay/product.do")
     Call<BaseModel<WeixinInfo>> getWeixinProductInfo(
             @Query("apptype") String apptype,
-            @Query("orderNum") String shopid,
+            @Query("orderNum") String orderid,
             @Query("token") String token
     );
     //31 商品充值支付

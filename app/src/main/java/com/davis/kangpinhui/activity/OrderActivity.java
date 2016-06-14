@@ -380,8 +380,8 @@ public class OrderActivity extends BaseActivity {
             case R.id.order_paytype_relative:
                 //付款方式  3:余额支付  2：货到付款 0：支付宝  1：财付通  4微信支付
 
-                final CharSequence[] charSequences = {"余额支付", "货到付款", "支付宝支付", "微信支付"};
-                final String[] type = {"3", "2", "0", "4"};
+                final CharSequence[] charSequences = {"余额支付", "支付宝支付", "微信支付"};
+                final String[] type = {"3", "0", "4"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
                 builder.setTitle("付款方式")
