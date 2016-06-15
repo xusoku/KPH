@@ -7,7 +7,6 @@ import java.io.Serializable;
  */
 public class WeixinInfo implements Serializable {
 
-    public String info;
     public String sign;
     public String timestamp;
     public String noncestr;

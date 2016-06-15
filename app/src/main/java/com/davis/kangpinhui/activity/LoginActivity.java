@@ -130,7 +130,7 @@ public class LoginActivity extends BaseActivity {
             case R.id.login_register_send_code:
 
                 String mobiles=login_phone.getText().toString().trim();
-                if(!TextUtils.isEmpty(mobiles)&&RegexUtils.isMobilePhoneNumber(mobiles)){
+                if(!TextUtils.isEmpty(mobiles)){
                     handler.postDelayed(runnable, 0);
                     ToastUitl.showToast("验证码发送成功");
                     Call<BaseModel> call=ApiInstant.getInstant().sendMsgRegister(AppApplication.apptype,mobiles);
@@ -146,7 +146,7 @@ public class LoginActivity extends BaseActivity {
                     });
 
                 }else{
-                    login_phone.setError("手机号不正确");
+                    login_phone.setError("请输入账户");
                 }
 
                 break;
@@ -157,39 +157,6 @@ public class LoginActivity extends BaseActivity {
                 WeixinLoginUtil c=new WeixinLoginUtil(this);
                 c.setProgressDialog(progressDialog);
                 c.startLogin();
-
-
-
-//
-//                String sss="{\"openid\":\"oxBZjuHK2IEpa2KwiVz2oP1EUnS8\"," +
-//                        "\"nickname\":\"aaa\"," +
-//                        "\"sex\":1," +
-//                        "\"language\":\"zh_CN\"," +
-//                        "\"city\":\"\"," +
-//                        "\"province\":\"\"," +
-//                        "\"country\":\"CN\"," +
-//                        "\"headimgurl\":\"http:\\/\\/wx.qlogo.cn\\/mmopen\\/AicNQpicwqnHTFeBZCXpPk4fPFGN1FwichI1jiaEXHYf4wxxjBdXJ1icexyGbkeAsLIPOibH5z1DmTrsdcOGsdQRGZsicKtsDF5HJtd\\/0\"," +
-//                        "\"privilege\":[]," +
-//                        "\"unionid\":\"oxBZjuHK2IEpa2KwiVz2oP1EUnS8\"}";
-//                Call<BaseModel<UserInfo>> calla = ApiInstant.getInstant().weixinLogin(AppApplication.apptype, sss);
-//
-//                calla.enqueue(new ApiCallback<BaseModel<UserInfo>>() {
-//                    @Override
-//                    public void onSucssce(BaseModel<UserInfo> userInfoBaseModel) {
-//                        Log.e("aaa", userInfoBaseModel.object.snickname);
-//                    }
-//
-//                    @Override
-//                    public void onFailure() {
-//                        Log.e("aaa", "aaa");
-//                    }
-//                });
-
-
-
-
-
-
 
                 break;
             case R.id.login_register_text:
@@ -227,10 +194,10 @@ public class LoginActivity extends BaseActivity {
                     login_password.setError("密码必须大于6位");
                 }
                 String mobile=login_phone.getText().toString().trim();
-                if(!TextUtils.isEmpty(mobile)&&RegexUtils.isMobilePhoneNumber(mobile)){
+                if(!TextUtils.isEmpty(mobile)){
                     loginb=true;
                 }else{
-                    login_phone.setError("手机号不正确");
+                    login_phone.setError("请输入账户");
                 }
 
 

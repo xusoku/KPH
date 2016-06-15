@@ -2,8 +2,11 @@ package com.davis.kangpinhui.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,8 +28,10 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.AppManager;
+import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.views.CustomTypefaceEditText;
 import com.davis.kangpinhui.views.LoadMoreListView;
 import com.davis.kangpinhui.views.StretchedListView;
 
@@ -172,17 +177,31 @@ public class AllorderFragment extends BaseFragment {
                 conutiPay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final CharSequence[] typepaytext = {"在线支付 微信支付", "在线支付 支付宝支付"};
+                        final CharSequence[] typepaytext = {"余额支付","在线支付 微信支付", "在线支付 支付宝支付"};
                         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle("支付方式")
                                 .setItems(typepaytext, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         AppApplication.getApplication().numberCode=itemData.sordernumber;
-                                        if (which==1) {
+                                        if (which==2) {
                                             thridPayUtil.alipay("0.01", itemData.sordernumber);
-                                        } else if (which==0) {//微信
+                                        } else if (which==1) {//微信
                                             getWeixinPay(itemData.sordernumber);
+                                        }else{
+                                            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                                            builder.setTitle("请输入密码");
+                                            CustomTypefaceEditText editText=new CustomTypefaceEditText(getActivity());
+                                            editText.setTextColor(Color.parseColor("#000000"));
+                                            editText.setTextSize(DisplayMetricsUtils.getDensity() * 18);
+                                            editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
+                                            editText.setSingleLine();
+                                            editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                                            builder.setView(editText);
+                                            builder.setPositiveButton("确定", null);
+                                            builder.setNegativeButton("取消", null);
+                                            AlertDialog dialog1=builder.create();
+                                            dialog1.show();
                                         }
 
                                     }

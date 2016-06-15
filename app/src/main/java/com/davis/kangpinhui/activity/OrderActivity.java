@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.model.Address;
 import com.davis.kangpinhui.model.Cart;
 import com.davis.kangpinhui.model.Coupon;
 import com.davis.kangpinhui.model.Extendedinfo;
@@ -141,13 +142,14 @@ public class OrderActivity extends BaseActivity {
             add_cart_add_passwrod_linear.setVisibility(View.GONE);
         }
 
+        if(AppApplication.address==null){
+            getAddresslist();
+        }
     }
 
     @Override
     protected void onActivityLoading() {
         super.onActivityLoading();
-
-
 
         getTimeList();
 
@@ -206,21 +208,7 @@ public class OrderActivity extends BaseActivity {
 
                 list.addAll(arrayListBaseModel.object);
 
-                DecimalFormat fnum = new DecimalFormat("##0.0");
-                String str = fnum.format(getTotalPrice(list));
-                str = str.endsWith(".0") ? str.substring(0, str.length() - 2) : str;
-                order_number_text.setText("¥" + str);
-
-                order_address_lst.setAdapter(new CommonBaseAdapter<Cart>(OrderActivity.this, list, R.layout.activity_order_item) {
-                    @Override
-                    public void convert(ViewHolder holder, Cart itemData, int position) {
-                        holder.setImageByUrl(R.id.order_comfi_item_iv, ApiService.picurl + itemData.picurl);
-                        holder.setText(R.id.order_comfi_item_title, itemData.productName);
-                        holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
-                        holder.setText(R.id.order_comfi_item_price, "¥" + itemData.iprice);
-                        holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.inumber));
-                    }
-                });
+               changePriceFun();
             }
 
             @Override
@@ -230,6 +218,50 @@ public class OrderActivity extends BaseActivity {
         });
     }
 
+    private void changePriceFun() {
+        DecimalFormat fnum = new DecimalFormat("##0.0");
+        String str = fnum.format(getTotalPrice(list));
+        str = str.endsWith(".0") ? str.substring(0, str.length() - 2) : str;
+        order_number_text.setText("¥" + str);
+
+        order_address_lst.setAdapter(new CommonBaseAdapter<Cart>(OrderActivity.this, list, R.layout.activity_order_item) {
+            @Override
+            public void convert(ViewHolder holder, Cart itemData, int position) {
+                holder.setImageByUrl(R.id.order_comfi_item_iv, ApiService.picurl + itemData.picurl);
+                holder.setText(R.id.order_comfi_item_title, itemData.productName);
+                holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
+                holder.setText(R.id.order_comfi_item_price, "¥" + (payTape.equals("3")?itemData.fvipprice:itemData.iprice));
+                holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.inumber));
+            }
+        });
+    }
+
+    public void getAddresslist(){
+        Call<BaseModel<ArrayList<Address>>> call = ApiInstant.getInstant().getAddresslist(AppApplication.apptype, AppApplication.shopid,AppApplication.token);
+
+        call.enqueue(new ApiCallback<BaseModel<ArrayList<Address>>>() {
+            @Override
+            public void onSucssce(BaseModel<ArrayList<Address>> arrayListBaseModel) {
+                onActivityLoadingSuccess();
+                ArrayList<Address> list = arrayListBaseModel.object;
+                if(list.size()>0){
+                    AppApplication.address=list.get(0);
+                    order_address_text.setText(AppApplication.address.saddress);
+                    order_address_phone.setText(AppApplication.address.smobile);
+                    order_address_pepole.setText(AppApplication.address.saddressname);
+                    RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    order_address_text.setLayoutParams(layoutParams);
+                }
+
+            }
+
+            @Override
+            public void onFailure() {
+                onActivityLoadingFailed();
+            }
+        });
+    }
     private void getCouplist() {
 
         Call<BaseModel<ArrayList<Coupon>>> callCoup = ApiInstant.getInstant().getCouponByUid(AppApplication.apptype, AppApplication.token);
@@ -285,7 +317,7 @@ public class OrderActivity extends BaseActivity {
                 if(TextUtils.isEmpty(s)){
                     s="0.0";
                 }
-                String ss=cart.iprice;
+                String ss=payTape.equals("3")?cart.fvipprice:cart.iprice;
                 if(TextUtils.isEmpty(ss)){
                     ss="0.0";
                 }
@@ -398,6 +430,7 @@ public class OrderActivity extends BaseActivity {
                                 } else {
                                     add_cart_add_passwrod_linear.setVisibility(View.GONE);
                                 }
+                                changePriceFun();
                             }
                         }).show();
                 break;
