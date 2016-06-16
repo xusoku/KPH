@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -30,6 +34,9 @@ import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.BadgeView;
 import com.davis.kangpinhui.views.FlowLayout;
+import com.davis.kangpinhui.views.MyScrollViewSmooh;
+import com.davis.kangpinhui.views.TBLayout;
+import com.davis.kangpinhui.views.XWebView;
 import com.davis.kangpinhui.views.dargview.DavisWebView;
 import com.davis.kangpinhui.views.dargview.DivasScrollViewPageOne;
 import com.davis.kangpinhui.views.dargview.DragLayout;
@@ -41,7 +48,8 @@ import java.util.ArrayList;
 import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 
-public class ProductDetailActivity extends BaseActivity {
+
+public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPullListener, TBLayout.OnPageChangedListener {
 
 
     private String id = "";
@@ -54,10 +62,15 @@ public class ProductDetailActivity extends BaseActivity {
             product_detail_date,
             product_detail_save,
             product_detail_producter;
-    private DavisWebView product_detail_xweb;
-    private DragLayout product_detail_drag;
-    private DivasScrollViewPageOne product_detail_header_sv;
+
+    private TBLayout mLayout;
+    private ScrollView  mFooter;
+    private MyScrollViewSmooh mHeader;
     private TextView product_detail_title_text;
+    private XWebView product_detail_xweb;
+    private LinearLayout mHeaderContent ,mFooterContent;
+
+
     private LinearLayout product_detail_title_text_linear, add_cart_number_linear;
 
     private AddCartPopuWindow addpopupWindow;
@@ -91,15 +104,21 @@ public class ProductDetailActivity extends BaseActivity {
 
         product_detail_back = $(R.id.product_detail_back);
         add_cart_number_linear = $(R.id.add_cart_number_linear);
-        product_detail_drag = $(R.id.product_detail_drag);
+        mLayout = $(R.id.product_detail_drag);
+
+        mLayout.setOnPullListener(this);
+        mLayout.setOnContentChangeListener(this);
         product_detail_title = $(R.id.product_detail_title);
         product_detail_price = $(R.id.product_detail_price);
         product_detail_logo_text = $(R.id.product_detail_logo_text);
         product_detail_date = $(R.id.product_detail_date);
         product_detail_save = $(R.id.product_detail_save);
-        product_detail_producter = $(R.id.product_detail_producter);
         product_detail_xweb = $(R.id.product_detail_xweb);
-        product_detail_header_sv = $(R.id.product_detail_header_sv);
+        product_detail_producter = $(R.id.product_detail_producter);
+        mHeader = (MyScrollViewSmooh) findViewById(R.id.header);
+        mFooter = (ScrollView) findViewById(R.id.footer);
+        mHeaderContent = (LinearLayout) mHeader.getChildAt(0);
+        mFooterContent = (LinearLayout) mFooter.getChildAt(0);
         product_detail_title_text = $(R.id.product_detail_title_text);
         product_detail_title_text_linear = $(R.id.product_detail_title_text_linear);
         add_cart_icon = $(R.id.add_cart_icon);
@@ -178,19 +197,6 @@ public class ProductDetailActivity extends BaseActivity {
     @Override
     protected void setListener() {
         product_detail_title_text_linear.setAlpha(0);
-        product_detail_drag.setChange(new DragLayout.Change() {
-            @Override
-            public void onScrollChange(int t) {
-                float alpha = 0.0f;
-                if (t > 0) {
-                    alpha = (float) ((t - 100) / 100.00);
-                } else {
-                    alpha = 0;
-                }
-                product_detail_title_text_linear.setAlpha(alpha);
-            }
-        });
-
     }
 
     @Override
@@ -201,7 +207,7 @@ public class ProductDetailActivity extends BaseActivity {
                 break;
             case R.id.add_cart_addlinear:
                 if (productDetail != null) {
-                    addpopupWindow.addpopupWindow.showAtLocation(product_detail_drag, Gravity.NO_GRAVITY, 0, 0);
+                    addpopupWindow.addpopupWindow.showAtLocation(product_detail_xweb, Gravity.NO_GRAVITY, 0, 0);
                 } else {
                     ToastUitl.showToast("暂无数据");
                 }
@@ -221,4 +227,34 @@ public class ProductDetailActivity extends BaseActivity {
             backgroundDefaultBadge.setText((int)Float.parseFloat(number)+"");
     }
 
+    @Override
+    public boolean headerFootReached(MotionEvent event) {
+        if (mHeader.getScrollY() + mHeader.getHeight() >= mHeaderContent
+                .getHeight()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean footerHeadReached(MotionEvent event) {
+        if (mFooter.getScrollY() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onPageChanged(int stub) {
+        switch (stub) {
+            case TBLayout.SCREEN_HEADER:
+                Log.d("tag", "SCREEN_HEADER");
+                product_detail_title_text_linear.setAlpha(0);
+                break;
+            case TBLayout.SCREEN_FOOTER:
+                Log.d("tag", "SCREEN_FOOTER");
+                product_detail_title_text_linear.setAlpha(1);
+                break;
+        }
+    }
 }
