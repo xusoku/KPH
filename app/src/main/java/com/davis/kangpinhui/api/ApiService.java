@@ -13,6 +13,7 @@ import com.davis.kangpinhui.model.OrderDetail;
 import com.davis.kangpinhui.model.Product;
 import com.davis.kangpinhui.model.ProductDetail;
 import com.davis.kangpinhui.model.Recharge;
+import com.davis.kangpinhui.model.Region;
 import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.model.TakeGoodsdate;
 import com.davis.kangpinhui.model.TestModel;
@@ -141,6 +142,12 @@ public interface ApiService {
             @Query("token") String token
     );
 
+    //9	用户地址区域接口
+    @GET("address/location/list.do")
+    Call<BaseModel<ArrayList<Region>>> getAddressRegion(
+            @Query("apptype") String apptype
+    );
+
     //10 用户收货地址根据ID获取接口
     @GET("address/get.do")
     Call<BaseModel<Address>> getAddressById(
@@ -159,6 +166,7 @@ public interface ApiService {
             @Query("saddress") String saddress,
             @Query("smobile") String smobile,
             @Query("shopid") String shopid,
+            @Query("ilocationid") String ilocationid,
             @Query("saddressperfix") String saddressperfix
     );
 
@@ -172,6 +180,7 @@ public interface ApiService {
             @Query("saddress") String saddress,
             @Query("smobile") String smobile,
             @Query("shopid") String shopid,
+            @Query("ilocationid") String ilocationid,
             @Query("saddressperfix") String saddressperfix
     );
 

@@ -193,7 +193,7 @@ public class AllorderFragment extends BaseFragment {
                                             builder.setTitle("请输入密码");
                                             CustomTypefaceEditText editText=new CustomTypefaceEditText(getActivity());
                                             editText.setTextColor(Color.parseColor("#000000"));
-                                            editText.setTextSize(DisplayMetricsUtils.getDensity() * 18);
+                                            editText.setTextSize(DisplayMetricsUtils.dp2px(8) );
                                             editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
                                             editText.setSingleLine();
                                             editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);

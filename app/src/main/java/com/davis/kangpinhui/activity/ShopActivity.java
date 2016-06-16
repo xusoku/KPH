@@ -15,6 +15,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.model.Address;
 import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
@@ -25,12 +26,14 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.LocalUtil;
+import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.LoadMoreListView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
 
 import java.util.ArrayList;
 
+import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 
 
@@ -150,7 +153,15 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
                 holder.getView(R.id.shop_item_linear).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this, itemData,type);
+                        if(itemData.id.equals("99")){
+                            AppApplication.shopid="99";
+                            SharePreferenceUtils.getSharedPreferences().putString("shopid", "99");
+                            SharePreferenceUtils.getSharedPreferences().putString("address", itemData.shopname);
+                            EventBus.getDefault().post(new Address());
+                            finish();
+                        }else {
+                            PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this, itemData, type);
+                        }
 
                     }
                 });
