@@ -81,8 +81,7 @@
         <activity
             android:name=".activity.OrderActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.AllOrderActivity"
             android:screenOrientation="portrait" />
@@ -92,11 +91,11 @@
         <activity
             android:name=".activity.RechargeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/colormainTheme"/>
+            android:theme="@style/colormainTheme" />
         <activity
             android:name=".activity.LetterheadActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/colormainTheme"/>
+            android:theme="@style/colormainTheme" />
         <activity
             android:name=".activity.RechargeListActivity"
             android:screenOrientation="portrait" />
@@ -121,12 +120,16 @@
             android:name=".activity.OrderDetailActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.PayResultActivity" />
-        <activity android:name=".activity.HistroyBillActivity"></activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <activity android:name=".activity.HistroyBillActivity" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".activity.TuangouChihuoActivity"></activity>
     </application>
 
 </manifest>

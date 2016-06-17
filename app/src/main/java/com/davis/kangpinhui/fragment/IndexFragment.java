@@ -17,6 +17,7 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.MainActivity;
 import com.davis.kangpinhui.activity.PolygonActivity;
 import com.davis.kangpinhui.activity.SearchResultActivity;
+import com.davis.kangpinhui.activity.TuangouChihuoActivity;
 import com.davis.kangpinhui.model.Banner;
 import com.davis.kangpinhui.model.Index;
 import com.davis.kangpinhui.model.Product;
@@ -337,7 +338,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 RechargeActivity.jumpRechangeActivity(getActivity());
                 break;
             case R.id.index_tuan:
-
+                TuangouChihuoActivity.jumpTuangouChihuoActivity(getActivity());
                 break;
             case R.id.index_cart:
                 CartListActivity.jumpCartListActivity(getActivity());

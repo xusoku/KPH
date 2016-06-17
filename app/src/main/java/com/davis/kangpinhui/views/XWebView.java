@@ -51,20 +51,12 @@ public class XWebView extends WebView
             this.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
         }
 
-        this.getSettings().setJavaScriptEnabled(false);
+        this.getSettings().setJavaScriptEnabled(true);
         this.getSettings().setDomStorageEnabled(true);
         this.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         this.getSettings().setAppCacheEnabled(true);
         this.setHorizontalScrollBarEnabled(false);
         this.setVerticalScrollBarEnabled(false);
-        this.setOnTouchListener(new OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                return true;
-            }
-        });
     }
 
     @Override
