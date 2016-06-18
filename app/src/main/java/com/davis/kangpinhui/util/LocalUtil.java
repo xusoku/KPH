@@ -166,7 +166,7 @@ public class LocalUtil implements AMapLocationListener {
     public static boolean getShopid(LatLng point, List<Shop> list) {
 
         for (Shop shop : list) {
-            if (PtInPolygon(point, createDDRectangle(shop.polygon))) {
+            if (shop.polygon!=null&&PtInPolygon(point, createDDRectangle(shop.polygon))) {
                 AppApplication.shopid = shop.id;
                 SharePreferenceUtils.getSharedPreferences("kph").putString("shopid", shop.id);
                 return true;

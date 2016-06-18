@@ -502,7 +502,7 @@ public class OrderActivity extends BaseActivity {
 //                EventBus.getDefault().post(new Extendedinfo());
                 AppApplication.getApplication().numberCode=baseModel.object.sordernumber;
                 if(payTape.equals("0")) {
-                    thridPayUtil.alipay("0.01", baseModel.object.sordernumber);
+                    thridPayUtil.alipay(baseModel.object.fmoney, baseModel.object.sordernumber);
                 }else if(payTape.equals("4")){//微信
                     getWeixinPay(baseModel.object.sordernumber);
                 }else if(payTape.equals("3")){//余额支付", "

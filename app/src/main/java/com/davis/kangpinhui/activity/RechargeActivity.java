@@ -142,7 +142,7 @@ public class RechargeActivity extends BaseActivity {
                     public void onSucssce(BaseModel<Recharge> rechargeBaseModel) {
                         AppApplication.getApplication().numberCode=rechargeBaseModel.object.schargenumber;
                         if (payTape.equals("2")) {
-                            thridPayUtil.alipayyue("0.01", rechargeBaseModel.object.schargenumber);
+                            thridPayUtil.alipayyue(rechargeBaseModel.object.fmoney, rechargeBaseModel.object.schargenumber);
                         } else if (payTape.equals("4")) {//微信
                             getWeixinPay(rechargeBaseModel.object.schargenumber);
                         }

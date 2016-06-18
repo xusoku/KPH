@@ -127,7 +127,7 @@ public class RechargeListActivity extends BaseActivity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         AppApplication.getApplication().numberCode=itemData.schargenumber;
                                         if (which==1) {
-                                            thridPayUtil.alipayyue("0.01", itemData.schargenumber);
+                                            thridPayUtil.alipayyue(itemData.fmoney, itemData.schargenumber);
                                         } else if (which==0) {//微信
                                             getWeixinPay(itemData.schargenumber);
                                         }

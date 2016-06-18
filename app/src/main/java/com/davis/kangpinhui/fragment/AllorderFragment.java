@@ -185,7 +185,7 @@ public class AllorderFragment extends BaseFragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         AppApplication.getApplication().numberCode=itemData.sordernumber;
                                         if (which==2) {
-                                            thridPayUtil.alipay("0.01", itemData.sordernumber);
+                                            thridPayUtil.alipay(itemData.fmoney, itemData.sordernumber);
                                         } else if (which==1) {//微信
                                             getWeixinPay(itemData.sordernumber);
                                         }else{
