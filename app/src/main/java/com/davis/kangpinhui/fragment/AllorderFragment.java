@@ -358,6 +358,8 @@ public class AllorderFragment extends BaseFragment {
             @Override
             public void onSucssce(BaseModel yueInfoBaseModel) {
                 PayResultActivity.jumpPayResultActivity(getActivity(), true, false);
+                AppManager.getAppManager().finishActivity(AllOrderActivity.class);
+                EventBus.getDefault().post(new Extendedinfo());
             }
             @Override
             public void onFailure() {
