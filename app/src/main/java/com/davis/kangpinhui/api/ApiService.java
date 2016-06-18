@@ -432,6 +432,14 @@ public interface ApiService {
             @Query("orderNum") String shopid,
             @Query("token") String token
     );
+    //31.1 余额支付
+    @GET("order/changepay.do")
+    Call<BaseModel> getYueInfo(
+            @Query("apptype") String apptype,
+            @Query("ordernum") String ordernum,
+            @Query("password") String password,
+            @Query("token") String token
+    );
     //32 微信登录
     @POST("wechat/login.do")
     Call<BaseModel<UserInfo>> weixinLogin(

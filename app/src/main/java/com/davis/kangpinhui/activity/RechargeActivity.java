@@ -160,7 +160,7 @@ public class RechargeActivity extends BaseActivity {
 
     public void getWeixinPay(String orderId) {
 
-        Call<BaseModel<WeixinInfo>> call = ApiInstant.getInstant().getWeixinProductInfo(AppApplication.apptype, orderId, AppApplication.token);
+        Call<BaseModel<WeixinInfo>> call = ApiInstant.getInstant().getWeixinChongzhiInfo(AppApplication.apptype, orderId, AppApplication.token);
         call.enqueue(new ApiCallback<BaseModel<WeixinInfo>>() {
             @Override
             public void onSucssce(BaseModel<WeixinInfo> weixinInfoBaseModel) {

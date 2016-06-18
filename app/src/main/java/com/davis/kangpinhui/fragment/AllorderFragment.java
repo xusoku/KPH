@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -161,7 +162,7 @@ public class AllorderFragment extends BaseFragment {
                                                 EventBus.getDefault().post(new Extendedinfo());
                                                 list.clear();
                                                 startFragmentLoading();
-                                                chageTitle();
+//                                                chageTitle();
                                             }
 
                                             @Override
@@ -191,14 +192,24 @@ public class AllorderFragment extends BaseFragment {
                                         }else{
                                             AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                                             builder.setTitle("请输入密码");
-                                            CustomTypefaceEditText editText=new CustomTypefaceEditText(getActivity());
+                                            final CustomTypefaceEditText editText=new CustomTypefaceEditText(getActivity());
                                             editText.setTextColor(Color.parseColor("#000000"));
-                                            editText.setTextSize(DisplayMetricsUtils.dp2px(8) );
+                                            editText.setTextSize(DisplayMetricsUtils.dp2px(8));
                                             editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
                                             editText.setSingleLine();
                                             editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                                             builder.setView(editText);
-                                            builder.setPositiveButton("确定", null);
+                                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    String pass=editText.getText().toString().trim();
+                                                    if(TextUtils.isEmpty(pass)){
+                                                        ToastUitl.showToast("请输入密码");
+                                                    }else {
+                                                        getYuePay(itemData.sordernumber,pass);
+                                                    }
+                                                }
+                                            });
                                             builder.setNegativeButton("取消", null);
                                             AlertDialog dialog1=builder.create();
                                             dialog1.show();
@@ -338,7 +349,19 @@ public class AllorderFragment extends BaseFragment {
 
             }
         });
-
     }
 
+    public void getYuePay(String orderId,String password) {
+
+        Call<BaseModel> call = ApiInstant.getInstant().getYueInfo(AppApplication.apptype, orderId, password,AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel>() {
+            @Override
+            public void onSucssce(BaseModel yueInfoBaseModel) {
+                PayResultActivity.jumpPayResultActivity(getActivity(), true, false);
+            }
+            @Override
+            public void onFailure() {
+            }
+        });
+    }
 }

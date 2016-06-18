@@ -12,6 +12,7 @@ import com.davis.kangpinhui.activity.OrderDetailActivity;
 import com.davis.kangpinhui.activity.PayResultActivity;
 import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.activity.RechargeListActivity;
+import com.davis.kangpinhui.activity.TuangouChihuoActivity;
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.util.alipay.PayResult;
 import com.davis.kangpinhui.util.alipay.ZhifubaoPayUtil;
@@ -96,6 +97,7 @@ public class ThridPayUtil {
                     if (TextUtils.equals(resultStatus, "9000")) {
                         ToastUitl.showToast("支付成功");
                         PayResultActivity.jumpPayResultActivity(context, true, isYue);
+                        AppManager.getAppManager().finishActivity(TuangouChihuoActivity.class);
                         AppManager.getAppManager().finishActivity(AllOrderActivity.class);
                         AppManager.getAppManager().finishActivity(OrderDetailActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeActivity.class);
@@ -112,6 +114,7 @@ public class ThridPayUtil {
                             ToastUitl.showToast("支付失败");
                         }
                         PayResultActivity.jumpPayResultActivity(context, false,isYue);
+                        AppManager.getAppManager().finishActivity(TuangouChihuoActivity.class);
                         AppManager.getAppManager().finishActivity(AllOrderActivity.class);
                         AppManager.getAppManager().finishActivity(OrderDetailActivity.class);
                         AppManager.getAppManager().finishActivity(RechargeListActivity.class);

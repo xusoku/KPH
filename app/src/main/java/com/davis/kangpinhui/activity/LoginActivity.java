@@ -152,6 +152,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.login_forget_password:
 
+                AboutActivity.jumpAboutActivity(this,2);
                 break;
             case R.id.login_wechat_btn:
                 WeixinLoginUtil c=new WeixinLoginUtil(this);

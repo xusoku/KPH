@@ -3,6 +3,7 @@ package com.davis.kangpinhui.activity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.os.Message;
 import android.text.InputType;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.widget.LinearLayout;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
@@ -23,6 +25,7 @@ import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.ThridPayUtil;
+import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.CustomTypefaceEditText;
 import com.davis.kangpinhui.views.XWebView;
 
@@ -33,6 +36,7 @@ import retrofit2.Call;
 public class TuangouChihuoActivity extends BaseActivity {
 
     private XWebView tuangou_web;
+    private LinearLayout product_detail_back;
     private ThridPayUtil thridPayUtil;
     public static void jumpTuangouChihuoActivity(Context cot) {
             Intent it = new Intent(cot, TuangouChihuoActivity.class);
@@ -62,6 +66,7 @@ public class TuangouChihuoActivity extends BaseActivity {
     @Override
     protected void findViews() {
         thridPayUtil = new ThridPayUtil(this);
+        product_detail_back=$(R.id.product_detail_back);
         tuangou_web=$(R.id.tuangou_web);
 
     }
@@ -90,12 +95,16 @@ public class TuangouChihuoActivity extends BaseActivity {
     }
     @Override
     protected void setListener() {
-
     }
 
     @Override
     public void doClick(View view) {
 
+        switch (view.getId()){
+            case R.id.product_detail_back:
+                finish();
+                break;
+        }
     }
 
     private void getDetailOrder(String code){
@@ -115,26 +124,35 @@ public class TuangouChihuoActivity extends BaseActivity {
         });
     }
 
-    private void  getPayType(Order<ArrayList<OrderDetail>> itemData){
+    private void  getPayType(final Order<ArrayList<OrderDetail>> itemData){
         String type=itemData.spaytype;
+        AppApplication.getApplication().numberCode=itemData.sordernumber;
         if (type.equals("0")) {
             thridPayUtil.alipay(itemData.fmoney, itemData.sordernumber);
         } else if (type.equals("4")) {//微信
             getWeixinPay(itemData.sordernumber);
         }else{
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
-            builder.setTitle("请输入密码");
-            CustomTypefaceEditText editText=new CustomTypefaceEditText(this);
-            editText.setTextColor(Color.parseColor("#000000"));
-            editText.setTextSize(DisplayMetricsUtils.dp2px(8) );
-            editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
-            editText.setSingleLine();
-            editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            builder.setView(editText);
-            builder.setPositiveButton("确定", null);
-            builder.setNegativeButton("取消", null);
-            AlertDialog dialog1=builder.create();
-            dialog1.show();
+            ToastUitl.showToast("支付成功");
+            PayResultActivity.jumpPayResultActivity(TuangouChihuoActivity.this, true, false);
+            finish();
+//            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+//            builder.setTitle("请输入密码");
+//            CustomTypefaceEditText editText=new CustomTypefaceEditText(this);
+//            editText.setTextColor(Color.parseColor("#000000"));
+//            editText.setTextSize(DisplayMetricsUtils.dp2px(8) );
+//            editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
+//            editText.setSingleLine();
+//            editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//            builder.setView(editText);
+//            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    getYuePay(itemData.sordernumber);
+//                }
+//            });
+//            builder.setNegativeButton("取消", null);
+//            AlertDialog dialog1=builder.create();
+//            dialog1.show();
         }
     }
 
@@ -155,7 +173,8 @@ public class TuangouChihuoActivity extends BaseActivity {
 
             }
         });
-
     }
+
+
 
 }

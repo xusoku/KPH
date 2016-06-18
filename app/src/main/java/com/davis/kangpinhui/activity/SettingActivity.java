@@ -65,6 +65,11 @@ public class SettingActivity extends BaseActivity {
             EventBus.getDefault().post("loginout");
             finish();
         }else if(view.getId()==R.id.setting_about){
+            AboutActivity.jumpAboutActivity(this,0);
+        }else if(view.getId()==R.id.fix_pass){
+            AboutActivity.jumpAboutActivity(this,1);
+        }else if(view.getId()==R.id.forget_pass){
+            AboutActivity.jumpAboutActivity(this,2);
         }
     }
 }

@@ -21,6 +21,36 @@
         app:line="false"
         app:text="关于我们"/>
     </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_measure_5dp"
+        android:layout_marginBottom="@dimen/common_measure_5dp">
+    <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/fix_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:src="@mipmap/mine_kefu"
+        android:clickable="true"
+        android:onClick="doClick"
+        app:line="false"
+        app:text="修改密码"/>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_measure_15dp"
+        android:layout_marginBottom="@dimen/common_measure_15dp">
+    <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/forget_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:src="@mipmap/mine_kefu"
+        android:clickable="true"
+        android:onClick="doClick"
+        app:line="false"
+        app:text="忘记密码"/>
+    </FrameLayout>
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_60dp"
