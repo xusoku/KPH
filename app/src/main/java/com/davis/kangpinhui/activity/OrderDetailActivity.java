@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -22,19 +24,23 @@ import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.OrderDetail;
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.DateUtils;
+import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
+import com.davis.kangpinhui.views.CustomTypefaceEditText;
 import com.davis.kangpinhui.views.StretchedListView;
 
 import java.util.ArrayList;
 
+import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 
 public class OrderDetailActivity extends BaseActivity {
@@ -157,17 +163,41 @@ public class OrderDetailActivity extends BaseActivity {
             order_detail_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final CharSequence[] typepaytext = {"在线支付 微信支付", "在线支付 支付宝支付"};
+                    final CharSequence[] typepaytext = {"余额支付","在线支付 微信支付", "在线支付 支付宝支付"};
                     final AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);
                     builder.setTitle("支付方式")
                             .setItems(typepaytext, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     AppApplication.getApplication().numberCode=itemData.sordernumber;
-                                    if (which==1) {
+                                    if (which==2) {
                                         thridPayUtil.alipay(itemData.fmoney, itemData.sordernumber);
-                                    } else if (which==0) {//微信
+                                    } else if (which==1) {//微信
                                         getWeixinPay(itemData.sordernumber);
+                                    }else{
+                                        AlertDialog.Builder builder=new AlertDialog.Builder(OrderDetailActivity.this);
+                                        builder.setTitle("请输入密码");
+                                        final CustomTypefaceEditText editText=new CustomTypefaceEditText(OrderDetailActivity.this);
+                                        editText.setTextColor(Color.parseColor("#000000"));
+                                        editText.setTextSize(DisplayMetricsUtils.dp2px(8));
+                                        editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
+                                        editText.setSingleLine();
+                                        editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                                        builder.setView(editText);
+                                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                String pass=editText.getText().toString().trim();
+                                                if(TextUtils.isEmpty(pass)){
+                                                    ToastUitl.showToast("请输入密码");
+                                                }else {
+                                                    getYuePay(itemData.sordernumber,pass);
+                                                }
+                                            }
+                                        });
+                                        builder.setNegativeButton("取消", null);
+                                        AlertDialog dialog1=builder.create();
+                                        dialog1.show();
                                     }
                                 }
                             }).show();
@@ -275,5 +305,20 @@ public class OrderDetailActivity extends BaseActivity {
             }
         });
 
+    }
+    public void getYuePay(String orderId,String password) {
+
+        Call<BaseModel> call = ApiInstant.getInstant().getYueInfo(AppApplication.apptype, orderId, password, AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel>() {
+            @Override
+            public void onSucssce(BaseModel yueInfoBaseModel) {
+                PayResultActivity.jumpPayResultActivity(OrderDetailActivity.this, true, false);
+                AppManager.getAppManager().finishActivity(AllOrderActivity.class);
+                EventBus.getDefault().post(new Extendedinfo());
+            }
+            @Override
+            public void onFailure() {
+            }
+        });
     }
 }
