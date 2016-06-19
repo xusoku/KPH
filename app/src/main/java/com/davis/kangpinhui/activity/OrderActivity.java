@@ -50,7 +50,7 @@ public class OrderActivity extends BaseActivity {
 
     private EditText order_beizhu_text;
 
-    private LinearLayout add_cart_add_passwrod_linear,order_coup_linear,order_paytype_linear;
+    private LinearLayout add_cart_add_passwrod_linear, order_coup_linear, order_paytype_linear;
 
     private StretchedListView order_address_lst;
 
@@ -71,8 +71,9 @@ public class OrderActivity extends BaseActivity {
         cot.startActivity(it);
     }
 
-    private String code="";
-    public static void jumpOrderActivity(Context cot, String ids,String code) {
+    private String code = "";
+
+    public static void jumpOrderActivity(Context cot, String ids, String code) {
         Intent it = new Intent(cot, OrderActivity.class);
         it.putExtra("ids", ids);
         it.putExtra("code", code);
@@ -91,12 +92,12 @@ public class OrderActivity extends BaseActivity {
             order_address_text.setText(AppApplication.address.saddress);
             order_address_phone.setText(AppApplication.address.smobile);
             order_address_pepole.setText(AppApplication.address.saddressname);
-            RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             order_address_text.setLayoutParams(layoutParams);
         } else {
             order_address_text.setText("暂无地址,请点击添加您的收货地址");
-            RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
             order_address_text.setLayoutParams(layoutParams);
 
@@ -108,8 +109,8 @@ public class OrderActivity extends BaseActivity {
     @Override
     protected void initVariable() {
         ids = getIntent().getStringExtra("ids");
-        if(ids.equals("-1")){
-            code=getIntent().getStringExtra("code");
+        if (ids.equals("-1")) {
+            code = getIntent().getStringExtra("code");
         }
         list = new ArrayList<>();
         listproduct = new ArrayList<>();
@@ -121,7 +122,7 @@ public class OrderActivity extends BaseActivity {
     protected void findViews() {
         showTopBar();
         setTitle("订单结算");
-        thridPayUtil=new ThridPayUtil(this);
+        thridPayUtil = new ThridPayUtil(this);
         twoPickerView = new TwoPickerView(this);
         order_number_text = $(R.id.order_number_text);
         order_paytype_text = $(R.id.order_paytype_text);
@@ -136,13 +137,13 @@ public class OrderActivity extends BaseActivity {
         add_cart_add_passwrod_linear = $(R.id.add_cart_add_passwrod_linear);
         order_coup_linear = $(R.id.order_coup_linear);
         order_paytype_linear = $(R.id.order_paytype_linear);
-        if(ids.equals("-1")){
+        if (ids.equals("-1")) {
             order_paytype_linear.setVisibility(View.GONE);
             order_coup_linear.setVisibility(View.GONE);
             add_cart_add_passwrod_linear.setVisibility(View.GONE);
         }
 
-        if(AppApplication.address==null){
+        if (AppApplication.address == null) {
             getAddresslist();
         }
     }
@@ -153,9 +154,9 @@ public class OrderActivity extends BaseActivity {
 
         getTimeList();
 
-        if(ids.equals("-1")) {
+        if (ids.equals("-1")) {
             getBycodeList();
-        }else{
+        } else {
             getorderlist();
             getCouplist();
         }
@@ -208,7 +209,7 @@ public class OrderActivity extends BaseActivity {
 
                 list.addAll(arrayListBaseModel.object);
 
-               changePriceFun();
+                changePriceFun();
             }
 
             @Override
@@ -230,26 +231,26 @@ public class OrderActivity extends BaseActivity {
                 holder.setImageByUrl(R.id.order_comfi_item_iv, ApiService.picurl + itemData.picurl);
                 holder.setText(R.id.order_comfi_item_title, itemData.productName);
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
-                holder.setText(R.id.order_comfi_item_price, "¥" + (payTape.equals("3")?itemData.fvipprice:itemData.iprice));
+                holder.setText(R.id.order_comfi_item_price, "¥" + (payTape.equals("3") ? itemData.fvipprice : itemData.iprice));
                 holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.inumber));
             }
         });
     }
 
-    public void getAddresslist(){
-        Call<BaseModel<ArrayList<Address>>> call = ApiInstant.getInstant().getAddresslist(AppApplication.apptype, AppApplication.shopid,AppApplication.token);
+    public void getAddresslist() {
+        Call<BaseModel<ArrayList<Address>>> call = ApiInstant.getInstant().getAddresslist(AppApplication.apptype, AppApplication.shopid, AppApplication.token);
 
         call.enqueue(new ApiCallback<BaseModel<ArrayList<Address>>>() {
             @Override
             public void onSucssce(BaseModel<ArrayList<Address>> arrayListBaseModel) {
                 onActivityLoadingSuccess();
                 ArrayList<Address> list = arrayListBaseModel.object;
-                if(list.size()>0){
-                    AppApplication.address=list.get(0);
+                if (list.size() > 0) {
+                    AppApplication.address = list.get(0);
                     order_address_text.setText(AppApplication.address.saddress);
                     order_address_phone.setText(AppApplication.address.smobile);
                     order_address_pepole.setText(AppApplication.address.saddressname);
-                    RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                     order_address_text.setLayoutParams(layoutParams);
                 }
@@ -262,6 +263,7 @@ public class OrderActivity extends BaseActivity {
             }
         });
     }
+
     private void getCouplist() {
 
         Call<BaseModel<ArrayList<Coupon>>> callCoup = ApiInstant.getInstant().getCouponByUid(AppApplication.apptype, AppApplication.token);
@@ -313,13 +315,13 @@ public class OrderActivity extends BaseActivity {
 
         for (Cart cart : list) {
             if (cart.flag) {
-                String s=cart.inumber;
-                if(TextUtils.isEmpty(s)){
-                    s="0.0";
+                String s = cart.inumber;
+                if (TextUtils.isEmpty(s)) {
+                    s = "0.0";
                 }
-                String ss=payTape.equals("3")?cart.fvipprice:cart.iprice;
-                if(TextUtils.isEmpty(ss)){
-                    ss="0.0";
+                String ss = payTape.equals("3") ? cart.fvipprice : cart.iprice;
+                if (TextUtils.isEmpty(ss)) {
+                    ss = "0.0";
                 }
                 int n = (int) Float.parseFloat(s);
                 Float f = Float.parseFloat(ss);
@@ -328,21 +330,22 @@ public class OrderActivity extends BaseActivity {
         }
         return total;
     }
+
     private Float getTotalPPrice(ArrayList<Product> list) {
         Float total = 0.0f;
 
         for (Product product : list) {
-                String s=product.count;
-                if(TextUtils.isEmpty(s)){
-                    s="0.0";
-                }
-                String ss=product.fprice;
-                if(TextUtils.isEmpty(ss)){
-                    ss="0.0";
-                }
-                int n = (int) Float.parseFloat(s);
-                Float f = Float.parseFloat(ss);
-                total += n * f;
+            String s = product.count;
+            if (TextUtils.isEmpty(s)) {
+                s = "0.0";
+            }
+            String ss = product.fprice;
+            if (TextUtils.isEmpty(ss)) {
+                ss = "0.0";
+            }
+            int n = (int) Float.parseFloat(s);
+            Float f = Float.parseFloat(ss);
+            total += n * f;
         }
         return total;
     }
@@ -386,9 +389,19 @@ public class OrderActivity extends BaseActivity {
                 final ArrayList<String> list = new ArrayList<String>();
                 final ArrayList<ArrayList<String>> arrayLists = new ArrayList<ArrayList<String>>();
                 for (TakeGoodsdate takeGoodsdate : takeGoodsdateArrayList) {
+
                     list.add(takeGoodsdate.date);
-                    arrayLists.add(takeGoodsdate.time);
+                    if (takeGoodsdate.time != null && takeGoodsdate.time.size() > 0) {
+                        arrayLists.add(takeGoodsdate.time);
+                    } else {
+                        ArrayList<String> ssss=new ArrayList();
+                        ssss.add("");
+                        ssss.add("");
+                        ssss.add("");
+                        arrayLists.add(ssss);
+                    }
                 }
+
 
                 twoPickerView.setPicker(list, arrayLists, false);
                 twoPickerView.setCyclic(false);
@@ -398,10 +411,10 @@ public class OrderActivity extends BaseActivity {
                     @Override
                     public void onOptionsSelect(int options1, int option2) {
 
-                        if(arrayLists.get(options1).size()==0){
-                            timeTape = (list.get(options1) );
+                        if (arrayLists.get(options1).size() == 0) {
+                            timeTape = (list.get(options1));
 
-                        }else{
+                        } else {
                             timeTape = (list.get(options1) + " " + arrayLists.get(options1).get(option2));
                         }
                         order_paytype_time.setText(timeTape);
@@ -451,13 +464,13 @@ public class OrderActivity extends BaseActivity {
 
                 String beizhu = order_beizhu_text.getText().toString().trim();
 
-                if(TextUtils.isEmpty(beizhu)){
-                    beizhu="";
+                if (TextUtils.isEmpty(beizhu)) {
+                    beizhu = "";
                 }
 
-                if(ids.equals("-1")){
+                if (ids.equals("-1")) {
                     saveByCode(beizhu);
-                }else {
+                } else {
                     saveOrder(beizhu);
                 }
                 break;
@@ -465,19 +478,19 @@ public class OrderActivity extends BaseActivity {
     }
 
     private void saveByCode(String beizhu) {
-        Call<BaseModel> call=ApiInstant.getInstant().saveProductCode(AppApplication.apptype, AppApplication.shopid, AppApplication.address.iuseraddressid, timeTape, beizhu, code, AppApplication.token);
-            call.enqueue(new ApiCallback<BaseModel>() {
-                @Override
-                public void onSucssce(BaseModel baseModel) {
-                    ToastUitl.showToast("订单提交成功");
+        Call<BaseModel> call = ApiInstant.getInstant().saveProductCode(AppApplication.apptype, AppApplication.shopid, AppApplication.address.iuseraddressid, timeTape, beizhu, code, AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel>() {
+            @Override
+            public void onSucssce(BaseModel baseModel) {
+                ToastUitl.showToast("订单提交成功");
 //                    EventBus.getDefault().post(new Extendedinfo());
-                }
+            }
 
-                @Override
-                public void onFailure() {
+            @Override
+            public void onFailure() {
 
-                }
-            });
+            }
+        });
     }
 
     private void saveOrder(String beizhu) {
@@ -500,22 +513,22 @@ public class OrderActivity extends BaseActivity {
             public void onSucssce(BaseModel<Order> baseModel) {
                 ToastUitl.showToast("订单提交成功");
 //                EventBus.getDefault().post(new Extendedinfo());
-                AppApplication.getApplication().numberCode=baseModel.object.sordernumber;
-                if(payTape.equals("0")) {
+                AppApplication.getApplication().numberCode = baseModel.object.sordernumber;
+                if (payTape.equals("0")) {
                     thridPayUtil.alipay(baseModel.object.fmoney, baseModel.object.sordernumber);
-                }else if(payTape.equals("4")){//微信
+                } else if (payTape.equals("4")) {//微信
                     getWeixinPay(baseModel.object.sordernumber);
-                }else if(payTape.equals("3")){//余额支付", "
-                    PayResultActivity.jumpPayResultActivity(OrderActivity.this,true);
+                } else if (payTape.equals("3")) {//余额支付", "
+                    PayResultActivity.jumpPayResultActivity(OrderActivity.this, true);
                     finish();
                     AppManager.getAppManager().finishActivity(CartListActivity.class);
 
-                }else if(payTape.equals("2")){//货到付款
-                    PayResultActivity.jumpPayResultActivity(OrderActivity.this,true);
+                } else if (payTape.equals("2")) {//货到付款
+                    PayResultActivity.jumpPayResultActivity(OrderActivity.this, true);
                     finish();
                     AppManager.getAppManager().finishActivity(CartListActivity.class);
                 }
-      }
+            }
 
             @Override
             public void onFailure() {
@@ -524,17 +537,18 @@ public class OrderActivity extends BaseActivity {
         });
     }
 
-    public void getWeixinPay(String orderId){
+    public void getWeixinPay(String orderId) {
 
-        Call<BaseModel<WeixinInfo>> call=ApiInstant.getInstant().getWeixinProductInfo(AppApplication.apptype,orderId,AppApplication.token);
+        Call<BaseModel<WeixinInfo>> call = ApiInstant.getInstant().getWeixinProductInfo(AppApplication.apptype, orderId, AppApplication.token);
         call.enqueue(new ApiCallback<BaseModel<WeixinInfo>>() {
             @Override
             public void onSucssce(BaseModel<WeixinInfo> weixinInfoBaseModel) {
                 thridPayUtil.wxpay(weixinInfoBaseModel.object);
             }
+
             @Override
             public void onFailure() {
-                PayResultActivity.jumpPayResultActivity(OrderActivity.this,false);
+                PayResultActivity.jumpPayResultActivity(OrderActivity.this, false);
                 finish();
                 AppManager.getAppManager().finishActivity(CartListActivity.class);
 

@@ -24,6 +24,7 @@ import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
+import com.davis.kangpinhui.util.NetWorkUtils;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.CustomTypefaceEditText;
@@ -67,19 +68,28 @@ public class TuangouChihuoActivity extends BaseActivity {
     protected void findViews() {
         thridPayUtil = new ThridPayUtil(this);
         product_detail_back=$(R.id.product_detail_back);
-        tuangou_web=$(R.id.tuangou_web);
+        tuangou_web=$(R.id.content);
 
     }
 
     @SuppressLint("JavascriptInterface")
     @Override
     protected void initData() {
-        tuangou_web.loadUrl("http://m2.kangpinhui.com:8089/weixin/tuanforapp.jsp?token="+AppApplication.token+"&apptype=android");
-        tuangou_web.addJavascriptInterface(new DemoJavaScriptInterface(), "android");
 
+        startActivityLoading();
     }
 
-
+    @Override
+    protected void onActivityLoading() {
+        super.onActivityLoading();
+        if(NetWorkUtils.isAvailable(this)){
+            onActivityLoadingSuccess();
+            tuangou_web.loadUrl("http://m2.kangpinhui.com:8089/weixin/tuanforapp.jsp?token="+AppApplication.token+"&apptype=android");
+            tuangou_web.addJavascriptInterface(new DemoJavaScriptInterface(), "android");
+        }else{
+            onActivityLoadingFailed();
+        }
+    }
 
     final class DemoJavaScriptInterface {
         DemoJavaScriptInterface() {
