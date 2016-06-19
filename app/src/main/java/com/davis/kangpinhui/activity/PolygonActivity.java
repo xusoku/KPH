@@ -102,6 +102,7 @@ public class PolygonActivity extends BaseActivity {
 
 
         for (Shop shop: list){
+            if(shop.polygon!=null)
             aMap.addPolygon(new PolygonOptions().addAll(createDDRectangle(shop.polygon)).fillColor(Color.parseColor("#550192dc"))
                     .strokeColor(Color.RED).strokeWidth(1));
         }

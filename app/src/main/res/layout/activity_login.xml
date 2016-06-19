@@ -37,8 +37,7 @@
                 android:drawableLeft="@mipmap/phone_icon"
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
-                android:hint="手机号"
-                android:inputType="phone"
+                android:hint="手机号/卡号"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/white" />
