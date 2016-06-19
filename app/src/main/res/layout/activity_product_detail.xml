@@ -238,6 +238,9 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/common_measure_25dp"
                         android:orientation="vertical">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/common_measure_65dp"/>
                         <com.davis.kangpinhui.views.XWebView
                             android:id="@+id/product_detail_xweb"
                             android:layout_width="match_parent"
