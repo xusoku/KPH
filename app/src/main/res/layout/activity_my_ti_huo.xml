@@ -13,7 +13,7 @@
         android:layout_margin="@dimen/common_measure_14dp"
         android:background="@drawable/bg_flow_tag_unselect"
         android:gravity="center_vertical"
-        android:hint="输入订单号"
+        android:hint="输入提货编码"
         android:padding="@dimen/common_measure_10dp" />
 
     <FrameLayout
@@ -30,7 +30,7 @@
             android:clickable="true"
             android:gravity="center"
             android:onClick="doClick"
-            android:text="提交订单号"
+            android:text="提交提货编码"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_17" />
     </FrameLayout>

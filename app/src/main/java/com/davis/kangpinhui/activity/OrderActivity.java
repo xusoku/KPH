@@ -478,12 +478,16 @@ public class OrderActivity extends BaseActivity {
     }
 
     private void saveByCode(String beizhu) {
-        Call<BaseModel> call = ApiInstant.getInstant().saveProductCode(AppApplication.apptype, AppApplication.shopid, AppApplication.address.iuseraddressid, timeTape, beizhu, code, AppApplication.token);
-        call.enqueue(new ApiCallback<BaseModel>() {
+        Call<BaseModel<Order>> call = ApiInstant.getInstant().saveProductCode(AppApplication.apptype, AppApplication.shopid, AppApplication.address.iuseraddressid, timeTape, beizhu, code, AppApplication.token);
+        call.enqueue(new ApiCallback<BaseModel<Order>>() {
             @Override
-            public void onSucssce(BaseModel baseModel) {
+            public void onSucssce(BaseModel<Order> baseModel) {
                 ToastUitl.showToast("订单提交成功");
-//                    EventBus.getDefault().post(new Extendedinfo());
+                AppApplication.getApplication().numberCode = baseModel.object.sordernumber;
+                PayResultActivity.jumpPayResultActivity(OrderActivity.this, true);
+                AppManager.getAppManager().finishActivity(MyTiHuoActivity.class);
+                AppManager.getAppManager().finishActivity(OrderActivity.class);
+                finish();
             }
 
             @Override

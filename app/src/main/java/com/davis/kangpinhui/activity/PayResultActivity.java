@@ -238,15 +238,15 @@ public class PayResultActivity extends BaseActivity {
         String stype = "";
         if (recharge.stype.equals("0")) {
             stype = "未付款";
-        } else if (recharge.srechargetype.equals("3")) {
+        } else if (recharge.stype.equals("3")) {
             stype = "已付款";
-        } else if (recharge.srechargetype.equals("6")) {
+        } else if (recharge.stype.equals("6")) {
             stype = "已取消";
         }
 
-        pay_result_chongzhi_paytype.setText(stype);
+        pay_result_chongzhi_paytype.setText(srechargetype);
         pay_result_chongzhi_paymoney.setText("¥" + UtilText.getRechargePrice(recharge.fmoney));
-        pay_result_chongzhi_paystatus.setText(srechargetype);
+        pay_result_chongzhi_paystatus.setText(stype);
         pay_result_chongzhi_ordernum.setText(recharge.schargenumber);
 
     }

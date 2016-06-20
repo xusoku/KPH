@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
+import com.davis.kangpinhui.db.SearchHistroy;
+import com.davis.kangpinhui.db.SearchHistroyDao;
 import com.davis.kangpinhui.model.Category;
 import com.davis.kangpinhui.model.Product;
 import com.davis.kangpinhui.model.Topic;
@@ -424,10 +426,14 @@ public class SearchResultActivity extends BaseActivity {
                 break;
             case R.id.search_right_iv:
                 key = search_et.getText().toString().trim();
+
                 if (!TextUtils.isEmpty(key)) {
                     CommonManager.dismissSoftInputMethod(this, view.getWindowToken());
                     isSearch = true;
                     startActivityLoading();
+                    SearchHistroy histroy = new SearchHistroy();
+                    histroy.setKey(key);
+                    new SearchHistroyDao(this).add(histroy);
                 }
                 break;
         }

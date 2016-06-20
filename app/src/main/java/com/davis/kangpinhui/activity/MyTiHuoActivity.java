@@ -43,7 +43,7 @@ public class MyTiHuoActivity extends BaseActivity {
     protected void findViews() {
 
         showTopBar();
-        setTitle("我的订单");
+        setTitle("我要提货");
 
         ti_huo_et=$(R.id.ti_huo_et);
         ti_huo_tv=$(R.id.ti_huo_tv);

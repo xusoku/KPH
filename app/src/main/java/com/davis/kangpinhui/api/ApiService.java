@@ -376,7 +376,7 @@ public interface ApiService {
 
     //24 创建提货券
     @GET("order/tihuoquan/save.do")
-    Call<BaseModel> saveProductCode(
+    Call<BaseModel<Order>> saveProductCode(
             @Query("apptype") String apptype,
             @Query("shopid") String shopid,
             @Query("addressid") String addressid,

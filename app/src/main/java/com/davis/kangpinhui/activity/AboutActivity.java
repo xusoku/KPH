@@ -44,7 +44,7 @@ public class AboutActivity extends BaseActivity {
             about_xweb.loadUrl(ApiService.baseurl + "/common/html.do?type=about&apptype=android");
         }else if(type==1){
             setTitle("修改密码");
-            about_xweb.loadUrl(ApiService.baseurl + "/common/html.do?type=updatepwd&apptype=android");
+            about_xweb.loadUrl(ApiService.baseurl + "/common/html.do?type=updatepwd&apptype=android&token="+AppApplication.token);
         }else if(type==2){
             setTitle("忘记密码");
             about_xweb.loadUrl(ApiService.baseurl + "/common/html.do?type=forgetpwd&apptype=android");

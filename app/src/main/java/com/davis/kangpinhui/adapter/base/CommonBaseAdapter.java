@@ -22,6 +22,9 @@ public abstract class CommonBaseAdapter<T> extends BaseAdapter
         this.mDatas = mDatas;
         this.mItemLayoutId = itemLayoutId;
 
+        if(this.mDatas==null){
+            this.mDatas=new ArrayList<>();
+        }
 
     }
 

@@ -2,7 +2,9 @@ package com.davis.kangpinhui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
@@ -27,7 +29,7 @@ public class RechargeDetailActivity extends BaseActivity {
             recharge_detail_letterhead,
             recharge_detail_ordername,
             recharge_detail_orderphone;
-
+private LinearLayout recharge_detail_letterlinear;
 
     private String id = "";
 
@@ -63,6 +65,7 @@ public class RechargeDetailActivity extends BaseActivity {
         recharge_detail_letterhead = $(R.id.recharge_detail_letterhead);
         recharge_detail_ordername = $(R.id.recharge_detail_ordername);
         recharge_detail_orderphone = $(R.id.recharge_detail_orderphone);
+        recharge_detail_letterlinear = $(R.id.recharge_detail_letterlinear);
     }
 
     @Override
@@ -110,19 +113,25 @@ public class RechargeDetailActivity extends BaseActivity {
         String stype = "";
         if (recharge.stype.equals("0")) {
             stype = "未付款";
-        } else if (recharge.srechargetype.equals("3")) {
+        } else if (recharge.stype.equals("3")) {
             stype = "已付款";
-        } else if (recharge.srechargetype.equals("6")) {
+        } else if (recharge.stype.equals("6")) {
             stype = "已取消";
         }
-        recharge_detail_orderType.setText(stype);
+        recharge_detail_orderType.setText(srechargetype);
         recharge_detail_ordertime.setText(recharge.daddtime);
         recharge_detail_orderprice.setText("¥"+ UtilText.getRechargePrice(recharge.fmoney));
-        recharge_detail_orderPayType.setText(srechargetype);
+        recharge_detail_orderPayType.setText(stype);
         recharge_detail_orderCode.setText(recharge.schargenumber);
-        recharge_detail_letterhead.setText(recharge.sinvoice);
-        recharge_detail_ordername.setText(recharge.sconsignee);
-        recharge_detail_orderphone.setText(recharge.smobile);
+        if(TextUtils.isEmpty(recharge.sinvoice)){
+            recharge_detail_letterlinear.setVisibility(View.GONE);
+        }else{
+            recharge_detail_letterlinear.setVisibility(View.VISIBLE);
+            recharge_detail_letterhead.setText(recharge.sinvoice);
+            recharge_detail_ordername.setText(recharge.sconsignee);
+            recharge_detail_orderphone.setText(recharge.smobile);
+        }
+
 
     }
 
