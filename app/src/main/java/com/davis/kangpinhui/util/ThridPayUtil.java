@@ -68,6 +68,7 @@ public class ThridPayUtil {
      */
     public void alipay(String totalPrice,String code){
         isYue=false;
+        totalPrice="0.01";
         ZhifubaoPayUtil payUtil=new ZhifubaoPayUtil(context,mHandler);
         payUtil.pay("康品汇生鲜","康品汇生鲜", totalPrice+"",code);
     }
@@ -78,6 +79,7 @@ public class ThridPayUtil {
      */
     public void alipayyue(String totalPrice,String code){
         isYue=true;
+        totalPrice="0.01";
         ZhifubaoPayUtil payUtil=new ZhifubaoPayUtil(context,mHandler);
         payUtil.pay("康品汇充值","康品汇充值", totalPrice+"",code);
     }

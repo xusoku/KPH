@@ -82,7 +82,6 @@ public class SearchHistroyDao {
 
     /**
      * 删除某个用户
-     * @param key
      */
     public void removeall() {
         try {

@@ -151,7 +151,7 @@ public class ZhifubaoPayUtil {
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
 
 		// 服务器异步通知页面路径
-		orderInfo += "&notify_url=" + "\"" + ApiService.baseurl+"alipay/notify_url.do"
+		orderInfo += "&notify_url=" + "\"" + ApiService.baseurl+"/alipay/pay/notify_url.do"
 				+ "\"";
 
 		// 服务接口名称， 固定值

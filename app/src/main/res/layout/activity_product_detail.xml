@@ -215,7 +215,7 @@
                                 android:drawableRight="@mipmap/triangle_down"
                                 android:gravity="center"
                                 android:text="继续拖动,查看图片详情"
-                                android:textSize="@dimen/text_size_11" />
+                                android:textSize="@dimen/text_size_15" />
 
                             <View
                                 android:layout_width="0dp"
