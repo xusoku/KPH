@@ -118,10 +118,10 @@ private LinearLayout recharge_detail_letterlinear;
         } else if (recharge.stype.equals("6")) {
             stype = "已取消";
         }
-        recharge_detail_orderType.setText(srechargetype);
+        recharge_detail_orderType.setText(stype);
         recharge_detail_ordertime.setText(recharge.daddtime);
         recharge_detail_orderprice.setText("¥"+ UtilText.getRechargePrice(recharge.fmoney));
-        recharge_detail_orderPayType.setText(stype);
+        recharge_detail_orderPayType.setText(srechargetype);
         recharge_detail_orderCode.setText(recharge.schargenumber);
         if(TextUtils.isEmpty(recharge.sinvoice)){
             recharge_detail_letterlinear.setVisibility(View.GONE);
