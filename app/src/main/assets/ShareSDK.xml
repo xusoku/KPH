@@ -33,7 +33,7 @@
         SortId="3"
         AppKey="2154831728"
         AppSecret="67a2578082d96c7247e486cacc440c64"
-        RedirectUrl="http://www.dymfilm.com"
+        RedirectUrl="http://www.kangpinhui.com"
         ShareByAppClient="true"
         Enable="true" />
 
@@ -77,16 +77,16 @@
     <WechatMoments
         Id="5"
         SortId="5"
-        AppId="wx66f7b570890308e9"
-        AppSecret="d4624c36b6795d1d99dcf0547af5443d"
+        AppId="wx962774b475625f93"
+        AppSecret="fed7bbf7d3329d8b222803eff59b0b52"
         BypassApproval="false"
         Enable="true" />
         
 	<WechatFavorite
         Id="6"
         SortId="6"
-        AppId="wx66f7b570890308e9"
-        AppSecret="d4624c36b6795d1d99dcf0547af5443d"
+        AppId="wx962774b475625f93"
+        AppSecret="fed7bbf7d3329d8b222803eff59b0b52"
         Enable="true" />
 
 </DevInfor>
