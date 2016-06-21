@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.views.ProgressWheel;
+import com.umeng.analytics.MobclickAgent;
 
 
 /**
@@ -269,5 +270,18 @@ public abstract class BaseFragment extends Fragment
             toast.setText(msg);
         }
         toast.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(TAG);
+        MobclickAgent.onResume(mContext);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(TAG);
+        MobclickAgent.onPause(mContext);
     }
 }

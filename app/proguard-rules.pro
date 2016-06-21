@@ -58,6 +58,13 @@
 -dontwarn com.mob.**
 -dontwarn cn.sharesdk.**
 -dontwarn **.R$*
+#UMeng
+-keep public class com.davis.kangpinhui.R$*{
+public static final int *;
+}
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
 
 -keepclasseswithmembernames class * {
     native <methods>;

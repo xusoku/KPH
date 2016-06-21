@@ -112,7 +112,7 @@ public class PolygonActivity extends BaseActivity {
      * 方法必须重写
      */
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         mapView.onResume();
     }
@@ -121,7 +121,7 @@ public class PolygonActivity extends BaseActivity {
      * 方法必须重写
      */
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         mapView.onPause();
     }

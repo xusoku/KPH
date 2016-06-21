@@ -28,6 +28,7 @@ import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.views.ProgressWheel;
+import com.umeng.analytics.MobclickAgent;
 
 
 public abstract class BaseActivity extends AppCompatActivity
@@ -62,7 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity
         TAG=this.getClass().getSimpleName().toString();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         setTranslucentStatusBar(R.color.colormain);
         AppManager.getAppManager().addActivity(this);
         initBase();
@@ -364,6 +365,18 @@ public abstract class BaseActivity extends AppCompatActivity
         return (T) (view.findViewById(id));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(TAG);
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(TAG);
+        MobclickAgent.onPause(this);
+    }
 
     private void showTextToast(String msg) {
         if (toast == null) {

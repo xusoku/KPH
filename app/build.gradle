@@ -119,4 +119,6 @@ dependencies {
     compile files('libs/ShareSDK-Core-2.7.2.jar')
     compile files('libs/ShareSDK-Wechat-2.7.2.jar')
     compile files('libs/ShareSDK-Wechat-Core-2.7.2.jar')
+    //uMeng
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }
