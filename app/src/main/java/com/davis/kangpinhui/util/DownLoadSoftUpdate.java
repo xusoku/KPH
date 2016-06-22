@@ -177,6 +177,8 @@ public class DownLoadSoftUpdate {
                             downLoadSoftUpdate.notification.contentView = downLoadSoftUpdate.contentView;
                             downLoadSoftUpdate.notification.contentIntent = downLoadSoftUpdate.pendingIntent;
                             downLoadSoftUpdate.notificationManager.notify(downLoadSoftUpdate.notification_id, downLoadSoftUpdate.notification);
+                            downLoadSoftUpdate.notificationManager.cancel(downLoadSoftUpdate.notification_id);
+                            ToastUitl.showToast("下载失败");
                         }
                         break;
                     case REF_PROGRESS:
