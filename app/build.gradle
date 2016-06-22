@@ -119,9 +119,9 @@ dependencies {
     compile files('libs/ShareSDK-Core-2.7.2.jar')
     compile files('libs/ShareSDK-Wechat-2.7.2.jar')
     compile files('libs/ShareSDK-Wechat-Core-2.7.2.jar')
-    //uMeng
-    compile 'com.umeng.analytics:analytics:latest.integration'
     compile files('libs/ShareSDK-QQ-2.6.4.jar')
     compile files('libs/ShareSDK-QZone-2.6.4.jar')
     compile files('libs/ShareSDK-SinaWeibo-2.6.4.jar')
+    //uMeng
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }
