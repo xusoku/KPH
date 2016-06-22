@@ -22,6 +22,7 @@ import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.model.basemodel.Page;
+import com.davis.kangpinhui.util.DownLoadSoftUpdate;
 import com.davis.kangpinhui.util.LogUtils;
 
 import java.io.BufferedReader;
@@ -494,6 +495,11 @@ public interface ApiService {
             @Query("pi") String pi,
             @Query("pz") String pz
 
+    );
+    //34APP升级接口
+    @GET("common/checkversion.do")
+    Call<BaseModel<DownLoadSoftUpdate.VersionInfo>> update(
+            @Query("apptype") String apptype
     );
 
 

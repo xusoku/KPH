@@ -248,7 +248,7 @@ public class OrderDetailActivity extends BaseActivity {
         if(TextUtils.isEmpty(code)) {
             order_jiayicode_linear.setVisibility(View.GONE);
         }else{
-            order_detail_jiaoyi_code.setText("¥" + UtilText.getFloatToString(code));
+            order_detail_jiaoyi_code.setText(code);
         }
 
         String send=itemData.fpostprice;

@@ -74,6 +74,7 @@ public class AppApplication extends Application {
     }
 
     public static boolean isLogin(Context context) {
+         token=SharePreferenceUtils.getSharedPreferences().getString("token","");
         if (TextUtils.isEmpty(token)) {
             LoginActivity.jumpLoginActivity(instance);
             return false;
