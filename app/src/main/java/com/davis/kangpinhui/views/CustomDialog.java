@@ -27,7 +27,7 @@ public class CustomDialog extends Dialog {
 	}
 	public void show(int gravity ){
 		DisplayMetrics d = context.getResources().getDisplayMetrics();
-		show(gravity, (int) (d.widthPixels * 0.8));
+		show(gravity, (int) (d.widthPixels * 1.0));
 	}
 	public void show(int gravity ,int width){
 		super.show();

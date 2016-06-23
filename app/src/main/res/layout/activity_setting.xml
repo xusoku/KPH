@@ -9,8 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_measure_15dp"
-        android:layout_marginBottom="@dimen/common_measure_15dp">
+        android:layout_marginTop="@dimen/common_measure_10dp">
     <com.davis.kangpinhui.views.MineCustomLayout
         android:id="@+id/setting_about"
         android:layout_width="match_parent"
@@ -24,8 +23,36 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_measure_5dp"
-        android:layout_marginBottom="@dimen/common_measure_5dp">
+        android:layout_marginTop="@dimen/common_measure_10dp">
+    <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/setting_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:src="@mipmap/mine_kefu"
+        android:clickable="true"
+        android:onClick="doClick"
+        app:line="false"
+        app:text="版本更新"/>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_measure_10dp"
+        android:layout_marginBottom="@dimen/common_measure_15dp">
+    <com.davis.kangpinhui.views.MineCustomLayout
+        android:id="@+id/setting_share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:src="@mipmap/mine_kefu"
+        android:clickable="true"
+        android:onClick="doClick"
+        app:line="false"
+        app:text="推荐给好友"/>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_measure_15dp">
     <com.davis.kangpinhui.views.MineCustomLayout
         android:id="@+id/fix_pass"
         android:layout_width="match_parent"

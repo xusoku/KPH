@@ -104,11 +104,11 @@ public class ShareManager
         if (!TextUtils.isEmpty(titleUrl)) {
             sp.setTitleUrl(titleUrl); // 标题的超链接
         }else{
-            sp.setTitleUrl("http://www.kangpinhui.com"); // 标题的超链接,qq分享必须有链接不能为空（null和""）
+            sp.setTitleUrl("http://m.kangpinhui.com/common/html.do?type=shareurl"); // 标题的超链接,qq分享必须有链接不能为空（null和""）
         }
 
         sp.setSite("康品汇生鲜");//发布分享的网站名称//qq空间必填
-        sp.setSiteUrl("http://www.kangpinhui.com");//发布分享网站的地址//qq空间必填
+        sp.setSiteUrl("http://m.kangpinhui.com/common/html.do?type=shareurl");//发布分享网站的地址//qq空间必填
         sp.setShareType(Platform.SHARE_WEBPAGE);
         if (webUrl!=null) {
             sp.setUrl(webUrl);
@@ -126,7 +126,7 @@ public class ShareManager
     {
         if (shareDialog == null) {
             shareDialog = new CustomDialog(context);
-//            shareDialog.setWindowAnimations(R.style.bottom_dialog_animation);
+            shareDialog.setWindowAnimations(R.style.popwin_add_cart_anim_style);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_share, null);
             Button btnCancelShare = (Button) view.findViewById(R.id.btnCancelShare);
             ImageButton btnWeixin = (ImageButton) view.findViewById(R.id.btnWeixin);
@@ -192,7 +192,7 @@ public class ShareManager
             shareDialog.setContentView(view);
         }
         DisplayMetrics d = context.getResources().getDisplayMetrics();
-        shareDialog.show(Gravity.CENTER);
+        shareDialog.show(Gravity.BOTTOM);
     }
 
 
