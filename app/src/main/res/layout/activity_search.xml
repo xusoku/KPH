@@ -105,6 +105,7 @@
             android:layout_height="@dimen/common_measure_50dp"
             android:textColor="@color/colorgray"
             android:gravity="center"
+            android:clickable="true"
             android:onClick="doClick"
             android:text="清除历史记录"/>
     </LinearLayout>
