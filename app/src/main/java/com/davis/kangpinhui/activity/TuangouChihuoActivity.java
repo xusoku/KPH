@@ -18,6 +18,7 @@ import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.OrderDetail;
 import com.davis.kangpinhui.model.WeixinInfo;
@@ -84,7 +85,7 @@ public class TuangouChihuoActivity extends BaseActivity {
         super.onActivityLoading();
         if(NetWorkUtils.isAvailable(this)){
             onActivityLoadingSuccess();
-            tuangou_web.loadUrl("http://m2.kangpinhui.com:8089/weixin/tuanforapp.jsp?token="+AppApplication.token+"&apptype=android");
+            tuangou_web.loadUrl(ApiService.baseurl+"/weixin/tuanforapp.jsp?token="+AppApplication.token+"&apptype=android");
             tuangou_web.addJavascriptInterface(new DemoJavaScriptInterface(), "android");
         }else{
             onActivityLoadingFailed();

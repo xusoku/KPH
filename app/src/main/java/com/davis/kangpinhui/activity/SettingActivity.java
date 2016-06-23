@@ -84,7 +84,7 @@ public class SettingActivity extends BaseActivity {
             mShareManager.showShareDialog(this);
 
         }else if(view.getId()==R.id.setting_update){
-            new DownLoadSoftUpdate(this).checkVersionThread();
+            new DownLoadSoftUpdate(this).checkVersionThread(true);
         }
     }
 }

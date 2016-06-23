@@ -83,8 +83,10 @@ public class DownLoadSoftUpdate {
         this.updateFlag = updateFlag;
     }
 
-    public void checkVersionThread() {
-        checkUpdate();
+    private boolean flag=false;
+    public void checkVersionThread(boolean flag) {
+        this.flag=flag;
+        checkUpdate(flag);
     }
 
     public void cancelDownLoad() {
@@ -212,6 +214,7 @@ public class DownLoadSoftUpdate {
                         }
                         break;
                     case NEW_UPDATED:
+                        if(downLoadSoftUpdate.flag)
                         Toast.makeText(downLoadSoftUpdate.mContext, "已经是最新版", Toast.LENGTH_SHORT).show();
                         break;
                     default:
@@ -354,7 +357,7 @@ public class DownLoadSoftUpdate {
         return 0;
     }
 
-    public void checkUpdate() {
+    public void checkUpdate(boolean flag) {
         // 检测是否需要软件升级
 
         Call<BaseModel<VersionInfo>> call = ApiInstant.getInstant().update(AppApplication.apptype);

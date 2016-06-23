@@ -338,6 +338,7 @@ public class AddCartPopuWindow {
     private void getRequre(String[] list) {
 
         this.list = list;
+        add_cart_flow.removeAllViews();
         for (int i = 0; i < list.length; i++) {
             add_cart_flow.addView(newFlowTagView(list[i], i));
         }
