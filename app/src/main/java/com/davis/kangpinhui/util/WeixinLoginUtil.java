@@ -127,6 +127,7 @@ public class WeixinLoginUtil implements Handler.Callback,PlatformActionListener 
                         "\"privilege\":[]," +
                         "\"unionid\":\""+platform.getDb().getUserId()+"\"}";
 
+                LogUtils.e("weixinLogin","aa"+sss);
                 progressDialog.show();
                 Call<BaseModel<UserInfo>> call = ApiInstant.getInstant().weixinLogin(AppApplication.apptype, sss);
 
