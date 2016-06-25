@@ -173,7 +173,7 @@
                 android:value="com.davis.kangpinhui.adapter.MyAuthorizeAdapter"/>
             <!-- <meta-data android:name="AuthorizeAdapter" android:value="cn.sharesdk.demo.MyAdapter" /> -->
             <intent-filter>
-                <data android:scheme="tencent1104965302"/>
+                <data android:scheme="tencent100562174"/>
 
                 <action android:name="android.intent.action.VIEW"/>
 

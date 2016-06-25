@@ -42,16 +42,16 @@
     <QZone
         Id="4"
         SortId="4"
-        AppId="1104965302"
-        AppKey="d7ZQwlDIooaqv7p0"
+        AppId="100562174"
+        AppKey="9ed09a5e7f2115b7a0ac826c48662623"
         ShareByAppClient="false"
         Enable="true" />
 
     <QQ
         Id="2"
         SortId="2"
-        AppId="1104965302"
-        AppKey="d7ZQwlDIooaqv7p0"
+        AppId="100562174"
+        AppKey="9ed09a5e7f2115b7a0ac826c48662623"
         ShareByAppClient="true"
         Enable="true" />
     <!-- 
