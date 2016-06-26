@@ -1,53 +1,81 @@
 package com.davis.kangpinhui.activity;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
+import com.davis.kangpinhui.adapter.base.ViewHolder;
+import com.davis.kangpinhui.util.CommonManager;
+import com.davis.kangpinhui.util.DisplayMetricsUtils;
+import com.davis.kangpinhui.views.loopbanner.LoopBanner;
+import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
 
-public class ScreenSaverActivity extends BaseActivity implements View.OnClickListener {
+import java.util.ArrayList;
 
-    private ImageView screen_iv;
+public class ScreenSaverActivity extends Activity  {
+
+    private LoopBanner loopBanner;
+
     @Override
-    protected int setLayoutView() {
-        return R.layout.activity_screen_saver;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        loopBanner = new LoopBanner(this);
+        AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT);
+        loopBanner.setLayoutParams(params);
+        setContentView(loopBanner);
+
+        ArrayList<String> str=new ArrayList<>();
+        str.add("http://m.kangpinhui.com/images/1.jpg");
+        str.add("http://m.kangpinhui.com/images/2.jpg");
+
+        loopBanner.setPageAdapter(new LoopPageAdapter<String>(this, str, R.layout.activity_screen_saver) {
+
+            @Override
+            public void convert(ViewHolder holder, final String itemData, final int position) {
+                // TODO Auto-generated method stub
+                ImageView imageView = (ImageView) holder.getConvertView();
+                Glide.with(ScreenSaverActivity.this).load(itemData)
+                        .placeholder(R.mipmap.img_defualt_bg)
+                        .error(R.mipmap.img_defualt_bg)
+                        .into(imageView);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        finish();
+                    }
+                });
+            }
+        });
     }
 
     @Override
-    protected void initVariable() {
-
+    public void onResume()
+    {
+        // TODO Auto-generated method stub
+        super.onResume();
+        loopBanner.startTurning(3000);
     }
 
     @Override
-    protected void findViews() {
-        setTranslucentStatusBarGone();
-        screen_iv=$(R.id.screen_iv);
+    public void onStop()
+    {
+        // TODO Auto-generated method stub
+        super.onStop();
+        loopBanner.stopTurning();
     }
 
     @Override
-    protected void initData() {
-
+    public void onPause()
+    {
+        super.onPause();
+        loopBanner.stopTurning();
     }
 
-    @Override
-    protected void setListener() {
-        screen_iv.setOnClickListener(this);
-    }
-
-    @Override
-    public void doClick(View view) {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.screen_iv:
-                finish();
-                break;
-        }
-    }
 }

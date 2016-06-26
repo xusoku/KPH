@@ -22,7 +22,6 @@ public class ScreenSaverS extends Service {
     }
 
     public void onCreate() {
-        LogUtils.e("aaa","Oncre");
         // 屏蔽系统的屏保
         KeyguardManager manager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         KeyguardManager.KeyguardLock lock = manager

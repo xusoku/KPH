@@ -31,10 +31,10 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5765859467e58ea1b1007e71"></meta-data>
+            android:value="5765859467e58ea1b1007e71" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="${value}"></meta-data>
+            android:value="${value}" />
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="fb143d27d0d652393ccb54f86fb4afd6" />
@@ -178,7 +178,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ScreenSaverActivity"></activity>
+        <activity android:name=".activity.ScreenSaverActivity" />
+        <activity android:name=".activity.base.IsOnclickActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
     </application>
 
 </manifest>
