@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
      
     <application
         android:name=".AppApplication"
@@ -28,17 +29,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5765859467e58ea1b1007e71" >
-        </meta-data>
+            android:value="5765859467e58ea1b1007e71"></meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="${value}" >
-        </meta-data>
-
-
+            android:value="${value}"></meta-data>
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="fb143d27d0d652393ccb54f86fb4afd6" />
@@ -141,7 +137,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".activity.TuangouChihuoActivity" />
-        <activity android:name=".activity.AboutActivity"></activity>
+        <activity android:name=".activity.AboutActivity" />
 
         <!-- 调用新浪客户端分享，需要注册的回调activity -->
         <activity
@@ -149,9 +145,9 @@
             android:multiprocess="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -170,18 +166,18 @@
 
             <meta-data
                 android:name="AuthorizeAdapter"
-                android:value="com.davis.kangpinhui.adapter.MyAuthorizeAdapter"/>
+                android:value="com.davis.kangpinhui.adapter.MyAuthorizeAdapter" />
             <!-- <meta-data android:name="AuthorizeAdapter" android:value="cn.sharesdk.demo.MyAdapter" /> -->
             <intent-filter>
-                <data android:scheme="tencent100562174"/>
+                <data android:scheme="tencent100562174" />
 
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".activity.ScreenSaverActivity"></activity>
     </application>
 
 </manifest>
