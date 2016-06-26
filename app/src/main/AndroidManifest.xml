@@ -40,6 +40,7 @@
             android:value="fb143d27d0d652393ccb54f86fb4afd6" />
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" />
+        <service android:name=".service.ScreenSaverS" />
 
         <activity
             android:name=".MainActivity"

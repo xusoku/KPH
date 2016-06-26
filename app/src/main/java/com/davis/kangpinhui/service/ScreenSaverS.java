@@ -10,6 +10,7 @@ import android.os.IBinder;
 
 import com.davis.kangpinhui.activity.ScreenSaverActivity;
 import com.davis.kangpinhui.util.AppManager;
+import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.PowerManagerWakeLock;
 
 public class ScreenSaverS extends Service {
@@ -21,6 +22,7 @@ public class ScreenSaverS extends Service {
     }
 
     public void onCreate() {
+        LogUtils.e("aaa","Oncre");
         // 屏蔽系统的屏保
         KeyguardManager manager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         KeyguardManager.KeyguardLock lock = manager

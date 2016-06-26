@@ -10,6 +10,7 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.api.ApiService;
+import com.davis.kangpinhui.service.ScreenSaverS;
 import com.davis.kangpinhui.views.XWebView;
 
 public class AboutActivity extends BaseActivity {
