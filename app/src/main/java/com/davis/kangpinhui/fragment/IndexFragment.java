@@ -338,6 +338,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 RechargeActivity.jumpRechangeActivity(getActivity());
                 break;
             case R.id.index_tuan:
+                if(AppApplication.isLogin(getActivity()))
                 TuangouChihuoActivity.jumpTuangouChihuoActivity(getActivity());
                 break;
             case R.id.index_cart:

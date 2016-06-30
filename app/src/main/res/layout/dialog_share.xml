@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:visibility="visible"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <ImageButton
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:visibility="visible"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <ImageButton
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:visibility="visible"
+        android:visibility="gone"
         android:weightSum="4">
 
         <LinearLayout

@@ -7,3 +7,5 @@
 .DS_Store
 /build
 /captures
+
+app/src/main/java/com/davis/kangpinhui/api/ApiService.java
