@@ -11,6 +11,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.davis.kangpinhui.R;
+
 
 /**
  * 仿小米声音调节环形进度条
@@ -52,7 +54,7 @@ public class VolumnView extends View {
 	void init(Context context) {
 		paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		paint.setStyle(Style.STROKE);
-		bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.video_ic_ling);
+		bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.video_ic_ling);
 	}
 
 	@Override
