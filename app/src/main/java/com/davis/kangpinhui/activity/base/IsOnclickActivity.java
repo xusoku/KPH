@@ -8,7 +8,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import com.davis.kangpinhui.activity.ScreenSaverActivity;
-import com.davis.kangpinhui.activity.VideoPlayerActivity;
 import com.davis.kangpinhui.util.LogUtils;
 
 import java.util.Date;
@@ -96,7 +95,7 @@ public class IsOnclickActivity extends AppCompatActivity {
      * 显示屏保
      */
     private void showScreenSaver() {
-        Intent intent = new Intent(this, VideoPlayerActivity.class);
+        Intent intent = new Intent(this, ScreenSaverActivity.class);
         startActivity(intent);
 
     }

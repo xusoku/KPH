@@ -1,6 +1,7 @@
 package com.davis.kangpinhui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.davis.kangpinhui.views.loopbanner.LoopBanner;
 import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ScreenSaverActivity extends Activity  {
 
@@ -25,6 +27,16 @@ public class ScreenSaverActivity extends Activity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Random random=new Random();
+        int i=random.nextInt(2);
+        if(i==0){
+            Intent it=new Intent(this,VideoPlayerActivity.class);
+            startActivity(it);
+            finish();
+        }else{
+
+        }
 
         loopBanner = new LoopBanner(this);
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT);
