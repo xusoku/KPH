@@ -40,7 +40,7 @@ public class ScreenSaverActivity extends Activity  {
 
         loopBanner = new LoopBanner(this);
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT);
-        loopBanner.setLayoutParams(params);
+        loopBanner.setLayoutParams(params);   
         setContentView(loopBanner);
 
         ArrayList<String> str=new ArrayList<>();
