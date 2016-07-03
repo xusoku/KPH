@@ -180,8 +180,10 @@
         </activity>
         <activity android:name=".activity.VideoPlayerActivity" />
         <activity android:name=".activity.ScreenSaverActivity" />
-        <activity android:name=".activity.base.IsOnclickActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+        <activity
+            android:name=".activity.base.IsOnclickActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity android:name=".activity.TestActivity"></activity>
     </application>
 
 </manifest>
