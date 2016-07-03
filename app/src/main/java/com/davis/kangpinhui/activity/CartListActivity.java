@@ -35,6 +35,9 @@ public class CartListActivity extends BaseActivity {
 
     ArrayList<Cart> list;
 
+
+    
+
     public static void jumpCartListActivity(Context context) {
         if (AppApplication.isLogin(context)) {
 
