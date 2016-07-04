@@ -28,7 +28,7 @@ public class AppApplication extends Application {
     /**
      * 全局context单例
      */
-    private static AppApplication instance = null;
+    private static AppApplication instance  = null;
 
     public static String apptype = "android";
     public static String shopid = "";
