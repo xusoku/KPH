@@ -31,7 +31,7 @@ import com.davis.kangpinhui.views.ProgressWheel;
 import com.umeng.analytics.MobclickAgent;
 
 
-public abstract class BaseActivity extends IsOnclickActivity
+public abstract class BaseActivity extends AppCompatActivity
 {
 
     public Context mContext;

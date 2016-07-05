@@ -41,7 +41,8 @@ public class DownLoadSoftUpdate {
     /**
      * 软件更新
      */
-    public final static File APP_ROOT_DIR_FILE = new File(Environment.getExternalStorageDirectory(), "KPH");
+    public final static File APP_ROOT_DIR_FILE = new File(AppApplication.getApplication().getFilesDir(), "KPH");
+//    public final static File APP_ROOT_DIR_FILE = new File(Environment.getExternalStorageDirectory(), "KPH");
 
     private Context mContext;
     private static final int TIMEOUT = 10 * 1000;// 超时
@@ -66,10 +67,14 @@ public class DownLoadSoftUpdate {
         this.mContext = context;
         this.path = APP_ROOT_DIR_FILE.getAbsolutePath() + File.separator
                 + "kph.apk";
-        File file = new File(APP_ROOT_DIR_FILE.getAbsolutePath());
+        this.path=Environment.getExternalStorageDirectory().getPath()+ "/Android/data/com.davis.kangpinhui"+File.separator + "KPH"
+                + File.separator;
+        File file = new File(this.path);
         if (!file.exists()) {
             file.mkdirs();
         }
+        this.path=Environment.getExternalStorageDirectory().getPath()+ "/Android/data/com.davis.kangpinhui"+File.separator + "KPH"
+                + File.separator+"kph.apk";
     }
 
     public void CancelNotification() {
@@ -137,14 +142,14 @@ public class DownLoadSoftUpdate {
                             return;
                         }
                         // 下载完成，点击安装
-                        if (!FileUtils.isSDCardEnable()) {
+//                        if (!FileUtils.isSDCardEnable()) {
                             try {
-                                String[] args2 = {"chmod", "777", downLoadSoftUpdate.path};
+                                String[] args2 = {"chmod", "755", downLoadSoftUpdate.path};
                                 Runtime.getRuntime().exec(args2);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                        }
+//                        }
                         Uri uri = Uri.fromFile(new File(downLoadSoftUpdate.path));
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setDataAndType(uri,

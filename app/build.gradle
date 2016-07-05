@@ -26,7 +26,7 @@ android {
             storePassword "123"
             keyAlias "kph.keystore"
             keyPassword "123"
-            storeFile file('/Users/davis/AndroidStudioProjects/Kangpinhui/app/kph.keystore')
+            storeFile file('/Users/xushengfu/AndroidStudioProjects/Kangpinhui/app/kph.keystore')
         }
     }
     buildTypes {
