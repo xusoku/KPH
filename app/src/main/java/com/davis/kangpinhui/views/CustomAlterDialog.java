@@ -134,6 +134,7 @@ public class CustomAlterDialog {
     }
 
     public void setContent_text(String str) {
+        content_text.setVisibility(View.VISIBLE);
         content_text.setText(str);
     }
 

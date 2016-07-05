@@ -31,6 +31,7 @@ import com.davis.kangpinhui.util.GlideCircleTransform;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.UtilText;
+import com.davis.kangpinhui.views.CustomAlterDialog;
 import com.davis.kangpinhui.views.MineCustomLayout;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
 
@@ -210,17 +211,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 SettingActivity.jumpSettingActivity(getActivity());
                 break;
             case R.id.mine_kefu:
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("联系客服")
-                        .setMessage("客服电话："+AppApplication.kefu)
-                        .setPositiveButton("呼叫", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + AppApplication.kefu));
-                                startActivity(intent);
-                            }
-                        }).setNegativeButton("取消",null)
-                        .show();
+                final CustomAlterDialog dialog=new CustomAlterDialog(getActivity());
+                dialog.setTitle("联系客服");
+                dialog.setContent_text("客服电话：" + AppApplication.kefu);
+                dialog .setConfirmButton("呼叫", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + AppApplication.kefu));
+                        startActivity(intent);
+                    }
+                }).setCancelButton("取消");
                 break;
             case R.id.mine_ti_huo:
                 MyTiHuoActivity.jumpMyTiHuoActivity(getActivity());

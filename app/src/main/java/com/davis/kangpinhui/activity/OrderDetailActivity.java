@@ -35,6 +35,7 @@ import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
+import com.davis.kangpinhui.views.CustomAlterDialog;
 import com.davis.kangpinhui.views.CustomTypefaceEditText;
 import com.davis.kangpinhui.views.StretchedListView;
 
@@ -175,29 +176,28 @@ public class OrderDetailActivity extends BaseActivity {
                                     } else if (which==1) {//微信
                                         getWeixinPay(itemData.sordernumber);
                                     }else{
-                                        AlertDialog.Builder builder=new AlertDialog.Builder(OrderDetailActivity.this);
+                                        final CustomAlterDialog builder=new CustomAlterDialog(OrderDetailActivity.this);
                                         builder.setTitle("请输入密码");
                                         final CustomTypefaceEditText editText=new CustomTypefaceEditText(OrderDetailActivity.this);
                                         editText.setTextColor(Color.parseColor("#000000"));
-                                        editText.setTextSize(DisplayMetricsUtils.dp2px(8));
+                                        editText.setTextSize(DisplayMetricsUtils.dp2px(15));
                                         editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
                                         editText.setSingleLine();
                                         editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                                        builder.setView(editText);
-                                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        builder.setContentView(editText);
+                                        builder.setConfirmButton("确定", new View.OnClickListener() {
                                             @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                String pass=editText.getText().toString().trim();
-                                                if(TextUtils.isEmpty(pass)){
+                                            public void onClick(View hich) {
+                                                builder.dismiss();
+                                                String pass = editText.getText().toString().trim();
+                                                if (TextUtils.isEmpty(pass)) {
                                                     ToastUitl.showToast("请输入密码");
-                                                }else {
-                                                    getYuePay(itemData.sordernumber,pass);
+                                                } else {
+                                                    getYuePay(itemData.sordernumber, pass);
                                                 }
                                             }
                                         });
-                                        builder.setNegativeButton("取消", null);
-                                        AlertDialog dialog1=builder.create();
-                                        dialog1.show();
+                                        builder.setCancelButton("取消");
                                     }
                                 }
                             }).show();
@@ -272,17 +272,18 @@ public class OrderDetailActivity extends BaseActivity {
 
         switch (view.getId()) {
             case R.id.order_detail_kefu:
-                new AlertDialog.Builder(this)
-                        .setTitle("联系客服")
-                        .setMessage("客服电话：" + AppApplication.kefu)
-                        .setPositiveButton("呼叫", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + AppApplication.kefu));
-                                startActivity(intent);
-                            }
-                        }).setNegativeButton("取消", null)
-                        .show();
+                final CustomAlterDialog dialog=new CustomAlterDialog(this);
+                        dialog.setTitle("联系客服");
+                dialog.setContent_text("客服电话：" + AppApplication.kefu);
+                dialog.setConfirmButton("呼叫", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View which) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + AppApplication.kefu));
+                        startActivity(intent);
+                    }
+                });
+                dialog.setCancelButton("取消");
                 break;
         }
     }

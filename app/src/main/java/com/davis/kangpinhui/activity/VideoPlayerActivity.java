@@ -36,6 +36,7 @@ import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.util.DimenUtils;
 import com.davis.kangpinhui.util.FileUtils;
 import com.davis.kangpinhui.util.LogUtils;
+import com.davis.kangpinhui.views.CustomAlterDialog;
 import com.davis.kangpinhui.views.fullvideoview.FullScreenVideoView;
 import com.davis.kangpinhui.views.fullvideoview.LightnessController;
 import com.davis.kangpinhui.views.fullvideoview.VolumnController;
@@ -450,19 +451,19 @@ public class VideoPlayerActivity extends Activity implements OnClickListener
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
 
-                new AlertDialog.Builder(VideoPlayerActivity.this)
-                        .setMessage("无法播放此视频。")
-                        .setPositiveButton("确定",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
+               final CustomAlterDialog dialog= new CustomAlterDialog(VideoPlayerActivity.this);
+                dialog.setTitle("警告");
+                dialog.setContent_text("无法播放此视频。");
+                        dialog.setConfirmButton("确定",
+                                new View.OnClickListener() {
+                                    public void onClick(View ichButton) {
                                         /* If we get here, there is no onError listener, so
                                          * at least inform them that the video is over.
                                          */
+                                        dialog.dismiss();
                                         finish();
                                     }
-                                })
-                        .setCancelable(false)
-                        .show();
+                                });
                 return true;
             }
         });
@@ -607,41 +608,35 @@ public class VideoPlayerActivity extends Activity implements OnClickListener
     };
 
     public void showDialog(String msg) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        StringBuilder build = new StringBuilder();
-        alert
-//                .setTitle("发现新的版本")
-                .setMessage(msg)
-                .setPositiveButton("继续",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                playVideo();
-                            }
-                        })
-                .setNegativeButton("取消",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                finish();
-                            }
-                        });
-        alert.create().show();
+        final CustomAlterDialog alert = new CustomAlterDialog(this);
+        alert.setTitle("信息");
+        alert.setContent_text(msg);
+        alert.setConfirmButton("继续",
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        alert.dismiss();
+                        playVideo();
+                    }
+                });
+        alert.setCancelButton("取消",
+                new View.OnClickListener() {
+                    public void onClick(View f) {
+                        alert.dismiss();
+                        finish();
+                    }
+                });
     }
     public void showDialog() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        StringBuilder build = new StringBuilder();
-        alert
-//                .setTitle("发现新的版本")
-                .setMessage("暂无网络")
-                .setPositiveButton("确定",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                playVideo();
-                            }
-                        });
-        alert.create().show();
+        final CustomAlterDialog alert = new CustomAlterDialog(this);
+        alert.setTitle("警告");
+        alert.setContent_text("暂无网络");
+        alert .setConfirmButton("确定",
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        alert.dismiss();
+                        playVideo();
+                    }
+                });
     }
 
 }

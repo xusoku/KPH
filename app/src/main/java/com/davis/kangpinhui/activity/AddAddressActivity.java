@@ -27,6 +27,7 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.RegexUtils;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.views.CustomAlterDialog;
 import com.davis.kangpinhui.views.CustomTypefaceTextView;
 
 import java.util.ArrayList;
@@ -273,12 +274,16 @@ public class AddAddressActivity extends BaseActivity {
                 }
                 break;
             case R.id.delete_address:
-                new AlertDialog.Builder(this).setMessage("确定要删除?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                final CustomAlterDialog dialog=new CustomAlterDialog(this);
+                dialog.setTitle("确定要删除?");
+                dialog.setConfirmButton("确定", new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View which) {
+                        dialog.dismiss();
                         deleteaddress();
                     }
-                }).setNegativeButton("取消", null).show();
+                });
+                dialog.setCancelButton("取消");
                 break;
         }
     }

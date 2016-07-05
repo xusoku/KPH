@@ -32,6 +32,7 @@ import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.views.CustomAlterDialog;
 import com.davis.kangpinhui.views.CustomTypefaceEditText;
 import com.davis.kangpinhui.views.LoadMoreListView;
 import com.davis.kangpinhui.views.StretchedListView;
@@ -150,10 +151,13 @@ public class AllorderFragment extends BaseFragment {
                     @Override
                     public void onClick(View v) {
 
-                        new AlertDialog.Builder(mContext).setTitle("是否取消订单").setNegativeButton("取消", null)
-                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        final CustomAlterDialog dialog=new CustomAlterDialog(mContext);
+                        dialog.setTitle("是否取消订单");
+                        dialog.setCancelButton("取消");
+                        dialog.setConfirmButton("确定", new View.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
                                         Call<BaseModel> call = ApiInstant.getInstant().cancelOrder(AppApplication.apptype, itemData.sordernumber, AppApplication.token);
                                         call.enqueue(new ApiCallback<BaseModel>() {
                                             @Override
@@ -171,7 +175,7 @@ public class AllorderFragment extends BaseFragment {
                                             }
                                         });
                                     }
-                                }).show();
+                                });
                     }
                 });
 
@@ -190,29 +194,28 @@ public class AllorderFragment extends BaseFragment {
                                         } else if (which==1) {//微信
                                             getWeixinPay(itemData.sordernumber);
                                         }else{
-                                            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                                           final CustomAlterDialog builder=new CustomAlterDialog(getActivity());
                                             builder.setTitle("请输入密码");
                                             final CustomTypefaceEditText editText=new CustomTypefaceEditText(getActivity());
                                             editText.setTextColor(Color.parseColor("#000000"));
-                                            editText.setTextSize(DisplayMetricsUtils.dp2px(8));
+                                            editText.setTextSize(DisplayMetricsUtils.dp2px(15));
                                             editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
                                             editText.setSingleLine();
                                             editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                                            builder.setView(editText);
-                                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            builder.setContentView(editText);
+                                            builder.setConfirmButton("确定", new View.OnClickListener() {
                                                 @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    String pass=editText.getText().toString().trim();
-                                                    if(TextUtils.isEmpty(pass)){
+                                                public void onClick(View v) {
+                                                    builder.dismiss();
+                                                    String pass = editText.getText().toString().trim();
+                                                    if (TextUtils.isEmpty(pass)) {
                                                         ToastUitl.showToast("请输入密码");
-                                                    }else {
-                                                        getYuePay(itemData.sordernumber,pass);
+                                                    } else {
+                                                        getYuePay(itemData.sordernumber, pass);
                                                     }
                                                 }
                                             });
-                                            builder.setNegativeButton("取消", null);
-                                            AlertDialog dialog1=builder.create();
-                                            dialog1.show();
+                                            builder.setCancelButton("取消");
                                         }
 
                                     }

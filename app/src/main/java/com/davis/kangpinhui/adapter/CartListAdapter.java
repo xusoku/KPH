@@ -20,6 +20,7 @@ import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
+import com.davis.kangpinhui.views.CustomAlterDialog;
 
 import java.util.ArrayList;
 
@@ -113,10 +114,13 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
         ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(contxt).setTitle("确定要删除吗？").setNegativeButton("取消", null)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                final CustomAlterDialog dialog=new CustomAlterDialog(contxt);
+                dialog.setTitle("确定要删除吗？");
+                dialog.setCancelButton("取消");
+                        dialog.setConfirmButton("确定", new View.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick(View v) {
+                                dialog.dismiss();
                                 Call<BaseModel> call = ApiInstant.getInstant().deleteCart(AppApplication.apptype,
                                         AppApplication.shopid, itemData.iproductid, AppApplication.token);
                                 call.enqueue(new ApiCallback<BaseModel>() {
@@ -132,7 +136,7 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
                                     }
                                 });
                             }
-                        }).show();
+                        });
 
             }
         });

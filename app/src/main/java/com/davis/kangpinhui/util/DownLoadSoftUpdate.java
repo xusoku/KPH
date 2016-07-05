@@ -237,17 +237,13 @@ public class DownLoadSoftUpdate {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                alert.dismiss();
                                 createNotification();
                                 downLoadThread();
                                 cancelFlag = true;
                             }
                         });
-        alert.setCancelButton("下次再说",
-                new View.OnClickListener() {
-                    public void onClick(View v) {
-                        alert.dismiss();
-                    }
-                });
+        alert.setCancelButton("下次再说");
 
     }
 //    public void showDialog(String msg) {

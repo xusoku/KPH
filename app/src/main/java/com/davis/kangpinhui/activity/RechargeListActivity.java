@@ -25,6 +25,7 @@ import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
+import com.davis.kangpinhui.views.CustomAlterDialog;
 import com.davis.kangpinhui.views.LoadMoreListView;
 
 import java.util.ArrayList;
@@ -140,29 +141,30 @@ public class RechargeListActivity extends BaseActivity {
                 holder.getView(R.id.recharge_item_cancel).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        new AlertDialog.Builder(RechargeListActivity.this)
-                                .setTitle("是否取消订单？")
-                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        final CustomAlterDialog dialog=new CustomAlterDialog(RechargeListActivity.this);
+                                dialog.setTitle("是否取消订单？");
+                        dialog.setConfirmButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View  which) {
+                                dialog.dismiss();
+                                Call<BaseModel> call = ApiInstant.getInstant().cancelRecharge(AppApplication.apptype, itemData.schargenumber, AppApplication.token);
+                                call.enqueue(new ApiCallback<BaseModel>() {
                                     @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Call<BaseModel> call=ApiInstant.getInstant().cancelRecharge(AppApplication.apptype,itemData.schargenumber,AppApplication.token);
-                                        call.enqueue(new ApiCallback<BaseModel>() {
-                                            @Override
-                                            public void onSucssce(BaseModel baseModel) {
-                                                ToastUitl.showToast("取消成功");
-                                                initData();
-                                                list.clear();
-                                            }
-
-                                            @Override
-                                            public void onFailure() {
-
-                                            }
-                                        });
+                                    public void onSucssce(BaseModel baseModel) {
+                                        dialog.dismiss();
+                                        ToastUitl.showToast("取消成功");
+                                        initData();
+                                        list.clear();
                                     }
-                                }).setNegativeButton("取消",null)
-                                .show();
 
+                                    @Override
+                                    public void onFailure() {
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
+                        });
+                        dialog.setCancelButton("取消");
                     }
                 });
 
