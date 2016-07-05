@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.views.CustomAlterDialog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -228,29 +230,51 @@ public class DownLoadSoftUpdate {
 
     public void showDialog(String msg) {
         // 发现新版本，提示用户更新
-        AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-        StringBuilder build = new StringBuilder();
-        alert.setTitle("发现新的版本")
-                .setMessage(msg)
-                .setPositiveButton("现在更新",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
+        final CustomAlterDialog alert = new CustomAlterDialog(mContext);
+        alert.setTitle("发现新的版本");
+                alert.setContent_text(msg);
+                alert.setConfirmButton("现在更新",
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
                                 createNotification();
                                 downLoadThread();
                                 cancelFlag = true;
                             }
-                        })
-                .setNegativeButton("下次再说",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                dialog.dismiss();
-                            }
                         });
-        alert.create().show();
+        alert.setCancelButton("下次再说",
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        alert.dismiss();
+                    }
+                });
 
     }
+//    public void showDialog(String msg) {
+//        // 发现新版本，提示用户更新
+//        AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+//        StringBuilder build = new StringBuilder();
+//        alert.setTitle("发现新的版本")
+//                .setMessage(msg)
+//                .setPositiveButton("现在更新",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog,
+//                                                int which) {
+//                                createNotification();
+//                                downLoadThread();
+//                                cancelFlag = true;
+//                            }
+//                        })
+//                .setNegativeButton("下次再说",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog,
+//                                                int which) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+//        alert.create().show();
+//
+//    }
 
     private RemoteViews contentView;
 
