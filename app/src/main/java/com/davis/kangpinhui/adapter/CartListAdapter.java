@@ -115,7 +115,8 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
             @Override
             public void onClick(View v) {
                 final CustomAlterDialog dialog=new CustomAlterDialog(contxt);
-                dialog.setTitle("确定要删除吗？");
+                dialog.setTitle("删除");
+                dialog.setContent_text("确定要删除吗？");
                 dialog.setCancelButton("取消");
                         dialog.setConfirmButton("确定", new View.OnClickListener() {
                             @Override
