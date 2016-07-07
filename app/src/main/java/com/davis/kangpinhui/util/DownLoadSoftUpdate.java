@@ -170,25 +170,26 @@ public class DownLoadSoftUpdate {
                         downLoadSoftUpdate.mContext.startActivity(intent);
                         break;
                     case DOWN_ERROR:
-                        // notification.setLatestEventInfo(mContext, "看客影视", "下载失败",
-                        // pendingIntent);
-                        if (downLoadSoftUpdate.mContext != null && downLoadSoftUpdate.notification != null) {
-                            Intent it = new Intent(downLoadSoftUpdate.mContext, MainActivity.class);
-                            SharePreferenceUtils.getSharedPreferences().putString("version", "");
-                            downLoadSoftUpdate.pendingIntent = PendingIntent.getActivity(downLoadSoftUpdate.mContext, 0, it, 0);
-                            downLoadSoftUpdate.contentView = new RemoteViews(downLoadSoftUpdate.mContext.getPackageName(),
-                                    R.layout.notification_item_finish);
-                            downLoadSoftUpdate.notification.contentView = downLoadSoftUpdate.contentView;
-                            downLoadSoftUpdate.contentView.setTextViewText(R.id.notificationfinishTitle,
-                                    "康品汇");
-                            downLoadSoftUpdate.contentView.setTextViewText(R.id.notificationfinishPercent,
-                                    "下载失败");
-                            downLoadSoftUpdate.notification.contentView = downLoadSoftUpdate.contentView;
-                            downLoadSoftUpdate.notification.contentIntent = downLoadSoftUpdate.pendingIntent;
-                            downLoadSoftUpdate.notificationManager.notify(downLoadSoftUpdate.notification_id, downLoadSoftUpdate.notification);
-                            downLoadSoftUpdate.notificationManager.cancel(downLoadSoftUpdate.notification_id);
-                            ToastUitl.showToast("下载失败");
-                        }
+//                        if (downLoadSoftUpdate.mContext != null && downLoadSoftUpdate.notification != null) {
+//                            Intent it = new Intent(downLoadSoftUpdate.mContext, MainActivity.class);
+//                            SharePreferenceUtils.getSharedPreferences().putString("version", "");
+//                            downLoadSoftUpdate.pendingIntent = PendingIntent.getActivity(downLoadSoftUpdate.mContext, 0, it, 0);
+//                            downLoadSoftUpdate.contentView = new RemoteViews(downLoadSoftUpdate.mContext.getPackageName(),
+//                                    R.layout.notification_item_finish);
+//                            downLoadSoftUpdate.notification.contentView = downLoadSoftUpdate.contentView;
+//                            downLoadSoftUpdate.contentView.setTextViewText(R.id.notificationfinishTitle,
+//                                    "康品汇");
+//                            downLoadSoftUpdate.contentView.setTextViewText(R.id.notificationfinishPercent,
+//                                    "下载失败");
+//                            downLoadSoftUpdate.notification.contentView = downLoadSoftUpdate.contentView;
+//                            downLoadSoftUpdate.notification.contentIntent = downLoadSoftUpdate.pendingIntent;
+//                            downLoadSoftUpdate.notificationManager.notify(downLoadSoftUpdate.notification_id, downLoadSoftUpdate.notification);
+//                            downLoadSoftUpdate.notificationManager.cancel(downLoadSoftUpdate.notification_id);
+//                            ToastUitl.showToast("下载失败");
+//                        }
+                        Uri u = Uri.parse(downLoadSoftUpdate.versionInfos.downurl);
+                        Intent intet = new Intent(Intent.ACTION_VIEW, u);
+                        downLoadSoftUpdate.mContext.startActivity(intet);
                         break;
                     case REF_PROGRESS:
                         downLoadSoftUpdate.contentView.setTextViewText(R.id.notificationPercent, msg.arg1
