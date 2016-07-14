@@ -88,14 +88,14 @@ public class OrderActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (AppApplication.address != null) {
-            order_address_text.setText(AppApplication.address.saddress);
-            order_address_phone.setText(AppApplication.address.smobile);
-            order_address_pepole.setText(AppApplication.address.saddressname);
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            order_address_text.setLayoutParams(layoutParams);
-        } else {
+//        if (AppApplication.address != null) {
+//            order_address_text.setText(AppApplication.address.saddress);
+//            order_address_phone.setText(AppApplication.address.smobile);
+//            order_address_pepole.setText(AppApplication.address.saddressname);
+//            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+//            order_address_text.setLayoutParams(layoutParams);
+//        } else {
             order_address_text.setText("暂无地址,请点击添加您的收货地址");
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
@@ -103,7 +103,7 @@ public class OrderActivity extends BaseActivity {
 
             order_address_phone.setText("");
             order_address_pepole.setText("");
-        }
+//        }
     }
 
     @Override
@@ -143,9 +143,9 @@ public class OrderActivity extends BaseActivity {
             add_cart_add_passwrod_linear.setVisibility(View.GONE);
         }
 
-        if (AppApplication.address == null) {
+//        if (AppApplication.address == null) {
             getAddresslist();
-        }
+//        }
     }
 
     @Override

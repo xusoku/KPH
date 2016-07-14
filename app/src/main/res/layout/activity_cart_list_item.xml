@@ -30,6 +30,7 @@
                     android:layout_width="@dimen/common_measure_40dp"
                     android:layout_height="@dimen/common_measure_40dp"
                     android:layout_marginLeft="@dimen/common_measure_10dp"
+                    android:focusable="false"
                     android:gravity="center"
                     android:padding="@dimen/common_measure_5dp"
                     android:scaleX="1.3"

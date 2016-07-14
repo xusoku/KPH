@@ -133,6 +133,14 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        id = intent.getStringExtra("id");
+        findViews();
+        initData();
+    }
+
+    @Override
     protected void onActivityLoading() {
         super.onActivityLoading();
     }
@@ -214,7 +222,10 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
                 }
                 break;
             case R.id.add_cart_number_linear:
-                CartListActivity.jumpCartListActivity((this));
+                Intent intent=new Intent(ProductDetailActivity.this,CartListActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+//                CartListActivity.jumpCartListActivity((this));
                 break;
             case R.id.product_detail_share:
                 ShareManager mShareManager = new ShareManager(mActivity);

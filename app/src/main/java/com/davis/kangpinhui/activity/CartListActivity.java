@@ -3,6 +3,7 @@ package com.davis.kangpinhui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -67,6 +68,16 @@ public class CartListActivity extends BaseActivity {
         add_cart_number_text = $(R.id.add_cart_number_text);
         add_cart_list_addlinear = $(R.id.add_cart_list_addlinear);
         list = new ArrayList<>();
+
+        cart_listvew.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(CartListActivity.this,ProductDetailActivity.class);
+                        intent.putExtra("id", list.get(position).iproductid);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
