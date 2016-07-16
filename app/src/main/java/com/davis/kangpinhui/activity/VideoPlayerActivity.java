@@ -57,6 +57,7 @@ public class VideoPlayerActivity extends Activity implements OnClickListener
 
     //	private String videoUrl = "file:///android_asset/video2.mp4";
     // 自动隐藏顶部和底部View的时间
+
     private static final int HIDE_TIME = 5000;
     // 自定义VideoView
     private FullScreenVideoView mVideo;
