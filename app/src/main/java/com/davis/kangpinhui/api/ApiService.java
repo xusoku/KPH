@@ -23,19 +23,11 @@ import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.model.basemodel.Page;
 import com.davis.kangpinhui.util.DownLoadSoftUpdate;
-import com.davis.kangpinhui.util.LogUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -53,8 +45,10 @@ import retrofit2.http.Query;
 public interface ApiService {
 
 
-   
-        //http://www.tngou.net/tnfs/api/list?page=1&rows=10
+    public static String baseurl="http://m.kangpinhui.com";
+    public static String picurl="http://img.kangpinhui.com/physic";
+
+    //http://www.tngou.net/tnfs/api/list?page=1&rows=10
 //        @GET("tnfs/api/list")
 //        Call<Grils> listGrils(@Query("id") int id,@Query("page") int page,@Query("rows") int rows);
 
