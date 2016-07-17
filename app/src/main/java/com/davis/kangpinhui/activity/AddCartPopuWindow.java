@@ -168,7 +168,7 @@ public class AddCartPopuWindow {
                         @Override
                         public void onSucssce(BaseModel baseModel) {
                             ToastUitl.showToast("添加成功");
-//                            EventBus.getDefault().post(new Extendedinfo());
+                            EventBus.getDefault().post(new Extendedinfo());
 
                             String number = AppApplication.getCartcount();
                             if (TextUtils.isEmpty(number) || number.equals("0.0")) {
