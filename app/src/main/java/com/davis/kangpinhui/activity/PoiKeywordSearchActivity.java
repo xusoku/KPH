@@ -43,6 +43,7 @@ import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.adapter.base.CommonBaseAdapter;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
 import com.davis.kangpinhui.model.Address;
+import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.CommonManager;
@@ -374,6 +375,7 @@ public class PoiKeywordSearchActivity extends Activity implements
                 finish();
                 AppManager.getAppManager().finishActivity(ShopActivity.class);
                 EventBus.getDefault().post(new Address());
+                EventBus.getDefault().post(new Extendedinfo());
                 CommonManager.dismissSoftInputMethod(PoiKeywordSearchActivity.this, listView.getWindowToken());
 
             }

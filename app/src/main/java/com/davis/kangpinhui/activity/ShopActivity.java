@@ -16,6 +16,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.Address;
+import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
@@ -158,6 +159,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
                             SharePreferenceUtils.getSharedPreferences().putString("shopid", "99");
                             SharePreferenceUtils.getSharedPreferences().putString("address", itemData.shopname);
                             EventBus.getDefault().post(new Address());
+                            EventBus.getDefault().post(new Extendedinfo());
                             finish();
                         }else {
                             PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(ShopActivity.this, itemData, type);
