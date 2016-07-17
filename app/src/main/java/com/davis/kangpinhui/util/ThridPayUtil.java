@@ -13,12 +13,15 @@ import com.davis.kangpinhui.activity.PayResultActivity;
 import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.activity.RechargeListActivity;
 import com.davis.kangpinhui.activity.TuangouChihuoActivity;
+import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.util.alipay.PayResult;
 import com.davis.kangpinhui.util.alipay.ZhifubaoPayUtil;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by davis on 16/6/1.
@@ -104,6 +107,7 @@ public class ThridPayUtil {
                         AppManager.getAppManager().finishActivity(RechargeListActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);
                         AppManager.getAppManager().finishActivity(OrderActivity.class);
+                        EventBus.getDefault().post(new Extendedinfo());
                     } else {
                         // 判断resultStatus 为非“9000”则代表可能支付失败
                         // “8000”代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
@@ -121,6 +125,7 @@ public class ThridPayUtil {
                         AppManager.getAppManager().finishActivity(RechargeActivity.class);
                         AppManager.getAppManager().finishActivity(CartListActivity.class);
                         AppManager.getAppManager().finishActivity(OrderActivity.class);
+                        EventBus.getDefault().post(new Extendedinfo());
                     }
                     break;
                 }

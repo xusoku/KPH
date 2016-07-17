@@ -152,7 +152,8 @@ public class AllorderFragment extends BaseFragment {
                     public void onClick(View v) {
 
                         final CustomAlterDialog dialog=new CustomAlterDialog(mContext);
-                        dialog.setTitle("是否取消订单");
+                        dialog.setTitle("订单");
+                        dialog.setContent_text("是否取消订单");
                         dialog.setCancelButton("取消");
                         dialog.setConfirmButton("确定", new View.OnClickListener() {
                                     @Override
@@ -166,7 +167,7 @@ public class AllorderFragment extends BaseFragment {
                                                 EventBus.getDefault().post(new Extendedinfo());
                                                 list.clear();
                                                 startFragmentLoading();
-//                                                chageTitle();
+                                                chageTitle();
                                             }
 
                                             @Override
