@@ -183,7 +183,7 @@ public class AllorderFragment extends BaseFragment {
                 conutiPay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final CharSequence[] typepaytext = {"余额支付","在线支付 微信支付", "在线支付 支付宝支付"};
+                        final CharSequence[] typepaytext = {"VIP卡支付","在线支付 微信支付", "在线支付 支付宝支付"};
                         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle("支付方式")
                                 .setItems(typepaytext, new DialogInterface.OnClickListener() {

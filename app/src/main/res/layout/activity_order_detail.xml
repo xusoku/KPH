@@ -321,6 +321,7 @@
                 android:id="@+id/order_jiayicode_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:orientation="vertical">
 
 
@@ -352,6 +353,52 @@
 
                     <com.davis.kangpinhui.views.CustomTypefaceTextView
                         android:id="@+id/order_detail_jiaoyi_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/common_measure_20dp"
+                        android:text="77"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_17" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/order_beizhu_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorlightgray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_measure_65dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/common_measure_10dp"
+                        android:text="备注"
+                        android:textColor="@color/colorgray"
+                        android:textSize="@dimen/text_size_17" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:id="@+id/order_detail_beizhu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

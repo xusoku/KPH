@@ -57,7 +57,7 @@
                     android:layout_below="@id/fragment_mine_price"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/common_measure_20dp"
-                    android:text="去充值"
+                    android:text="会员卡充值"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_17" />
             </RelativeLayout>

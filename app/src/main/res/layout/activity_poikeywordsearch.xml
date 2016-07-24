@@ -30,6 +30,8 @@
             android:layout_weight="1"
             android:background="@null"
             android:drawablePadding="10dp"
+            android:hint="请输入小区名称或大楼"
+            android:textColorHint="@color/white"
             android:drawableBottom="@drawable/line" />
     </LinearLayout>
 

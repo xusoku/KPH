@@ -39,7 +39,7 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="bottom"
-            android:hint="请输入关键字"
+            android:hint="搜索商品、美食"
             android:singleLine="true"
             android:textColor="@color/white"
             android:textColorHint="@color/white"

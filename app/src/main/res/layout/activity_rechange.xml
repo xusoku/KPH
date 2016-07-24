@@ -21,37 +21,39 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:text="发票抬头"
-
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_17"
-             />
+            android:visibility="gone" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <com.davis.kangpinhui.views.CustomTypefaceTextView
-            android:id="@+id/recharge_letterhead"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/common_measure_60dp"
-            android:layout_marginLeft="@dimen/common_measure_10dp"
-            android:layout_marginRight="@dimen/common_measure_10dp"
-            android:background="@drawable/bg_flow_recharg_unselect"
-            android:clickable="true"
-            android:drawablePadding="@dimen/common_measure_10dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
-            android:gravity="center_vertical"
-            android:onClick="doClick"
-            android:paddingLeft="@dimen/common_measure_10dp"
-            android:text="不开具发票"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_17" />
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/recharge_letterhead"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_measure_60dp"
+                android:layout_marginLeft="@dimen/common_measure_10dp"
+                android:layout_marginRight="@dimen/common_measure_10dp"
+                android:background="@drawable/bg_flow_recharg_unselect"
+                android:clickable="true"
+                android:drawablePadding="@dimen/common_measure_10dp"
+
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingLeft="@dimen/common_measure_10dp"
+                android:text="不开具发票"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_17" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@mipmap/ic_right_arrow"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/common_measure_15dp"/>
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/common_measure_15dp"
+                android:src="@mipmap/ic_right_arrow" />
         </RelativeLayout>
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -63,8 +65,7 @@
             android:text="充值金额"
 
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_17"
-             />
+            android:textSize="@dimen/text_size_17" />
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/recharge_price"
@@ -90,8 +91,7 @@
             android:text="支付方式"
 
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_17"
-            />
+            android:textSize="@dimen/text_size_17" />
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/recharge_pay"
@@ -146,8 +146,8 @@
                 android:gravity="center_vertical"
                 android:text="¥500"
                 android:textColor="@color/colormain"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_size_22" />
+                android:textSize="@dimen/text_size_22"
+                android:textStyle="bold" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:id="@+id/recharge_commit"

@@ -190,7 +190,7 @@ public class PayResultActivity extends BaseActivity {
         } else {
             pay_result_product_paystatus.setText("未知");
         }
-        CharSequence[] charSequences = {"余额支付", "货到付款", "支付宝支付", "微信支付"};
+        CharSequence[] charSequences = {"VIP卡支付", "货到付款", "支付宝支付", "微信支付"};
         String[] type = {"3", "2", "0", "4"};
 
         for (int i = 0; i < type.length; i++) {

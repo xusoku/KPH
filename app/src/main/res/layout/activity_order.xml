@@ -128,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@id/order_paytype_right"
-                        android:text="余额支付"
+                        android:text="VIP卡支付"
                         android:textSize="@dimen/text_size_17" />
                 </RelativeLayout>
             </LinearLayout>

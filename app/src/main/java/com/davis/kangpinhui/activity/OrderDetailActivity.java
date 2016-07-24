@@ -59,7 +59,7 @@ public class OrderDetailActivity extends BaseActivity {
 
     private TextView order_detail_state, order_detail_people, order_detail_phone,
             order_detail_address, order_detail_paytype, order_detail_m_oney, order_detail_time,
-            order_detail_code, order_detail_kefu;
+            order_detail_code, order_detail_kefu,order_detail_beizhu;
 
     private TextView order_detail_coup_money;
     private LinearLayout order_copu_linear;
@@ -68,7 +68,7 @@ public class OrderDetailActivity extends BaseActivity {
     private LinearLayout order_sending_linear;
 
     private TextView order_detail_jiaoyi_code;
-    private LinearLayout order_jiayicode_linear;
+    private LinearLayout order_jiayicode_linear,order_beizhu_linear;
 
     private StretchedListView order_detail_lst;
 
@@ -103,6 +103,8 @@ public class OrderDetailActivity extends BaseActivity {
         order_detail_lst = $(R.id.order_detail_lst);
         order_detail_sentting_money = $(R.id.order_detail_sentting_money);
         order_sending_linear = $(R.id.order_sending_linear);
+        order_detail_beizhu = $(R.id.order_detail_beizhu);
+        order_beizhu_linear = $(R.id.order_beizhu_linear);
         order_detail_jiaoyi_code = $(R.id.order_detail_jiaoyi_code);
         order_jiayicode_linear = $(R.id.order_jiayicode_linear);
     }
@@ -164,7 +166,7 @@ public class OrderDetailActivity extends BaseActivity {
             order_detail_state.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final CharSequence[] typepaytext = {"余额支付","在线支付 微信支付", "在线支付 支付宝支付"};
+                    final CharSequence[] typepaytext = {"VIP卡支付","在线支付 微信支付", "在线支付 支付宝支付"};
                     final AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);
                     builder.setTitle("支付方式")
                             .setItems(typepaytext, new DialogInterface.OnClickListener() {
@@ -222,7 +224,7 @@ public class OrderDetailActivity extends BaseActivity {
 
 
 
-        CharSequence[] charSequences = {"余额支付", "货到付款", "支付宝支付", "微信支付"};
+        CharSequence[] charSequences = {"VIP卡支付", "货到付款", "支付宝支付", "微信支付"};
         String[] type = {"3", "2", "0", "4"};
 
         for (int i = 0; i < type.length; i++) {
@@ -249,6 +251,12 @@ public class OrderDetailActivity extends BaseActivity {
             order_jiayicode_linear.setVisibility(View.GONE);
         }else{
             order_detail_jiaoyi_code.setText(code);
+        }
+        String remark=itemData.sremark;
+        if(TextUtils.isEmpty(remark)) {
+            order_beizhu_linear.setVisibility(View.GONE);
+        }else{
+            order_detail_beizhu.setText(remark);
         }
 
         String send=itemData.fpostprice;
