@@ -62,6 +62,7 @@ public class SearchResultActivity extends BaseActivity {
     private LinearLayout search_all_sort;
     private TextView search_all_classic_text;
     private TextView search_all_sort_text;
+    private TextView search_et_text;
     private int Page = 0;
 
     private int PageSize = 20;
@@ -152,21 +153,15 @@ public class SearchResultActivity extends BaseActivity {
     protected void findViews() {
 
         EventBus.getDefault().register(this);
-        if (type) {
-            showTopBar();
-            setTitle(key);
-        }
 
         search_result_title_linear = $(R.id.search_result_title_linear);
         search_result_card = $(R.id.search_result_card);
 
-        if (type) {
-            search_result_title_linear.setVisibility(View.GONE);
-            search_result_card.setVisibility(View.GONE);
-        }
+
         search_back = $(R.id.search_back);
         search_right_iv = $(R.id.search_right_iv);
         search_et = $(R.id.search_et);
+        search_et_text = $(R.id.search_et_text);
         search_result_recycler = $(R.id.search_result_recycler);
         search_result_myswipe = $(R.id.content);
         search_all_classic = $(R.id.search_all_classic);
@@ -174,7 +169,17 @@ public class SearchResultActivity extends BaseActivity {
         search_all_classic_text = $(R.id.search_all_classic_text);
         search_all_sort_text = $(R.id.search_all_sort_text);
 
-        search_et.setText(key);
+        if (type) {
+            search_et_text.setVisibility(View.VISIBLE);
+            search_et.setVisibility(View.GONE);
+            search_result_card.setVisibility(View.GONE);
+            search_et_text.setText(key);
+        }else{
+            search_et_text.setVisibility(View.GONE);
+            search_et.setVisibility(View.VISIBLE);
+            search_et.setText(key);
+        }
+
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);

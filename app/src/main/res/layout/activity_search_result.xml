@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/search_result_title_linear"
         android:layout_width="match_parent"
@@ -27,27 +28,47 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:padding="15dp"
                 android:layout_centerVertical="true"
+                android:padding="15dp"
                 android:src="@mipmap/btn_titlebar_back_normal" />
         </LinearLayout>
 
-        <com.davis.kangpinhui.views.CustomTypefaceEditText
-            android:id="@+id/search_et"
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="bottom"
-            android:hint="搜索商品、美食"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:layout_gravity="center_vertical"
-            android:background="@color/colormain"
-            android:textSize="@dimen/text_size_17"
-            android:drawablePadding="@dimen/common_measure_10dp"
-            android:drawableBottom="@drawable/line"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.davis.kangpinhui.views.CustomTypefaceEditText
+                android:id="@+id/search_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colormain"
+                android:drawableBottom="@drawable/line"
+                android:visibility="gone"
+                android:drawablePadding="@dimen/common_measure_10dp"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:hint="搜索商品、美食"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/text_size_17" />
+
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/search_et_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colormain"
+                android:textColor="@color/white"
+                android:text="wowo"
+                android:gravity="center"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/text_size_17" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/search_right_iv"
@@ -64,20 +85,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/index_search" />
+                android:src="@mipmap/index_cart" />
         </LinearLayout>
     </LinearLayout>
+
     <android.support.v7.widget.CardView
         android:id="@+id/search_result_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        >
+        app:cardCornerRadius="0dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
 
             <LinearLayout
