@@ -21,7 +21,7 @@
             <RelativeLayout
                 android:id="@+id/order_address_relative"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/common_measure_120dp"
+                android:layout_height="@dimen/common_measure_135dp"
                 android:background="@color/colorlightgray"
                 android:onClick="doClick"
                 android:paddingBottom="6dp">
@@ -72,6 +72,16 @@
                         android:text="asdf"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_17" />
+
+                    <com.davis.kangpinhui.views.CustomTypefaceTextView
+                        android:layout_below="@id/order_address_pepole"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_measure_10dp"
+                        android:layout_marginBottom="@dimen/common_measure_15dp"
+                        android:textColor="@color/colormain"
+                        android:textSize="@dimen/text_size_17"
+                        android:text="(收获不便时,可选择免费代收获服务)"/>
                 </RelativeLayout>
                 <ImageView
                     android:layout_width="match_parent"

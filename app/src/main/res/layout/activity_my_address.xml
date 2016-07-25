@@ -23,6 +23,25 @@
         android:text="＋添加新的收获地址"/>
     </FrameLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_measure_5dp"
+        android:background="@color/white">
+    <com.davis.kangpinhui.views.CustomTypefaceTextView
+        android:id="@+id/select_address_add_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_measure_64dp"
+        android:textColor="@color/colorgray"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_measure_15dp"
+        android:onClick="doClick"
+        android:textSize="@dimen/text_size_17"
+        android:text="选择代收货地址"/>
+    </FrameLayout>
+
     <com.davis.kangpinhui.views.CustomTypefaceTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
