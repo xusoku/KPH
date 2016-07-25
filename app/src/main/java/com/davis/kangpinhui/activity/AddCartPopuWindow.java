@@ -54,12 +54,6 @@ public class AddCartPopuWindow {
 
     private FlowLayout add_cart_flow;
 
-    private BadgeView backgroundDefaultBadge;
-
-
-    public void setBackgroundDefaultBadge(BadgeView backgroundDefaultBadge) {
-        this.backgroundDefaultBadge = backgroundDefaultBadge;
-    }
 
     @SuppressWarnings("unchecked")
     protected final <T extends View> T $(@NonNull View view, @IdRes int id)
@@ -170,16 +164,16 @@ public class AddCartPopuWindow {
                             ToastUitl.showToast("添加成功");
                             EventBus.getDefault().post(new Extendedinfo());
 
-                            String number = AppApplication.getCartcount();
-                            if (TextUtils.isEmpty(number) || number.equals("0.0")) {
-                                number = "0";
-                            }
-                            int n = (int)Float.parseFloat(number);
-                            n++;
-                            AppApplication.setCartcount(n+"");
-
-                            if(backgroundDefaultBadge!=null)
-                            backgroundDefaultBadge.setText(n + "");
+//                            String number = AppApplication.getCartcount();
+//                            if (TextUtils.isEmpty(number) || number.equals("0.0")) {
+//                                number = "0";
+//                            }
+//                            int n = (int)Float.parseFloat(number);
+//                            n++;
+//                            AppApplication.setCartcount(n+"");
+//
+//                            if(backgroundDefaultBadge!=null)
+//                            backgroundDefaultBadge.setText(n + "");
 
                             addpopupWindow.dismiss();
                         }
@@ -268,17 +262,15 @@ public class AddCartPopuWindow {
                         @Override
                         public void onSucssce(BaseModel baseModel) {
                             ToastUitl.showToast("添加成功");
-//                            EventBus.getDefault().post(new Extendedinfo());
-
-                            String number = AppApplication.getCartcount();
-                            if (TextUtils.isEmpty(number) || number.equals("0.0")) {
-                                number = "0";
-                            }
-                            int n = (int)Float.parseFloat(number);
-                            n++;
-                            AppApplication.setCartcount(n+"");
-                            if(backgroundDefaultBadge!=null)
-                            backgroundDefaultBadge.setText(n + "");
+                            EventBus.getDefault().post(new Extendedinfo());
+//
+//                            String number = AppApplication.getCartcount();
+//                            if (TextUtils.isEmpty(number) || number.equals("0.0")) {
+//                                number = "0";
+//                            }
+//                            int n = (int)Float.parseFloat(number);
+//                            n++;
+//                            AppApplication.setCartcount(n+"");
 
                             addpopupWindow.dismiss();
                         }

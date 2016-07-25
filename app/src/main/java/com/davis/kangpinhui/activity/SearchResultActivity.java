@@ -23,6 +23,8 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.db.SearchHistroy;
 import com.davis.kangpinhui.db.SearchHistroyDao;
 import com.davis.kangpinhui.model.Category;
+import com.davis.kangpinhui.model.Extendedinfo;
+import com.davis.kangpinhui.model.Index;
 import com.davis.kangpinhui.model.Product;
 import com.davis.kangpinhui.model.Topic;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
@@ -38,12 +40,14 @@ import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.UtilText;
+import com.davis.kangpinhui.views.BadgeView;
 import com.davis.kangpinhui.views.LoadMoreRecyclerView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.logging.Handler;
 
+import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 
 public class SearchResultActivity extends BaseActivity {
@@ -84,6 +88,7 @@ public class SearchResultActivity extends BaseActivity {
     private LinearLayout search_result_title_linear;
     private AddCartPopuWindow addCartPopuWindow;
 
+    private   BadgeView backgroundDefaultBadge;
     /**
      * 搜索
      */
@@ -146,6 +151,7 @@ public class SearchResultActivity extends BaseActivity {
     @Override
     protected void findViews() {
 
+        EventBus.getDefault().register(this);
         if (type) {
             showTopBar();
             setTitle(key);
@@ -231,6 +237,8 @@ public class SearchResultActivity extends BaseActivity {
         });
 
         addCartPopuWindow=new AddCartPopuWindow(this);
+        backgroundDefaultBadge = new BadgeView(this);
+        backgroundDefaultBadge.setTargetView(search_right_iv);
     }
 
     @Override
@@ -255,8 +263,43 @@ public class SearchResultActivity extends BaseActivity {
         startActivityLoading();
         initPopupClassicWindow();
         initPopupSortWindow();
+        setcartNumber();
+    }
+    //添加成功购物车 需要调用
+    public  void setUIOrder(){
+        Call<BaseModel<Extendedinfo>> call= ApiInstant.getInstant().getExtendedInfo(AppApplication.apptype,
+                AppApplication.shopid,AppApplication.token);
+
+        call.enqueue(new ApiCallback<BaseModel<Extendedinfo>>() {
+            @Override
+            public void onSucssce(BaseModel<Extendedinfo> extendedinfoBaseModel) {
+
+                AppApplication.extendedinfo = extendedinfoBaseModel.object;
+                EventBus.getDefault().post(new Extendedinfo());
+                setcartNumber();
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
     }
 
+
+    public void setcartNumber() {
+        String number = AppApplication.getCartcount();
+        if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0") && backgroundDefaultBadge != null){
+            backgroundDefaultBadge.setVisibility(View.VISIBLE);
+            backgroundDefaultBadge.setText((int) Float.parseFloat(number) + "");
+        }else{
+            setcartNumberLoginout();
+        }
+    }
+    public void setcartNumberLoginout() {
+        if(backgroundDefaultBadge!=null)
+            backgroundDefaultBadge.setVisibility(View.GONE);
+    }
     @Override
     protected void setListener() {
 
@@ -694,5 +737,15 @@ public class SearchResultActivity extends BaseActivity {
 //            cinema_expandable_image_city.setImageResource(R.drawable.price_expandable_close);
 //            cinema_expandable_image_region.setImageResource(R.drawable.price_expandable_close);
         }
+    }
+
+    public void onEvent(Index  index) {
+        setcartNumber();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

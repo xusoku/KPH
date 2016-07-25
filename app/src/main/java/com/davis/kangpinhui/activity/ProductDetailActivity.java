@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.model.Extendedinfo;
+import com.davis.kangpinhui.model.Index;
 import com.davis.kangpinhui.model.ProductDetail;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.R;
@@ -98,6 +99,7 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
 
     @Override
     protected void findViews() {
+        EventBus.getDefault().register(this);
         setTranslucentStatusBarGone();
         product_detail_banner = $(R.id.product_detail_banner);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) DisplayMetricsUtils.getWidth(), (int) DisplayMetricsUtils.getWidth());
@@ -129,7 +131,6 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
         backgroundDefaultBadge.setTargetView(add_cart_number_linear);
         setcartNumber();
         addpopupWindow=new AddCartPopuWindow(this);
-        addpopupWindow.setBackgroundDefaultBadge(backgroundDefaultBadge);
     }
 
     @Override
@@ -242,6 +243,9 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
 
     private BadgeView backgroundDefaultBadge;
 
+    public void onEvent(Index index) {
+        setcartNumber();
+    }
     public void setcartNumber() {
         String number = AppApplication.getCartcount();
         if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0"))
@@ -277,5 +281,11 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
                 product_detail_title_text_linear.setAlpha(1);
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
