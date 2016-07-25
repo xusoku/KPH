@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -142,7 +143,9 @@ public class OrderDetailActivity extends BaseActivity {
 
     }
 
+    ArrayList<OrderDetail> list;
     private void bindList(ArrayList<OrderDetail> list) {
+        this.list=list;
         order_detail_lst.setAdapter(new CommonBaseAdapter<OrderDetail>(this, list, R.layout.activity_order_item) {
             @Override
             public void convert(ViewHolder holder, OrderDetail itemData, int position) {
@@ -272,7 +275,12 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Override
     protected void setListener() {
-
+        order_detail_lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ProductDetailActivity.jumpProductDetailActivity(OrderDetailActivity.this, list.get(position).iproductid);
+            }
+        });
     }
 
     @Override

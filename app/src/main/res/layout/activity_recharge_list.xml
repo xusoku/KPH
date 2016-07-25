@@ -10,7 +10,7 @@
         android:layout_marginTop="@dimen/common_measure_10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
+        android:scrollbars="vertical"
         android:dividerHeight="@dimen/common_measure_10dp"
         android:divider="@null"/>
 

@@ -232,9 +232,9 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
                 ShareManager mShareManager = new ShareManager(mActivity);
                 mShareManager.setTitle("康品汇-家门口的生鲜店");
                 mShareManager.setText("家门口的康品汇又有好赞的生鲜啦，我猜你肯定喜欢，快来戳我啊~");
-                mShareManager.setWebUrl("http://m.kangpinhui.com/common/html.do?type=shareurl");
-                mShareManager.setTitleUrl("http://m.kangpinhui.com/common/html.do?type=shareurl");
-                mShareManager.setImageUrl("http://img.kangpinhui.com/images/logo200.png");
+                mShareManager.setWebUrl(ApiService.baseurl+"/common/html.do?type=product&apptype=android&id="+productDetail.iproductid);
+                mShareManager.setTitleUrl(ApiService.baseurl+"/common/html.do?type=product&apptype=android&id="+productDetail.iproductid);
+                mShareManager.setImageUrl(ApiService.picurl+productDetail.spicurl);
                 mShareManager.showShareDialog(this);
                 break;
         }

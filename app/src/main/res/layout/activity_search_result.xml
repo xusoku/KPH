@@ -176,7 +176,8 @@
             android:id="@+id/search_result_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/common_measure_5dp">
+            android:layout_margin="@dimen/common_measure_5dp"
+            android:scrollbars="vertical">
 
         </com.davis.kangpinhui.views.LoadMoreRecyclerView>
     </com.davis.kangpinhui.views.MySwipeRefreshLayout>

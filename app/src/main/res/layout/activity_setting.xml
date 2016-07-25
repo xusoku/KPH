@@ -52,6 +52,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="@dimen/common_measure_15dp">
     <com.davis.kangpinhui.views.MineCustomLayout
         android:id="@+id/fix_pass"
@@ -66,6 +67,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/common_measure_10dp"
         android:layout_marginBottom="@dimen/common_measure_15dp">
     <com.davis.kangpinhui.views.MineCustomLayout

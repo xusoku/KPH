@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:divider="@null"
                 android:background="@color/white"
-                android:scrollbars="none" />
+                 />
         </com.davis.kangpinhui.views.MySwipeRefreshLayout>
 
         <LinearLayout
