@@ -8,7 +8,9 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -333,6 +335,36 @@ public class SearchResultActivity extends BaseActivity {
                 }
             });
         }
+
+        search_et.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView arg0, int arg1,
+                                          KeyEvent arg2) {
+                if (arg1 == EditorInfo.IME_ACTION_SEARCH
+                        || arg1 == EditorInfo.IME_ACTION_GO
+                        || arg1 == EditorInfo.IME_ACTION_NEXT
+                        || arg1 == EditorInfo.IME_ACTION_SEND
+                        || arg1 == EditorInfo.IME_ACTION_DONE
+                        || arg1 == EditorInfo.IME_NULL) {
+                    String key = search_et.getText().toString()
+                            .trim();
+                    // 去除空格
+                    key = key.trim();
+                    if (!TextUtils.isEmpty(key)) {
+                            CommonManager.dismissSoftInputMethod(SearchResultActivity.this, search_et.getWindowToken());
+                            isSearch = true;
+                            startActivityLoading();
+                            SearchHistroy histroy = new SearchHistroy();
+                            histroy.setKey(key);
+                            new SearchHistroyDao(SearchResultActivity.this).add(histroy);
+                    } else {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
     }
 
     /**
@@ -473,16 +505,7 @@ public class SearchResultActivity extends BaseActivity {
                 classicpopupWindow.showAsDropDown(search_all_classic, 0, 5);
                 break;
             case R.id.search_right_iv:
-                key = search_et.getText().toString().trim();
-
-                if (!TextUtils.isEmpty(key)) {
-                    CommonManager.dismissSoftInputMethod(this, view.getWindowToken());
-                    isSearch = true;
-                    startActivityLoading();
-                    SearchHistroy histroy = new SearchHistroy();
-                    histroy.setKey(key);
-                    new SearchHistroyDao(this).add(histroy);
-                }
+                CartListActivity.jumpCartListActivity(this);
                 break;
         }
     }
@@ -753,4 +776,6 @@ public class SearchResultActivity extends BaseActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+
 }
