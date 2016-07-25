@@ -27,6 +27,7 @@ public class MyAddressActivity extends BaseActivity {
 
 
     private ListView listView;
+    private TextView select_address_add_text;
 
     private boolean isOrder=false;
 
@@ -60,6 +61,12 @@ public class MyAddressActivity extends BaseActivity {
         showTopBar();
         setTitle("我的地址");
         listView = $(R.id.content);
+        select_address_add_text = $(R.id.select_address_add_text);
+        if(isOrder){
+            select_address_add_text.setVisibility(View.VISIBLE);
+        }else{
+            select_address_add_text.setVisibility(View.GONE);
+        }
 
     }
 
@@ -141,7 +148,6 @@ public class MyAddressActivity extends BaseActivity {
                 });
             }
         });
-
     }
 
     @Override

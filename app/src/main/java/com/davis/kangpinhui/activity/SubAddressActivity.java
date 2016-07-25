@@ -1,5 +1,6 @@
 package com.davis.kangpinhui.activity;
 
+import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.davis.kangpinhui.model.Address;
 import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.Shop;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
+import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.LocalUtil;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 
@@ -76,23 +78,48 @@ public class SubAddressActivity extends BaseActivity {
     }
 
     private void getShopid() {
-        if(AppApplication.shoplist!=null&&AppApplication.shoplist.size()>0){
-            onActivityLoadingSuccess();
-            shop_list.setAdapter(new CommonBaseAdapter<Shop>(this, AppApplication.shoplist, R.layout.activity_poikeywordsearch_item) {
-                @Override
-                public void convert(ViewHolder holder, final Shop itemData, int position) {
-                    holder.setText(R.id.poi_item_title,itemData.shopname);
-                    holder.setText(R.id.poi_item_address,"地址:" +itemData.address);
-                    if (!TextUtils.isEmpty(itemData.tel)) {
-                        holder.getView(R.id.poi_item_phone).setVisibility(View.VISIBLE);
-                        holder.setText(R.id.poi_item_phone, "电话:" + itemData.tel);
-                    } else {
-                        holder.getView(R.id.poi_item_phone).setVisibility(View.GONE);
-                    }
+            Call<BaseModel<ArrayList<Shop>>> call = ApiInstant.getInstant().getShoplist(AppApplication.apptype,AppApplication.shopid);
 
-                    holder.getView(R.id.shop_item_linear).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+            call.enqueue(new ApiCallback<BaseModel<ArrayList<Shop>>>() {
+                @Override
+                public void onSucssce(BaseModel<ArrayList<Shop>> arrayListBaseModel) {
+                    onActivityLoadingSuccess();
+                    setBind(arrayListBaseModel.object);
+                }
+
+                @Override
+                public void onFailure() {
+                    onActivityLoadingFailed();
+                }
+            });
+    }
+
+
+    private void setBind(ArrayList<Shop> list){
+        shop_list.setAdapter(new CommonBaseAdapter<Shop>(this, list, R.layout.activity_poikeywordsearch_item) {
+            @Override
+            public void convert(ViewHolder holder, final Shop itemData, int position) {
+                holder.setText(R.id.poi_item_title,itemData.shopname);
+                holder.setText(R.id.poi_item_address,"地址:" +itemData.address);
+                if (!TextUtils.isEmpty(itemData.tel)) {
+                    holder.getView(R.id.poi_item_phone).setVisibility(View.VISIBLE);
+                    holder.setText(R.id.poi_item_phone, "电话:" + itemData.tel);
+                } else {
+                    holder.getView(R.id.poi_item_phone).setVisibility(View.GONE);
+                }
+
+                holder.getView(R.id.shop_item_linear).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Address address=new Address();
+                        address.iuseraddressid=itemData.addressid;
+                        address.saddress=itemData.address;
+                        address.smobile=itemData.tel;
+                        address.saddressname=itemData.shopname;
+                        AppApplication.address = address;
+                        AppManager.getAppManager().finishActivity(MyAddressActivity.class);
+                        finish();
 //                        if(itemData.id.equals("99")){
 //                            AppApplication.shopid="99";
 //                            SharePreferenceUtils.getSharedPreferences().putString("shopid", "99");
@@ -104,30 +131,10 @@ public class SubAddressActivity extends BaseActivity {
 //                            PoiKeywordSearchActivity.jumpPoiKeywordSearchActivity(SubAddressActivity.this, itemData, type);
 //                        }
 
-                        }
-                    });
+                    }
+                });
 
-                }
-            });
-        }else {
-            Call<BaseModel<ArrayList<Shop>>> call = ApiInstant.getInstant().getShoplist(AppApplication.apptype);
-
-            call.enqueue(new ApiCallback<BaseModel<ArrayList<Shop>>>() {
-                @Override
-                public void onSucssce(BaseModel<ArrayList<Shop>> arrayListBaseModel) {
-                    if(arrayListBaseModel.object!=null)
-                    AppApplication.shoplist.clear();
-                    AppApplication.shoplist.addAll(arrayListBaseModel.object);
-                    getShopid();
-                    onActivityLoadingSuccess();
-                }
-
-                @Override
-                public void onFailure() {
-                    onActivityLoadingFailed();
-                }
-            });
-        }
+            }
+        });
     }
-
 }
