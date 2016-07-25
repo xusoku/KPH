@@ -213,28 +213,29 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                         .error(R.mipmap.img_defualt_bg)
                         .into(imageView);
 
+               index_loopbanner.startTurning(4000);
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         String gotype = itemData.gotype;
-                        if(TextUtils.isEmpty(gotype)){
-                            gotype="";
+                        if (TextUtils.isEmpty(gotype)) {
+                            gotype = "";
                         }
                         String tempvalue = itemData.tempvalue;
-                        if(TextUtils.isEmpty(tempvalue)){
-                            tempvalue="";
+                        if (TextUtils.isEmpty(tempvalue)) {
+                            tempvalue = "";
                         }
-                        if(gotype.equals("detail")){
+                        if (gotype.equals("detail")) {
                             ProductDetailActivity.jumpProductDetailActivity(getActivity(), tempvalue);
-                        }else if(gotype.equals("rootlist")){
-                            SearchResultActivity.jumpSearchResultActivity(getActivity(),"",false,"",tempvalue);
-                        }else if(gotype.equals("list")){
-                            SearchResultActivity.jumpSearchResultActivity(getActivity(),"",false,tempvalue,"");
-                        }else if(gotype.equals("special")){
-                            SearchResultActivity.jumpSearchResultActivity(getActivity(),itemData.title,true,tempvalue);
-                        }else if(gotype.equals("search")){
-                            SearchResultActivity.jumpSearchResultActivity(getActivity(),tempvalue,true);
-                        }else{
+                        } else if (gotype.equals("rootlist")) {
+                            SearchResultActivity.jumpSearchResultActivity(getActivity(), "", false, "", tempvalue);
+                        } else if (gotype.equals("list")) {
+                            SearchResultActivity.jumpSearchResultActivity(getActivity(), "", false, tempvalue, "");
+                        } else if (gotype.equals("special")) {
+                            SearchResultActivity.jumpSearchResultActivity(getActivity(), itemData.title, true, tempvalue);
+                        } else if (gotype.equals("search")) {
+                            SearchResultActivity.jumpSearchResultActivity(getActivity(), tempvalue, true);
+                        } else {
                             ToastUitl.showToast("暂无定义");
                         }
                     }
@@ -257,7 +258,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 holder.getView(R.id.fragment_index_item_image).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        SearchResultActivity.jumpSearchResultActivity(getActivity(),itemData.title,true,itemData.id);
+                        SearchResultActivity.jumpSearchResultActivity(getActivity(), itemData.title, true, itemData.id);
                     }
                 });
                 getContentitemData((RecyclerView) holder.getView(R.id.fragment_index_item_recycler), list);
@@ -357,5 +358,28 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 ShopActivity.jumpShopActivity(getActivity());
                 break;
         }
+    }
+
+    @Override
+    public void onResume()
+    {
+        // TODO Auto-generated method stub
+        super.onResume();
+        index_loopbanner.startTurning(4000);
+    }
+
+    @Override
+    public void onStop()
+    {
+        // TODO Auto-generated method stub
+        super.onStop();
+        index_loopbanner.stopTurning();
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        index_loopbanner.stopTurning();
     }
 }
