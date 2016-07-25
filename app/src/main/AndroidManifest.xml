@@ -183,7 +183,8 @@
         <activity
             android:name=".activity.base.IsOnclickActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity android:name=".activity.TestActivity"></activity>
+        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.SubAddressActivity"></activity>
     </application>
 
 </manifest>

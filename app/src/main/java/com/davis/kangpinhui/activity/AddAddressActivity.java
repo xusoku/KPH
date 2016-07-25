@@ -26,6 +26,7 @@ import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.RegexUtils;
+import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.CustomAlterDialog;
 import com.davis.kangpinhui.views.CustomTypefaceTextView;
@@ -97,6 +98,8 @@ public class AddAddressActivity extends BaseActivity {
             }
         });
 
+        String str= SharePreferenceUtils.getSharedPreferences().getString("address","");
+        add_address_text.setText(str);
 
     }
 

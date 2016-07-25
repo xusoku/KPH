@@ -150,6 +150,9 @@ public class MyAddressActivity extends BaseActivity {
             case R.id.my_address_add_text:
                 AddAddressActivity.jumpAddAddressActivity(this,"1","");
                 break;
+            case R.id.select_address_add_text:
+                SubAddressActivity.startactivity(this);
+                break;
         }
 
     }

@@ -31,14 +31,18 @@
     <com.davis.kangpinhui.views.CustomTypefaceTextView
         android:id="@+id/select_address_add_text"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_64dp"
+        android:layout_height="@dimen/common_measure_54dp"
         android:textColor="@color/colorgray"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/common_measure_15dp"
+        android:paddingRight="@dimen/common_measure_15dp"
+        android:paddingTop="@dimen/common_measure_10dp"
+        android:paddingBottom="@dimen/common_measure_10dp"
         android:onClick="doClick"
         android:textSize="@dimen/text_size_17"
+        android:drawableRight="@mipmap/ic_right_arrow"
         android:text="选择代收货地址"/>
     </FrameLayout>
 
