@@ -45,6 +45,8 @@ import retrofit2.http.Query;
 public interface ApiService {
 
 
+    public static String baseurl="http://m.kangpinhui.com";
+    public static String picurl="http://img.kangpinhui.com/physic";
 
     //http://www.tngou.net/tnfs/api/list?page=1&rows=10
 //        @GET("tnfs/api/list")
@@ -117,6 +119,12 @@ public interface ApiService {
     @GET("shop/list.do")
     Call<BaseModel<ArrayList<Shop>>> getShoplist(
             @Query("apptype") String apptype
+    );
+    //8.2、获取代收
+    @GET("shop/list.do")
+    Call<BaseModel<ArrayList<Shop>>> getShoplist(
+            @Query("apptype") String apptype,
+            @Query("shopid") String shopid
     );
 
     //8.2、根据门店ID获取门店详情
