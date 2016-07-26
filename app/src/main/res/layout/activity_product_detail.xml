@@ -353,8 +353,8 @@
         android:padding="@dimen/common_measure_10dp">
 
         <ImageView
-            android:layout_width="@dimen/common_measure_30dp"
-            android:layout_height="@dimen/common_measure_30dp"
+            android:layout_width="@dimen/common_measure_25dp"
+            android:layout_height="@dimen/common_measure_25dp"
             android:scaleType="centerInside"
             android:src="@mipmap/ic_share_normal" />
     </LinearLayout>

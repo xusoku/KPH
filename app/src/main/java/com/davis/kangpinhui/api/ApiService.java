@@ -45,6 +45,8 @@ import retrofit2.http.Query;
 public interface ApiService {
 
 
+    public static String baseurl="http://m.kangpinhui.com";
+    public static String picurl="http://img.kangpinhui.com/physic";
 
     //http://www.tngou.net/tnfs/api/list?page=1&rows=10
 //        @GET("tnfs/api/list")
@@ -390,6 +392,14 @@ public interface ApiService {
             @Query("apptype") String apptype,
             @Query("shopid") String shopid,
             @Query("activeid") String activeid
+    );
+    //25。1 Youlike数据获取
+    @GET("user/gettop.do")
+    Call<BaseModel<ArrayList<Product>>> getYoulikelist(
+            @Query("apptype") String apptype,
+            @Query("shopid") String shopid,
+            @Query("token") String activeid,
+            @Query("ipagesize") String ipagesize
     );
 
     //27 提交订单时获取用户的优惠券信息

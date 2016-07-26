@@ -149,6 +149,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             mine_allorder_unsend.setText(UtilText.getminenumber("待配送 (" + AppApplication.getOrderwaitsend() + ")"));
             mine_cart.setText(UtilText.getminenumber("购物车 (" + (int)Float.parseFloat(AppApplication.getCartcount()) + ")"));
             mine_mycoup.setText(("我的优惠券 (" + AppApplication.getCouponcount() + "张)"));
+            fragment_mine_price.setText("¥"+AppApplication.getFcurrmoney());
         }
     }
 
@@ -158,6 +159,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             mine_allorder_unpay.setText(UtilText.getminenumber("待付款"));
             mine_allorder_sending.setText(UtilText.getminenumber("配送中"));
             mine_allorder_unsend.setText(UtilText.getminenumber("待配送"));
+            fragment_mine_price.setText("¥");
             mine_cart.setText(UtilText.getminenumber("购物车"));
             mine_mycoup.setText(("我的优惠券"));
             fragment_mine_name.setText("注册/登录");

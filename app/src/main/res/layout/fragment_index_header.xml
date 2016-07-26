@@ -87,6 +87,29 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_17" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/index_youlike"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:onClick="doClick"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/common_measure_64dp"
+                android:layout_height="@dimen/common_measure_64dp"
+                android:src="@mipmap/index_vip_rechange" />
+
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/index_youlike"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_17" />
+        </LinearLayout>
     </LinearLayout>
 
 

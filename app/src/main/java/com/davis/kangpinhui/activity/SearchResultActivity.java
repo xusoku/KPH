@@ -371,6 +371,11 @@ public class SearchResultActivity extends BaseActivity {
      * 专题数据
      */
     private void getActivedlist() {
+
+        if(activid.equals("youlike")){
+            getYouLikelist();
+            return;
+        }
         Call<BaseModel<Topic<ArrayList<Product>>>> call = ApiInstant.getInstant().getActivelist(AppApplication.apptype, AppApplication.shopid, activid);
 
         call.enqueue(new ApiCallback<BaseModel<Topic<ArrayList<Product>>>>() {
@@ -382,6 +387,36 @@ public class SearchResultActivity extends BaseActivity {
                     list.clear();
                 }
                 list.addAll(topicBaseModel.object.list);
+                adapter.notifyDataSetChanged();
+                if (list.size() == 0) {
+                    onActivityFirstLoadingNoData();
+                }
+                search_result_recycler.onLoadUnavailable();
+            }
+
+            @Override
+            public void onFailure() {
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingFailed();
+            }
+        });
+    }
+    /**
+     * 猜你喜欢
+     */
+    private void getYouLikelist() {
+
+        Call<BaseModel<ArrayList<Product>>> call = ApiInstant.getInstant().getYoulikelist(AppApplication.apptype, AppApplication.shopid, AppApplication.token,"10");
+
+        call.enqueue(new ApiCallback<BaseModel<ArrayList<Product>>>() {
+            @Override
+            public void onSucssce(BaseModel<ArrayList<Product>> topicBaseModel) {
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingSuccess();
+                if (isLoadOrRefresh) {
+                    list.clear();
+                }
+                list.addAll(topicBaseModel.object);
                 adapter.notifyDataSetChanged();
                 if (list.size() == 0) {
                     onActivityFirstLoadingNoData();

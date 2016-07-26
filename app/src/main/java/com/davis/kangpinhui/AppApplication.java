@@ -90,6 +90,13 @@ public class AppApplication extends Application {
             return  "";
         }
     }
+    public static String getFcurrmoney() {
+        if (extendedinfo!=null) {
+            return extendedinfo.fcurrmoney;
+        } else {
+            return  "";
+        }
+    }
     public static String getCartcount() {
         if (extendedinfo!=null) {
             return extendedinfo.cartcount;

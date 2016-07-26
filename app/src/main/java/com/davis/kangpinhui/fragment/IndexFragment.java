@@ -54,6 +54,7 @@ import retrofit2.Call;
 public class IndexFragment extends BaseFragment implements View.OnClickListener {
 
     private LinearLayout index_rechange;
+    private LinearLayout index_youlike;
     private LinearLayout index_tuan;
     private LinearLayout index_classic;
     private LoopBanner index_loopbanner;
@@ -96,6 +97,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         index_classic = $(headerView, R.id.index_classic);
         index_tuan = $(headerView, R.id.index_tuan);
         index_rechange = $(headerView, R.id.index_rechange);
+        index_youlike = $(headerView, R.id.index_youlike);
 
 
         no_linear_shopid = $(view, R.id.no_linear_shopid);
@@ -317,6 +319,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         index_local_select_linear.setOnClickListener(this);
         index_classic.setOnClickListener(this);
         index_rechange.setOnClickListener(this);
+        index_youlike.setOnClickListener(this);
         index_tuan.setOnClickListener(this);
         index_cart.setOnClickListener(this);
         index_search.setOnClickListener(this);
@@ -337,6 +340,9 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 break;
             case R.id.index_rechange:
                 RechargeActivity.jumpRechangeActivity(getActivity());
+                break;
+            case R.id.index_youlike:
+                SearchResultActivity.jumpSearchResultActivity(getActivity(), getResources().getString(R.string.index_youlike), true, "youlike");
                 break;
             case R.id.index_tuan:
                 if(AppApplication.isLogin(getActivity()))
