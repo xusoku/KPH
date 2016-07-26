@@ -12,5 +12,6 @@ public class Extendedinfo implements Serializable {
     public String ordersending="0";
     public String orderwaitsend="0";
     public String orderall="0";
+    public String fcurrmoney="0";
     public String cartcount="0.0";
 }
