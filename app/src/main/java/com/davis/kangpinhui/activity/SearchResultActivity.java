@@ -347,12 +347,12 @@ public class SearchResultActivity extends BaseActivity {
                         || arg1 == EditorInfo.IME_ACTION_SEND
                         || arg1 == EditorInfo.IME_ACTION_DONE
                         || arg1 == EditorInfo.IME_NULL) {
-                    String key = search_et.getText().toString()
+                    String keyu = search_et.getText().toString()
                             .trim();
                     // 去除空格
-                    key = key.trim();
-                    if (!TextUtils.isEmpty(key)) {
-                            CommonManager.dismissSoftInputMethod(SearchResultActivity.this, search_et.getWindowToken());
+                    if (!TextUtils.isEmpty(keyu)) {
+                        key=keyu;
+                        CommonManager.dismissSoftInputMethod(SearchResultActivity.this, search_et.getWindowToken());
                             isSearch = true;
                             startActivityLoading();
                             SearchHistroy histroy = new SearchHistroy();
