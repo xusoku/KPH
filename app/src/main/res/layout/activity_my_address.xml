@@ -10,17 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_measure_20dp"
         android:background="@color/white">
-    <com.davis.kangpinhui.views.CustomTypefaceTextView
-        android:id="@+id/my_address_add_text"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_64dp"
-        android:textColor="@color/colormain"
-        android:gravity="center"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:onClick="doClick"
-        android:textSize="@dimen/text_size_22"
-        android:text="＋添加新的收获地址"/>
+
+        <com.davis.kangpinhui.views.CustomTypefaceTextView
+            android:id="@+id/my_address_add_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_measure_64dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="doClick"
+            android:text="＋添加新的收获地址"
+            android:textColor="@color/colormain"
+            android:textSize="@dimen/text_size_22" />
     </FrameLayout>
 
     <FrameLayout
@@ -28,22 +29,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_measure_5dp"
         android:background="@color/white">
-    <com.davis.kangpinhui.views.CustomTypefaceTextView
-        android:id="@+id/select_address_add_text"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/common_measure_54dp"
-        android:textColor="@color/colorgray"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/common_measure_15dp"
-        android:paddingRight="@dimen/common_measure_15dp"
-        android:paddingTop="@dimen/common_measure_10dp"
-        android:paddingBottom="@dimen/common_measure_10dp"
-        android:onClick="doClick"
-        android:textSize="@dimen/text_size_17"
-        android:drawableRight="@mipmap/ic_right_arrow"
-        android:text="选择代收货地址"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/select_address_add_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_measure_54dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:onClick="doClick"
+                android:paddingBottom="@dimen/common_measure_10dp"
+                android:paddingLeft="@dimen/common_measure_15dp"
+                android:paddingRight="@dimen/common_measure_15dp"
+                android:paddingTop="@dimen/common_measure_10dp"
+                android:text="选择自提收货地址"
+                android:textColor="@color/colormain"
+                android:textSize="@dimen/text_size_17" />
+            <ImageView
+                android:id="@+id/order_address_right"
+                android:layout_width="@dimen/common_measure_20dp"
+                android:layout_height="@dimen/common_measure_20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/common_measure_10dp"
+                android:gravity="center"
+                android:src="@mipmap/ic_right_arrow" />
+        </RelativeLayout>
     </FrameLayout>
 
     <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -51,13 +66,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/common_measure_15dp"
         android:text="我的地址"
-        android:textSize="@dimen/text_size_17"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_17" />
+
     <ListView
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@null"
         android:dividerHeight="4dp"
-        android:scrollbars="none"/>
+        android:scrollbars="none" />
 </LinearLayout>

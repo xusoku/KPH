@@ -33,7 +33,7 @@
             android:singleLine="true"
             android:text="sdfasf"
             android:textColor="@color/colorgray"
-            android:textSize="@dimen/text_size_11" />
+            android:textSize="@dimen/text_size_15" />
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/poi_item_phone"
@@ -45,6 +45,6 @@
             android:singleLine="true"
             android:text="sdfasf"
             android:textColor="@color/colorgray"
-            android:textSize="@dimen/text_size_11" />
+            android:textSize="@dimen/text_size_15" />
     </LinearLayout>
 </FrameLayout>

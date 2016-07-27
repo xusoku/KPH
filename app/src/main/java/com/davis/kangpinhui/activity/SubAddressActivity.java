@@ -51,7 +51,7 @@ public class SubAddressActivity extends BaseActivity {
     @Override
     protected void findViews() {
         showTopBar();
-        setTitle("代收地址");
+        setTitle("自提地址");
         shop_list=$(R.id.shop_list);
     }
 
