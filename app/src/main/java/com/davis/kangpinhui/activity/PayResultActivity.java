@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
@@ -21,6 +22,7 @@ import com.davis.kangpinhui.model.OrderDetail;
 import com.davis.kangpinhui.model.Recharge;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.util.DateUtils;
+import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 
 import org.w3c.dom.Text;
@@ -158,6 +160,12 @@ public class PayResultActivity extends BaseActivity {
             @Override
             public void onSucssce(BaseModel<Order<ArrayList<OrderDetail>>> orderBaseModel) {
                 onActivityLoadingSuccess();
+
+                if(flag){//如果支付成功
+                    String s=orderBaseModel.errorinfo;
+                    if(!TextUtils.isEmpty(s))
+                    Toast.makeText(PayResultActivity.this,s,Toast.LENGTH_LONG).show();
+                }
 
                 Order<ArrayList<OrderDetail>> orderDetailOrder = orderBaseModel.object;
 
