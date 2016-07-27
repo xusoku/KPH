@@ -100,6 +100,8 @@ public class AddAddressActivity extends BaseActivity {
 
         String str= SharePreferenceUtils.getSharedPreferences().getString("address","");
         add_address_text.setText(str);
+        String str1= SharePreferenceUtils.getSharedPreferences().getString("address1","");
+        add_des_address_text.setText(str1);
 
     }
 

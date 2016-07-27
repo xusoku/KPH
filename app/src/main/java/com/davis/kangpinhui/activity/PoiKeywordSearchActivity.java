@@ -369,6 +369,7 @@ public class PoiKeywordSearchActivity extends Activity implements
                     return;
                 }
                 SharePreferenceUtils.getSharedPreferences().putString("address", list.get(position).getTitle());
+                SharePreferenceUtils.getSharedPreferences().putString("address1", list.get(position).getSnippet());
                 LatLonPoint s = list.get(position).getLatLonPoint();
                 LatLng latLng = new LatLng(s.getLatitude(), s.getLongitude());
                 LocalUtil.getShopid(latLng, AppApplication.shoplist);

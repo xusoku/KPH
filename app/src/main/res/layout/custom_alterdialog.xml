@@ -42,6 +42,7 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:orientation="vertical"
         android:gravity="center"
         >
@@ -50,8 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:visibility="gone"
             android:padding="22dp"
+            android:visibility="gone"
             android:lineSpacingExtra="5dp"
             android:textSize="@dimen/text_size_17"/>
     </LinearLayout>

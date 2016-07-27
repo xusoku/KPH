@@ -203,6 +203,7 @@ public class AllorderFragment extends BaseFragment {
                                             editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
                                             editText.setSingleLine();
                                             editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                                            editText.setBackgroundResource(R.drawable.bg_edittext);
                                             builder.setContentView(editText);
                                             builder.setConfirmButton("确定", new View.OnClickListener() {
                                                 @Override
