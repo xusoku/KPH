@@ -65,6 +65,7 @@ public class AppApplication extends Application {
         instance = (AppApplication) getApplicationContext();
 
         token=SharePreferenceUtils.getSharedPreferences().getString("token","");
+
         shopid=SharePreferenceUtils.getSharedPreferences().getString("shopid","");
 
 
