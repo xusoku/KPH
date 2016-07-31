@@ -100,7 +100,7 @@
             <ImageView
                 android:layout_width="@dimen/common_measure_64dp"
                 android:layout_height="@dimen/common_measure_64dp"
-                android:src="@mipmap/index_vip_rechange" />
+                android:src="@mipmap/caimylike" />
 
             <com.davis.kangpinhui.views.CustomTypefaceTextView
                 android:layout_width="wrap_content"

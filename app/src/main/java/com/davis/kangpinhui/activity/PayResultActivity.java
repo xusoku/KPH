@@ -24,6 +24,7 @@ import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.util.DateUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
+import com.davis.kangpinhui.views.CustomAlterDialog;
 
 import org.w3c.dom.Text;
 
@@ -163,8 +164,13 @@ public class PayResultActivity extends BaseActivity {
 
                 if(flag){//如果支付成功
                     String s=orderBaseModel.errorinfo;
-                    if(!TextUtils.isEmpty(s))
-                    Toast.makeText(PayResultActivity.this,s,Toast.LENGTH_LONG).show();
+                    if(!TextUtils.isEmpty(s)){
+                        CustomAlterDialog dialog=new CustomAlterDialog(PayResultActivity.this);
+                        dialog.bottomButtonVisiblity(CustomAlterDialog.VISIBLE_CANCEL_BUTTON);
+                        dialog.setTitle("提示");
+                        dialog.setContent_text(s);
+                        dialog.setCancelButton("我知道了");
+                    }
                 }
 
                 Order<ArrayList<OrderDetail>> orderDetailOrder = orderBaseModel.object;

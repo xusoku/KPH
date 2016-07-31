@@ -146,6 +146,9 @@ public class OrderActivity extends BaseActivity {
 //        if (AppApplication.address == null) {
             getAddresslist();
 //        }
+
+
+        order_paytype_text.setText("VIP卡支付"+"(¥"+AppApplication.getFcurrmoney()+")");
     }
 
     @Override
@@ -439,6 +442,7 @@ public class OrderActivity extends BaseActivity {
                                 order_paytype_text.setText(charSequences[which].toString());
 
                                 if (payTape.equals("3")) {
+                                    order_paytype_text.setText(charSequences[which].toString()+"(¥"+AppApplication.getFcurrmoney()+")");
                                     add_cart_add_passwrod_linear.setVisibility(View.VISIBLE);
                                 } else {
                                     add_cart_add_passwrod_linear.setVisibility(View.GONE);
