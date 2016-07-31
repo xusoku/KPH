@@ -113,7 +113,7 @@ public class SubAddressActivity extends BaseActivity {
                     public void onClick(View v) {
 
                         Address address=new Address();
-                        address.iuseraddressid=itemData.addressid;
+                        address.iuseraddressid=itemData.id;
                         address.saddress=itemData.address;
                         address.smobile=itemData.tel;
                         address.saddressname=itemData.shopname;
