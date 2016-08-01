@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +43,7 @@ public class LoginActivity extends BaseActivity {
     private TextView login_register_send_code;
     private RelativeLayout login_code_relative;
     private RelativeLayout login_forget_relative;
+    private TextInputLayout inputtext;
 
     private boolean isLogin = true;
     public  int count = 60;
@@ -84,6 +86,7 @@ public class LoginActivity extends BaseActivity {
         login_password = $(R.id.login_password);
         login_code = $(R.id.login_code);
         login_last_text = $(R.id.login_last_text);
+        inputtext = $(R.id.inputtext);
         login_code_relative = $(R.id.login_code_relative);
         login_register_send_code = $(R.id.login_register_send_code);
         login_forget_relative = $(R.id.login_forget_relative);
@@ -258,11 +261,13 @@ public class LoginActivity extends BaseActivity {
             login_code_relative.setVisibility(View.GONE);
             login_forget_relative.setVisibility(View.VISIBLE);
             login_btn.setText("登录");
+            inputtext.setHint("手机号/卡号");
             login_last_text.setText("＜ 随便逛逛");
         } else {
             login_forget_relative.setVisibility(View.GONE);
             login_code_relative.setVisibility(View.VISIBLE);
             login_btn.setText("注册");
+            inputtext.setHint("手机号");
             login_last_text.setText("＜ 已有账户，去登录");
         }
         login_phone.setFocusable(true);
