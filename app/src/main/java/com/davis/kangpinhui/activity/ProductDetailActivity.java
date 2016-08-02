@@ -137,7 +137,7 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         id = intent.getStringExtra("id");
-        findViews();
+//        findViews();
         initData();
     }
 

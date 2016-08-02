@@ -18,6 +18,7 @@ import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.CartListAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.ToastUitl;
 
 import java.text.DecimalFormat;
@@ -72,6 +73,7 @@ public class CartListActivity extends BaseActivity {
         cart_listvew.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                AppManager.getAppManager().finishActivity(ProductDetailActivity.class);
                 Intent intent=new Intent(CartListActivity.this,ProductDetailActivity.class);
                         intent.putExtra("id", list.get(position).iproductid);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);

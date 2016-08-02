@@ -1,11 +1,13 @@
 package com.davis.kangpinhui.fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -35,6 +37,7 @@ import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.views.CustomAlterDialog;
+import com.davis.kangpinhui.views.CustomListDialog;
 import com.davis.kangpinhui.views.CustomTypefaceEditText;
 import com.davis.kangpinhui.views.LoadMoreListView;
 import com.davis.kangpinhui.views.StretchedListView;
@@ -186,46 +189,87 @@ public class AllorderFragment extends BaseFragment {
                     @Override
                     public void onClick(View v) {
                         final CharSequence[] typepaytext = {"VIP卡支付","在线支付 微信支付", "在线支付 支付宝支付"};
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setTitle("支付方式")
-                                .setItems(typepaytext, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        AppApplication.getApplication().numberCode=itemData.sordernumber;
-                                        if (which==2) {
-                                            thridPayUtil.alipay(itemData.fmoney, itemData.sordernumber);
-                                        } else if (which==1) {//微信
-                                            getWeixinPay(itemData.sordernumber);
-                                        }else{
-                                           final CustomAlterDialog builder=new CustomAlterDialog(getActivity());
-                                            builder.setTitle("请输入密码");
-                                            final CustomTypefaceEditText editText=new CustomTypefaceEditText(getActivity());
-                                            editText.setTextColor(Color.parseColor("#000000"));
-                                            editText.setTextSize(DisplayMetricsUtils.dp2px(15));
-                                            editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
-                                            editText.setSingleLine();
-                                            editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                                            editText.setBackgroundResource(R.drawable.bg_edittext);
-                                            builder.setContentView(editText);
-                                            builder.setConfirmButton("确定", new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    builder.dismiss();
-                                                    String pass = editText.getText().toString().trim();
-                                                    if (TextUtils.isEmpty(pass)) {
-                                                        ToastUitl.showToast("请输入密码");
-                                                    } else {
-                                                        getYuePay(itemData.sordernumber, pass);
-                                                    }
-                                                }
-                                            });
-                                            builder.setCancelButton("取消");
+
+                        CustomListDialog dialog=new CustomListDialog(getActivity());
+                        dialog.setTitle("支付方式");
+                        dialog.setList(typepaytext);
+                        dialog.setOnItemClick(new CustomListDialog.OnItemClick() {
+                            @Override
+                            public void click(int which) {
+                                AppApplication.getApplication().numberCode=itemData.sordernumber;
+                                if (which==2) {
+                                    thridPayUtil.alipay(itemData.fmoney, itemData.sordernumber);
+                                } else if (which==1) {//微信
+                                    getWeixinPay(itemData.sordernumber);
+                                }else{
+                                    final CustomAlterDialog builder=new CustomAlterDialog(getActivity());
+                                    builder.setTitle("请输入密码");
+                                    View view= LayoutInflater.from(getActivity()).inflate(R.layout.payedittext,null);
+                                    final CustomTypefaceEditText editText= (CustomTypefaceEditText) view.findViewById(R.id.pay_text_et);
+//                                            editText.setTextColor(Color.parseColor("#000000"));
+//                                            editText.setTextSize(DisplayMetricsUtils.dp2px(15));
+//                                            editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
+//                                            editText.setSingleLine();
+//                                            editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//                                            editText.setBackgroundResource(R.drawable.bg_edittext);
+                                    builder.setContentView(view);
+                                    builder.setConfirmButton("确定", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            builder.dismiss();
+                                            String pass = editText.getText().toString().trim();
+                                            if (TextUtils.isEmpty(pass)) {
+                                                ToastUitl.showToast("请输入密码");
+                                            } else {
+                                                getYuePay(itemData.sordernumber, pass);
+                                            }
                                         }
-
-                                    }
-                                }).show();
-
-
+                                    });
+                                    builder.setCancelButton("取消");
+                                }
+                            }
+                        });
+//                        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                        builder.setTitle("支付方式")
+//                                .setItems(typepaytext, new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        AppApplication.getApplication().numberCode=itemData.sordernumber;
+//                                        if (which==2) {
+//                                            thridPayUtil.alipay(itemData.fmoney, itemData.sordernumber);
+//                                        } else if (which==1) {//微信
+//                                            getWeixinPay(itemData.sordernumber);
+//                                        }else{
+//                                           final CustomAlterDialog builder=new CustomAlterDialog(getActivity());
+//                                            builder.setTitle("请输入密码");
+//                                            View view= LayoutInflater.from(getActivity()).inflate(R.layout.payedittext,null);
+//                                            final CustomTypefaceEditText editText= (CustomTypefaceEditText) view.findViewById(R.id.pay_text_et);
+////                                            editText.setTextColor(Color.parseColor("#000000"));
+////                                            editText.setTextSize(DisplayMetricsUtils.dp2px(15));
+////                                            editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
+////                                            editText.setSingleLine();
+////                                            editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+////                                            editText.setBackgroundResource(R.drawable.bg_edittext);
+//                                            builder.setContentView(view);
+//                                            builder.setConfirmButton("确定", new View.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(View v) {
+//                                                    builder.dismiss();
+//                                                    String pass = editText.getText().toString().trim();
+//                                                    if (TextUtils.isEmpty(pass)) {
+//                                                        ToastUitl.showToast("请输入密码");
+//                                                    } else {
+//                                                        getYuePay(itemData.sordernumber, pass);
+//                                                    }
+//                                                }
+//                                            });
+//                                            builder.setCancelButton("取消");
+//                                        }
+//
+//                                    }
+//                                }).show();
+//
+//
                     }
                 });
 

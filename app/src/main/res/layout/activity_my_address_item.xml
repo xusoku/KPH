@@ -69,10 +69,10 @@
 
         <ImageView
             android:id="@+id/my_address_item_edit"
-            android:layout_width="@dimen/common_measure_65dp"
-            android:layout_height="@dimen/common_measure_65dp"
-            android:paddingRight="@dimen/common_measure_15dp"
-            android:scaleType="centerInside"
+            android:layout_width="@dimen/common_measure_28dp"
+            android:layout_height="@dimen/common_measure_28dp"
+            android:layout_margin="@dimen/common_measure_15dp"
+            android:scaleType="fitXY"
             android:src="@mipmap/my_andress_fix" />
     </LinearLayout>
 </FrameLayout>

@@ -23,10 +23,10 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="15dp"
+                android:layout_width="@dimen/common_measure_28dp"
+                android:layout_height="@dimen/common_measure_28dp"
                 android:layout_centerVertical="true"
+                android:layout_margin="@dimen/common_measure_10dp"
                 android:src="@mipmap/btn_titlebar_back_normal" />
         </LinearLayout>
 
@@ -59,8 +59,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/common_measure_28dp"
+                android:layout_height="@dimen/common_measure_28dp"
                 android:layout_centerVertical="true"
                 android:src="@mipmap/index_search" />
         </LinearLayout>
@@ -83,6 +83,7 @@
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_measure_50dp"
+            android:textSize="@dimen/text_size_17"
             android:textColor="@color/colorgray"
             android:layout_marginLeft="@dimen/common_measure_15dp"
             android:gravity="center_vertical"
@@ -105,6 +106,7 @@
             android:layout_height="@dimen/common_measure_50dp"
             android:textColor="@color/colorgray"
             android:gravity="center"
+            android:textSize="@dimen/text_size_17"
             android:clickable="true"
             android:onClick="doClick"
             android:text="清除历史记录"/>

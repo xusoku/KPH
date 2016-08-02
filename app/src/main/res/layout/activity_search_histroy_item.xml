@@ -11,6 +11,7 @@
         android:layout_height="@dimen/common_measure_50dp"
         android:textColor="@color/black"
         android:gravity="center_vertical"
+        android:textSize="@dimen/text_size_17"
         android:layout_marginLeft="@dimen/common_measure_15dp"
         android:text="历史搜索"/>
     <View
