@@ -33,6 +33,7 @@ public class AboutActivity extends BaseActivity {
     protected void initVariable() {
 
         type=getIntent().getIntExtra("type",0);
+
     }
 
     @Override

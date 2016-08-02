@@ -59,6 +59,11 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
         holder.setText(R.id.add_cart_item_add_center, (int) Float.parseFloat(itemData.inumber) + "");
 
         CheckBox checkBox = holder.getView(R.id.add_cart_item_checkbox);
+        int size= contxt.getResources().getDisplayMetrics().densityDpi;
+        if(size==160) {
+            checkBox.setScaleX(1.5f);
+            checkBox.setScaleY(1.5f);
+        }
         ImageView ivDelete = holder.getView(R.id.add_cart_add_del);
         TextView addText = holder.getView(R.id.add_cart_item_add);
         final TextView text = holder.getView(R.id.add_cart_item_add_center);

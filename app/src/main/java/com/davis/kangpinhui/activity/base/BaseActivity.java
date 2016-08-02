@@ -26,9 +26,12 @@ import android.widget.Toast;
 
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.util.AppManager;
+import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.views.ProgressWheel;
 import com.umeng.analytics.MobclickAgent;
+
+import utils.DisplayMetrics;
 
 
 public abstract class BaseActivity extends AppCompatActivity
@@ -113,7 +116,11 @@ public abstract class BaseActivity extends AppCompatActivity
         Resources res = super.getResources();
         Configuration config = new Configuration();
         config.setToDefaults();
-        res.updateConfiguration(config, res.getDisplayMetrics());
+
+        android.util.DisplayMetrics metrics = res.getDisplayMetrics();
+        metrics.densityDpi=480;
+        metrics.density=3;
+        res.updateConfiguration(config, metrics);
         return res;
     }
 
@@ -316,7 +323,10 @@ public abstract class BaseActivity extends AppCompatActivity
         }
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         layContentView.setLayoutParams(layoutParams);
+
         layBody.addView(layContentView, 0);
+
+
     }
 
     /**

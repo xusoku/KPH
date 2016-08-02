@@ -66,6 +66,7 @@ public abstract class BaseFragment extends Fragment
 
     }
 
+
     @SuppressWarnings("unchecked")
     protected final <T extends View> T $(@IdRes int id)
     {

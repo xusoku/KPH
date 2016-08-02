@@ -39,6 +39,8 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.davis.kangpinhui.activity.base.BaseActivity;
+
 
 public class BadgeView extends TextView {
 
@@ -71,11 +73,19 @@ public class BadgeView extends TextView {
         // set default font
         setTextColor(Color.WHITE);
         setTypeface(Typeface.DEFAULT_BOLD);
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
-        setPadding(dip2Px(5), dip2Px(1), dip2Px(5), dip2Px(1));
+        int size= (int)this.getResources().getDisplayMetrics().densityDpi;
+        if(size==160){
+            setTextSize(40);
+            setPadding(10, 3, 10, 3);
+            setBackground(20, Color.parseColor("#ff0000"));
+        }else {
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, (11));
+            setPadding(dip2Px(5), dip2Px(1), dip2Px(5), dip2Px(1));
+            setBackground(9, Color.parseColor("#ff0000"));
+        }
 
         // set default background
-        setBackground(9, Color.parseColor("#ff0000"));
+
 
         setGravity(Gravity.CENTER);
 
