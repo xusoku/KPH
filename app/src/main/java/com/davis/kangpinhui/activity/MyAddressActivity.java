@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
@@ -28,6 +29,7 @@ public class MyAddressActivity extends BaseActivity {
 
     private ListView listView;
     private TextView select_address_add_text;
+    private RelativeLayout select_address_add_text_relative;
 
     private boolean isOrder=false;
 
@@ -62,10 +64,11 @@ public class MyAddressActivity extends BaseActivity {
         setTitle("我的地址");
         listView = $(R.id.content);
         select_address_add_text = $(R.id.select_address_add_text);
+        select_address_add_text_relative = $(R.id.select_address_add_text_relative);
         if(isOrder){
-            select_address_add_text.setVisibility(View.VISIBLE);
+            select_address_add_text_relative.setVisibility(View.VISIBLE);
         }else{
-            select_address_add_text.setVisibility(View.GONE);
+            select_address_add_text_relative.setVisibility(View.GONE);
         }
 
     }

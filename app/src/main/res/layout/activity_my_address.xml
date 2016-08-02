@@ -31,6 +31,7 @@
         android:background="@color/white">
 
         <RelativeLayout
+            android:id="@+id/select_address_add_text_relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

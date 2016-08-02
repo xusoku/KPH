@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.activity.CartListActivity;
 import com.davis.kangpinhui.activity.OrderDetailActivity;
 import com.davis.kangpinhui.activity.PayResultActivity;
+import com.davis.kangpinhui.activity.ProductDetailActivity;
 import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.OrderDetail;
@@ -270,7 +272,7 @@ public class AllorderFragment extends BaseFragment {
         return i + "";
     }
 
-    private void bindItemView(StretchedListView listView, ArrayList<OrderDetail> orderDetails) {
+    private void bindItemView(StretchedListView listView, final ArrayList<OrderDetail> orderDetails) {
         listView.setAdapter(new CommonBaseAdapter<OrderDetail>(getActivity(), orderDetails, R.layout.activity_order_item) {
             @Override
             public void convert(ViewHolder holder, OrderDetail itemData, int position) {
@@ -279,6 +281,13 @@ public class AllorderFragment extends BaseFragment {
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
                 holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fprice);
                 holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.icount));
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ProductDetailActivity.jumpProductDetailActivity(getActivity(), orderDetails.get(position).iproductid);
             }
         });
     }
@@ -303,6 +312,8 @@ public class AllorderFragment extends BaseFragment {
                 getOrderList(++iPage, iPageSize);
             }
         });
+
+
     }
 
     private void getOrderList(int ipage, int iPageSize) {
