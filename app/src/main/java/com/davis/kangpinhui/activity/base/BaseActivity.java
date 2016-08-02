@@ -117,10 +117,10 @@ public abstract class BaseActivity extends AppCompatActivity
         Configuration config = new Configuration();
         config.setToDefaults();
 
-        android.util.DisplayMetrics metrics = res.getDisplayMetrics();
-        metrics.densityDpi=480;
-        metrics.density=3;
-        res.updateConfiguration(config, metrics);
+//        android.util.DisplayMetrics metrics = res.getDisplayMetrics();
+//        metrics.densityDpi=480;
+//        metrics.density=3;
+        res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
     }
 
