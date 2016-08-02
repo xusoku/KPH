@@ -29,16 +29,15 @@
             android:textColor="#ffffff"
             android:textSize="@dimen/text_size_22" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btnLeft"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/common_measure_28dp"
+            android:layout_height="@dimen/common_measure_28dp"
             android:background="@null"
             android:src="@mipmap/btn_titlebar_back_normal"
             android:layout_centerVertical="true"
             android:onClick="doClick"
-            android:padding="15dp"
-            android:scaleType="fitCenter" />
+            android:layout_marginLeft="@dimen/common_measure_10dp" />
 
         <ImageButton
             android:id="@+id/btnRight"
@@ -60,10 +59,9 @@
             android:layout_centerVertical="true"
             android:clickable="true"
             android:gravity="center"
-            android:text="aaa"
-            android:padding="15dp"
+            android:paddingRight="@dimen/common_measure_10dp"
             android:textColor="#ffffff"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_20"
             android:visibility="gone"/>
     </RelativeLayout>
 

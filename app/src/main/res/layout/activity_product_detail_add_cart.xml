@@ -20,7 +20,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <View
                 android:id="@+id/add_cart_view"
@@ -29,7 +30,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/common_measure_100dp"
+                android:layout_height="@dimen/common_measure_105dp"
                 android:layout_below="@id/add_cart_view"
                 android:background="@color/white" />
 
@@ -72,7 +73,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/add_cart_view"
                 android:layout_margin="@dimen/common_measure_10dp"
-                android:scaleType="centerInside"
+                android:scaleType="fitXY"
                 android:src="@mipmap/ic_close_share_black" />
         </RelativeLayout>
 

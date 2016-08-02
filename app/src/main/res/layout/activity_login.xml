@@ -115,6 +115,7 @@
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1"
+                android:text="dujuan"
                 android:singleLine="true"
                 android:textColor="@color/white" />
 

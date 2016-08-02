@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/base_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/common_measure_100dp"
+            android:layout_height="@dimen/common_measure_100dp"
             android:src="@mipmap/ic_no_network" />
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
@@ -27,14 +27,14 @@
             android:singleLine="true"
             android:text="加载失败! 点击刷新"
             android:textColor="#3B3B3B"
-            android:textSize="17sp"
+            android:textSize="@dimen/text_size_17"
             android:textStyle="bold" />
     </LinearLayout>
 
     <com.davis.kangpinhui.views.ProgressWheel
         android:id="@+id/loadingProgress"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/common_measure_45dp"
+        android:layout_height="@dimen/common_measure_45dp"
         android:layout_gravity="center"
         app:matProg_circleRadius="45dp"
         app:matProg_fillRadius="false"

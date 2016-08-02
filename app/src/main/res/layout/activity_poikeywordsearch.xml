@@ -12,9 +12,10 @@
 
         <ImageView
             android:id="@+id/searchText_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="15dp"
+            android:layout_width="@dimen/common_measure_28dp"
+            android:layout_height="@dimen/common_measure_28dp"
+            android:layout_marginLeft="@dimen/common_measure_10dp"
+            android:layout_marginRight="@dimen/common_measure_10dp"
             android:layout_gravity="center_vertical"
             android:scaleType="centerInside"
             android:src="@mipmap/btn_titlebar_back_normal" />
@@ -30,6 +31,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:drawablePadding="10dp"
+            android:textSize="@dimen/text_size_17"
             android:hint="请输入小区名称或大楼"
             android:textColorHint="@color/white"
             android:drawableBottom="@drawable/line" />

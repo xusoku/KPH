@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity
 
     private RelativeLayout layTopBar;
     private TextView tvTitle;
-    private ImageButton btnLeft;
+    private ImageView btnLeft;
     private ImageButton btnRight;
     private TextView btnRightTitle;
     private FrameLayout layBody;
@@ -84,7 +84,7 @@ public abstract class BaseActivity extends AppCompatActivity
         // topbar相关
         layTopBar = (RelativeLayout) findViewById(R.id.layTopBar);
         tvTitle = (TextView) findViewById(R.id.tvTopBarTitle);
-        btnLeft = (ImageButton) findViewById(R.id.btnLeft);
+        btnLeft = (ImageView) findViewById(R.id.btnLeft);
         btnRight = (ImageButton) findViewById(R.id.btnRight);
         btnRightTitle = (TextView) findViewById(R.id.btnRightTitle);
 
@@ -134,7 +134,7 @@ public abstract class BaseActivity extends AppCompatActivity
     /**
      * 得到左边的按钮
      */
-    public ImageButton getLeftButton()
+    public ImageView getLeftButton()
     {
         btnLeft.setVisibility(View.VISIBLE);
         return btnLeft;

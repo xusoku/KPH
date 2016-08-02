@@ -33,8 +33,9 @@
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/common_measure_28dp"
+                android:layout_height="@dimen/common_measure_28dp"
+                android:scaleType="fitXY"
                 android:src="@mipmap/index_search" />
         </LinearLayout>
 
