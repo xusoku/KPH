@@ -20,6 +20,7 @@ import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.views.CustomListDialog;
 
 import de.greenrobot.event.EventBus;
 import retrofit2.Call;
@@ -97,33 +98,34 @@ public class RechargeActivity extends BaseActivity {
                 LetterheadActivity.jumpLetterheadActivity(this);
                 break;
             case R.id.recharge_price:
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
 
-                builder1.setTitle("充值金额")
-                        .setItems(pricetext, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                price = pricetext[which] + "";
-                                recharge_price.setText(pricetext[which] + "");
-                                recharge_price_text.setText("¥"+pricetext[which]);
-
-                            }
-                        }).show();
+                CustomListDialog dialog=new CustomListDialog((this));
+                dialog.setTitle("充值金额");
+                dialog.setList(pricetext);
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.setOnItemClick(new CustomListDialog.OnItemClick() {
+                    @Override
+                    public void click(int which) {
+                        price = pricetext[which] + "";
+                        recharge_price.setText(pricetext[which] + "");
+                        recharge_price_text.setText("¥" + pricetext[which]);
+                    }
+                });
                 break;
             case R.id.recharge_pay:
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                builder.setTitle("支付方式")
-                        .setItems(typepaytext, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ToastUitl.showToast(typepaytext[which].toString());
-                                payTape = typepay[which].toString();
-                                recharge_pay.setText(typepaytext[which].toString());
-
-                            }
-                        }).show();
+                CustomListDialog dialog1=new CustomListDialog((this));
+                dialog1.setTitle("支付方式");
+                dialog1.setList(typepaytext);
+                dialog1.setCanceledOnTouchOutside(true);
+                dialog1.setOnItemClick(new CustomListDialog.OnItemClick() {
+                    @Override
+                    public void click(int which) {
+                        ToastUitl.showToast(typepaytext[which].toString());
+                        payTape = typepay[which].toString();
+                        recharge_pay.setText(typepaytext[which].toString());
+                    }
+                });
                 break;
             case R.id.recharge_commit:
 
@@ -140,13 +142,14 @@ public class RechargeActivity extends BaseActivity {
                 call.enqueue(new ApiCallback<BaseModel<Recharge>>() {
                     @Override
                     public void onSucssce(BaseModel<Recharge> rechargeBaseModel) {
-                        AppApplication.getApplication().numberCode=rechargeBaseModel.object.schargenumber;
+                        AppApplication.getApplication().numberCode = rechargeBaseModel.object.schargenumber;
                         if (payTape.equals("2")) {
                             thridPayUtil.alipayyue(rechargeBaseModel.object.fmoney, rechargeBaseModel.object.schargenumber);
                         } else if (payTape.equals("4")) {//微信
                             getWeixinPay(rechargeBaseModel.object.schargenumber);
                         }
                     }
+
                     @Override
                     public void onFailure() {
 

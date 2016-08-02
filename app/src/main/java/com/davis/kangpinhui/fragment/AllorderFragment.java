@@ -193,6 +193,7 @@ public class AllorderFragment extends BaseFragment {
                         CustomListDialog dialog=new CustomListDialog(getActivity());
                         dialog.setTitle("支付方式");
                         dialog.setList(typepaytext);
+                        dialog.setCanceledOnTouchOutside(true);
                         dialog.setOnItemClick(new CustomListDialog.OnItemClick() {
                             @Override
                             public void click(int which) {

@@ -32,6 +32,7 @@ import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.views.CustomListDialog;
 import com.davis.kangpinhui.views.StretchedListView;
 
 import java.text.DecimalFormat;
@@ -430,26 +431,26 @@ public class OrderActivity extends BaseActivity {
 
                 final CharSequence[] charSequences = {"VIP卡支付", "支付宝支付", "微信支付"};
                 final String[] type = {"3", "0", "4"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                CustomListDialog dialog1=new CustomListDialog((this));
+                dialog1.setTitle("付款方式");
+                dialog1.setList(charSequences);
+                dialog1.setCanceledOnTouchOutside(true);
+                dialog1.setOnItemClick(new CustomListDialog.OnItemClick() {
+                    @Override
+                    public void click(int which) {
+                        ToastUitl.showToast(charSequences[which].toString());
+                        payTape = type[which];
+                        order_paytype_text.setText(charSequences[which].toString());
 
-                builder.setTitle("付款方式")
-                        .setItems(charSequences, new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ToastUitl.showToast(charSequences[which].toString());
-                                payTape = type[which];
-                                order_paytype_text.setText(charSequences[which].toString());
-
-                                if (payTape.equals("3")) {
-                                    order_paytype_text.setText(charSequences[which].toString()+"(¥"+AppApplication.getFcurrmoney()+")");
-                                    add_cart_add_passwrod_linear.setVisibility(View.VISIBLE);
-                                } else {
-                                    add_cart_add_passwrod_linear.setVisibility(View.GONE);
-                                }
-                                changePriceFun();
-                            }
-                        }).show();
+                        if (payTape.equals("3")) {
+                            order_paytype_text.setText(charSequences[which].toString() + "(¥" + AppApplication.getFcurrmoney() + ")");
+                            add_cart_add_passwrod_linear.setVisibility(View.VISIBLE);
+                        } else {
+                            add_cart_add_passwrod_linear.setVisibility(View.GONE);
+                        }
+                        changePriceFun();
+                    }
+                });
                 break;
             case R.id.order_address_relative:
                 MyAddressActivity.jumpMyAddressActivity(this, true);
