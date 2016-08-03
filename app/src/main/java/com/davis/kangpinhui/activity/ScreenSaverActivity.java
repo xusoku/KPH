@@ -9,9 +9,15 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.R;
 import com.davis.kangpinhui.activity.base.BaseActivity;
 import com.davis.kangpinhui.adapter.base.ViewHolder;
+import com.davis.kangpinhui.api.ApiCallback;
+import com.davis.kangpinhui.api.ApiInstant;
+import com.davis.kangpinhui.api.ApiService;
+import com.davis.kangpinhui.model.BigPictrue;
+import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.views.loopbanner.LoopBanner;
@@ -19,6 +25,8 @@ import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import retrofit2.Call;
 
 public class ScreenSaverActivity extends Activity  {
 
@@ -43,9 +51,32 @@ public class ScreenSaverActivity extends Activity  {
         loopBanner.setLayoutParams(params);
         setContentView(loopBanner);
 
-        ArrayList<String> str=new ArrayList<>();
-        str.add("http://m.kangpinhui.com/images/1.jpg");
-        str.add("http://m.kangpinhui.com/images/2.jpg");
+        Call<BaseModel<ArrayList<BigPictrue>>> call = ApiInstant.getInstant().getbigpic(AppApplication.apptype);
+
+        call.enqueue(new ApiCallback<BaseModel<ArrayList<BigPictrue>>>() {
+            @Override
+            public void onSucssce(BaseModel<ArrayList<BigPictrue>> arrayListBaseModel) {
+                ArrayList<BigPictrue> str=arrayListBaseModel.object;
+                ArrayList<String> strr=new ArrayList<>();
+                for (BigPictrue s:str) {
+                    strr.add(s.picurl);
+                }
+                bindView(strr);
+            }
+
+            @Override
+            public void onFailure() {
+                ArrayList<String> str=new ArrayList<>();
+                str.add("http://m.kangpinhui.com/images/1.jpg");
+                str.add("http://m.kangpinhui.com/images/2.jpg");
+                bindView(str);
+            }
+        });
+
+
+    }
+
+    private void bindView(ArrayList<String> str){
 
         loopBanner.setPageAdapter(new LoopPageAdapter<String>(this, str, R.layout.activity_screen_saver) {
 
@@ -66,6 +97,7 @@ public class ScreenSaverActivity extends Activity  {
             }
         });
     }
+
 
     @Override
     public void onResume()
