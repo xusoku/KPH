@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.davis.kangpinhui.AppApplication;
@@ -61,8 +63,11 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
         CheckBox checkBox = holder.getView(R.id.add_cart_item_checkbox);
         int size= contxt.getResources().getDisplayMetrics().densityDpi;
         if(size==160) {
-            checkBox.setScaleX(1.5f);
-            checkBox.setScaleY(1.5f);
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(30,30,30,30);
+            checkBox.setLayoutParams(params);
+            checkBox.setScaleX(2.5f);
+            checkBox.setScaleY(2.5f);
         }
         ImageView ivDelete = holder.getView(R.id.add_cart_add_del);
         TextView addText = holder.getView(R.id.add_cart_item_add);
