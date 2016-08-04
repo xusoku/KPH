@@ -76,6 +76,9 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void findViews() {
 
+        showTopBar();
+//        getRightTextButton().setText("返回首页");
+
         login_btn = $(R.id.login_btn);
         login_phone = $(R.id.login_phone);
         String str=SharePreferenceUtils.getSharedPreferences("kph").getString("username", "");
