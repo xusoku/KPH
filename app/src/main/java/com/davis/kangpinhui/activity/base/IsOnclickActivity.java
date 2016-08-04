@@ -23,7 +23,7 @@ public class IsOnclickActivity extends AppCompatActivity {
     private long timePeriod;
 
     /* 静止超过N秒将自动进入屏保 */
-    private float mHoldStillTime = 3;
+    private float mHoldStillTime = 30;
     /*标识当前是否进入了屏保*/
     private boolean isRunScreenSaver;
 

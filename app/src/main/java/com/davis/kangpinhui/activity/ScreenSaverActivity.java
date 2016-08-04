@@ -59,7 +59,7 @@ public class ScreenSaverActivity extends Activity  {
                 ArrayList<BigPictrue> str=arrayListBaseModel.object;
                 ArrayList<String> strr=new ArrayList<>();
                 for (BigPictrue s:str) {
-                    strr.add(s.picurl);
+                    strr.add(s.name);
                 }
                 bindView(strr);
             }
@@ -85,8 +85,8 @@ public class ScreenSaverActivity extends Activity  {
                 // TODO Auto-generated method stub
                 ImageView imageView = (ImageView) holder.getConvertView();
                 Glide.with(ScreenSaverActivity.this).load(itemData)
-                        .placeholder(R.mipmap.img_defualt_bg)
-                        .error(R.mipmap.img_defualt_bg)
+//                        .placeholder(R.mipmap.img_defualt_bg)
+//                        .error(R.mipmap.img_defualt_bg)
                         .into(imageView);
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -96,6 +96,7 @@ public class ScreenSaverActivity extends Activity  {
                 });
             }
         });
+        loopBanner.startTurning(4000);
     }
 
 

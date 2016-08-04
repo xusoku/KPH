@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -200,6 +201,10 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
         product_detail_save.setText(productDetail.sstorage);
         product_detail_producter.setText(productDetail.sfactoryname);
 
+        int size=getResources().getDisplayMetrics().densityDpi;
+        if(size==160) {
+            product_detail_xweb.getSettings().setTextSize(WebSettings.TextSize.LARGEST);
+        }
         product_detail_xweb.loadDataWithBaseURL(null, "<style type=\"text/css\">img{max-width:100%;height: auto;margin-bottom: .1rem;}</style>"+(productDetail.scontentinfo)+"<p>.</p>", "text/html", "utf-8", null);
     }
 
