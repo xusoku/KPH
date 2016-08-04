@@ -205,7 +205,7 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
         if(size==160) {
             product_detail_xweb.getSettings().setTextSize(WebSettings.TextSize.LARGEST);
         }
-        product_detail_xweb.loadDataWithBaseURL(null, "<style type=\"text/css\">img{max-width:100%;height: auto;margin-bottom: .1rem;}</style>"+(productDetail.scontentinfo)+"<p>.</p>", "text/html", "utf-8", null);
+        product_detail_xweb.loadDataWithBaseURL(null, "<style type=\"text/css\">img{max-width:100%;height: auto;margin-bottom: .1rem;width:100%;}</style>"+(productDetail.scontentinfo)+"<p>.</p>", "text/html", "utf-8", null);
     }
 
 
