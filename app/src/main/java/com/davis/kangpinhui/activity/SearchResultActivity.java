@@ -376,6 +376,10 @@ public class SearchResultActivity extends BaseActivity {
             getYouLikelist();
             return;
         }
+        if(activid.equals("index_tuan")){
+            getIndexTuanlist();
+            return;
+        }
         Call<BaseModel<Topic<ArrayList<Product>>>> call = ApiInstant.getInstant().getActivelist(AppApplication.apptype, AppApplication.shopid, activid);
 
         call.enqueue(new ApiCallback<BaseModel<Topic<ArrayList<Product>>>>() {
@@ -406,7 +410,37 @@ public class SearchResultActivity extends BaseActivity {
      */
     private void getYouLikelist() {
 
-        Call<BaseModel<ArrayList<Product>>> call = ApiInstant.getInstant().getYoulikelist(AppApplication.apptype, AppApplication.shopid, AppApplication.token,"10");
+        Call<BaseModel<ArrayList<Product>>> call = ApiInstant.getInstant().getYoulikelist(AppApplication.apptype, AppApplication.shopid, AppApplication.token, "10");
+
+        call.enqueue(new ApiCallback<BaseModel<ArrayList<Product>>>() {
+            @Override
+            public void onSucssce(BaseModel<ArrayList<Product>> topicBaseModel) {
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingSuccess();
+                if (isLoadOrRefresh) {
+                    list.clear();
+                }
+                list.addAll(topicBaseModel.object);
+                adapter.notifyDataSetChanged();
+                if (list.size() == 0) {
+                    onActivityFirstLoadingNoData();
+                }
+                search_result_recycler.onLoadUnavailable();
+            }
+
+            @Override
+            public void onFailure() {
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingFailed();
+            }
+        });
+    }
+    /**
+     * 团购
+     */
+    private void getIndexTuanlist() {
+
+        Call<BaseModel<ArrayList<Product>>> call = ApiInstant.getInstant().getTuanlist(AppApplication.apptype, AppApplication.shopid);
 
         call.enqueue(new ApiCallback<BaseModel<ArrayList<Product>>>() {
             @Override

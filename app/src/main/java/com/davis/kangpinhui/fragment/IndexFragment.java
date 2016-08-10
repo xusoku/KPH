@@ -346,8 +346,9 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 SearchResultActivity.jumpSearchResultActivity(getActivity(), getResources().getString(R.string.index_youlike), true, "youlike");
                 break;
             case R.id.index_tuan:
-                if(AppApplication.isLogin(getActivity()))
-                TuangouChihuoActivity.jumpTuangouChihuoActivity(getActivity());
+//                if(AppApplication.isLogin(getActivity()))
+//                TuangouChihuoActivity.jumpTuangouChihuoActivity(getActivity());
+                SearchResultActivity.jumpSearchResultActivity(getActivity(), getResources().getString(R.string.index_tuan), true, "index_tuan");
                 break;
             case R.id.index_cart:
                 CartListActivity.jumpCartListActivity(getActivity());
