@@ -2,6 +2,7 @@ package com.davis.kangpinhui.api;
 
 
 import com.davis.kangpinhui.model.Address;
+import com.davis.kangpinhui.model.BigPictrue;
 import com.davis.kangpinhui.model.Cart;
 import com.davis.kangpinhui.model.Category;
 import com.davis.kangpinhui.model.Consume;
@@ -401,6 +402,12 @@ public interface ApiService {
             @Query("token") String activeid,
             @Query("ipagesize") String ipagesize
     );
+    //25。2 团购吃货数据获取
+    @GET("product/tuan.do")
+    Call<BaseModel<ArrayList<Product>>> getTuanlist(
+            @Query("apptype") String apptype,
+            @Query("shopid") String shopid
+    );
 
     //27 提交订单时获取用户的优惠券信息
     @GET("coupon/getbyuid.do")
@@ -506,6 +513,12 @@ public interface ApiService {
     //34APP升级接口
     @GET("common/checkversion.do")
     Call<BaseModel<DownLoadSoftUpdate.VersionInfo>> update(
+            @Query("apptype") String apptype
+    );
+
+    //35屏保接口
+    @GET("common/forbigapp.do")
+    Call<BaseModel<ArrayList<BigPictrue>>> getbigpic(
             @Query("apptype") String apptype
     );
 
