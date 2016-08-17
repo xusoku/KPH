@@ -36,15 +36,15 @@ public class ScreenSaverActivity extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Random random=new Random();
-        int i=random.nextInt(2);
-        if(i==0){
-            Intent it=new Intent(this,VideoPlayerActivity.class);
-            startActivity(it);
-            finish();
-        }else{
-
-        }
+//        Random random=new Random();
+//        int i=random.nextInt(2);
+//        if(i==0){
+//            Intent it=new Intent(this,VideoPlayerActivity.class);
+//            startActivity(it);
+//            finish();
+//        }else{
+//
+//        }
 
         loopBanner = new LoopBanner(this);
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT);
