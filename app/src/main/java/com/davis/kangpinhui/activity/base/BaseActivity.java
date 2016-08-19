@@ -34,7 +34,7 @@ import com.umeng.analytics.MobclickAgent;
 import utils.DisplayMetrics;
 
 
-public abstract class BaseActivity extends IsOnclickActivity
+public abstract class BaseActivity extends  AppCompatActivity
 {
 
     public Context mContext;
