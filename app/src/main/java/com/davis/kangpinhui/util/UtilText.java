@@ -1,5 +1,8 @@
 package com.davis.kangpinhui.util;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -203,4 +206,6 @@ public class UtilText {
         ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
         spanString.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
+
+
 }
