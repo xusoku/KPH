@@ -96,7 +96,7 @@ public class ScreenSaverActivity extends Activity  {
                 });
             }
         });
-        loopBanner.startTurning(4000);
+        loopBanner.startTurning(15000);
     }
 
 
@@ -105,7 +105,7 @@ public class ScreenSaverActivity extends Activity  {
     {
         // TODO Auto-generated method stub
         super.onResume();
-        loopBanner.startTurning(3000);
+        loopBanner.startTurning(15000);
     }
 
     @Override
