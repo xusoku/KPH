@@ -325,6 +325,23 @@ public class AddCartPopuWindow {
         }
     }
 
+    public void onClickAdd(){
+        add_cart_add_btn.performClick();
+    }
+
+    public boolean isShowPW(final Product productDetail){
+        if (!TextUtils.isEmpty(productDetail.srequire)) {
+            String req = productDetail.srequire;
+            String[] list = req.split(" ");
+            if(list.length>0){
+                return true;
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+
     private String[] list;
 
     private void getRequre(String[] list) {
