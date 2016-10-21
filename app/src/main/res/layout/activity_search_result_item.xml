@@ -45,6 +45,7 @@
                 android:layout_marginLeft="@dimen/common_measure_10dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
+                android:singleLine="true"
                 android:textColor="@color/colorgray"
                 android:textSize="@dimen/text_size_15" />
 

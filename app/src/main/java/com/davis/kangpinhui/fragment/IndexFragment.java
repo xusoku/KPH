@@ -1,21 +1,26 @@
 package com.davis.kangpinhui.fragment;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.davis.kangpinhui.AppApplication;
 import com.davis.kangpinhui.MainActivity;
+import com.davis.kangpinhui.activity.AddCartPopuWindow;
 import com.davis.kangpinhui.activity.PolygonActivity;
 import com.davis.kangpinhui.activity.SearchResultActivity;
 import com.davis.kangpinhui.activity.TuangouChihuoActivity;
@@ -36,12 +41,15 @@ import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
 import com.davis.kangpinhui.util.CommonManager;
+import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.LogUtils;
 import com.davis.kangpinhui.util.SharePreferenceUtils;
 import com.davis.kangpinhui.util.ToastUitl;
 import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.BadgeView;
 import com.davis.kangpinhui.views.MySwipeRefreshLayout;
+import com.davis.kangpinhui.views.NoScrollGridView;
+import com.davis.kangpinhui.views.StretchedListView;
 import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
 import com.davis.kangpinhui.views.viewlineloop.LoopBanner;
 
@@ -61,7 +69,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private LoopBanner index_loopbanner;
     private LinearLayout headerView;
 
-    private ListView content;
+    private StretchedListView content,index_AD_listview;
+    private NoScrollGridView index_noScrollgridview;
     private LinearLayout index_cart;
     private LinearLayout index_search;
     private TextView index_local_select;
@@ -71,11 +80,14 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private TextView no_shopid_see_sending;
     private TextView no_shopid_text;
     private MySwipeRefreshLayout index_refresh;
+    private ScrollView index_scroll;
 
     private boolean isRefreshOrLoad = false;
 
     ArrayList<Banner> bannerList = new ArrayList<>();
     ArrayList<Index.Productlist> recommandList = new ArrayList<Index.Productlist>();
+    ArrayList<Product> productList = new ArrayList<>();
+    ArrayList<Banner> bannerListAd = new ArrayList<>();
 
     BadgeView backgroundDefaultBadge;
 
@@ -92,17 +104,20 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     @Override
     protected void findViews(View view) {
 
-        headerView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_index_header, null);
+//        headerView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_index_header, null);
 
-        index_loopbanner = $(headerView, R.id.index_loopbanner);
-        index_classic = $(headerView, R.id.index_classic);
-        index_tuan = $(headerView, R.id.index_tuan);
-        index_rechange = $(headerView, R.id.index_rechange);
-        index_youlike = $(headerView, R.id.index_youlike);
+        index_loopbanner = $(view, R.id.index_loopbanner);
+        index_classic = $(view, R.id.index_classic);
+        index_tuan = $(view, R.id.index_tuan);
+        index_rechange = $(view, R.id.index_rechange);
+        index_youlike = $(view, R.id.index_youlike);
 
 
         no_linear_shopid = $(view, R.id.no_linear_shopid);
         no_shopid_text = $(view, R.id.no_shopid_text);
+        index_AD_listview = $(view, R.id.index_AD_listview);
+        index_noScrollgridview = $(view, R.id.index_noScrollgridview);
+
         no_shopid_text.setText("");
         no_shopid_text.append("Hi，小康恭候多时了～");
         no_shopid_text.append(UtilText.getOrderDetail("门店周边三公里平均一小时送达"));
@@ -111,12 +126,13 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         no_shopid_see_sending = $(view, R.id.no_shopid_see_sending);
         index_refresh = $(view, R.id.index_refresh);
         index_local_select = $(view, R.id.index_local_select);
+        index_scroll = $(view, R.id.index_scroll);
         index_local_select_linear = $(view, R.id.index_local_select_linear);
         index_cart = $(view, R.id.index_cart);
         index_search = $(view, R.id.index_search);
 
         content = $(view, R.id.content);
-        content.addHeaderView(headerView);
+//        content.addHeaderView(headerView);
         index_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -183,12 +199,25 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 if (isRefreshOrLoad) {
                     bannerList.clear();
                     recommandList.clear();
+                    productList.clear();
+                    bannerListAd.clear();
                 }
                 Index index = indexBaseModel.object;
                 bannerList.addAll(index.bannerList);
                 recommandList.addAll(index.recommandList);
+                productList.addAll(index.productList);
+                bannerListAd.addAll(index.bannerListAd);
                 getBannerData();
                 getContentData();
+                getproductListData();
+                getbannerListAd();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        index_scroll.scrollTo(0, 0);
+                    }
+                }, 50);
             }
 
             @Override
@@ -199,6 +228,103 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 } else {
 //                    listShowFilm.onLoadFailed();//加载失败
                 }
+            }
+        });
+    }
+
+    private void getbannerListAd() {
+        index_AD_listview.setAdapter(new CommonBaseAdapter<Banner>(mContext, bannerListAd, R.layout.layout_main_banner_item) {
+
+            @Override
+            public void convert(ViewHolder holder, final Banner itemData, final int position) {
+                // TODO Auto-generated method stub
+                ImageView imageView = (ImageView) holder.getConvertView();
+                String img = itemData.picurl;
+                Glide.with(getActivity()).load(img)
+                        .placeholder(R.mipmap.img_defualt_bg)
+                        .error(R.mipmap.img_defualt_bg)
+                        .into(imageView);
+
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+            }
+        });
+
+        index_AD_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Banner itemData = bannerListAd.get(position);
+                String gotype = itemData.gotype;
+                if (TextUtils.isEmpty(gotype)) {
+                    gotype = "";
+                }
+                String tempvalue = itemData.tempvalue;
+                if (TextUtils.isEmpty(tempvalue)) {
+                    tempvalue = "";
+                }
+                if (gotype.equals("detail")) {
+                    ProductDetailActivity.jumpProductDetailActivity(getActivity(), tempvalue);
+                } else if (gotype.equals("rootlist")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), "", false, "", tempvalue);
+                } else if (gotype.equals("list")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), "", false, tempvalue, "");
+                } else if (gotype.equals("special")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), itemData.title, true, tempvalue);
+                } else if (gotype.equals("search")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), tempvalue, true);
+                } else {
+                    ToastUitl.showToast("暂无定义");
+                }
+            }
+        });
+    }
+
+    private void getproductListData() {
+        index_noScrollgridview.setAdapter(new CommonBaseAdapter<Product>(getActivity(), productList, R.layout.activity_search_result_item) {
+            @Override
+            public void convert(ViewHolder holder, final Product itemData, int position) {
+
+
+                ImageView iv = holder.getView(R.id.search_result_item_iv);
+
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) DisplayMetricsUtils.getWidth() / 2 - 30, (int) DisplayMetricsUtils.getWidth() / 2 - 30);
+                iv.setLayoutParams(layoutParams);
+                Glide.with(getActivity()).load(itemData.picurl)
+                        .placeholder(R.mipmap.img_defualt_bg)
+                        .error(R.mipmap.img_defualt_bg)
+                        .into(iv);
+
+                TextView tv_name = holder.getView(R.id.search_result_item_name);
+                tv_name.setText(itemData.productname);
+
+                TextView tv_price = holder.getView(R.id.search_result_item_price);
+                tv_price.setText("");
+                tv_price.append(UtilText.getIndexPrice("¥"));
+                tv_price.append(UtilText.getBigProductDetail(itemData.fprice));
+                tv_price.append("/" + itemData.sstandard);
+
+                holder.getView(R.id.search_cart_iv).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AddCartPopuWindow addCartPopuWindow = new AddCartPopuWindow(getActivity());
+                        addCartPopuWindow.setBindPopData(itemData);
+                        if (addCartPopuWindow.isShowPW(itemData)) {
+                            addCartPopuWindow.addpopupWindow.showAtLocation(index_loopbanner, Gravity.NO_GRAVITY, 0, 0);
+                        } else {
+                            addCartPopuWindow.onClickAdd();
+                        }
+                    }
+                });
+                holder.getConvertView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ProductDetailActivity.jumpProductDetailActivity(getActivity(), itemData.iproductid);
+                    }
+                });
             }
         });
     }

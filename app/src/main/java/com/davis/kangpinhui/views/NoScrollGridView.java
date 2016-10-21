@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
+import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
+import com.davis.kangpinhui.model.Product;
+
 public class NoScrollGridView extends GridView {
 
 	public NoScrollGridView(Context paramContext, AttributeSet paramAttributeSet) {
@@ -16,4 +19,5 @@ public class NoScrollGridView extends GridView {
 				MeasureSpec.AT_MOST);
 		super.onMeasure(widthMeasureSpec, expandSpec);
 	}
+
 }
