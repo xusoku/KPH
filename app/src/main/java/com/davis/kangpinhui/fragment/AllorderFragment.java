@@ -132,19 +132,19 @@ public class AllorderFragment extends BaseFragment {
                     holder.setText(R.id.allorder_item_type, "已支付");
                     conutiPay.setVisibility(View.GONE);
                     linearLayout.setVisibility(View.VISIBLE);
-                } else if (itemData.stype.equals("2")||itemData.stype.equals("1")) {
+                } else if (itemData.stype.equals("2") || itemData.stype.equals("1")) {
                     holder.setText(R.id.allorder_item_type, "待配送");
                     linearLayout.setVisibility(View.GONE);
                 } else if (itemData.stype.equals("3")) {
                     holder.setText(R.id.allorder_item_type, "配送中");
                     linearLayout.setVisibility(View.GONE);
-                }else if (itemData.stype.equals("4")||itemData.stype.equals("5")) {
+                } else if (itemData.stype.equals("4") || itemData.stype.equals("5")) {
                     holder.setText(R.id.allorder_item_type, "已完成");
                     linearLayout.setVisibility(View.GONE);
                 } else if (itemData.stype.equals("6")) {
                     holder.setText(R.id.allorder_item_type, "已关闭");
                     linearLayout.setVisibility(View.GONE);
-                } else if (payType.equals("2") &&itemData.stype.equals("0")) {
+                } else if (payType.equals("2") && itemData.stype.equals("0")) {
                     holder.setText(R.id.allorder_item_type, "待配送");
                     linearLayout.setVisibility(View.GONE);
                 } else {
@@ -156,57 +156,57 @@ public class AllorderFragment extends BaseFragment {
                     @Override
                     public void onClick(View v) {
 
-                        final CustomAlterDialog dialog=new CustomAlterDialog(mContext);
+                        final CustomAlterDialog dialog = new CustomAlterDialog(mContext);
                         dialog.setTitle("订单");
                         dialog.setContent_text("是否取消订单");
                         dialog.setCancelButton("取消");
                         dialog.setConfirmButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                                Call<BaseModel> call = ApiInstant.getInstant().cancelOrder(AppApplication.apptype, itemData.sordernumber, AppApplication.token);
+                                call.enqueue(new ApiCallback<BaseModel>() {
                                     @Override
-                                    public void onClick(View v) {
-                                        dialog.dismiss();
-                                        Call<BaseModel> call = ApiInstant.getInstant().cancelOrder(AppApplication.apptype, itemData.sordernumber, AppApplication.token);
-                                        call.enqueue(new ApiCallback<BaseModel>() {
-                                            @Override
-                                            public void onSucssce(BaseModel baseModel) {
-                                                ToastUitl.showToast("取消成功");
-                                                EventBus.getDefault().post(new Extendedinfo());
-                                                list.clear();
-                                                startFragmentLoading();
-                                                chageTitle();
-                                            }
+                                    public void onSucssce(BaseModel baseModel) {
+                                        ToastUitl.showToast("取消成功");
+                                        EventBus.getDefault().post(new Extendedinfo());
+                                        list.clear();
+                                        startFragmentLoading();
+                                        chageTitle();
+                                    }
 
-                                            @Override
-                                            public void onFailure() {
+                                    @Override
+                                    public void onFailure() {
 
-                                            }
-                                        });
                                     }
                                 });
+                            }
+                        });
                     }
                 });
 
                 conutiPay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final CharSequence[] typepaytext = {"VIP卡支付","在线支付 微信支付", "在线支付 支付宝支付"};
+                        final CharSequence[] typepaytext = {"VIP卡支付", "在线支付 微信支付", "在线支付 支付宝支付"};
 
-                        CustomListDialog dialog=new CustomListDialog(getActivity());
+                        CustomListDialog dialog = new CustomListDialog(getActivity());
                         dialog.setTitle("支付方式");
                         dialog.setList(typepaytext);
                         dialog.setCanceledOnTouchOutside(true);
                         dialog.setOnItemClick(new CustomListDialog.OnItemClick() {
                             @Override
                             public void click(int which) {
-                                AppApplication.getApplication().numberCode=itemData.sordernumber;
-                                if (which==2) {
+                                AppApplication.getApplication().numberCode = itemData.sordernumber;
+                                if (which == 2) {
                                     thridPayUtil.alipay(itemData.fmoney, itemData.sordernumber);
-                                } else if (which==1) {//微信
+                                } else if (which == 1) {//微信
                                     getWeixinPay(itemData.sordernumber);
-                                }else{
-                                    final CustomAlterDialog builder=new CustomAlterDialog(getActivity());
+                                } else {
+                                    final CustomAlterDialog builder = new CustomAlterDialog(getActivity());
                                     builder.setTitle("请输入密码");
-                                    View view= LayoutInflater.from(getActivity()).inflate(R.layout.payedittext,null);
-                                    final CustomTypefaceEditText editText= (CustomTypefaceEditText) view.findViewById(R.id.pay_text_et);
+                                    View view = LayoutInflater.from(getActivity()).inflate(R.layout.payedittext, null);
+                                    final CustomTypefaceEditText editText = (CustomTypefaceEditText) view.findViewById(R.id.pay_text_et);
 //                                            editText.setTextColor(Color.parseColor("#000000"));
 //                                            editText.setTextSize(DisplayMetricsUtils.dp2px(15));
 //                                            editText.setPadding((int) DisplayMetricsUtils.dp2px(10), (int) DisplayMetricsUtils.dp2px(10), 10, 10);
@@ -297,7 +297,7 @@ public class AllorderFragment extends BaseFragment {
             tabNames[3] = "配送中(" + getString(AppApplication.getOrdersending()) + ")";
             tabNames[1] = "待付款(" + AppApplication.getOrderunpaid() + ")";
             tabNames[2] = "待配送(" + AppApplication.getOrderwaitsend() + ")";
-        }else{
+        } else {
             tabNames[1] = "待付款(" + AppApplication.getOrderunpaid() + ")";
             tabNames[2] = "待配送(" + AppApplication.getOrderwaitsend() + ")";
             tabNames[3] = "配送中(" + AppApplication.getOrdersending() + ")";
@@ -393,13 +393,14 @@ public class AllorderFragment extends BaseFragment {
             }
         });
     }
+
     public void getWeixinPay(String orderId) {
 
         Call<BaseModel<WeixinInfo>> call = ApiInstant.getInstant().getWeixinProductInfo(AppApplication.apptype, orderId, AppApplication.token);
         call.enqueue(new ApiCallback<BaseModel<WeixinInfo>>() {
             @Override
             public void onSucssce(BaseModel<WeixinInfo> weixinInfoBaseModel) {
-                AppApplication.getApplication().isYue=false;
+                AppApplication.getApplication().isYue = false;
                 thridPayUtil.wxpay(weixinInfoBaseModel.object);
             }
 
@@ -412,9 +413,9 @@ public class AllorderFragment extends BaseFragment {
         });
     }
 
-    public void getYuePay(String orderId,String password) {
+    public void getYuePay(String orderId, String password) {
 
-        Call<BaseModel> call = ApiInstant.getInstant().getYueInfo(AppApplication.apptype, orderId, password,AppApplication.token);
+        Call<BaseModel> call = ApiInstant.getInstant().getYueInfo(AppApplication.apptype, orderId, password, AppApplication.token);
         call.enqueue(new ApiCallback<BaseModel>() {
             @Override
             public void onSucssce(BaseModel yueInfoBaseModel) {
@@ -422,6 +423,7 @@ public class AllorderFragment extends BaseFragment {
                 AppManager.getAppManager().finishActivity(AllOrderActivity.class);
                 EventBus.getDefault().post(new Extendedinfo());
             }
+
             @Override
             public void onFailure() {
             }
