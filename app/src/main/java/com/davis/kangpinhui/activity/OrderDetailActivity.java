@@ -132,7 +132,7 @@ public class OrderDetailActivity extends BaseActivity {
 
 
                 ArrayList<OrderDetail> list = orderDetailOrder.list;
-                bindList(list);
+                bindList(list,orderDetailOrder);
             }
 
             @Override
@@ -144,7 +144,7 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
     ArrayList<OrderDetail> list;
-    private void bindList(ArrayList<OrderDetail> list) {
+    private void bindList(ArrayList<OrderDetail> list, final Order<ArrayList<OrderDetail>> orderDetailOrder) {
         this.list=list;
         order_detail_lst.setAdapter(new CommonBaseAdapter<OrderDetail>(this, list, R.layout.activity_order_item) {
             @Override
@@ -152,8 +152,12 @@ public class OrderDetailActivity extends BaseActivity {
                 holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
                 holder.setText(R.id.order_comfi_item_title, itemData.sproductname);
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
-                holder.setText(R.id.order_comfi_item_price, "¥" + (itemData.fprice));
-                holder.setText(R.id.order_comfi_item_number, "数量:" + UtilText.getDivideZero(itemData.icount+""));
+                holder.setText(R.id.order_comfi_item_number, "数量:" + UtilText.getDivideZero(itemData.icount + ""));
+                if (!TextUtils.isEmpty(orderDetailOrder.totalscore) && !orderDetailOrder.totalscore.equals("0")) {
+                    holder.setText(R.id.order_comfi_item_price, UtilText.getDivideZero(itemData.fprice) + "积分");
+                } else {
+                    holder.setText(R.id.order_comfi_item_price, "¥" + (itemData.fprice));
+                }
             }
         });
     }
@@ -270,6 +274,12 @@ public class OrderDetailActivity extends BaseActivity {
 
         Float f=Float.parseFloat(itemData.fvipmoney)+Float.parseFloat(itemData.fmoney)-Float.parseFloat(itemData.freturnmoney);
         order_detail_m_oney.setText("¥" + UtilText.getFloatToString(f+""));
+
+
+        if(!TextUtils.isEmpty(itemData.totalscore)&&!itemData.totalscore.equals("0")){
+            order_sending_linear.setVisibility(View.GONE);
+            order_detail_m_oney.setText(itemData.totalscore+"积分");
+        }
     }
 
 

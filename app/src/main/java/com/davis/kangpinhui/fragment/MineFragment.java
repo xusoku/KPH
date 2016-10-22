@@ -251,6 +251,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.fragment_mine_price:
                 RechargeActivity.jumpRechangeActivity(getActivity());
+                break;
             case R.id.mine_myscore_bill:
                 MyScoreBillActivity.jumpMyScoreBillActivity(getActivity());
                 break;

@@ -87,5 +87,61 @@
                     android:src="@mipmap/mine_cart" />
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/search_result_item_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/add_cart_add_mins"
+                android:layout_width="@dimen/common_measure_40dp"
+                android:layout_height="@dimen/common_measure_40dp"
+                android:layout_toLeftOf="@id/add_cart_add_center"
+                android:background="@drawable/bg_flow_tag_unselect"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_measure_20dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/add_cart_add_center"
+                android:layout_width="@dimen/common_measure_40dp"
+                android:layout_height="@dimen/common_measure_40dp"
+                android:layout_toLeftOf="@id/add_cart_add"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                android:id="@+id/add_cart_add"
+                android:layout_width="@dimen/common_measure_40dp"
+                android:layout_height="@dimen/common_measure_40dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/bg_flow_tag_unselect"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_measure_20dp"
+                android:textStyle="bold" />
+
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/search_result_item_jifen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:padding="@dimen/common_measure_10dp"
+                android:textColor="@color/red"
+                android:text="兑换"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_17" />
+        </LinearLayout>
+
     </LinearLayout>
 </android.support.v7.widget.CardView>

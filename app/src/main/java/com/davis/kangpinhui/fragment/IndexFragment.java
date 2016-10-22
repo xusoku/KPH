@@ -69,7 +69,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private LoopBanner index_loopbanner;
     private LinearLayout headerView;
 
-    private StretchedListView content,index_AD_listview;
+    private StretchedListView content, index_AD_listview;
     private NoScrollGridView index_noScrollgridview;
     private LinearLayout index_cart;
     private LinearLayout index_search;
@@ -81,6 +81,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private TextView no_shopid_text;
     private MySwipeRefreshLayout index_refresh;
     private ScrollView index_scroll;
+    private NoScrollGridView index_ad_noScrollview;
 
     private boolean isRefreshOrLoad = false;
 
@@ -88,6 +89,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     ArrayList<Index.Productlist> recommandList = new ArrayList<Index.Productlist>();
     ArrayList<Product> productList = new ArrayList<>();
     ArrayList<Banner> bannerListAd = new ArrayList<>();
+    ArrayList<Banner> iconBannerList = new ArrayList<>();
 
     BadgeView backgroundDefaultBadge;
 
@@ -111,6 +113,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         index_tuan = $(view, R.id.index_tuan);
         index_rechange = $(view, R.id.index_rechange);
         index_youlike = $(view, R.id.index_youlike);
+
+        index_ad_noScrollview = $(view, R.id.index_ad_noScrollview);
 
 
         no_linear_shopid = $(view, R.id.no_linear_shopid);
@@ -164,15 +168,16 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
     public void setcartNumber() {
         String number = AppApplication.getCartcount();
-        if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0") && backgroundDefaultBadge != null){
+        if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0") && backgroundDefaultBadge != null) {
             backgroundDefaultBadge.setVisibility(View.VISIBLE);
             backgroundDefaultBadge.setText((int) Float.parseFloat(number) + "");
-        }else{
+        } else {
             setcartNumberLoginout();
         }
     }
+
     public void setcartNumberLoginout() {
-        if(backgroundDefaultBadge!=null)
+        if (backgroundDefaultBadge != null)
             backgroundDefaultBadge.setVisibility(View.GONE);
     }
 
@@ -201,16 +206,19 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                     recommandList.clear();
                     productList.clear();
                     bannerListAd.clear();
+                    iconBannerList.clear();
                 }
                 Index index = indexBaseModel.object;
                 bannerList.addAll(index.bannerList);
                 recommandList.addAll(index.recommandList);
                 productList.addAll(index.productList);
                 bannerListAd.addAll(index.bannerListAd);
+                iconBannerList.addAll(index.iconBannerList);
                 getBannerData();
                 getContentData();
                 getproductListData();
                 getbannerListAd();
+                getIconData();
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -227,6 +235,49 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                     CommonManager.setRefreshingState(index_refresh, false);//隐藏下拉刷新
                 } else {
 //                    listShowFilm.onLoadFailed();//加载失败
+                }
+            }
+        });
+    }
+
+    private void getIconData() {
+        index_ad_noScrollview.setAdapter(new CommonBaseAdapter<Banner>(mContext, iconBannerList, R.layout.fragment_index_item_icon) {
+            @Override
+            public void convert(ViewHolder holder, Banner itemData, int position) {
+                holder.setImageByUrl(R.id.index_ad_noScrollview_iv, itemData.picurl);
+                holder.setText(R.id.index_ad_noScrollview_tv, itemData.title);
+            }
+        });
+        index_ad_noScrollview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Banner itemData = iconBannerList.get(position);
+                String gotype = itemData.gotype;
+                if (TextUtils.isEmpty(gotype)) {
+                    gotype = "";
+                }
+                String tempvalue = itemData.tempvalue;
+                if (TextUtils.isEmpty(tempvalue)) {
+                    tempvalue = "";
+                }
+                if (gotype.equals("detail")) {
+                    ProductDetailActivity.jumpProductDetailActivity(getActivity(), tempvalue);
+                } else if (gotype.equals("rootlist")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), "", false, "", tempvalue);
+                } else if (gotype.equals("list")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), "", false, tempvalue, "");
+                } else if (gotype.equals("special")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), itemData.title, true, tempvalue);
+                } else if (gotype.equals("search")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), tempvalue, true);
+                } else if (gotype.equals("productlist")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), itemData.title, false,true, "", tempvalue);
+                } else if (gotype.equals("tuan")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), getResources().getString(R.string.index_tuan), true, "index_tuan");
+                } else if (gotype.equals("jifen")) {
+                    SearchResultActivity.jumpSearchResultActivity(getActivity(), "积分兑换", true, "jifen");
+                } else if (gotype.equals("credit")) {
+                    RechargeActivity.jumpRechangeActivity(getActivity());
                 }
             }
         });
@@ -302,10 +353,10 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 tv_price.append("/" + itemData.sstandard);
 
                 TextView textView = holder.getView(R.id.search_result_item_name_tv);
-                String text=itemData.prostate;
-                if(TextUtils.isEmpty(text)){
+                String text = itemData.prostate;
+                if (TextUtils.isEmpty(text)) {
                     textView.setVisibility(View.GONE);
-                }else{
+                } else {
                     textView.setText(text);
                     textView.setVisibility(View.VISIBLE);
                 }
@@ -344,7 +395,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                         .error(R.mipmap.img_defualt_bg)
                         .into(imageView);
 
-               index_loopbanner.startTurning(4000);
+                index_loopbanner.startTurning(4000);
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -497,24 +548,21 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
         index_loopbanner.startTurning(4000);
     }
 
     @Override
-    public void onStop()
-    {
+    public void onStop() {
         // TODO Auto-generated method stub
         super.onStop();
         index_loopbanner.stopTurning();
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
         index_loopbanner.stopTurning();
     }

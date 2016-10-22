@@ -58,6 +58,10 @@ public class OrderActivity extends BaseActivity {
 
     private String ids = "";
 
+    private boolean isJiFen=false;
+    private String jiFenNumber="";
+    private  Product product;
+
     private ArrayList<Cart> list;
     private ArrayList<Product> listproduct;
     private ArrayList<TakeGoodsdate> takeGoodsdateArrayList;
@@ -79,6 +83,14 @@ public class OrderActivity extends BaseActivity {
         Intent it = new Intent(cot, OrderActivity.class);
         it.putExtra("ids", ids);
         it.putExtra("code", code);
+        cot.startActivity(it);
+    }
+    public static void jumpOrderActivity(Context cot, String ids,Product product, boolean isJiFen,String jiFenNumber) {
+        Intent it = new Intent(cot, OrderActivity.class);
+        it.putExtra("ids", ids);
+        it.putExtra("product", product);
+        it.putExtra("isJiFen", isJiFen);
+        it.putExtra("jiFenNumber", jiFenNumber);
         cot.startActivity(it);
     }
 
@@ -110,6 +122,9 @@ public class OrderActivity extends BaseActivity {
 
     @Override
     protected void initVariable() {
+        isJiFen = getIntent().getBooleanExtra("isJiFen",false);
+        jiFenNumber = getIntent().getStringExtra("jiFenNumber");
+        product = (Product) getIntent().getSerializableExtra("product");
         ids = getIntent().getStringExtra("ids");
         if (ids.equals("-1")) {
             code = getIntent().getStringExtra("code");
@@ -145,9 +160,12 @@ public class OrderActivity extends BaseActivity {
             add_cart_add_passwrod_linear.setVisibility(View.GONE);
         }
 
-//        if (AppApplication.address == null) {
-            getAddresslist();
-//        }
+        if(isJiFen){
+            order_paytype_linear.setVisibility(View.GONE);
+            order_coup_linear.setVisibility(View.GONE);
+            add_cart_add_passwrod_linear.setVisibility(View.GONE);
+        }
+        getAddresslist();
 
 
         order_paytype_text.setText("VIP卡支付"+"(¥"+AppApplication.getFcurrmoney()+")");
@@ -156,9 +174,12 @@ public class OrderActivity extends BaseActivity {
     @Override
     protected void onActivityLoading() {
         super.onActivityLoading();
-
         getTimeList();
-
+        if(isJiFen){
+            payType="-1";
+            getJiFenlist();
+            return;
+        }
         if (ids.equals("-1")) {
             getBycodeList();
         } else {
@@ -204,7 +225,19 @@ public class OrderActivity extends BaseActivity {
             }
         });
     }
+    private void getJiFenlist(){
 
+        if(product!=null) {
+            Cart cart = new Cart();
+            cart.picurl = product.picurl;
+            cart.productName=product.productname;
+            cart.sstandard=product.sstandard;
+            cart.iprice=product.score+"";
+            cart.inumber=Integer.valueOf(jiFenNumber);
+            list.add(cart);
+            changePriceFun();
+        }
+    }
     private void getorderlist() {
         Call<BaseModel<ArrayList<Cart>>> call = ApiInstant.getInstant().getCartlist(AppApplication.apptype, AppApplication.shopid, ids, AppApplication.token);
         call.enqueue(new ApiCallback<BaseModel<ArrayList<Cart>>>() {
@@ -228,7 +261,11 @@ public class OrderActivity extends BaseActivity {
         DecimalFormat fnum = new DecimalFormat("##0.0");
         String str = fnum.format(getTotalPrice(list));
         str = str.endsWith(".0") ? str.substring(0, str.length() - 2) : str;
-        order_number_text.setText("¥" + str);
+        if(isJiFen){
+            order_number_text.setText(str+"积分");
+        }else {
+            order_number_text.setText("¥" + str);
+        }
 
         order_address_lst.setAdapter(new CommonBaseAdapter<Cart>(OrderActivity.this, list, R.layout.activity_order_item) {
             @Override
@@ -236,8 +273,13 @@ public class OrderActivity extends BaseActivity {
                 holder.setImageByUrl(R.id.order_comfi_item_iv, ApiService.picurl + itemData.picurl);
                 holder.setText(R.id.order_comfi_item_title, itemData.productName);
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
-                holder.setText(R.id.order_comfi_item_price, "¥" + (payTape.equals("3") ? itemData.fvipprice : itemData.iprice));
-                holder.setText(R.id.order_comfi_item_number, "数量:" + UtilText.getDivideZero(itemData.inumber+""));
+                holder.setText(R.id.order_comfi_item_price, "¥" + (payType.equals("3") ? itemData.fvipprice : itemData.iprice));
+                holder.setText(R.id.order_comfi_item_number, "数量:" + UtilText.getDivideZero(itemData.inumber + ""));
+
+                if(isJiFen){
+                    holder.setText(R.id.order_comfi_item_price, ""+itemData.iprice);
+                    holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
+                }
             }
         });
     }
@@ -307,7 +349,7 @@ public class OrderActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        startActivityLoading();
+            startActivityLoading();
     }
 
     @Override
@@ -324,7 +366,7 @@ public class OrderActivity extends BaseActivity {
 //                if (TextUtils.isEmpty(s)) {
 //                    s = "0.0";
 //                }
-                String ss = payTape.equals("3") ? cart.fvipprice : cart.iprice;
+                String ss = payType.equals("3") ? cart.fvipprice : cart.iprice;
                 if (TextUtils.isEmpty(ss)) {
                     ss = "0.0";
                 }
@@ -355,7 +397,7 @@ public class OrderActivity extends BaseActivity {
         return total;
     }
 
-    private String payTape = "3";
+    private String payType = "3";
     private String couponId = "";
     private String timeTape = "";
 
@@ -440,10 +482,10 @@ public class OrderActivity extends BaseActivity {
                     @Override
                     public void click(int which) {
                         ToastUitl.showToast(charSequences[which].toString());
-                        payTape = type[which];
+                        payType = type[which];
                         order_paytype_text.setText(charSequences[which].toString());
 
-                        if (payTape.equals("3")) {
+                        if (payType.equals("3")) {
                             order_paytype_text.setText(charSequences[which].toString() + "(¥" + AppApplication.getFcurrmoney() + ")");
                             add_cart_add_passwrod_linear.setVisibility(View.VISIBLE);
                         } else {
@@ -506,7 +548,7 @@ public class OrderActivity extends BaseActivity {
     private void saveOrder(String beizhu) {
 
         String pass = add_cart_add_passwrod.getText().toString().trim();
-        if (payTape.equals("3")) {
+        if (payType.equals("3")) {
             if (TextUtils.isEmpty(pass)) {
                 ToastUitl.showToast("请输入交易密码");
                 return;
@@ -516,7 +558,7 @@ public class OrderActivity extends BaseActivity {
         }
 
         Call<BaseModel<Order>> call = ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
-                ids, AppApplication.address.iuseraddressid, payTape, timeTape, beizhu, couponId, pass, AppApplication.token);
+                ids, AppApplication.address.iuseraddressid, payType, timeTape, beizhu, couponId, pass,isJiFen?"1":"",jiFenNumber, AppApplication.token);
 
         call.enqueue(new ApiCallback<BaseModel<Order>>() {
             @Override
@@ -524,19 +566,23 @@ public class OrderActivity extends BaseActivity {
                 ToastUitl.showToast("订单提交成功");
                 EventBus.getDefault().post(new Extendedinfo());
                 AppApplication.getApplication().numberCode = baseModel.object.sordernumber;
-                if (payTape.equals("0")) {
+                if (payType.equals("0")) {
                     thridPayUtil.alipay(baseModel.object.fmoney, baseModel.object.sordernumber);
-                } else if (payTape.equals("4")) {//微信
+                } else if (payType.equals("4")) {//微信
                     getWeixinPay(baseModel.object.sordernumber);
-                } else if (payTape.equals("3")) {//余额支付", "
+                } else if (payType.equals("3")) {//余额支付", "
                     PayResultActivity.jumpPayResultActivity(OrderActivity.this, true);
                     finish();
                     AppManager.getAppManager().finishActivity(CartListActivity.class);
 
-                } else if (payTape.equals("2")) {//货到付款
+                } else if (payType.equals("2")) {//货到付款
                     PayResultActivity.jumpPayResultActivity(OrderActivity.this, true);
                     finish();
                     AppManager.getAppManager().finishActivity(CartListActivity.class);
+                }
+                if(isJiFen){
+                    PayResultActivity.jumpPayResultActivity(OrderActivity.this, true);
+                    finish();
                 }
             }
 

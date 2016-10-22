@@ -26,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/order_comfi_item_iv"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/common_measure_50dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="aaa"
             android:textColor="@color/black"
             android:layout_marginLeft="@dimen/common_measure_10dp"
             android:textSize="@dimen/text_size_17" />
@@ -42,7 +42,6 @@
             android:layout_alignParentRight="true"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="12"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_17" />
 
@@ -53,7 +52,6 @@
             android:layout_toRightOf="@id/order_comfi_item_iv"
             android:layout_marginTop="@dimen/common_measure_40dp"
             android:layout_below="@id/order_comfi_item_title"
-            android:text="asdfsdafasf"
             android:textColor="@color/colorgray"
             android:layout_marginLeft="@dimen/common_measure_10dp"
             android:textSize="@dimen/text_size_17" />
@@ -68,7 +66,6 @@
             android:layout_alignParentRight="true"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="24"
             android:textColor="@color/colorgray"
             android:textSize="@dimen/text_size_17" />
     </RelativeLayout>

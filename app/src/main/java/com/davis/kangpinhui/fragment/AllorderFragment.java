@@ -95,7 +95,7 @@ public class AllorderFragment extends BaseFragment {
             public void convert(ViewHolder holder, final Order<ArrayList<OrderDetail>> itemData, int position) {
 //                Stype：  0：待配送  3：已付款成功  6：已关闭
                 ArrayList<OrderDetail> orderDetails = itemData.list;
-                bindItemView(holder.<StretchedListView>getView(R.id.allorder_lst_item), orderDetails);
+                bindItemView(holder.<StretchedListView>getView(R.id.allorder_lst_item), orderDetails,itemData);
 
                 holder.setText(R.id.allorder_item_number, itemData.sordernumber + "[详情]");
                 holder.getView(R.id.allorder_item_number).setOnClickListener(new View.OnClickListener() {
@@ -148,7 +148,8 @@ public class AllorderFragment extends BaseFragment {
                     linearLayout.setVisibility(View.GONE);
                 } else if (payType.equals("2") && itemData.stype.equals("0")) {
                     holder.setText(R.id.allorder_item_type, "待配送");
-                    linearLayout.setVisibility(View.GONE);
+                    conutiPay.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.VISIBLE);
                 } else {
                     holder.setText(R.id.allorder_item_type, "未知");
                     linearLayout.setVisibility(View.GONE);
@@ -319,14 +320,19 @@ public class AllorderFragment extends BaseFragment {
         return i + "";
     }
 
-    private void bindItemView(StretchedListView listView, final ArrayList<OrderDetail> orderDetails) {
+    private void bindItemView(StretchedListView listView, final ArrayList<OrderDetail> orderDetails, final Order<ArrayList<OrderDetail>> itemDatas) {
         listView.setAdapter(new CommonBaseAdapter<OrderDetail>(getActivity(), orderDetails, R.layout.activity_order_item) {
             @Override
             public void convert(ViewHolder holder, OrderDetail itemData, int position) {
                 holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
                 holder.setText(R.id.order_comfi_item_title, itemData.sproductname);
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
-                holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fprice);
+                if(!TextUtils.isEmpty(itemDatas.totalscore)&&!itemDatas.totalscore.equals("0")) {
+                    holder.setText(R.id.order_comfi_item_price, UtilText.getDivideZero(itemData.fprice)+"积分");
+                }else{
+                    holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fprice);
+
+                }
                 holder.setText(R.id.order_comfi_item_number, "数量:" + UtilText.getDivideZero(itemData.icount+""));
             }
         });

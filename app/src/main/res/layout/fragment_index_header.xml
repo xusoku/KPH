@@ -10,10 +10,17 @@
 
     </com.davis.kangpinhui.views.viewlineloop.LoopBanner>
 
+    <com.davis.kangpinhui.views.NoScrollGridView
+        android:id="@+id/index_ad_noScrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4">
+    </com.davis.kangpinhui.views.NoScrollGridView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_measure_140dp"
         android:background="@color/white"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <LinearLayout

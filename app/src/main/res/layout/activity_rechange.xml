@@ -130,7 +130,7 @@
             android:layout_marginTop="@dimen/common_measure_20dp"
             android:gravity="center_vertical"
             android:lineSpacingExtra="4.5dp"
-            android:hint="充值赠品：充值500送200积分，充值1000送500积分，充值2000送1000积分。\n充值成功后，积分查看可以 我的->我的积分 进行查看积分详情"
+            android:text="充值赠品：充值500送200积分，充值1000送500积分，充值2000送1000积分。\n充值成功后，积分查看可以 我的->我的积分 进行查看积分详情"
             android:paddingLeft="@dimen/common_measure_10dp"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_17" />

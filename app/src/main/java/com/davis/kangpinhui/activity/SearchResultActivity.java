@@ -79,6 +79,8 @@ public class SearchResultActivity extends BaseActivity {
 
     //判断是不是从搜索进来的
     private boolean isSearch = true;
+    //判断是不是从搜索进来的
+    private boolean isProductlist = true;
 
     //专题数据判断
     private boolean type = false;
@@ -91,7 +93,8 @@ public class SearchResultActivity extends BaseActivity {
     private LinearLayout search_result_title_linear;
     private AddCartPopuWindow addCartPopuWindow;
 
-    private   BadgeView backgroundDefaultBadge;
+    private BadgeView backgroundDefaultBadge;
+
     /**
      * 搜索
      */
@@ -124,6 +127,18 @@ public class SearchResultActivity extends BaseActivity {
         it.putExtra("rootid", rootid);
         con.startActivity(it);
     }
+    /**
+     *
+     */
+    public static void jumpSearchResultActivity(Context con, String key,boolean isSearch, boolean isProductlist, String classid, String rootid) {
+        Intent it = new Intent(con, SearchResultActivity.class);
+        it.putExtra("key", key);
+        it.putExtra("isProductlist", isProductlist);
+        it.putExtra("issearch", isSearch);
+        it.putExtra("classid", classid);
+        it.putExtra("rootid", rootid);
+        con.startActivity(it);
+    }
 
     @Override
     protected int setLayoutView() {
@@ -135,7 +150,11 @@ public class SearchResultActivity extends BaseActivity {
 
         key = getIntent().getStringExtra("key");
         type = getIntent().getBooleanExtra("type", false);
+        isProductlist = getIntent().getBooleanExtra("isProductlist", false);
         activid = getIntent().getStringExtra("activid");
+        if(TextUtils.isEmpty(activid)){
+            activid="";
+        }
         if (!type) {
             isSearch = getIntent().getBooleanExtra("issearch", false);
             classid = getIntent().getStringExtra("classid");
@@ -171,17 +190,16 @@ public class SearchResultActivity extends BaseActivity {
         search_all_classic_text = $(R.id.search_all_classic_text);
         search_all_sort_text = $(R.id.search_all_sort_text);
 
-        if (type) {
+        if (type||isProductlist) {
             search_et_text.setVisibility(View.VISIBLE);
             search_et.setVisibility(View.GONE);
             search_result_card.setVisibility(View.GONE);
             search_et_text.setText(key);
-        }else{
+        } else {
             search_et_text.setVisibility(View.GONE);
             search_et.setVisibility(View.VISIBLE);
             search_et.setText(key);
         }
-
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -189,7 +207,7 @@ public class SearchResultActivity extends BaseActivity {
 
         adapter = new CommonRecyclerAdapter<Product>(this, list, R.layout.activity_search_result_item) {
             @Override
-            public void convert(BaseViewHolder holder, final Product itemData, int position) {
+            public void convert(final BaseViewHolder holder, final Product itemData, int position) {
 
                 ImageView iv = holder.getView(R.id.search_result_item_iv);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) DisplayMetricsUtils.getWidth() / 2 - 30, (int) DisplayMetricsUtils.getWidth() / 2 - 30);
@@ -201,21 +219,71 @@ public class SearchResultActivity extends BaseActivity {
 
                 TextView tv_name = holder.getView(R.id.search_result_item_name);
                 tv_name.setText(itemData.productname);
-
+                LinearLayout search_cart_iv = holder.getView(R.id.search_cart_iv);
                 TextView tv_price = holder.getView(R.id.search_result_item_price);
-                tv_price.setText("");
-                tv_price.append(UtilText.getIndexPrice("¥"));
-                tv_price.append(UtilText.getBigProductDetail(itemData.fprice));
-                tv_price.append("/" + itemData.sstandard);
+                LinearLayout search_result_item_linear = holder.getView(R.id.search_result_item_linear);
+                if (type && activid.equals("jifen")) {
+                    tv_price.setText("");
+                    tv_price.append(UtilText.getBigProductDetail(itemData.score + ""));
+                    tv_price.append("积分");
+                    tv_price.append("/" + itemData.sstandard);
+                    search_cart_iv.setVisibility(View.GONE);
+                    search_result_item_linear.setVisibility(View.VISIBLE);
+
+                    holder.getView(R.id.search_result_item_jifen).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                             TextView numbertv = holder.getView(R.id.add_cart_add_center);
+                             String number = numbertv.getText().toString().trim();
+                            OrderActivity.jumpOrderActivity(SearchResultActivity.this, itemData.iproductid, itemData, true, number);
+                        }
+                    });
+
+                    holder.getView(R.id.add_cart_add).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String number =((TextView)holder.getView(R.id.add_cart_add_center)).getText().toString().trim();
+                            int n = Integer.valueOf(number);
+                            n++;
+                            ((TextView)holder.getView(R.id.add_cart_add_center)).setText((n + ""));
+                        }
+                    });
+
+                    holder.getView(R.id.add_cart_add_mins).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String number = ((TextView)holder.getView(R.id.add_cart_add_center)).getText().toString().trim();
+                            int n = Integer.valueOf(number);
+                            if (n <= 1) {
+                                n = 1;
+                            } else {
+                                n--;
+                                if (n == 0) {
+                                    n = 1;
+                                }
+                            }
+                            ((TextView)holder.getView(R.id.add_cart_add_center)).setText((n + ""));
+                        }
+                    });
+
+                } else {
+                    tv_price.setText("");
+                    tv_price.append(UtilText.getIndexPrice("¥"));
+                    tv_price.append(UtilText.getBigProductDetail(itemData.fprice));
+                    tv_price.append("/" + itemData.sstandard);
+                    search_cart_iv.setVisibility(View.VISIBLE);
+                    search_result_item_linear.setVisibility(View.GONE);
+                }
 
                 TextView textView = holder.getView(R.id.search_result_item_name_tv);
-                String text=itemData.prostate;
-                if(TextUtils.isEmpty(text)){
+                String text = itemData.prostate;
+                if (TextUtils.isEmpty(text)) {
                     textView.setVisibility(View.GONE);
-                }else{
+                } else {
                     textView.setText(text);
                     textView.setVisibility(View.VISIBLE);
                 }
+
 
                 holder.getView(R.id.search_cart_iv).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -243,7 +311,11 @@ public class SearchResultActivity extends BaseActivity {
                 isLoadOrRefresh = true;
 
                 if (type) {
-                    getActivedlist();
+                    if (activid.equals("jifen")) {
+                        getMScorelist(Page, PageSize);
+                    } else {
+                        getActivedlist();
+                    }
                 } else {
                     if (isSearch) {
                         getSearchProductList(Page, PageSize);
@@ -255,7 +327,7 @@ public class SearchResultActivity extends BaseActivity {
             }
         });
 
-        addCartPopuWindow=new AddCartPopuWindow(this);
+        addCartPopuWindow = new AddCartPopuWindow(this);
         backgroundDefaultBadge = new BadgeView(this);
         backgroundDefaultBadge.setTargetView(search_right_iv);
     }
@@ -267,7 +339,11 @@ public class SearchResultActivity extends BaseActivity {
         isLoadOrRefresh = true;
 
         if (type) {
-            getActivedlist();
+            if (activid.equals("jifen")) {
+                getMScorelist(Page, PageSize);
+            } else {
+                getActivedlist();
+            }
         } else {
             if (isSearch) {
                 getSearchProductList(Page, PageSize);
@@ -284,10 +360,11 @@ public class SearchResultActivity extends BaseActivity {
         initPopupSortWindow();
         setcartNumber();
     }
+
     //添加成功购物车 需要调用
-    public  void setUIOrder(){
-        Call<BaseModel<Extendedinfo>> call= ApiInstant.getInstant().getExtendedInfo(AppApplication.apptype,
-                AppApplication.shopid,AppApplication.token);
+    public void setUIOrder() {
+        Call<BaseModel<Extendedinfo>> call = ApiInstant.getInstant().getExtendedInfo(AppApplication.apptype,
+                AppApplication.shopid, AppApplication.token);
 
         call.enqueue(new ApiCallback<BaseModel<Extendedinfo>>() {
             @Override
@@ -308,17 +385,19 @@ public class SearchResultActivity extends BaseActivity {
 
     public void setcartNumber() {
         String number = AppApplication.getCartcount();
-        if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0") && backgroundDefaultBadge != null){
+        if (!TextUtils.isEmpty(number) && !number.equals("0") && !number.equals("0.0") && backgroundDefaultBadge != null) {
             backgroundDefaultBadge.setVisibility(View.VISIBLE);
             backgroundDefaultBadge.setText((int) Float.parseFloat(number) + "");
-        }else{
+        } else {
             setcartNumberLoginout();
         }
     }
+
     public void setcartNumberLoginout() {
-        if(backgroundDefaultBadge!=null)
+        if (backgroundDefaultBadge != null)
             backgroundDefaultBadge.setVisibility(View.GONE);
     }
+
     @Override
     protected void setListener() {
 
@@ -333,7 +412,17 @@ public class SearchResultActivity extends BaseActivity {
 
             }
         });
-        if (!type) {
+        if (type) {
+            if (activid.equals("jifen")) {
+                search_result_recycler.setOnLoadListener(new LoadMoreRecyclerView.OnLoadListener() {
+                    @Override
+                    public void onLoad(LoadMoreRecyclerView recyclerView) {
+                        getMScorelist(++Page, PageSize);
+                        isLoadOrRefresh = false;
+                    }
+                });
+            }
+        } else {
             search_result_recycler.setOnLoadListener(new LoadMoreRecyclerView.OnLoadListener() {
                 @Override
                 public void onLoad(LoadMoreRecyclerView recyclerView) {
@@ -363,13 +452,13 @@ public class SearchResultActivity extends BaseActivity {
                             .trim();
                     // 去除空格
                     if (!TextUtils.isEmpty(keyu)) {
-                        key=keyu;
+                        key = keyu;
                         CommonManager.dismissSoftInputMethod(SearchResultActivity.this, search_et.getWindowToken());
-                            isSearch = true;
-                            startActivityLoading();
-                            SearchHistroy histroy = new SearchHistroy();
-                            histroy.setKey(key);
-                            new SearchHistroyDao(SearchResultActivity.this).add(histroy);
+                        isSearch = true;
+                        startActivityLoading();
+                        SearchHistroy histroy = new SearchHistroy();
+                        histroy.setKey(key);
+                        new SearchHistroyDao(SearchResultActivity.this).add(histroy);
                     } else {
                         return false;
                     }
@@ -384,11 +473,11 @@ public class SearchResultActivity extends BaseActivity {
      */
     private void getActivedlist() {
 
-        if(activid.equals("youlike")){
+        if (activid.equals("youlike")) {
             getYouLikelist();
             return;
         }
-        if(activid.equals("index_tuan")){
+        if (activid.equals("index_tuan")) {
             getIndexTuanlist();
             return;
         }
@@ -417,6 +506,53 @@ public class SearchResultActivity extends BaseActivity {
             }
         });
     }
+
+    /**
+     * 积分兑换
+     *
+     * @param page
+     * @param pagesize
+     */
+    private void getMScorelist(int page, int pagesize) {
+        Call<BaseModel<Page<ArrayList<Product>>>> call = ApiInstant.getInstant().getScoreList(AppApplication.apptype, page + "", pagesize + "", "0", AppApplication.token);
+
+        call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.model.basemodel.Page<ArrayList<Product>>>>() {
+            @Override
+            public void onSucssce(BaseModel<Page<ArrayList<Product>>> pageBaseModel) {
+
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingSuccess();
+                if (isLoadOrRefresh) {
+                    list.clear();
+                }
+                Page<ArrayList<Product>> page = pageBaseModel.object;
+
+                TotalPage = page.iTotalPage;
+
+                list.addAll(page.list);
+                adapter.notifyDataSetChanged();
+
+                if (list.size() == 0) {
+                    onActivityFirstLoadingNoData();
+                    search_result_recycler.onLoadUnavailable();
+                } else if (TotalPage != Page) {
+                    search_result_recycler.onLoadSucess(true);
+                } else {
+                    search_result_recycler.onLoadSucess(false);
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingFailed();
+                if (!isLoadOrRefresh) {
+                    search_result_recycler.onLoadFailed();
+                }
+            }
+        });
+    }
+
     /**
      * 猜你喜欢
      */
@@ -447,6 +583,7 @@ public class SearchResultActivity extends BaseActivity {
             }
         });
     }
+
     /**
      * 团购
      */
@@ -720,14 +857,13 @@ public class SearchResultActivity extends BaseActivity {
             }
 
 
-
-            for(Category category : AppApplication.classiclist){
+            for (Category category : AppApplication.classiclist) {
                 category.isOnclick = false;
-                if(rootid.equals(category.id)){
-                    category.isOnclick=true;
+                if (rootid.equals(category.id)) {
+                    category.isOnclick = true;
                     bindClassRightView(category.clist);
-                    for(Category category1:category.clist){
-                        if(category1.id.equals(classid)){
+                    for (Category category1 : category.clist) {
+                        if (category1.id.equals(classid)) {
                             search_all_classic_text.setText(category1.name);
                             break;
                         }
@@ -819,7 +955,7 @@ public class SearchResultActivity extends BaseActivity {
         });
     }
 
-    private void bindClassRightView(ArrayList<Category> list){
+    private void bindClassRightView(ArrayList<Category> list) {
         pop_list_classic.setAdapter(new CommonBaseAdapter<Category>(SearchResultActivity.this, list, R.layout.fragment_classic_left_item) {
             @Override
             public void convert(ViewHolder holder, Category itemData, int position) {
@@ -848,7 +984,7 @@ public class SearchResultActivity extends BaseActivity {
         }
     }
 
-    public void onEvent(Index  index) {
+    public void onEvent(Index index) {
         setcartNumber();
     }
 

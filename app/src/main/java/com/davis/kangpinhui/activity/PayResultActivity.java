@@ -219,6 +219,10 @@ public class PayResultActivity extends BaseActivity {
         pay_result_product_ordernumber.setText(itemData.sordernumber);
         Float f = Float.parseFloat(itemData.fvipmoney) + Float.parseFloat(itemData.fmoney) - Float.parseFloat(itemData.freturnmoney);
         pay_result_product_paymoney.setText("¥" + UtilText.getFloatToString(f + ""));
+        if(!TextUtils.isEmpty(itemData.totalscore)&&!itemData.totalscore.equals("0")){
+            pay_result_product_paymoney.setText("¥" + UtilText.getFloatToString(f + "")+"/"+itemData.totalscore+"积分");
+
+        }
     }
 
 
