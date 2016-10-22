@@ -26,6 +26,7 @@ public class Cart implements Serializable {
     public String itgclassid;
     public String sproductcode;
     public String sstandard;
+    public String vippaytype;
     public float mincount;
 
     public boolean flag=true;

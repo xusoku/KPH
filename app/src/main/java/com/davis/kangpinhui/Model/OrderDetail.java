@@ -24,4 +24,5 @@ public class OrderDetail implements Serializable {
     public String picurl;
     public String fotherprice;
 
+
 }

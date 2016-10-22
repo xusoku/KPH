@@ -11,6 +11,7 @@ public class Index implements Serializable {
     public ArrayList<Productlist> recommandList=new ArrayList<Productlist>();
     public ArrayList<Product> productList=new ArrayList<Product>();
     public ArrayList<Banner> bannerListAd=new ArrayList<Banner>();
+    public ArrayList<Banner> iconBannerList=new ArrayList<Banner>();
 
     public static class Productlist extends  Banner{
 

@@ -47,5 +47,6 @@ public class Order<T> implements Serializable {
     public String quancode;
     public String refundno;
     public String fvipbalance;
+    public String totalscore;
     public T list;
 }
