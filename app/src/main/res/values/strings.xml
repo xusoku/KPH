@@ -21,6 +21,7 @@
     <string name="mine_set">设置</string>
     <string name="mine_order">充值订单</string>
     <string name="mine_histroy">历史账单</string>
+    <string name="mine_scoce">我的积分</string>
 
 
     <string name="mine_location">自动定位当前位置</string>

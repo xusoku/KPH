@@ -165,6 +165,30 @@
                 android:background="@color/colorlightgray" />
 
             <com.davis.kangpinhui.views.MineCustomLayout
+                android:id="@+id/mine_rechange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:src="@mipmap/mine_rechange"
+                app:text="@string/mine_order" />
+
+            <com.davis.kangpinhui.views.MineCustomLayout
+                android:id="@+id/mine_histroy_bill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:src="@mipmap/mine_histroy"
+                app:text="@string/mine_histroy" />
+            <com.davis.kangpinhui.views.MineCustomLayout
+                android:id="@+id/mine_myscore_bill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:src="@mipmap/mine_histroy"
+                app:text="@string/mine_scoce" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_measure_10dp"
+                android:background="@color/colorlightgray" />
+            <com.davis.kangpinhui.views.MineCustomLayout
                 android:id="@+id/mine_kefu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,24 +214,7 @@
                 android:layout_height="@dimen/common_measure_10dp"
                 android:background="@color/colorlightgray" />
 
-            <com.davis.kangpinhui.views.MineCustomLayout
-                android:id="@+id/mine_rechange"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:src="@mipmap/mine_rechange"
-                app:text="@string/mine_order" />
 
-            <com.davis.kangpinhui.views.MineCustomLayout
-                android:id="@+id/mine_histroy_bill"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:src="@mipmap/mine_histroy"
-                app:text="@string/mine_histroy" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_measure_10dp"
-                android:background="@color/colorlightgray" />
         </LinearLayout>
     </ScrollView>
 </com.davis.kangpinhui.views.MySwipeRefreshLayout>

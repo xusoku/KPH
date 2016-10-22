@@ -118,6 +118,9 @@
             android:name=".activity.PoiKeywordSearchActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.MyScoreBillActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent" />

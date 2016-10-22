@@ -21,4 +21,7 @@ public class Consume implements Serializable {
     public String daddtime;
     public String flow_id;
     public String sordernum;
+    public String iscoreid;
+    public String iscore;
+    public String scpos_handled;
 }

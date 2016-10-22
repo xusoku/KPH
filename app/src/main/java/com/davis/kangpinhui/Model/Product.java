@@ -20,4 +20,6 @@ public class Product implements Serializable {
     public String srequire;
     public float    mincount;
     public String    prostate;
+    public int   score; //积分
+
 }

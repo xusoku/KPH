@@ -19,6 +19,7 @@ import com.davis.kangpinhui.activity.CouponActivity;
 import com.davis.kangpinhui.activity.FeedBackActivity;
 import com.davis.kangpinhui.activity.HistroyBillActivity;
 import com.davis.kangpinhui.activity.MyAddressActivity;
+import com.davis.kangpinhui.activity.MyScoreBillActivity;
 import com.davis.kangpinhui.activity.MyTiHuoActivity;
 import com.davis.kangpinhui.activity.RechargeActivity;
 import com.davis.kangpinhui.activity.RechargeListActivity;
@@ -44,7 +45,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private MineCustomLayout mine_allorder;
     private MineCustomLayout mine_feedback_linear, mine_histroy_bill, mine_rechange, mine_setting, mine_kefu, mine_ti_huo, mine_myaddress, mine_mycoup, mine_cart, mine_allorder_sending,
-            mine_allorder_unpay,mine_allorder_unsend;
+            mine_allorder_unpay,mine_allorder_unsend,mine_myscore_bill;
     private TextView fragment_mine_name,fragment_mine_price,fragment_mine_price_info;
 
     private ImageView fragment_mine_photo;
@@ -68,6 +69,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mine_allorder_unsend = $(R.id.mine_allorder_unsend);
         fragment_mine_photo = $(R.id.fragment_mine_photo);
         mine_allorder = $(R.id.mine_allorder);
+        mine_myscore_bill = $(R.id.mine_myscore_bill);
         mine_feedback_linear = $(R.id.mine_feedback_linear);
         mine_histroy_bill = $(R.id.mine_histroy_bill);
         mine_rechange = $(R.id.mine_rechange);
@@ -192,6 +194,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         fragment_mine_price.setOnClickListener(this);
         fragment_mine_photo.setOnClickListener(this);
         fragment_mine_name.setOnClickListener(this);
+        mine_myscore_bill.setOnClickListener(this);
     }
 
     @Override
@@ -248,6 +251,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.fragment_mine_price:
                 RechargeActivity.jumpRechangeActivity(getActivity());
+            case R.id.mine_myscore_bill:
+                MyScoreBillActivity.jumpMyScoreBillActivity(getActivity());
                 break;
             case R.id.fragment_mine_price_info:
                 RechargeActivity.jumpRechangeActivity(getActivity());
