@@ -192,7 +192,6 @@ public class SearchResultActivity extends BaseActivity {
             public void convert(BaseViewHolder holder, final Product itemData, int position) {
 
                 ImageView iv = holder.getView(R.id.search_result_item_iv);
-
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) DisplayMetricsUtils.getWidth() / 2 - 30, (int) DisplayMetricsUtils.getWidth() / 2 - 30);
                 iv.setLayoutParams(layoutParams);
                 Glide.with(mActivity).load(itemData.picurl)
@@ -208,6 +207,15 @@ public class SearchResultActivity extends BaseActivity {
                 tv_price.append(UtilText.getIndexPrice("¥"));
                 tv_price.append(UtilText.getBigProductDetail(itemData.fprice));
                 tv_price.append("/" + itemData.sstandard);
+
+                TextView textView = holder.getView(R.id.search_result_item_name_tv);
+                String text=itemData.prostate;
+                if(TextUtils.isEmpty(text)){
+                    textView.setVisibility(View.GONE);
+                }else{
+                    textView.setText(text);
+                    textView.setVisibility(View.VISIBLE);
+                }
 
                 holder.getView(R.id.search_cart_iv).setOnClickListener(new View.OnClickListener() {
                     @Override

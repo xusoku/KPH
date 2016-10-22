@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="3dp"
-    android:layout_margin="@dimen/common_measure_5dp">
+    android:layout_margin="@dimen/common_measure_5dp"
+    app:cardCornerRadius="3dp">
 
 
     <LinearLayout
@@ -14,13 +14,32 @@
         android:background="?android:attr/selectableItemBackground"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/search_result_item_iv"
-            android:layout_gravity="center_horizontal"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY" />
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/search_result_item_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY" />
+            </LinearLayout>
+
+            <com.davis.kangpinhui.views.CustomTypefaceTextView
+                android:id="@+id/search_result_item_name_tv"
+                android:layout_width="@dimen/common_measure_58dp"
+                android:layout_height="@dimen/common_measure_45dp"
+                android:background="@mipmap/mark_bg"
+                android:padding="@dimen/common_measure_10dp"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:textSize="@dimen/text_size_17" />
+        </RelativeLayout>
 
         <com.davis.kangpinhui.views.CustomTypefaceTextView
             android:id="@+id/search_result_item_name"

@@ -301,6 +301,14 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 tv_price.append(UtilText.getBigProductDetail(itemData.fprice));
                 tv_price.append("/" + itemData.sstandard);
 
+                TextView textView = holder.getView(R.id.search_result_item_name_tv);
+                String text=itemData.prostate;
+                if(TextUtils.isEmpty(text)){
+                    textView.setVisibility(View.GONE);
+                }else{
+                    textView.setText(text);
+                    textView.setVisibility(View.VISIBLE);
+                }
                 holder.getView(R.id.search_cart_iv).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
