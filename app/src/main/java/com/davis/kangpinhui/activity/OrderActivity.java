@@ -32,6 +32,7 @@ import com.davis.kangpinhui.api.ApiService;
 import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.CustomListDialog;
 import com.davis.kangpinhui.views.StretchedListView;
 
@@ -236,7 +237,7 @@ public class OrderActivity extends BaseActivity {
                 holder.setText(R.id.order_comfi_item_title, itemData.productName);
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
                 holder.setText(R.id.order_comfi_item_price, "¥" + (payTape.equals("3") ? itemData.fvipprice : itemData.iprice));
-                holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.inumber));
+                holder.setText(R.id.order_comfi_item_number, "数量:" + UtilText.getDivideZero(itemData.inumber+""));
             }
         });
     }
@@ -319,16 +320,16 @@ public class OrderActivity extends BaseActivity {
 
         for (Cart cart : list) {
             if (cart.flag) {
-                String s = cart.inumber;
-                if (TextUtils.isEmpty(s)) {
-                    s = "0.0";
-                }
+                float s = cart.inumber;
+//                if (TextUtils.isEmpty(s)) {
+//                    s = "0.0";
+//                }
                 String ss = payTape.equals("3") ? cart.fvipprice : cart.iprice;
                 if (TextUtils.isEmpty(ss)) {
                     ss = "0.0";
                 }
-                int n = (int) Float.parseFloat(s);
-                Float f = Float.parseFloat(ss);
+                float n = s;
+                float f = Float.parseFloat(ss);
                 total += n * f;
             }
         }

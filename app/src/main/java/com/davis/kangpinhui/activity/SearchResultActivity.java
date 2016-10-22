@@ -213,7 +213,11 @@ public class SearchResultActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         addCartPopuWindow.setBindPopData(itemData);
-                        addCartPopuWindow.addpopupWindow.showAtLocation(search_result_title_linear, Gravity.NO_GRAVITY, 0, 0);
+                        if (addCartPopuWindow.isShowPW(itemData)) {
+                            addCartPopuWindow.addpopupWindow.showAtLocation(search_result_title_linear, Gravity.NO_GRAVITY, 0, 0);
+                        } else {
+                            addCartPopuWindow.onClickAdd();
+                        }
                     }
                 });
             }

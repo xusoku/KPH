@@ -245,12 +245,6 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                         .error(R.mipmap.img_defualt_bg)
                         .into(imageView);
 
-                imageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                });
             }
         });
 

@@ -153,7 +153,7 @@ public class OrderDetailActivity extends BaseActivity {
                 holder.setText(R.id.order_comfi_item_title, itemData.sproductname);
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
                 holder.setText(R.id.order_comfi_item_price, "¥" + (itemData.fprice));
-                holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.icount));
+                holder.setText(R.id.order_comfi_item_number, "数量:" + UtilText.getDivideZero(itemData.icount+""));
             }
         });
     }

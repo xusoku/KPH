@@ -146,7 +146,13 @@ public class AddCartPopuWindow {
         add_cart_text_price.append(UtilText.getBigProductDetail(productDetail.fprice));
         add_cart_text_price.append("/" + productDetail.sstandard);
 
-        add_cart_add_center.setText("1");
+
+        float mincount=productDetail.mincount;
+        if(mincount>1){
+            add_cart_add_center.setText(mincount+"");
+        }else {
+            add_cart_add_center.setText("1");
+        }
 
 
         add_cart_add_btn.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +162,14 @@ public class AddCartPopuWindow {
                 if (AppApplication.isLogin(context)) {
 
                     String num = add_cart_add_center.getText().toString().trim();
+                    float to=Float.valueOf(num);
+                    float mincount=productDetail.mincount;
+                    if(mincount>1){
+                        num=to/mincount+"";
+                    }else {
+                       num=to/1+"";
+                    }
+                    num=UtilText.getDivideZero(num);
                     Call<BaseModel> call = ApiInstant.getInstant().addCart(AppApplication.apptype, AppApplication.shopid, num, productDetail.iproductid, srequire, AppApplication.token);
 
                     call.enqueue(new ApiCallback<BaseModel>() {
@@ -192,27 +206,38 @@ public class AddCartPopuWindow {
             @Override
             public void onClick(View v) {
 
+                float mincount=productDetail.mincount;
+                if(mincount>1){}else{
+                    mincount=1;
+                }
                 String number = add_cart_add_center.getText().toString().trim();
 
-                int n = Integer.valueOf(number);
-                n++;
-                add_cart_add_center.setText(n + "");
+                float n = Float.valueOf(number);
+                n=n+mincount;
+                add_cart_add_center.setText(UtilText.getDivideZero(n + ""));
             }
         });
 
         add_cart_add_mins.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                float mincount=productDetail.mincount;
+                if(mincount>1){}else{
+                    mincount=1;
+                }
                 String number = add_cart_add_center.getText().toString().trim();
 
-                int n = Integer.valueOf(number);
+                float n = Float.valueOf(number);
 
                 if (n <= 1) {
-                    n = 1;
+                    n = mincount;
                 } else {
-                    n--;
+                    n=n-mincount;
+                    if(n==0){
+                        n=mincount;
+                    }
                 }
-                add_cart_add_center.setText(n + "");
+                add_cart_add_center.setText(UtilText.getDivideZero(n + ""));
             }
         });
 
@@ -256,6 +281,7 @@ public class AddCartPopuWindow {
                 if (AppApplication.isLogin(context)) {
 
                     String num = add_cart_add_center.getText().toString().trim();
+                    num=UtilText.getDivideZero(num + "");
                     Call<BaseModel> call = ApiInstant.getInstant().addCart(AppApplication.apptype, AppApplication.shopid, num, productDetail.iproductid, srequire, AppApplication.token);
 
                     call.enqueue(new ApiCallback<BaseModel>() {
@@ -289,27 +315,39 @@ public class AddCartPopuWindow {
             @Override
             public void onClick(View v) {
 
+                float mincount=productDetail.mincount;
+                if(mincount>1){}else{
+                    mincount=1;
+                }
                 String number = add_cart_add_center.getText().toString().trim();
 
-                int n = Integer.valueOf(number);
-                n++;
-                add_cart_add_center.setText(n + "");
+                float n = Float.valueOf(number);
+                n=n+mincount;
+                add_cart_add_center.setText(UtilText.getDivideZero(n + ""));
             }
         });
 
         add_cart_add_mins.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                float mincount=productDetail.mincount;
+                if(mincount>1){}else{
+                    mincount=1;
+                }
                 String number = add_cart_add_center.getText().toString().trim();
 
-                int n = Integer.valueOf(number);
+                float n = Float.valueOf(number);
 
                 if (n <= 1) {
-                    n = 1;
+                    n = mincount;
                 } else {
-                    n--;
+                    n=n-mincount;
+                    if(n==0){
+                        n=mincount;
+                    }
                 }
-                add_cart_add_center.setText(n + "");
+                add_cart_add_center.setText(UtilText.getDivideZero(n + ""));
             }
         });
 
@@ -330,6 +368,18 @@ public class AddCartPopuWindow {
     }
 
     public boolean isShowPW(final Product productDetail){
+        if (!TextUtils.isEmpty(productDetail.srequire)) {
+            String req = productDetail.srequire;
+            String[] list = req.split(" ");
+            if(list.length>0){
+                return true;
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+    public boolean isShowPW(final ProductDetail productDetail){
         if (!TextUtils.isEmpty(productDetail.srequire)) {
             String req = productDetail.srequire;
             String[] list = req.split(" ");

@@ -58,7 +58,7 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
         textView.setText("");
         textView.append(UtilText.getBigProductDetail("¥" + itemData.iprice));
         textView.append("/" + itemData.sstandard);
-        holder.setText(R.id.add_cart_item_add_center, (int) Float.parseFloat(itemData.inumber) + "");
+        holder.setText(R.id.add_cart_item_add_center, UtilText.getDivideZero((itemData.inumber) + ""));
 
         CheckBox checkBox = holder.getView(R.id.add_cart_item_checkbox);
         int size= contxt.getResources().getDisplayMetrics().densityDpi;
@@ -91,13 +91,17 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
             @Override
             public void onClick(View v) {
 
+                float mincount=itemData.mincount;
+                if(mincount>1){}else{
+                    mincount=1;
+                }
                 String number = text.getText().toString().trim();
 
-                int n = (int) Float.parseFloat(number);
-                n++;
-                itemData.inumber = n + "";
+                float n = (float) Float.parseFloat(number);
+                n=n+mincount;
+                itemData.inumber = n;
                 notifyDataSetChanged();
-                addAndMins(itemData.iproductid,"1");
+                addAndMins(itemData.iproductid, "1");
                 onPriceChange.priceChange();
             }
         });
@@ -105,16 +109,24 @@ public class CartListAdapter extends CommonBaseAdapter<Cart> {
         minsText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                float mincount=itemData.mincount;
+                if(mincount>1){}else{
+                    mincount=1;
+                }
                 String number = text.getText().toString().trim();
-                int n = (int) Float.parseFloat(number);
+                float n =  Float.parseFloat(number);
 
                 if (n <= 1) {
-                    n = 1;
+                    n = mincount;
                 } else {
-                    n--;
-                    addAndMins(itemData.iproductid,"-1");
+                    n=n-mincount;
+                    if(n==0){
+                        n=mincount;
+                    }
+                    addAndMins(itemData.iproductid, "-1");
                 }
-                itemData.inumber = n + "";
+                itemData.inumber = n;
                 notifyDataSetChanged();
                 onPriceChange.priceChange();
             }

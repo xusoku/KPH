@@ -147,13 +147,13 @@ public class CartListActivity extends BaseActivity {
     }
 
 
-    private Float getTotalPrice(ArrayList<Cart> list) {
-        Float total = 0.0f;
+    private float getTotalPrice(ArrayList<Cart> list) {
+        float total = 0.0f;
 
         for (Cart cart : list) {
             if (cart.flag) {
-                int n = (int) Float.parseFloat(cart.inumber);
-                Float f = Float.parseFloat(cart.iprice);
+                float n = (cart.inumber);
+                float f = Float.parseFloat(cart.iprice);
                 total += n * f;
             }
         }

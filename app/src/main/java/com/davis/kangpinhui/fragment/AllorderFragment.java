@@ -22,6 +22,7 @@ import com.davis.kangpinhui.activity.ProductDetailActivity;
 import com.davis.kangpinhui.model.Extendedinfo;
 import com.davis.kangpinhui.model.Order;
 import com.davis.kangpinhui.model.OrderDetail;
+import com.davis.kangpinhui.model.UserInfo;
 import com.davis.kangpinhui.model.WeixinInfo;
 import com.davis.kangpinhui.model.basemodel.BaseModel;
 import com.davis.kangpinhui.model.basemodel.Page;
@@ -36,6 +37,7 @@ import com.davis.kangpinhui.util.AppManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.ThridPayUtil;
 import com.davis.kangpinhui.util.ToastUitl;
+import com.davis.kangpinhui.util.UtilText;
 import com.davis.kangpinhui.views.CustomAlterDialog;
 import com.davis.kangpinhui.views.CustomListDialog;
 import com.davis.kangpinhui.views.CustomTypefaceEditText;
@@ -325,7 +327,7 @@ public class AllorderFragment extends BaseFragment {
                 holder.setText(R.id.order_comfi_item_title, itemData.sproductname);
                 holder.setText(R.id.order_comfi_item_sstandent, itemData.sstandard);
                 holder.setText(R.id.order_comfi_item_price, "¥" + itemData.fprice);
-                holder.setText(R.id.order_comfi_item_number, "数量:" + (int) Float.parseFloat(itemData.icount));
+                holder.setText(R.id.order_comfi_item_number, "数量:" + UtilText.getDivideZero(itemData.icount+""));
             }
         });
 

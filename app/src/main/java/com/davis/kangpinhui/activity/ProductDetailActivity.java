@@ -160,7 +160,6 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
                 ArrayList<String> bannerList = productDetail.piclist;
                 getBannerData(bannerList);
                 setBindData(productDetail);
-                addpopupWindow.setBindPopData(productDetail);
             }
 
             @Override
@@ -222,7 +221,12 @@ public class ProductDetailActivity extends BaseActivity implements TBLayout.OnPu
                 break;
             case R.id.add_cart_addlinear:
                 if (productDetail != null) {
-                    addpopupWindow.addpopupWindow.showAtLocation(product_detail_xweb, Gravity.NO_GRAVITY, 0, 0);
+                    addpopupWindow.setBindPopData(productDetail);
+                    if (addpopupWindow.isShowPW(productDetail)) {
+                        addpopupWindow.addpopupWindow.showAtLocation(product_detail_xweb, Gravity.NO_GRAVITY, 0, 0);
+                    } else {
+                        addpopupWindow.onClickAdd();
+                    }
                 } else {
                     ToastUitl.showToast("暂无数据");
                 }
