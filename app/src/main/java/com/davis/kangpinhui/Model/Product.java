@@ -18,4 +18,6 @@ public class Product implements Serializable {
     public String count;
     public String productcode;
     public String srequire;
+    public float    mincount;
+    public String    prostate;
 }

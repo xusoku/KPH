@@ -20,12 +20,13 @@ public class Cart implements Serializable {
     public String iprice;
     public String fmarketprice;
     public String fvipprice;
-    public String inumber;
+    public float inumber;
     public String iuserid;
     public String shopid;
     public String itgclassid;
     public String sproductcode;
     public String sstandard;
+    public float mincount;
 
     public boolean flag=true;
 }

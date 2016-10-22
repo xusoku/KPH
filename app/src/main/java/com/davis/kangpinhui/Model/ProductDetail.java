@@ -84,5 +84,7 @@ public class ProductDetail implements Serializable {
     public String    sletter;
     public String    makingmethod;
     public String    itag;
+    public float    mincount;
+    public String    prostate;
     public ArrayList<String> piclist=new ArrayList<>();
 }

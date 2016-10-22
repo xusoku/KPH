@@ -17,7 +17,7 @@ public class OrderDetail implements Serializable {
     public String fprostand;
     public String sstandard;
     public String daddtime;
-    public String icount;
+    public float icount;
     public String fprice;
     public String fmoney;
     public String sproductcode;
