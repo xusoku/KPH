@@ -320,7 +320,11 @@ public class SearchResultActivity extends BaseActivity {
                     if (isSearch) {
                         getSearchProductList(Page, PageSize);
                     } else {
-                        getProductList(Page, PageSize);
+                        if(isProductlist){
+                            getProductListbyids(Page, PageSize);
+                        }else{
+                            getProductList(Page, PageSize);
+                        }
                     }
                 }
 
@@ -348,7 +352,11 @@ public class SearchResultActivity extends BaseActivity {
             if (isSearch) {
                 getSearchProductList(Page, PageSize);
             } else {
-                getProductList(Page, PageSize);
+                if(isProductlist){
+                    getProductListbyids(Page, PageSize);
+                }else {
+                    getProductList(Page, PageSize);
+                }
             }
         }
     }
@@ -430,7 +438,11 @@ public class SearchResultActivity extends BaseActivity {
                     if (isSearch) {
                         getSearchProductList(++Page, PageSize);
                     } else {
-                        getProductList(++Page, PageSize);
+                        if(isProductlist){
+                            getProductListbyids(++Page, PageSize);
+                        }else {
+                            getProductList(++Page, PageSize);
+                        }
                     }
                     isLoadOrRefresh = false;
                 }
@@ -671,6 +683,53 @@ public class SearchResultActivity extends BaseActivity {
     private void getProductList(int page, int pagesize) {
         Call<BaseModel<Page<ArrayList<Product>>>> call = ApiInstant.getInstant().getProductlist(AppApplication.apptype, sortid,
                 rootid, classid, AppApplication.shopid, page + "", pagesize + "");
+
+        call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.model.basemodel.Page<ArrayList<Product>>>>() {
+            @Override
+            public void onSucssce(BaseModel<Page<ArrayList<Product>>> pageBaseModel) {
+
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingSuccess();
+                if (isLoadOrRefresh) {
+                    list.clear();
+                }
+                Page<ArrayList<Product>> page = pageBaseModel.object;
+
+                TotalPage = page.iTotalPage;
+
+                list.addAll(page.list);
+                adapter.notifyDataSetChanged();
+
+                if (list.size() == 0) {
+                    onActivityFirstLoadingNoData();
+                    search_result_recycler.onLoadUnavailable();
+                } else if (TotalPage != Page) {
+                    search_result_recycler.onLoadSucess(true);
+                } else {
+                    search_result_recycler.onLoadSucess(false);
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                CommonManager.setRefreshingState(search_result_myswipe, false);//隐藏下拉刷新
+                onActivityLoadingFailed();
+                if (!isLoadOrRefresh) {
+                    search_result_recycler.onLoadFailed();
+                }
+            }
+        });
+    }
+
+    /**
+     * 商品list
+     *
+     * @param page
+     * @param pagesize
+     */
+    private void getProductListbyids(int page, int pagesize) {
+        Call<BaseModel<Page<ArrayList<Product>>>> call = ApiInstant.getInstant().getProductlistbyids(AppApplication.apptype, "0",
+                rootid, AppApplication.shopid, page + "", pagesize + "", AppApplication.token);
 
         call.enqueue(new ApiCallback<BaseModel<com.davis.kangpinhui.model.basemodel.Page<ArrayList<Product>>>>() {
             @Override

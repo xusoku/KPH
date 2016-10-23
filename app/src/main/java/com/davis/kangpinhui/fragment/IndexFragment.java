@@ -40,6 +40,7 @@ import com.davis.kangpinhui.adapter.recycleradapter.CommonRecyclerAdapter;
 import com.davis.kangpinhui.api.ApiCallback;
 import com.davis.kangpinhui.api.ApiInstant;
 import com.davis.kangpinhui.fragment.base.BaseFragment;
+import com.davis.kangpinhui.util.ACache;
 import com.davis.kangpinhui.util.CommonManager;
 import com.davis.kangpinhui.util.DisplayMetricsUtils;
 import com.davis.kangpinhui.util.LogUtils;
@@ -53,6 +54,8 @@ import com.davis.kangpinhui.views.StretchedListView;
 import com.davis.kangpinhui.views.loopbanner.LoopPageAdapter;
 import com.davis.kangpinhui.views.viewlineloop.LoopBanner;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -92,6 +95,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     ArrayList<Banner> iconBannerList = new ArrayList<>();
 
     BadgeView backgroundDefaultBadge;
+
+    SwipeRefreshLayout.OnRefreshListener listener;
 
     @Override
     protected void initVariable() {
@@ -137,14 +142,15 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
         content = $(view, R.id.content);
 //        content.addHeaderView(headerView);
-        index_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
+
+        listener = new SwipeRefreshLayout.OnRefreshListener(){
+            public void onRefresh(){
                 isRefreshOrLoad = true;
                 LogUtils.e(TAG, "isRefreshOrLoad");
                 getDate();
             }
-        });
+        };
+        index_refresh.setOnRefreshListener(listener);
 
         index_loopbanner.setPageIndicator(true);
         backgroundDefaultBadge = new BadgeView(getActivity());
@@ -191,7 +197,18 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         super.onFragmentLoading();
         LogUtils.e(TAG, "onFragmentLoading");
         isRefreshOrLoad = true;
-        getDate();
+        final Index index= (Index) ACache.get(getActivity()).getAsObject("index");
+        if(index!=null){
+            onFragmentLoadingSuccess();//显示内容区
+            bindIndexData(index);
+        }
+        index_refresh.post(new Runnable() {
+            @Override
+            public void run() {
+                index_refresh.setRefreshing(true);
+                listener.onRefresh();
+            }
+        });
     }
 
     private void getDate() {
@@ -209,23 +226,10 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                     iconBannerList.clear();
                 }
                 Index index = indexBaseModel.object;
-                bannerList.addAll(index.bannerList);
-                recommandList.addAll(index.recommandList);
-                productList.addAll(index.productList);
-                bannerListAd.addAll(index.bannerListAd);
-                iconBannerList.addAll(index.iconBannerList);
-                getBannerData();
-                getContentData();
-                getproductListData();
-                getbannerListAd();
-                getIconData();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        index_scroll.scrollTo(0, 0);
-                    }
-                }, 50);
+                if(index!=null){
+                    ACache.get(getActivity()).put("index",index);
+                }
+                bindIndexData(index);
             }
 
             @Override
@@ -240,6 +244,25 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         });
     }
 
+   private void bindIndexData(Index index){
+        bannerList.addAll(index.bannerList);
+        recommandList.addAll(index.recommandList);
+        productList.addAll(index.productList);
+        bannerListAd.addAll(index.bannerListAd);
+        iconBannerList.addAll(index.iconBannerList);
+        getBannerData();
+        getContentData();
+        getproductListData();
+        getbannerListAd();
+        getIconData();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                index_scroll.scrollTo(0, 0);
+            }
+        }, 50);
+    }
     private void getIconData() {
         index_ad_noScrollview.setAdapter(new CommonBaseAdapter<Banner>(mContext, iconBannerList, R.layout.fragment_index_item_icon) {
             @Override

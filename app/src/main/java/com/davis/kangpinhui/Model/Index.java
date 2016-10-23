@@ -13,7 +13,7 @@ public class Index implements Serializable {
     public ArrayList<Banner> bannerListAd=new ArrayList<Banner>();
     public ArrayList<Banner> iconBannerList=new ArrayList<Banner>();
 
-    public static class Productlist extends  Banner{
+    public static class Productlist extends  Banner implements Serializable{
 
         public String id;
         public ArrayList<Product> list=new ArrayList<>();
