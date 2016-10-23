@@ -207,7 +207,23 @@ public class UtilText {
         spanString.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
+    // 一次只能删除一个元素
+    public static CharSequence[] remove(CharSequence [] arr, String num) {
 
+        CharSequence[] tmp = new CharSequence[arr.length - 1];
+
+        int idx = 0;
+        boolean hasRemove = false;
+        for (int i = 0; i < arr.length; i++) {
+
+            if (!hasRemove && arr[i] .equals(num)) {
+                hasRemove = true;
+                continue;
+            }
+            tmp[idx++] = arr[i];
+        }
+        return tmp;
+    }
 
 
 }

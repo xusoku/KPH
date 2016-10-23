@@ -276,12 +276,24 @@ public class OrderActivity extends BaseActivity {
                 holder.setText(R.id.order_comfi_item_price, "¥" + (payType.equals("3") ? itemData.fvipprice : itemData.iprice));
                 holder.setText(R.id.order_comfi_item_number, "数量:" + UtilText.getDivideZero(itemData.inumber + ""));
 
-                if(isJiFen){
-                    holder.setText(R.id.order_comfi_item_price, ""+itemData.iprice);
+                if (isJiFen) {
+                    holder.setText(R.id.order_comfi_item_price, "" + itemData.iprice);
                     holder.setImageByUrl(R.id.order_comfi_item_iv, itemData.picurl);
                 }
             }
         });
+    }
+    private boolean isShowOtherPay(){
+        if(list!=null&&list.size()>0){
+            for(Cart cart : list){
+                if(cart.vippaytype.equals("1")){
+                    return true;
+                }
+            }
+            return false;
+        }else{
+            return false;
+        }
     }
 
     public void getAddresslist() {
@@ -400,6 +412,7 @@ public class OrderActivity extends BaseActivity {
     private String payType = "3";
     private String couponId = "";
     private String timeTape = "";
+    private CharSequence[] charSequences = {"VIP卡支付", "支付宝支付", "微信支付"};
 
     @Override
     public void doClick(View view) {
@@ -471,8 +484,10 @@ public class OrderActivity extends BaseActivity {
                 break;
             case R.id.order_paytype_relative:
                 //付款方式  3:余额支付  2：货到付款 0：支付宝  1：财付通  4微信支付
-
-                final CharSequence[] charSequences = {"VIP卡支付", "支付宝支付", "微信支付"};
+                if(isShowOtherPay()&&charSequences.length>1){
+                    charSequences=UtilText.remove(charSequences,"支付宝支付");
+                    charSequences=UtilText.remove(charSequences,"微信支付");
+                }
                 final String[] type = {"3", "0", "4"};
                 CustomListDialog dialog1=new CustomListDialog((this));
                 dialog1.setTitle("付款方式");
@@ -558,7 +573,7 @@ public class OrderActivity extends BaseActivity {
         }
 
         Call<BaseModel<Order>> call = ApiInstant.getInstant().orderSave(AppApplication.apptype, AppApplication.shopid,
-                ids, AppApplication.address.iuseraddressid, payType, timeTape, beizhu, couponId, pass,isJiFen?"1":"",jiFenNumber, AppApplication.token);
+                ids, AppApplication.address.iuseraddressid, payType, timeTape, beizhu, couponId, pass, isJiFen ? "1" : "", jiFenNumber, AppApplication.token);
 
         call.enqueue(new ApiCallback<BaseModel<Order>>() {
             @Override
@@ -612,4 +627,6 @@ public class OrderActivity extends BaseActivity {
         });
 
     }
+
+
 }
