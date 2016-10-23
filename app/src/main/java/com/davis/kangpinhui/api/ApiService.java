@@ -46,7 +46,7 @@ import retrofit2.http.Query;
 public interface ApiService {
 
 
-
+   
     //http://www.tngou.net/tnfs/api/list?page=1&rows=10
 //        @GET("tnfs/api/list")
 //        Call<Grils> listGrils(@Query("id") int id,@Query("page") int page,@Query("rows") int rows);
@@ -92,6 +92,18 @@ public interface ApiService {
             @Query("shopid") String shopid,
             @Query("ipage") String ipage,
             @Query("ipagesize") String ipagesize
+            );
+    //5.1、商品分类列表 /product/listbyids.do?ipagesize=10&ipage=1&rootid=79,80&shopid=2&iordertype=0&token=EAA8909090C6FEA76442E168CD47D7E1
+
+    @GET("product/listbyids.do")
+    Call<BaseModel<Page<ArrayList<Product>>>> getProductlistbyids(
+            @Query("apptype") String apptype,
+            @Query("iordertype") String iordertype,
+            @Query("rootid") String rootid,
+            @Query("shopid") String shopid,
+            @Query("ipage") String ipage,
+            @Query("ipagesize") String ipagesize,
+            @Query("token") String token
             );
 
     //6、商品搜索
@@ -291,6 +303,8 @@ public interface ApiService {
             @Query("sremark") String sremark,
             @Query("couponid") String couponid,
             @Query("password") String password,
+            @Query("orderpaytype") String orderpaytype,
+            @Query("count") String count,
             @Query("token") String token
     );
 
@@ -518,6 +532,23 @@ public interface ApiService {
     @GET("common/forbigapp.do")
     Call<BaseModel<ArrayList<BigPictrue>>> getbigpic(
             @Query("apptype") String apptype
+    );
+    //36积分列表接口
+    @GET("product/listscore.do")
+    Call<BaseModel<Page<ArrayList<Product>>>> getScoreList(
+            @Query("apptype") String apptype,
+            @Query("ipage") String ipage,
+            @Query("ipagesize") String ipagesize,
+            @Query("iordertype") String iordertype,
+            @Query("token") String token
+    );
+    //37 我的积分列表接口
+    @GET("userscore/list.do")
+    Call<BaseModel<Page<ArrayList<Consume>>>> getMyScoreList(
+            @Query("apptype") String apptype,
+            @Query("ipage") String ipage,
+            @Query("ipagesize") String ipagesize,
+            @Query("token") String token
     );
 
 

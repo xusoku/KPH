@@ -23,6 +23,7 @@ public class OrderDetail implements Serializable {
     public String sproductcode;
     public String picurl;
     public String fotherprice;
+    public String vippaytype;
 
 
 }
