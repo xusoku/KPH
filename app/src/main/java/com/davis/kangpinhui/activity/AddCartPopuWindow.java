@@ -128,7 +128,7 @@ public class AddCartPopuWindow {
 
 
     public void setBindPopData(final ProductDetail productDetail) {
-        Glide.with(context).load(ApiService.picurl + productDetail.spicurl)
+        Glide.with(AppApplication.getApplication()).load(ApiService.picurl + productDetail.spicurl)
                 .placeholder(R.mipmap.img_defualt_bg)
                 .error(R.mipmap.img_defualt_bg)
                 .into(add_cart_image);
@@ -253,7 +253,7 @@ public class AddCartPopuWindow {
         }
     }
     public void setBindPopData(final Product productDetail) {
-        Glide.with(context).load( productDetail.picurl)
+        Glide.with(AppApplication.getApplication()).load( productDetail.picurl)
                 .placeholder(R.mipmap.img_defualt_bg)
                 .error(R.mipmap.img_defualt_bg)
                 .into(add_cart_image);
