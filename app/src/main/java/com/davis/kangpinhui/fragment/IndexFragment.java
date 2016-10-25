@@ -377,6 +377,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
                 TextView textView = holder.getView(R.id.search_result_item_name_tv);
                 String text = itemData.prostate;
+                text="";
                 if (TextUtils.isEmpty(text)) {
                     textView.setVisibility(View.GONE);
                 } else {
