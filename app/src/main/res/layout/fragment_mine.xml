@@ -178,6 +178,12 @@
                 app:src="@mipmap/mine_histroy"
                 app:text="@string/mine_histroy" />
             <com.davis.kangpinhui.views.MineCustomLayout
+                android:id="@+id/mine_myorder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:src="@mipmap/mine_all_order"
+                app:text="@string/mine_myorder" />
+            <com.davis.kangpinhui.views.MineCustomLayout
                 android:id="@+id/mine_myscore_bill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

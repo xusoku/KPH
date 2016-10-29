@@ -45,7 +45,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     private MineCustomLayout mine_allorder;
     private MineCustomLayout mine_feedback_linear, mine_histroy_bill, mine_rechange, mine_setting, mine_kefu, mine_ti_huo, mine_myaddress, mine_mycoup, mine_cart, mine_allorder_sending,
-            mine_allorder_unpay,mine_allorder_unsend,mine_myscore_bill;
+            mine_allorder_unpay,mine_allorder_unsend,mine_myscore_bill,mine_myorder;
     private TextView fragment_mine_name,fragment_mine_price,fragment_mine_price_info;
 
     private ImageView fragment_mine_photo;
@@ -73,6 +73,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mine_feedback_linear = $(R.id.mine_feedback_linear);
         mine_histroy_bill = $(R.id.mine_histroy_bill);
         mine_rechange = $(R.id.mine_rechange);
+        mine_myorder = $(R.id.mine_myorder);
         mine_setting = $(R.id.mine_setting);
         mine_kefu = $(R.id.mine_kefu);
         mine_swipe = $(R.id.mine_refresh);
@@ -195,11 +196,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         fragment_mine_photo.setOnClickListener(this);
         fragment_mine_name.setOnClickListener(this);
         mine_myscore_bill.setOnClickListener(this);
+        mine_myorder.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.mine_myorder:
+                AllOrderActivity.jumpAllOrderActivity(getActivity(),0);
+                break;
             case R.id.mine_allorder:
                 AllOrderActivity.jumpAllOrderActivity(getActivity(),0);
                 break;

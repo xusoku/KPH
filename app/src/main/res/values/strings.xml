@@ -9,6 +9,7 @@
 
 
     <string name="mine_allorder">全部订单</string>
+    <string name="mine_myorder">我的订单</string>
     <string name="mine_unpay">待付款</string>
     <string name="mine_unsend">待配送</string>
     <string name="mine_senging">配送中</string>
