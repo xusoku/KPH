@@ -187,7 +187,7 @@
                 android:id="@+id/mine_myscore_bill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:src="@mipmap/mine_histroy"
+                app:src="@mipmap/mine_jifen_icon"
                 app:text="@string/mine_scoce" />
 
             <View
